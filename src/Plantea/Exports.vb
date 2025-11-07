@@ -98,8 +98,9 @@ Module Exports
                           Function(tf)
                               Return tf.ToArray
                           End Function)
-        Dim TFIndex As Dictionary(Of String, TFInfo()) = TFdb _
-            .GroupBy(Function(a) a.protein_id) _
+        Dim TFGeneIndex As Dictionary(Of String, TFInfo()) = TFdb _
+            .GroupBy(Function(a) a.gene_id) _
+            .OrderByDescending(Function(a) a.Count) _
             .ToDictionary(Function(a) a.Key,
                           Function(a)
                               Return a.ToArray
@@ -128,7 +129,7 @@ Module Exports
             Dim links = matrixIndex(motif_seed.First)
             Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
             Dim regList As New List(Of IQueryHits)
-            Dim infertype As String
+            Dim infertype As String = "missing"
 
             For Each source_id As String In gene_ids
                 If regulatorHits.ContainsKey(source_id) Then
@@ -139,6 +140,29 @@ Module Exports
                         Call regList.AddRange(regulatorHits(mappedId))
                     Next
                     infertype = "conserved"
+                ElseIf TFGeneIndex.ContainsKey(source_id) Then
+                    Dim maps = TFGeneIndex(source_id)
+
+                    infertype = "family propagate"
+
+                    For Each map As TFInfo In maps
+                        Dim infer = TFfamily(map.family)
+                        Dim anyhits As IQueryHits() = infer _
+                            .Where(Function(a) regulatorHits.ContainsKey(a.protein_id)) _
+                            .Select(Function(a) regulatorHits(a.protein_id)) _
+                            .IteratesALL _
+                            .ToArray
+
+                        Call regList.AddRange(anyhits)
+                    Next
+
+                    If regList.Any Then
+                        regList = New List(Of IQueryHits) From {
+                            regList _
+                                .OrderByDescending(Function(a) a.identities) _
+                                .First
+                        }
+                    End If
                 Else
                     Call $"missing regulator mapping information for motif hit: {scan}".warning
                 End If
