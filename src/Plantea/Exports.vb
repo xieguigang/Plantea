@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm
 Imports Microsoft.VisualBasic.CommandLine.Reflection
+Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Scripting.Runtime
@@ -87,6 +88,14 @@ Module Exports
             Return regs.getError
         End If
 
+        Dim TFfamily As Dictionary(Of String, TFInfo()) = env.globalEnvironment _
+            .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
+            .LoadCsv(Of TFInfo)(mute:=True) _
+            .GroupBy(Function(tf) tf.family) _
+            .ToDictionary(Function(tf) tf.Key,
+                          Function(tf)
+                              Return tf.ToArray
+                          End Function)
         Dim matrixIndex As Dictionary(Of String, MotifLink()) = motifLinks _
             .GroupBy(Function(a) a.Matrix_id) _
             .ToDictionary(Function(a) a.Key,
