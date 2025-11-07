@@ -33,6 +33,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\GCModeller\src\GCModeller\analysis\SequenceToolkit\SequencePatterns.Abstract\SequencePatterns.Abstract.NET5.vbproj" />
+    <ProjectReference Include="..\..\..\GCModeller\src\GCModeller\analysis\SequenceToolkit\SequencePatterns\SequencePatterns.NET5.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\GCModeller\core\Bio.Annotation\annotation.NET5.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\GCModeller\core\Bio.Assembly\biocore-netcore5.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\interops\localblast\LocalBLAST\localblast.NET5.vbproj" />

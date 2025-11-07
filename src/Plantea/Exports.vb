@@ -4,6 +4,10 @@ Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
+Imports Microsoft.VisualBasic.CommandLine.Reflection
+Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
+Imports Microsoft.VisualBasic.Text.Xml.Models
+Imports Microsoft.VisualBasic.Linq
 
 <Package("Plantea")>
 <RTypeExport("motif_link", GetType(MotifLink))>
@@ -27,5 +31,16 @@ Module Exports
         Call df.add("datasource_id", From id As MotifLink In list Select id.Datasource_ID)
 
         Return df
+    End Function
+
+    ''' <summary>
+    ''' load motif database from a given xml list dataset
+    ''' </summary>
+    ''' <returns></returns>
+    <ExportAPI("load_motifdb")>
+    Public Function loadMotifDb(file As String) As MotifPWM()
+        Return file.LoadXml(Of XmlList(Of MotifPWM))() _
+            .AsEnumerable _
+            .ToArray
     End Function
 End Module

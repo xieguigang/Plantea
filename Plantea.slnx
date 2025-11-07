@@ -25,6 +25,14 @@
       <Platform Solution="*|x64" Project="x64" />
     </Project>
   </Folder>
+  <Folder Name="/gcmodeller/motif/">
+    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/SequencePatterns.Abstract/SequencePatterns.Abstract.NET5.vbproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/SequencePatterns/SequencePatterns.NET5.vbproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
   <Folder Name="/renv/">
     <Project Path="../GCModeller/src/R-sharp/R#/Rsharp-netcore5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
