@@ -88,10 +88,6 @@
       <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
     </Project>
-    <Project Path="../GCModeller/src/GCModeller/data/MicrobesOnline/MicrobesOnline.NET5.vbproj">
-      <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
-      <Platform Solution="*|x64" Project="x64" />
-    </Project>
     <Project Path="../GCModeller/src/GCModeller/data/RegulonDatabase/RegulonDatabase.NET5.vbproj">
       <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
       <Platform Solution="*|x64" Project="x64" />
