@@ -56,6 +56,7 @@ Module Exports
     ''' <param name="env"></param>
     ''' <returns></returns>
     <ExportAPI("tf_network")>
+    <RApiReturn(GetType(RegulationFootprint))>
     Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As Object,
                                   Optional env As Environment = Nothing) As Object
 
