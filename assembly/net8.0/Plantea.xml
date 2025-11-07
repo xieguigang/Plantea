@@ -6,5 +6,11 @@ Plantea
 </name>
 </assembly>
 <members>
+<member name="M:Plantea.Exports.loadMotifDb(System.String)">
+ <summary>
+ load motif database from a given xml list dataset
+ </summary>
+ <returns></returns>
+</member>
 </members>
 </doc>
