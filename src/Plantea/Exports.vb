@@ -1,4 +1,5 @@
-﻿Imports Microsoft.VisualBasic.CommandLine.Reflection
+﻿Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm
+Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Text.Xml.Models
@@ -80,14 +81,32 @@ Module Exports
                           End Function)
         Dim network As New List(Of RegulationFootprint)
 
-        For Each scan As MotifMatch In motif_hits
-            Dim motif_seed = scan.seeds(0).Split
+        For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
+            Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
             Dim links = matrixIndex(motif_seed.First)
             Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
+            Dim regList As New List(Of IQueryHits)
 
             For Each source_id As String In gene_ids
+                If regulatorHits.ContainsKey(source_id) Then
+                    Call regList.AddRange(regulatorHits(source_id))
+                Else
 
+                End If
             Next
+
+            Dim target_meta As String() = scan.title.Split("|"c)
+
+            Call network.Add(New RegulationFootprint With {
+                .chromosome = target_meta(0),
+                .Sequence = scan.segment,
+                .MotifId = motif_seed.First,
+                .Signature = scan.motif,
+                .tag = scan.seeds(0),
+                .RegulatorTrace = regList.Select(Function(a) a.hitName).Distinct.JoinBy("; "),
+                .Regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
+                .ORF = target_meta(1)
+            })
         Next
 
         Return network.ToArray
