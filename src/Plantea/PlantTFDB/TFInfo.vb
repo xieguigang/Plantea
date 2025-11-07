@@ -1,4 +1,5 @@
-﻿Imports Microsoft.VisualBasic.Serialization.JSON
+﻿Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
+Imports Microsoft.VisualBasic.Serialization.JSON
 
 Public Class TFInfo
 
@@ -18,11 +19,12 @@ Public Class TFInfo
 
     Sub New(title As String)
         Dim t As String() = title.Split("|"c)
+        Dim mol As NamedValue(Of String) = t(0).GetTagValue(" ")
 
-        protein_id = t(0)
-        species = t(1)
-        family = t(2)
-        description = t.Skip(3).JoinBy("|")
+        protein_id = mol.Name
+        species = mol.Value
+        family = t(1)
+        description = t.Skip(2).JoinBy("|")
     End Sub
 
     Public Overrides Function ToString() As String
