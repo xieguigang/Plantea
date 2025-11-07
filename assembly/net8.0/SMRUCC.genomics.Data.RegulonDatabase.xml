@@ -1,0 +1,1308 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Data.RegulonDatabase
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Data.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Extensions.IsContinuous(System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ 判断这个locus_tag的集合是否是连续的
+ </summary>
+ <param name="lstId"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Extensions.ContinuouParts(System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ 得到连续的部分
+ </summary>
+ <param name="lstId"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon">
+ <summary>
+ Operon regulon model that reconstructed from the RegPrecise database.
+ (使用RegPrecise数据库重构出来的Regulon数据)
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.Regulators">
+ <summary>
+ Mapping from <see cref="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.TF_trace"/> by using protein ortholog analysis, such as ``bbh`` method.
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.Effector">
+ <summary>
+ Active the regulation from <see cref="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.TF_trace"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.TF_trace">
+ <summary>
+ Operon regulator TF
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.Operon">
+ <summary>
+ Operon members
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.bbhUID">
+ <summary>
+ Using for the CORN analysis or distinct
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.#ctor(SMRUCC.genomics.Data.Regprecise.Regulator,System.String[],System.String[],System.String,System.String[])">
+ <summary>
+ Copy regulon definition from <see cref="T:SMRUCC.genomics.Data.Regprecise.Regulator"/>
+ </summary>
+ <param name="regulon"></param>
+ <param name="TF"></param>
+ <param name="members"></param>
+ <param name="cstrand"></param>
+ <param name="bbhHits"></param>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegPreciseOperon.#ctor(SMRUCC.genomics.Data.Regprecise.Regulator,System.String[],System.String[],SMRUCC.genomics.ComponentModel.Loci.Strands,System.String[])">
+ <summary>
+ Copy regulon definition from <see cref="T:SMRUCC.genomics.Data.Regprecise.Regulator"/>
+ </summary>
+ <param name="regulon"></param>
+ <param name="TF"></param>
+ <param name="members"></param>
+ <param name="strand"></param>
+ <param name="bbhHits"></param>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.bbhMappings">
+ <summary>
+ bbh mappings of the regulators between the RegPrecise database and annotated genome.
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.bbhMappings.query_name">
+ <summary>
+ 在Regprecise数据库之中的进行注释的源
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.bbhMappings.hit_name">
+ <summary>
+ 在所需要进行注释的基因组之中的蛋白质基因号
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.FamilyHit">
+ <summary>
+ annotated TF hits on Family
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.Compiler.Compile(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genome},System.String)">
+ <summary>
+ 请在下载完了整个数据库之后再使用这个函数来进行编译
+ </summary>
+ <param name="Regprecise"></param>
+ <param name="repository"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.Compiler.SitesFamilyCategory(System.String,System.Boolean)">
+ <summary>
+ Category export the motif fasta sites into file system.
+ (生成meme计算所需要的调控位点的fasta文件（按照家族分类）)
+ </summary>
+ <param name="repositoryDIR">为了保持简洁性，没有引用配置项目。。。需要手动设定数据源</param>
+ <param name="genomePartitioning">当一个家族里面的序列数太多的时候是否需要按照基因组进行分组，默认不分组</param>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.Compiler.__genomePartitions(System.Collections.Generic.List{SMRUCC.genomics.Data.Regprecise.FastaReaders.Site},System.String,SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon[])">
+ <summary>
+ 检查，OK
+ </summary>
+ <param name="sites"></param>
+ <param name="repository"></param>
+ <param name="familyGroup"></param>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator">
+ <summary>
+ 调控因子的蛋白质序列
+ > xcb:XC_1184|Family|Regulates|Regulog|Definition
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.KEGG">
+ <summary>
+ &lt;(KEGG)species_code>:&lt;locusTag>
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.ToString">
+ <summary>
+ $"{<see cref="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.KEGG"/>}|{<see cref="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.Family"/>}|{<see cref="T:System.String"/>(";", <see cref="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.Sites"/>)}|{<see cref="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.Regulog"/>}|{<see cref="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.Definition"/>}"
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.LoadDocument(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="fasta">文件的路径</param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Regulator.KEGGFamily">
+ <summary>
+ 在KEGG数据库之中所注释的家族分类
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site">
+ <summary>
+ 调控位点的数据
+ > geneLocusTag:position|geneVIMSSId|regulonId|score|Bacteria
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.geneLocusTag">
+ <summary>
+ locus tag of a downstream gene in GeneBank
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.geneVIMSSId">
+ <summary>
+ identifier of a downstream gene in MicrobesOnline database.
+ (请注意这个是基因的编号，而非这个调控位点的编号，假若需要唯一确定一个调控位点，请使用locus_tag:position的组合) 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.position">
+ <summary>
+ position of a regulatory site relative to the start of a downstream gene 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.regulonId">
+ <summary>
+  identifier of regulon
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.score">
+ <summary>
+ score of a regualtory site
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.SequenceData">
+ <summary>
+ Motif sequence
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.FastaReaders.Site.Load(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="fasta">位点Fasta文件的文件路径</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.Download(System.String)">
+ <summary>
+ Download the whole regprecise database for each bacteria genome.
+ </summary>
+ <param name="outDIR"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.DownloadRegulatorSequence(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors,System.String)">
+ <summary>
+ Download regprecise regulator protein sequence from kegg database.
+ </summary>
+ <param name="Regprecise"></param>
+ <param name="EXPORT"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.ExportBySpecies(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors,System.String)">
+ <summary>
+ 还存在问题
+ </summary>
+ <param name="Regprecise"></param>
+ <param name="ExportDir"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.__exportMotifs(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,SMRUCC.genomics.Data.Regtransbase.WebServices.MotifFasta}},System.String,SMRUCC.genomics.Data.Regprecise.TranscriptionFactors)">
+ <summary>
+ 
+ </summary>
+ <param name="source"></param>
+ <param name="Family"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.ExportByFamily(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors)">
+ <summary>
+ Export regulatory site from given database by family
+ </summary>
+ <param name="Regprecise"></param>
+ <returns></returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.ReGenerate(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors,System.String,System.String)">
+ <summary>
+ 当有时候向RegulatorSequerncede Fasta文件之中添加了新的Regprecise数据库之中没有的蛋白质序列数据之后，可能会出现
+ TFBS序列和Regulator之间的关系无法对应的情况，则这个时候可以使用本方法来重新刷新着两个Fasta序列文件
+ </summary>
+ <returns></returns>
+ <remarks>对于调控因子序列仅仅取出LocusTAG以及Description数据，TFBS文件是重新生成的</remarks>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.LoadRegulationDb">
+ <summary>
+ 加载自有的源之中的调控数据库
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.RegpreciseBBH">
+ <summary>
+ RegPrecise regulator matched by blastp sbh/bbh mapping
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegpreciseBBH.QueryName">
+ <summary>
+ 和Regprecise数据库之中的调控因子所比对上的目标菌株的基因组之中的蛋白质
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegpreciseBBH.HitName">
+ <summary>
+ Regprecise_regulator
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegpreciseBBH.Tfbs">
+ <summary>
+ a list of known TFBS id that regulated by this regulator in regprecise database
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH">
+ <summary>
+ Bidirectional best hit regulator with the regprecise database.(调控因子与Regprecise数据库的双向最佳比对结果)
+ </summary>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseBidirectionalBh_Methods.MPCutoff(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH},System.Double)">
+ <summary>
+
+ </summary>
+ <param name="data"></param>
+ <param name="cutoff">Cutoff value for property <see cref="P:SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH.Similarity"></see>, a recommended value is 0.85</param>
+ <returns></returns>
+ <remarks>cutoff is recommended using value 0.85</remarks>
+
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseBidirectionalBh_Methods.FamilyStatics(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH})">
+ <summary>
+ 统计出所比对的蛋白质的家族分布,由于一个蛋白质可能会比对上对各家族，故而总和不会等于最佳比对的结果数目
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseBidirectionalBh_Methods.Match(SMRUCC.genomics.SequenceModel.FASTA.FastaFile,SMRUCC.genomics.SequenceModel.FASTA.FastaFile,SMRUCC.genomics.SequenceModel.FASTA.FastaFile,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.InteropService.InteropService,System.String,System.String,System.Boolean)">
+ <summary>
+ 通过最佳双向比对来匹配目标蛋白质集合中在Regprecise数据库中存在的记录
+ </summary>
+ <param name="RegpreciseRegulators">Regprecise调控因子序列数据库</param>
+ <param name="Query">所将要进行匹配的目标蛋白质集合</param>
+ <param name="LocalBLAST">本地BLAST服务</param>
+ <param name="QueryGrep">可选参数，目标蛋白质集合的ID号的解析脚本</param>
+ <returns></returns>
+ <remarks></remarks>
+
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseBidirectionalBh_Methods.Convert(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BiDirectionalBesthit[])">
+ <summary>
+ 从最佳双向BLAST比对结果之中得到所需要的基础数据
+ </summary>
+ <param name="BLASTbh"></param>
+ <returns></returns>
+ <remarks></remarks>
+
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.Query">
+ <summary>
+ The genome query.(待注释的目标基因组的蛋白编号)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.Regulator">
+ <summary>
+ The regprecise regulator name
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.Identities">
+ <summary>
+ 相似度
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.species">
+ <summary>
+ 注释来源的基因组名称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.RegulonSites">
+ <summary>
+ 这个<see cref="P:SMRUCC.genomics.Data.Regprecise.RegPreciseRegulatorMatch.Regulator"/>所调控的位点集合
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.gene">
+ <summary>
+ 当前的这个基因组位点相关的在一定长度范围内的下游基因
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.location">
+ <summary>
+ 这个下游基因的位置
+ </summary>
+ <returns></returns>
+ 
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.replicon">
+ <summary>
+ 这个位点所属的复制子的编号，这个属性是为了将基因组的染色体DNA和质粒DNA区分开
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.distance">
+ <summary>
+ 这个基因的转录起始位点到目标位点之间的最小距离
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.product">
+ <summary>
+ 基因的功能描述
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.FootprintSite.sequenceData">
+ <summary>
+ 这个motif位点区域上的序列信息
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.RegulationFootprint">
+ <summary>
+ 调控关系，这个对象相当于网络之中的边对象
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.regulator">
+ <summary>
+ 预测出来的基因组之中的调控因子的基因编号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.regulated">
+ <summary>
+ 预测出来的被调控的基因
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.motif">
+ <summary>
+ motif位点的基因组坐标位置
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.sequenceData">
+ <summary>
+ 这个位置上的序列片段数据
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.distance">
+ <summary>
+ motif位点到被调控的基因之间的最短距离
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.replicon">
+ <summary>
+ 这个位点所属的复制子的编号，这个属性是为了将基因组的染色体DNA和质粒DNA区分开
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.product">
+ <summary>
+ 受调控的基因的功能
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.regprecise">
+ <summary>
+ 来自于RegPrecise数据库之中的调控因子注释来源
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.identities">
+ <summary>
+ 相似度
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.species">
+ <summary>
+ 注释来源的基因组名称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.RegulationFootprint.site">
+ <summary>
+ motif位点的预测来源
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog">
+ <summary>
+ /regulogs?collectionType={type}&amp;collectionId={id};
+ /regulog?regulogId={id}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.effector">
+ <summary>
+ effector molecule or environmental signal of a regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.regulationType">
+ <summary>
+ type of regulation: either TF (transcription factor) or RNA
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.regulatorFamily">
+ <summary>
+ family of regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.regulatorName">
+ <summary>
+ name of regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.regulogId">
+ <summary>
+ identifier of regulog
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.taxonName">
+ <summary>
+ name of taxonomic group
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulog.pathway">
+ <summary>
+ metabolic pathway or biological process controlled by a regulator 
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon">
+ <summary>
+ /regulons?[regulogId={regulogId},genomeId={genomeId}]
+ /regulon?regulonId={id}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.effector">
+ <summary>
+ effector molecule or environmentla signal of a regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.genomeId">
+ <summary>
+ identifier of a genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.genomeName">
+ <summary>
+ name of a genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.pathway">
+ <summary>
+ metabolic pathway or biological process controlled by regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.regulationType">
+ <summary>
+ type of regulation: either TF (transcription factor) or RNA
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.regulatorFamily">
+ <summary>
+ famliy of a regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.regulatorName">
+ <summary>
+ name of a regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.regulogId">
+ <summary>
+ identifier of a regulog
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulon.regulonId">
+ <summary>
+ identifier of a regulon
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator">
+ <summary>
+ /regulators?[regulonId={regulonId},regulogId={regulogId}]
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.locusTag">
+ <summary>
+ locus tag of regulator gene in GeneBank
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.name">
+ <summary>
+ name of regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.regulatorFamily">
+ <summary>
+ family of a regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.regulonId">
+ <summary>
+ identifier of regulon to which a regulator belongs to
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.vimssId">
+ <summary>
+ identifier of regulator gene in MicrobesOnline database 
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene">
+ <summary>
+ /genes?[regulonId={regulonId},regulogId={regulogId}]
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene.function">
+ <summary>
+ gene function
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene.locusTag">
+ <summary>
+ locus tag of a gene in GeneBank
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene.name">
+ <summary>
+ name of gene
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene.regulonId">
+ <summary>
+ identifier of a regulon 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.gene.vimssId">
+ <summary>
+ identifier of gene in MicrobesOnline database 
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site">
+ <summary>
+ /sites?[regulonId={regulonId},regulogId={regulogId}]
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.geneLocusTag">
+ <summary>
+ locus tag of a downstream gene in GeneBank
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.geneVIMSSId">
+ <summary>
+ identifier of a downstream gene in MicrobesOnline database 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.position">
+ <summary>
+ position of a regulatory site relative to the start of a downstream gene 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.regulonId">
+ <summary>
+  identifier of regulon
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.score">
+ <summary>
+ score of a regualtory site
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.sequence">
+ <summary>
+ sequence of a regualtory site
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef">
+ <summary>
+ /searchRegulons?objType={type}&amp;text={text}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef.foundObjName">
+ <summary>
+ found object name (or locusTag)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef.foundObjType">
+ <summary>
+ found object type (either 'gene' or 'regulator')
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef.genomeName">
+ <summary>
+ name of genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef.regulatorName">
+ <summary>
+ the name of regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulonRef.regulonId">
+ <summary>
+ identifier of regulon
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat">
+ <summary>
+ https://regprecise.lbl.gov/Services/rest/genomeStats
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.genomeId">
+ <summary>
+ genome identifier
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.name">
+ <summary>
+ genome name
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.rnaRegulonCount">
+ <summary>
+ total number of RNA-controlled regulons reconstructed in genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.rnaSiteCount">
+ <summary>
+ total number of RNA regulatory sites in genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.taxonomyId">
+ <summary>
+ NCBI taxonomy id
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.tfRegulonCount">
+ <summary>
+ total number of TF-controlled regulons reconstructed in genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genomeStat.tfSiteCount">
+ <summary>
+ total number of TF binding sites in genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons">
+ <summary>
+ /searchExtRegulons?taxonomyId={taxonomyId}&amp;locusTags={locusTags}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons.regulonId">
+ <summary>
+ identifier Of regulon
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons.genomeName">
+ <summary>
+ name Of genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons.regulatorName">
+ <summary>
+ the name Of regulator
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons.foundObjType">
+ <summary>
+ found Object type 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.searchExtRegulons.foundObjName">
+ <summary>
+ found Object name (Or locusTag)
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat">
+ <summary>
+ /regulogCollectionStats?collectionType={type}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.className">
+ <summary>
+ name of collection class
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.collectionId">
+ <summary>
+ identifier of collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.collectionType">
+ <summary>
+ type of collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.name">
+ <summary>
+ collection name
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.rnaCount">
+ <summary>
+ number of RNA families in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.rnaRegulogCount">
+ <summary>
+ number of RNA-controlled regulogs in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.rnaSiteCount">
+ <summary>
+ number of RNA regulatory sites in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.tfCount">
+ <summary>
+ number of different transcription factors in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.tfRegulogCount">
+ <summary>
+ number of TF-controlled regulogs in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.tfSiteCount">
+ <summary>
+ number of TF binding sites in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.totalGenomeCount">
+ <summary>
+ total number of genomes that have at least one regulon in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollectionStat.totalRegulogCount">
+ <summary>
+ total number of regulogs in collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genome">
+ <summary>
+ https://regprecise.lbl.gov/Services/rest/genomes
+ </summary>
+ 
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genome.genomeId">
+ <summary>
+ genome identifier
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genome.name">
+ <summary>
+ genome name
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.genome.taxonomyId">
+ <summary>
+ NCBI taxonomy id
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollection">
+ <summary>
+ /regulogCollections?collectionType={type}
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollection.collectionType">
+ <summary>
+ type of regulog collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollection.collectionId">
+ <summary>
+ identifier of collection
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollection.name">
+ <summary>
+ collection name
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulogCollection.className">
+ <summary>
+ name of collection class 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.Regulation.Regulator">
+ <summary>
+ <see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.vimssId"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.Regulation.Site">
+ <summary>
+ <see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.geneLocusTag"/>:<see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.position"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.WebServices.Regulation.Regulon">
+ <summary>
+ <see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.regulator.regulonId"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations">
+ <summary>
+ %Repository%/Regprecise/MEME/regulations.xml
+ (在进行了MEME分析之后，使用这个模块来生成所预测的调控关系)
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations.GetRegulator(System.String)">
+ <summary>
+ 从调控因子的编号获取得到他的调控因子的数据模型
+ </summary>
+ <param name="locusId"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations.GetRegulator(System.Int32)">
+ <summary>
+ 通过vimssid编号来获取得到调控因子的数据模型
+ </summary>
+ <param name="geneVIMSSId"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations.GetRegulations(System.String)">
+ <summary>
+ {locus_tag:position}
+ </summary>
+ <param name="uid"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations.GetMotifFamily(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="site">$"{site.geneLocusTag}:{site.position}"</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebServices.Regulations.GetSite(System.String)">
+ <summary>
+ $"{<see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.geneLocusTag"/>}:{<see cref="P:SMRUCC.genomics.Data.Regprecise.WebServices.JSON.site.position"/>}"
+ </summary>
+ <param name="geneLocusTag"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome">
+ <summary>
+ 微生物的调控组数据模型
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.genome">
+ <summary>
+ {GenomeName, Url}
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.regulome">
+ <summary>
+ 调控组
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.numOfRegulons">
+ <summary>
+ 这个基因组里面的Regulon的数目
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.ListRegulators">
+ <summary>
+ Listing all TF type regulators in this genome.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.ListRegulatedGenes">
+ <summary>
+ Listing all regulated genes in this genome.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome.CreateKEGGQuery">
+ <summary>
+ 创建用于从KEGG数据库之中下载蛋白质序列的查询数据集合
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.KEGGDownloader">
+ <summary>
+ Downloads the protein fasta sequence from the KEGG which was records in the regprecise regulation datasets.
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.KEGGDownloader.RegulatorDownloads(SMRUCC.genomics.Data.Regprecise.Regulator,SMRUCC.genomics.Data.Regprecise.BacteriaRegulome,Microsoft.VisualBasic.ApplicationServices.Debugging.Logging.LogFile,System.String,System.String)">
+ <summary>
+ 从KEGG数据库之中下载调控因子的蛋白质序列数据
+ </summary>
+ <param name="Regulator"></param>
+ <param name="Bacteria"></param>
+ <param name="ErrLog"></param>
+ <param name="DownloadDirectory"></param>
+ <param name="FastaSaved"></param>
+ <returns></returns>
+
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.MotifSitelog">
+ <summary>
+ regulogs.Xml RegPrecise数据库之中已经完成的Motif位点的数据
+ </summary>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.Operon">
+ <summary>
+ Operon that regulated in a regulon
+ </summary>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulateGraph.ParseMotifSites(System.Collections.Generic.IEnumerable{System.String})">
+ <summary>
+ Parse the motif site fasta data
+ </summary>
+ <param name="data"></param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.Regulator.infoURL">
+ <summary>
+ 用来下载生成motif数据库的时候所需要使用的
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.Regulator.operons">
+ <summary>
+ 被这个调控因子所调控的基因，按照操纵子进行分组，这个适用于推断Regulon的
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.Regulator.LocusId">
+ <summary>
+ 该Regprecise调控因子的基因号
+ </summary>
+ <value></value>
+ <returns>
+ id of <see cref="P:SMRUCC.genomics.Data.Regprecise.Regulator.locus_tag"/>
+ </returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.Regulator.GetMotifSite(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="trace">locus_tag:position</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.Regulator.ExportMotifs">
+ <summary>
+ 这个函数会自动移除一些表示NNNN的特殊符号
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulatorQuery.basicParser(System.String,SMRUCC.genomics.Data.Regprecise.Regulator)">
+ <summary>
+ 解析基本的信息
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+</member>
+<member name="F:SMRUCC.genomics.Data.Regprecise.Types.TF">
+ <summary>
+
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:SMRUCC.genomics.Data.Regprecise.Types.RNA">
+ <summary>
+ RNA regulatory element
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulomeQuery.doParseObject(System.String,System.Type)">
+ <summary>
+ 下载某一个基因组内所有预测的调控元的数据
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulatedGene.ParseDoc(System.String)">
+ <summary>
+ 从文件系统上面的一个文本文件之中解析出基因的摘要数据
+ </summary>
+ <param name="path"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulatedGene.DocParser(System.String)">
+ <summary>
+ 解析文档文本
+ </summary>
+ <param name="doc"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.RegulonAPI">
+ <summary>
+ 根据直系同源的方法能够真的重建出Regulon么？
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulonAPI.uid(SMRUCC.genomics.Data.Regprecise.Regulator)">
+ <summary>
+ 这个函数主要是用来唯一标示meme的分析结果的
+ </summary>
+ <param name="regulator"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulonAPI.Reconstruct(System.String,System.String,SMRUCC.genomics.Assembly.DOOR.DOOR)">
+ <summary>
+ Regulon reconstruction
+ </summary>
+ <param name="mappings">Mappings result of the regulon gene from the bbh method.</param>
+ <param name="Regprecise">Regulon annotation data source genome data which is downloaded from the RegPrecise web server.</param>
+ <param name="door">Door operon database</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulonAPI.Reconstruct(System.Collections.Generic.Dictionary{System.String,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BiDirectionalBesthit[]},SMRUCC.genomics.Data.Regprecise.Regulator,SMRUCC.genomics.Assembly.DOOR.DOOR)">
+ <summary>
+ 分别比较调控因子和被调控的基因，被调控的基因应该是在一个操纵子里面的
+ </summary>
+ <param name="mappings"></param>
+ <param name="regulon">RegPrecise数据库之中的数据</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegulonAPI.__getOperons(SMRUCC.genomics.Data.Regprecise.RegulatedGene[],SMRUCC.genomics.Assembly.DOOR.DOOR)">
+ <summary>
+ 从需要被注释的基因组之中获取得到被调控基因所在的操纵子
+ </summary>
+ <param name="mappings"></param>
+ <param name="DOOR"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors">
+ <summary>
+ [Regprecise database] [Collections of regulogs classified by transcription factors]
+ Each transcription factor collection organizes all reconstructed regulogs for a given set of orthologous
+ regulators across different taxonomic groups of microorganisms. These collections represent regulons for
+ a selected subset of transcription factors. The collections include both widespread transcription factors
+ such as NrdR, LexA, and Zur, that are present in more than 25 diverse taxonomic groups of Bacteria, and
+ narrowly distributed transcription factors such as Irr and PurR. The TF regulon collections are valuable
+ for comparative and evolutionary analysis of TF binding site motifs and regulon content for orthologous
+ transcription factors.
+ </summary>
+ <remarks></remarks>
+
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.GetRegulators(System.String)">
+ <summary>
+ 相较于<see cref="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.GetRegulatorId(System.String,System.Int32)"/>方法，其只是获取得到的第一个调控因子的编号，推荐使用这个方法来获取完整的调控因子的信息
+ </summary>
+ <param name="trace">locus_tag:position</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.FilteRegulators(SMRUCC.genomics.Data.Regprecise.Types)">
+ <summary>
+ 选择所有的调控因子请使用<see cref="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.FilteRegulators(SMRUCC.genomics.Data.Regprecise.Types)"></see>
+ </summary>
+ <param name="Type"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.BuildRegulatesTable">
+ <summary>
+ 生成映射{site, TF()}
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.WebAPI.DownloadRegulatorSequence(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors,System.String)">
+ <summary>
+ 从KEGG数据库中下载调控因子的蛋白质序列
+ </summary>
+ <param name="Regprecise"></param>
+ <returns></returns>
+ <remarks></remarks>
+ 
+</member>
+<member name="T:SMRUCC.genomics.Data.RegulonDatabase.RegulationModels">
+ <summary>
+ Write for csv file
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regtransbase.WebServices.TranscriptionFactorFamily">
+ <summary>
+ https://regprecise.lbl.gov/collections_tffam.jsp
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regtransbase.WebServices.Regulogs.GetUniqueIds">
+ <summary>
+ {Regulog, {Locus_tag, Locus_tag()}}
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regtransbase.WebServices.Regulator.GetUniqueId">
+ <summary>
+ 获取一个唯一的物种的编号 {Regulog, {Locus_tag, Locus_tag()}}
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regtransbase.WebServices.Regulator.Select(System.String)">
+ <summary>
+ 根据物种编号筛选出基因号
+ </summary>
+ <param name="SpeciesId"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regtransbase.WebServices.Regulator.SequenceTrimming(System.String)">
+ <summary>
+ 将序列之中的长度缩写进行拓展为实际的序列
+ </summary>
+ <param name="sequence"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.Regtransbase.WebServices.MotifFasta">
+ <summary>
+ The fasta sequence model of the regulated motif site in Regtransbase/Regprecise
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regtransbase.WebServices.WebServiceHandler.DownloadSequenceData(SMRUCC.genomics.Data.Regtransbase.WebServices.RegPreciseTFFamily,System.String)">
+ <summary>
+ 从KEGG数据库中下载TFF数据库中的每一个结合位点的调控因子的序列
+ </summary>
+ <param name="TFFamily"></param>
+ <returns></returns>
+ <remarks>
+ 对于每一个结合位点，都有一个唯一的基因号来进行标识，故而可以通过该基因号得到物种编号，之后既可以下载调控因子的蛋白质序列
+ 对于
+ </remarks>
+</member>
+</members>
+</doc>

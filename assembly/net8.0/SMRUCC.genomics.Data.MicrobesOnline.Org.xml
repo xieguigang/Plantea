@@ -1,0 +1,41 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Data.MicrobesOnline.Org
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Data.MicrobesOnline.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.MicrobesOnline.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.MicrobesOnline.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:SMRUCC.genomics.Data.MicrobesOnline.fetchLocus">
+ <summary>
+ Some gene sequence is not exists in the KEGG database that can be download from this database.
+ http://www.microbesonline.org/cgi-bin/fetchLocus.cgi?locus=5219138&amp;disp=4
+ </summary>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.MicrobesOnline.fetchLocus.Downloads(System.String)">
+ <summary>
+ {prot, nt}, Downloads nt and prot sequence from microbesonline database
+ </summary>
+ <param name="locusId"></param>
+ <returns></returns>
+ 
+</member>
+</members>
+</doc>

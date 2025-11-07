@@ -18,10 +18,13 @@
           "SMRUCC.genomics.Annotation": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655",
           "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0",
+          "SMRUCC.genomics.Model.Network.VirtualFootprint": "1.0.0",
           "Microsoft.VisualBasic.Data.BinaryData.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Data.Framework.Reference": "5.0.123.0",
           "Microsoft.VisualBasic.Data.GraphTheory.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Data.IO.MessagePack.Reference": "1.0.0.0",
+          "Microsoft.VisualBasic.Data.visualize.Network.Reference": "1.0.0.0",
+          "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.DataMining.DynamicProgramming.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.DataMining.Framework.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.DataMining.UMAP.Reference": "5.0.1.2389",
@@ -30,6 +33,7 @@
           "Microsoft.VisualBasic.Math.GibbsSampling.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Math.Randomizer.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Math.Statistics.Reference": "1.0.0.0",
+          "Microsoft.VisualBasic.MIME.Html.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Runtime.Reference": "5.33.69.2558",
           "REnv.Reference": "2.33.856.6961",
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference": "1.0.0.0",
@@ -41,8 +45,12 @@
           "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.Reference": "1.0.0.0",
           "SMRUCC.genomics.Annotation.Reference": "1.0.0.0",
           "SMRUCC.genomics.Core.Reference": "6.3.256.3655",
+          "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference": "1.0.0.0",
+          "SMRUCC.genomics.Data.RegulonDatabase.Reference": "1.0.0.0",
+          "SMRUCC.genomics.InteractionModel.Reference": "1.0.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions.Reference": "1.0.0.0",
-          "SMRUCC.genomics.Model.MotifGraph.Reference": "1.0.0.0"
+          "SMRUCC.genomics.Model.MotifGraph.Reference": "1.0.0.0",
+          "SMRUCC.genomics.Model.Network.VirtualFootprint.Reference": "1.0.0.0"
         },
         "runtime": {
           "Plantea.dll": {}
@@ -108,6 +116,40 @@
           }
         }
       },
+      "System.Configuration.ConfigurationManager/8.0.1": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "8.0.1",
+          "System.Security.Cryptography.ProtectedData": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        }
+      },
+      "System.Diagnostics.EventLog/8.0.1": {
+        "runtime": {
+          "lib/net8.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        }
+      },
       "System.Numerics.Tensors/8.0.0": {
         "runtime": {
           "lib/net8.0/System.Numerics.Tensors.dll": {
@@ -119,6 +161,14 @@
       "System.Resources.Extensions/8.0.0": {
         "runtime": {
           "lib/net8.0/System.Resources.Extensions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/8.0.0": {
+        "runtime": {
+          "lib/net8.0/System.Security.Cryptography.ProtectedData.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.23.53103"
           }
@@ -197,6 +247,33 @@
         },
         "runtime": {
           "Microsoft.VisualBasic.Data.IO.MessagePack.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.Data.visualize.Network/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.GraphTheory": "1.0.0",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "System.Composition": "8.0.0",
+          "System.Resources.Extensions": "8.0.0"
+        },
+        "runtime": {
+          "Microsoft.VisualBasic.Data.visualize.Network.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.Framework": "5.0.123",
+          "Microsoft.VisualBasic.Data.GraphTheory": "1.0.0",
+          "Microsoft.VisualBasic.Data.visualize.Network": "1.0.0",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389"
+        },
+        "runtime": {
+          "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions.dll": {
             "fileVersion": "0.0.0.0"
           }
         }
@@ -301,6 +378,19 @@
         },
         "runtime": {
           "Microsoft.VisualBasic.Math.Statistics.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.MIME.Html/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "System.Composition": "8.0.0",
+          "System.Configuration.ConfigurationManager": "8.0.1",
+          "System.Resources.Extensions": "8.0.0"
+        },
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.Html.dll": {
             "fileVersion": "0.0.0.0"
           }
         }
@@ -453,6 +543,44 @@
           }
         }
       },
+      "SMRUCC.genomics.Data.MicrobesOnline.Org/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Core": "6.3.256.3655"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Data.MicrobesOnline.Org.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.Data.RegulonDatabase/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.Framework": "5.0.123",
+          "Microsoft.VisualBasic.MIME.Html": "1.0.0",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Core": "6.3.256.3655",
+          "SMRUCC.genomics.Data.MicrobesOnline.Org": "1.0.0",
+          "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Data.RegulonDatabase.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.InteractionModel/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.GraphTheory": "1.0.0",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Core": "6.3.256.3655"
+        },
+        "runtime": {
+          "SMRUCC.genomics.InteractionModel.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Interops.NCBI.Extensions/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Data.Framework": "5.0.123",
@@ -475,6 +603,43 @@
         },
         "runtime": {
           "SMRUCC.genomics.Model.MotifGraph.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.Model.Network.VirtualFootprint/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.BinaryData": "1.0.0",
+          "Microsoft.VisualBasic.Data.Framework": "5.0.123",
+          "Microsoft.VisualBasic.Data.GraphTheory": "1.0.0",
+          "Microsoft.VisualBasic.Data.IO.MessagePack": "1.0.0",
+          "Microsoft.VisualBasic.Data.visualize.Network": "1.0.0",
+          "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions": "1.0.0",
+          "Microsoft.VisualBasic.DataMining.DynamicProgramming": "1.0.0",
+          "Microsoft.VisualBasic.DataMining.Framework": "1.0.0",
+          "Microsoft.VisualBasic.DataMining.UMAP": "5.0.1.2389",
+          "Microsoft.VisualBasic.DataStorage.HDSPack": "1.0.0",
+          "Microsoft.VisualBasic.MIME.Html": "1.0.0",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
+          "Microsoft.VisualBasic.Math.GibbsSampling": "1.0.0",
+          "Microsoft.VisualBasic.Math.Randomizer": "1.0.0",
+          "Microsoft.VisualBasic.Math.Statistics": "1.0.0",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.MSA": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman": "1.0.0",
+          "SMRUCC.genomics.Core": "6.3.256.3655",
+          "SMRUCC.genomics.Data.MicrobesOnline.Org": "1.0.0",
+          "SMRUCC.genomics.Data.RegulonDatabase": "1.0.0",
+          "SMRUCC.genomics.InteractionModel": "1.0.0",
+          "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0",
+          "SMRUCC.genomics.Model.MotifGraph": "1.0.0"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Model.Network.VirtualFootprint.dll": {
             "fileVersion": "0.0.0.0"
           }
         }
@@ -506,6 +671,22 @@
       "Microsoft.VisualBasic.Data.IO.MessagePack.Reference/1.0.0.0": {
         "runtime": {
           "Microsoft.VisualBasic.Data.IO.MessagePack.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.Data.visualize.Network.Reference/1.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualBasic.Data.visualize.Network.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions.Reference/1.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -570,6 +751,14 @@
       "Microsoft.VisualBasic.Math.Statistics.Reference/1.0.0.0": {
         "runtime": {
           "Microsoft.VisualBasic.Math.Statistics.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualBasic.MIME.Html.Reference/1.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.Html.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -663,6 +852,30 @@
           }
         }
       },
+      "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Data.MicrobesOnline.Org.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.Data.RegulonDatabase.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Data.RegulonDatabase.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.InteractionModel.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.InteractionModel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Interops.NCBI.Extensions.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Interops.NCBI.Extensions.dll": {
@@ -674,6 +887,14 @@
       "SMRUCC.genomics.Model.MotifGraph.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Model.MotifGraph.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.Model.Network.VirtualFootprint.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Model.Network.VirtualFootprint.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -729,6 +950,20 @@
       "path": "system.composition.typedparts/8.0.0",
       "hashPath": "system.composition.typedparts.8.0.0.nupkg.sha512"
     },
+    "System.Configuration.ConfigurationManager/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gPYFPDyohW2gXNhdQRSjtmeS6FymL2crg4Sral1wtvEJ7DUqFCDWDVbbLobASbzxfic8U1hQEdC7hmg9LHncMw==",
+      "path": "system.configuration.configurationmanager/8.0.1",
+      "hashPath": "system.configuration.configurationmanager.8.0.1.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n1ZP7NM2Gkn/MgD8+eOT5MulMj6wfeQMNS2Pizvq5GHCZfjlFMXV2irQlQmJhwA2VABC57M0auudO89Iu2uRLg==",
+      "path": "system.diagnostics.eventlog/8.0.1",
+      "hashPath": "system.diagnostics.eventlog.8.0.1.nupkg.sha512"
+    },
     "System.Numerics.Tensors/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -742,6 +977,13 @@
       "sha512": "sha512-psnQ6GRQOvt+evda5C4nD5EuV49mz2Tv0DD2JDVDEbE/TKoMukxSkGJcsBJ0pajpPuFRr67syFYlkJ4Wj6A5Zw==",
       "path": "system.resources.extensions/8.0.0",
       "hashPath": "system.resources.extensions.8.0.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+TUFINV2q2ifyXauQXRwy4CiBhqvDEDZeVJU7qfxya4aRYOKzVBpN+4acx25VcPB9ywUN6C0n8drWl110PhZEg==",
+      "path": "system.security.cryptography.protecteddata/8.0.0",
+      "hashPath": "system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
     },
     "System.Security.Permissions/8.0.0": {
       "type": "package",
@@ -773,6 +1015,16 @@
       "sha512": ""
     },
     "Microsoft.VisualBasic.Data.IO.MessagePack/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.Data.visualize.Network/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -813,6 +1065,11 @@
       "sha512": ""
     },
     "Microsoft.VisualBasic.Math.Statistics/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.MIME.Html/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -872,12 +1129,32 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Data.MicrobesOnline.Org/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Data.RegulonDatabase/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.InteractionModel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Interops.NCBI.Extensions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "SMRUCC.genomics.Model.MotifGraph/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Model.Network.VirtualFootprint/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -898,6 +1175,16 @@
       "sha512": ""
     },
     "Microsoft.VisualBasic.Data.IO.MessagePack.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.Data.visualize.Network.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.Data.visualize.Network.IO.Extensions.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -938,6 +1225,11 @@
       "sha512": ""
     },
     "Microsoft.VisualBasic.Math.Statistics.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.MIME.Html.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -997,12 +1289,32 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Data.RegulonDatabase.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.InteractionModel.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Interops.NCBI.Extensions.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "SMRUCC.genomics.Model.MotifGraph.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Model.Network.VirtualFootprint.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
