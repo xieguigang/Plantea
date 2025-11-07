@@ -19,7 +19,7 @@ declare namespace Plantea {
     * 
      * @param motifLinks -
      * @param motif_hits -
-     * @param regulators should be a blast alignment result of the subclass of @``T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IQueryHits``.
+     * @param regulators should be a blast alignment result of the subclass of @``T:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits``.
      * @param env -
      * 
      * + default value Is ``null``.
