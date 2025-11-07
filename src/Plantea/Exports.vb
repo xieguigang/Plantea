@@ -174,16 +174,16 @@ Module Exports
 
             Call network.Add(New RegulationFootprint With {
                 .chromosome = target_meta(0),
-                .Sequence = scan.segment,
-                .MotifId = motif_seed.First,
-                .Signature = scan.motif,
+                .sequence = scan.segment,
+                .motif_id = motif_seed.First,
+                .signature = scan.motif,
                 .tag = scan.seeds(0),
                 .RegulatorTrace = regList.Select(Function(a) a.hitName).Distinct.JoinBy("; "),
                 .Regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
                 .ORF = target_meta(1),
-                .MotifFamily = reg_desc.JoinBy(", "),
+                .motif_family = reg_desc.JoinBy(", "),
                 .MotifTrace = scan.seeds.First,
-                .Distance = -scan.start,
+                .distance = -scan.start,
                 .pvalue = scan.pvalue,
                 .Type = infertype
             })
