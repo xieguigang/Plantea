@@ -30,35 +30,34 @@
             <code id="clr_ts">
 # namespace SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat
 export class RegulatesFootprints extends <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a> {
-   # C. 目标基因对象的KEGG的代谢途径分类
-   Category: string;
-   # B 目标基因对象的KEGG的代谢途径分类
-   Class: string;
-   Distance: integer;
-   Ends: integer;
-   Length: integer;
-   MotifFamily: string;
-   MotifId: string;
+   # A 目标基因对象的KEGG的代谢途径分类
+   class: string;
+   # 所预测的调控因子对目标基因的调控作用的权重的大小，这里的元素的顺序是和<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a>.<a href="#">regulator</a>之中的顺序是一一对应的
+   cor: double;
+   distance: integer;
+   ends: integer;
+   length: integer;
+   motif_family: string;
+   motif_id: string;
    # Trace.Site.(Motif的匹配来源)
    MotifTrace: string;
    ORF: string;
-   ORFDirection: string;
-   # 所预测的调控因子对目标基因的调控作用的权重的大小，这里的元素的顺序是和<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a>.<a href="#">Regulator</a>之中的顺序是一一对应的
-   Pcc: double;
    # 这个基因对象所被预测的调控因子
-   Regulator: string;
+   regulator: string;
    # Trace.Regulator.(调控因子的匹配来源)
    RegulatorTrace: string;
-   Sequence: string;
-   Signature: string;
-   sPcc: double;
-   Starts: integer;
-   Strand: string;
+   sequence: string;
+   signature: string;
+   starts: integer;
+   strand: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a>;
+   # B 目标基因对象的KEGG的代谢途径分类
+   subclass: string;
    # 自定义的一个标签数据
    tag: string;
-   # A
-   Type: string;
-   WGCNA: double;
+   # annotation type
+   type: string;
+   # the WGCNA module type of this regulated ORF gene
+   WGCNA: string;
 }
 </code>
         </pre>
@@ -67,6 +66,7 @@ export class RegulatesFootprints extends <a href="/vignettes/clr/SMRUCC/genomics
 
         <ol>
 <li>this class extends from <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a> class: <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a></li>
+<li>use by <i>property</i> member <code>strand</code>: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a></li>
 </ol>
 
 

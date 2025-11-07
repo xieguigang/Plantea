@@ -11854,9 +11854,9 @@ Get feature site data by nucleotide location.
 <member name="T:SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation">
  <summary>
  Loci segment location information on an nucleotide sequence, this object added an <see cref="P:SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation.Strand"></see> 
- information on <see cref="T:SMRUCC.genomics.ComponentModel.Loci.Location"></see> data.(会自动根据LEFT和RIGHT的值来修正属性值)
+ information on <see cref="T:SMRUCC.genomics.ComponentModel.Loci.Location"></see> data.
  </summary>
- <remarks></remarks>
+ <remarks>(会自动根据LEFT和RIGHT的值来修正属性值)</remarks>
 </member>
 <member name="P:SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation.Strand">
  <summary>

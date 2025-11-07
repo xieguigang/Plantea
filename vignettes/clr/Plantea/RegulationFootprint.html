@@ -30,29 +30,27 @@
             <code id="clr_ts">
 # namespace Plantea
 export class RegulationFootprint extends <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a> {
-   Category: string;
    chromosome: string;
-   Class: string;
-   Distance: integer;
-   Ends: integer;
-   Length: integer;
-   MotifFamily: string;
-   MotifId: string;
+   class: string;
+   cor: double;
+   distance: integer;
+   ends: integer;
+   length: integer;
+   motif_family: string;
+   motif_id: string;
    MotifTrace: string;
    ORF: string;
-   ORFDirection: string;
-   Pcc: double;
    pvalue: double;
-   Regulator: string;
+   regulator: string;
    RegulatorTrace: string;
-   Sequence: string;
-   Signature: string;
-   sPcc: double;
-   Starts: integer;
-   Strand: string;
+   sequence: string;
+   signature: string;
+   starts: integer;
+   strand: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a>;
+   subclass: string;
    tag: string;
-   Type: string;
-   WGCNA: double;
+   type: string;
+   WGCNA: string;
 }
 </code>
         </pre>
@@ -61,6 +59,7 @@ export class RegulationFootprint extends <a href="/vignettes/clr/SMRUCC/genomics
 
         <ol>
 <li>this class extends from <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a> class: <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a></li>
+<li>use by <i>property</i> member <code>strand</code>: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a></li>
 </ol>
 
 

@@ -30,27 +30,29 @@
             <code id="clr_ts">
 # namespace SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat
 export class VirtualFootprints {
-   # <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a>.<a href="#">MotifId</a>与<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a>.<a href="#">ORF</a>的ATG之间的距离
-   Distance: integer;
-   Ends: integer;
+   # <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a>.<a href="#">motif_id</a>与<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a>.<a href="#">ORF</a>的ATG之间的距离
+   distance: integer;
+   ends: integer;
    # Motif序列片段的长度
-   Length: integer;
+   length: integer;
    # 注释源信息
-   MotifId: string;
+   motif_id: string;
    ORF: string;
-   ORFDirection: string;
-   Sequence: string;
+   # the matched TFBS site sequence
+   sequence: string;
    # Motif序列的正则表达式表述模型
-   Signature: string;
-   Starts: integer;
-   Strand: string;
+   signature: string;
+   starts: integer;
+   strand: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a>;
 }
 </code>
         </pre>
 
         <h3>.NET clr type reference tree</h3>
 
-        this clr type has no other .net clr type reference.
+        <ol>
+<li>use by <i>property</i> member <code>strand</code>: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a></li>
+</ol>
 
 
         <hr />

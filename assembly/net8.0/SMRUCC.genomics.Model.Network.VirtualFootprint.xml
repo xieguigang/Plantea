@@ -86,7 +86,7 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  简单描述调控位点和调控因子之间的关系以及该位点在基因组上面的位置
  </summary>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Regulator">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.regulator">
  <summary>
  这个基因对象所被预测的调控因子
  </summary>
@@ -94,31 +94,37 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Pcc">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.cor">
  <summary>
- 所预测的调控因子对目标基因的调控作用的权重的大小，这里的元素的顺序是和<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Regulator"></see>之中的顺序是一一对应的
+ 所预测的调控因子对目标基因的调控作用的权重的大小，这里的元素的顺序是和<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.regulator"></see>之中的顺序是一一对应的
+ </summary>
+ <value></value>
+ <returns>the correlation value which is evaluated from the expression value of target gene and target regulator</returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.WGCNA">
+ <summary>
+ the WGCNA module type of this regulated ORF gene
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.type">
+ <summary>
+ annotation type
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.class">
+ <summary>
+ A 目标基因对象的KEGG的代谢途径分类
  </summary>
  <value></value>
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Type">
- <summary>
- A
- </summary>
- <returns></returns>
-</member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Class">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.subclass">
  <summary>
  B 目标基因对象的KEGG的代谢途径分类
- </summary>
- <value></value>
- <returns></returns>
- <remarks></remarks>
-</member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.Category">
- <summary>
- C. 目标基因对象的KEGG的代谢途径分类
  </summary>
  <value></value>
  <returns></returns>
@@ -156,21 +162,21 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <param name="x"></param>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.MotifId">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.motif_id">
  <summary>
  注释源信息
  </summary>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.Distance">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.distance">
  <summary>
- <see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.MotifId"></see>与<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.ORF"></see>的ATG之间的距离
+ <see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.motif_id"></see>与<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.ORF"></see>的ATG之间的距离
  </summary>
  <value></value>
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.Length">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.length">
  <summary>
  Motif序列片段的长度
  </summary>
@@ -178,7 +184,13 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.Signature">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.sequence">
+ <summary>
+ the matched TFBS site sequence 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.signature">
  <summary>
  Motif序列的正则表达式表述模型
  </summary>
