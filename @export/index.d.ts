@@ -8,4 +8,8 @@ declare namespace Plantea {
       */
       function onLoad(): object;
    }
+   /**
+     * @param data_frame default value Is ``false``.
+   */
+   function load_motif_links(data_frame?: any): object;
 }
