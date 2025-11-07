@@ -24,5 +24,5 @@ declare namespace Plantea {
      * 
      * + default value Is ``null``.
    */
-   function tf_network(motifLinks: object, motif_hits: object, regulators: any, env?: object): object;
+   function tf_network(motifLinks: object, motif_hits: object, regulators: any, sourceMaps: object, env?: object): object;
 }
