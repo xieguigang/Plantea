@@ -39,13 +39,13 @@ export class RegulatesFootprints extends <a href="/vignettes/clr/SMRUCC/genomics
    length: integer;
    motif_family: string;
    motif_id: string;
-   # Trace.Site.(Motif的匹配来源)
-   MotifTrace: string;
+   # source trace of the TFBS site motif.
+   motif_trace: string;
    ORF: string;
    # 这个基因对象所被预测的调控因子
    regulator: string;
-   # Trace.Regulator.(调控因子的匹配来源)
-   RegulatorTrace: string;
+   # source trace of the TF regulator.
+   regulator_trace: string;
    sequence: string;
    signature: string;
    starts: integer;
