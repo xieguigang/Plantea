@@ -10839,6 +10839,42 @@ Get feature site data by nucleotide location.
  <param name="offsets"></param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit">
+ <summary>
+ A simple alignment annotation result model
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.queryName">
+ <summary>
+ the target molecule to be annotated
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.hitName">
+ <summary>
+ the id of the subject reference molecule data
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.description">
+ <summary>
+ the description of the subject hit reference object, will be used as 
+ the annotation text result of the corresponding <see cref="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.queryName"/> 
+ target.
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits">
+ <summary>
+ the annotation alignment result model with score value
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits.identities">
+ <summary>
+ the alignment silimarity score
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:SMRUCC.genomics.ComponentModel.Annotation.ECNumber">
  <summary>
  Enzyme Commission Number

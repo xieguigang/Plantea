@@ -19,7 +19,7 @@ Plantea
  <param name="motifLinks"></param>
  <param name="motif_hits"></param>
  <param name="regulators">
- should be a blast alignment result of the subclass of <see cref="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IQueryHits"/>.
+ should be a blast alignment result of the subclass of <see cref="T:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits"/>.
  </param>
  <param name="env"></param>
  <returns></returns>

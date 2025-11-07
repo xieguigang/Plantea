@@ -635,19 +635,13 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <param name="trim">这个函数里面默认是消除了KEGG的物种简写代码的</param>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.description">
- <summary>
- the description of the subject hit reference object, will be used as the annotation text result of the corresponding <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.queryName"/> target.
- </summary>
- <returns></returns>
-</member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.Extensions.isEmpty(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IQueryHits)">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.Extensions.isEmpty(SMRUCC.genomics.ComponentModel.Annotation.IQueryHits)">
  <summary>
  目标比对结果是否是空的?
  
  1. 对象是空值
- 2. 空的<see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.queryName"/>
- 3. 空的<see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.hitName"/>或者其等于<see cref="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.IBlastOutput.HITS_NOT_FOUND"/>
+ 2. 空的<see cref="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.queryName"/>
+ 3. 空的<see cref="P:SMRUCC.genomics.ComponentModel.Annotation.IBlastHit.hitName"/>或者其等于<see cref="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.IBlastOutput.HITS_NOT_FOUND"/>
  </summary>
  <param name="hit"></param>
  <returns></returns>
