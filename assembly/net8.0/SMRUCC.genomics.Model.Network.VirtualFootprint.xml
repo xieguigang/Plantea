@@ -130,17 +130,23 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.RegulatorTrace">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.regulator_trace">
  <summary>
- Trace.Regulator.(调控因子的匹配来源)
+ source trace of the TF regulator.
  </summary>
  <returns></returns>
+ <remarks>
+ (调控因子的匹配来源)
+ </remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.MotifTrace">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.motif_trace">
  <summary>
- Trace.Site.(Motif的匹配来源)
+ source trace of the TFBS site motif.
  </summary>
  <returns></returns>
+ <remarks>
+ (Motif的匹配来源)
+ </remarks>
 </member>
 <member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints.tag">
  <summary>
