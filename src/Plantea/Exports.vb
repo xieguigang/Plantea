@@ -25,7 +25,7 @@ Module Exports
         }
 
         Call df.add("matrix_id", From id As MotifLink In list Select id.Matrix_id)
-        Call df.add("gene_id", From id As MotifLink In list Select id.Gene_id)
+        Call df.add("gene_id", From id As MotifLink In list Select id.Gene_id.JoinBy("; "))
         Call df.add("species", From id As MotifLink In list Select id.Species)
         Call df.add("method", From id As MotifLink In list Select id.Method)
         Call df.add("data_source", From id As MotifLink In list Select id.Datasource)
