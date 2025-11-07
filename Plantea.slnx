@@ -1,5 +1,8 @@
 <Solution>
   <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="PlantMAT" />
+    <BuildType Name="Release" />
     <Platform Name="Any CPU" />
     <Platform Name="x64" />
   </Configurations>
@@ -9,14 +12,17 @@
     </Project>
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Data_science/Mathematica/Math/Math/Math.NET5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="PlantMAT|Any CPU" Project="x86" />
     </Project>
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Microsoft.VisualBasic.Core/src/Core.vbproj">
       <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="PlantMAT|Any CPU" Project="x86" />
     </Project>
   </Folder>
   <Folder Name="/gcmodeller/">
     <Project Path="../GCModeller/src/GCModeller/core/Bio.Annotation/annotation.NET5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="PlantMAT|Any CPU" Project="ARM32" />
     </Project>
     <Project Path="../GCModeller/src/GCModeller/core/Bio.Assembly/biocore-netcore5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
