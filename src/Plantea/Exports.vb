@@ -66,6 +66,24 @@ Module Exports
             Return regs.getError
         End If
 
+        Dim matrixIndex As Dictionary(Of String, MotifLink()) = motifLinks _
+            .GroupBy(Function(a) a.Matrix_id) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.ToArray
+                          End Function)
+        Dim regulatorHits As Dictionary(Of String, IQueryHits()) = regs.populates(Of IQueryHits)(env) _
+            .GroupBy(Function(a) a.hitName) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.ToArray
+                          End Function)
+        Dim network As New List(Of RegulationFootprint)
 
+        For Each scan As MotifMatch In motif_hits
+
+        Next
+
+        Return network.ToArray
     End Function
 End Module
