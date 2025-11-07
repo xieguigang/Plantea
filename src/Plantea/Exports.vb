@@ -98,7 +98,12 @@ Module Exports
                           Function(tf)
                               Return tf.ToArray
                           End Function)
-        Dim TFIndex As Dictionary(Of String, TFInfo) = TFdb.ToDictionary(Function(a) a.protein_id)
+        Dim TFIndex As Dictionary(Of String, TFInfo()) = TFdb _
+            .GroupBy(Function(a) a.protein_id) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.ToArray
+                          End Function)
         Dim matrixIndex As Dictionary(Of String, MotifLink()) = motifLinks _
             .GroupBy(Function(a) a.Matrix_id) _
             .ToDictionary(Function(a) a.Key,
