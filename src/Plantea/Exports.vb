@@ -123,6 +123,7 @@ Module Exports
         '                  Function(a)
         '                      Return CLRVector.asCharacter(a.Value)
         '                  End Function)
+        Dim missing As New List(Of String)
 
         For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
             Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
@@ -164,7 +165,7 @@ Module Exports
                         }
                     End If
                 Else
-                    Call $"missing regulator mapping information for motif hit: {scan}".warning
+
                 End If
             Next
 
@@ -178,14 +179,14 @@ Module Exports
                 .motif_id = motif_seed.First,
                 .signature = scan.motif,
                 .tag = scan.seeds(0),
-                .RegulatorTrace = regList.Select(Function(a) a.hitName).Distinct.JoinBy("; "),
-                .Regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
+                .regulator_trace = regList.Select(Function(a) a.hitName).Distinct.JoinBy("; "),
+                .regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
                 .ORF = target_meta(1),
                 .motif_family = reg_desc.JoinBy(", "),
-                .MotifTrace = scan.seeds.First,
+                .motif_trace = scan.seeds.First,
                 .distance = -scan.start,
                 .pvalue = scan.pvalue,
-                .Type = infertype
+                .type = infertype
             })
         Next
 
