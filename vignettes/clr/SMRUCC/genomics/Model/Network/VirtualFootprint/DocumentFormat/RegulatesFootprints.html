@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.RegulatesFootprints</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="../../_assets/page.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <table style="width: 100%;">
+            <tr>
+                <td>RegulatesFootprints {SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat}</td>
+                <td style="text-align: right;">.NET clr documentation</td>
+            </tr>
+        </table>
+
+        <h2>RegulatesFootprints</h2>
+
+        <h3>Description</h3>
+
+        <p>简单描述调控位点和调控因子之间的关系以及该位点在基因组上面的位置</p>
+
+        <h3>Declare</h3>        
+
+        <pre>
+            <code id="clr_ts">
+# namespace SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat
+export class RegulatesFootprints extends <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a> {
+   # C. 目标基因对象的KEGG的代谢途径分类
+   Category: string;
+   # B 目标基因对象的KEGG的代谢途径分类
+   Class: string;
+   Distance: integer;
+   Ends: integer;
+   Length: integer;
+   MotifFamily: string;
+   MotifId: string;
+   # Trace.Site.(Motif的匹配来源)
+   MotifTrace: string;
+   ORF: string;
+   ORFDirection: string;
+   # 所预测的调控因子对目标基因的调控作用的权重的大小，这里的元素的顺序是和<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a>.<a href="#">Regulator</a>之中的顺序是一一对应的
+   Pcc: double;
+   # 这个基因对象所被预测的调控因子
+   Regulator: string;
+   # Trace.Regulator.(调控因子的匹配来源)
+   RegulatorTrace: string;
+   Sequence: string;
+   Signature: string;
+   sPcc: double;
+   Starts: integer;
+   Strand: string;
+   # 自定义的一个标签数据
+   tag: string;
+   # A
+   Type: string;
+   WGCNA: double;
+}
+</code>
+        </pre>
+
+        <h3>.NET clr type reference tree</h3>
+
+        <ol>
+<li>this class extends from <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a> class: <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprints.html">VirtualFootprints</a></li>
+</ol>
+
+
+        <hr />
+        <div style="text-align: center;">[Package <em>{$package}</em> version {$version} <a
+                href="../{$package}.html">Index</a>]
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../../_assets/R_syntax.js"></script>
+<script type="text/javascript" src="../../_assets/highlights.js"></script>
+<script type="text/javascript">r_highlights("clr_ts");</script>
+
+</html>
