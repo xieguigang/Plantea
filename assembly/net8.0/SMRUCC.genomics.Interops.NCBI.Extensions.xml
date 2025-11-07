@@ -588,6 +588,12 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.description">
+ <summary>
+ The functional description of <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.HitName"/>
+ </summary>
+ <returns></returns>
+</member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.isMatched">
  <summary>
  仅仅是依靠对HitName的判断来使用这个属性了解<see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.QueryName"></see>是否已经和<see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.HitName"></see>比对上了
@@ -627,6 +633,12 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <param name="source"></param>
  <param name="indexByHits">Using <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.HitName"/> as hash key? Default is using <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.QueryName"/></param>
  <param name="trim">这个函数里面默认是消除了KEGG的物种简写代码的</param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.description">
+ <summary>
+ the description of the subject hit reference object, will be used as the annotation text result of the corresponding <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IBlastHit.queryName"/> target.
+ </summary>
  <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.Extensions.isEmpty(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IQueryHits)">
@@ -876,12 +888,6 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  (单向的最佳比对结果)
  </summary>
  <remarks></remarks>
-</member>
-<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit.description">
- <summary>
- The functional description of <see cref="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.I_BlastQueryHit.HitName"/>
- </summary>
- <returns></returns>
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit.coverage">
  <summary>
