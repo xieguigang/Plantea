@@ -24,5 +24,11 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
+<member name="P:Plantea.MotifLink.Gene_id">
+ <summary>
+ A set of the gene id that associated with current motif object
+ </summary>
+ <returns></returns>
+</member>
 </members>
 </doc>
