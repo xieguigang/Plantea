@@ -1,0 +1,508 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Microsoft.VisualBasic.DataMining.UMAP
+</name>
+</assembly>
+<members>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.DefaultRandomGenerator.Instance">
+ <summary>
+ This is the default configuration (it supports the optimization process to be executed on multiple threads)
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.DefaultRandomGenerator.DisableThreading">
+ <summary>
+ This uses the same random number generator but forces the optimization process to run on a single thread (which may be desirable if multiple requests may be processed concurrently
+ or if it is otherwise not desirable to let a single request access all of the CPUs)
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.MakeHeap(System.Int32,System.Int32)">
+ <summary>
+ Constructor for the heap objects. The heaps are used for approximate nearest neighbor search, maintaining a list of potential neighbors sorted by their distance.We also flag if potential neighbors
+ are newly added to the list or not.Internally this is stored as a single array; the first axis determines whether we are looking at the array of candidate indices, the array of distances, or the
+ flag array for whether elements are new or not.Each of these arrays are of shape (``nPoints``, ``size``)
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.HeapPush(Microsoft.VisualBasic.DataMining.UMAP.Heap,System.Int32,System.Double,System.Int32,System.Int32)">
+ <summary>
+ Push a new element onto the heap. The heap stores potential neighbors for each data point.The ``row`` parameter determines which data point we are addressing, the ``weight`` determines the distance
+ (for heap sorting), the ``index`` is the element to add, and the flag determines whether this is to be considered a new addition.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.UncheckedHeapPush(Microsoft.VisualBasic.DataMining.UMAP.Heap,System.Int32,System.Double,System.Int32,System.Int32)">
+ <summary>
+ Push a new element onto the heap. The heap stores potential neighbors for each data point. The ``row`` parameter determines which data point we are addressing, the ``weight`` determines the distance
+ (for heap sorting), the ``index`` is the element to add, and the flag determines whether this is to be considered a new addition.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.BuildCandidates(Microsoft.VisualBasic.DataMining.UMAP.Heap,System.Int32,System.Int32,System.Int32,Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Build a heap of candidate neighbors for nearest neighbor descent. 
+ For each vertex the candidate neighbors are any current neighbors, 
+ and any vertices that have the vertex as one of their nearest 
+ neighbors.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.DeHeapSort(Microsoft.VisualBasic.DataMining.UMAP.Heap)">
+ <summary>
+ Given an array of heaps (of indices and weights), unpack the heap out to give and array of sorted lists of indices and weights by increasing weight. This is effectively just the second half of heap sort
+ (the first half not being required since we already have the data in a heap).
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.SiftDown(System.Double[],System.Double[],System.Int32,System.Int32)">
+ <summary>
+ Restore the heap property for a heap with an out of place element at position ``elt``. This works with a heap pair where heap1 carries the weights and heap2 holds the corresponding elements.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Heaps.SmallestFlagged(Microsoft.VisualBasic.DataMining.UMAP.Heap,System.Int32)">
+ <summary>
+ Search the heap for the smallest element that is still flagged
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.RowCol.GetHashCode">
+ <summary>
+ Courtesy of https://stackoverflow.com/a/263416/3813189
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.PairwiseMultiply(Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix)">
+ <summary>
+ Element-wise multiplication of two matrices
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.Add(Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix)">
+ <summary>
+ Element-wise addition of two matrices
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.Subtract(Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix)">
+ <summary>
+ Element-wise subtraction of two matrices
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.MultiplyScalar(System.Double)">
+ <summary>
+ Scalar multiplication of a matrix
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.ElementWiseWith(Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix,System.Func{System.Double,System.Double,System.Double})">
+ <summary>
+ Helper function for element-wise operations
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.SparseMatrix.GetCSR">
+ <summary>
+ Helper function for getting data, indices, and indptr arrays from a sparse matrix 
+ to follow csr matrix conventions. Super inefficient (and kind of defeats the 
+ purpose of this convention) but a lot of the ported python tree search logic depends 
+ on this data format.
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.maxDepth">
+ <summary>
+ max depth for make tree 
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.MakeTree(System.Double[][],System.Int32,System.Int32,Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Construct a random projection tree based on ``data`` with leaves of size at most ``leafSize``
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.EuclideanRandomProjectionSplit(System.Double[][],System.Int32[],Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Given a set of ``indices`` for data points from ``data``, create 
+ a random hyperplane to split the data, returning two arrays indices 
+ that fall on either side of the hyperplane. This is the basis for
+ a random projection tree, which simply uses this splitting recursively.
+ This particular split uses euclidean distance to determine the 
+ hyperplane and which side each data sample falls on.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.MakeLeafArray(Microsoft.VisualBasic.DataMining.UMAP.Tree.FlatTree[])">
+ <summary>
+ Generate an array of sets of candidate nearest neighbors by 
+ constructing a random projection forest and taking the leaves
+ of all the trees. Any given tree has leaves that are a set 
+ of potential nearest neighbors.Given enough trees the set of
+ all such leaves gives a good likelihood of getting a good set
+ of nearest neighbors in composite. Since such a random 
+ projection forest is inexpensive to compute, this can be a 
+ useful means of seeding other nearest neighbor algorithms.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.SearchFlatTree(System.Double[],Microsoft.VisualBasic.DataMining.UMAP.Tree.FlatTree,Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Searches a flattened rp-tree for a point
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Tree.Tree.SelectSide(System.Double[],System.Double,System.Double[],Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Select the side of the tree to search during flat tree search
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Utils.Empty(System.Int32)">
+ <summary>
+ Creates an empty array
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Utils.Range(System.Int32)">
+ <summary>
+ Creates an array filled with index values
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Utils.Filled(System.Int32,System.Double)">
+ <summary>
+ Creates an array filled with a specific value
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Utils.RejectionSample(System.Int32,System.Int32,Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ Generate nSamples many integers from 0 to poolSize such that no integer is selected twice.The duplication constraint is achieved via rejection sampling.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.DistanceFunctions.Cosine(System.Double[],System.Double[])">
+ <summary>
+ this function will do data normalization and then evaluated the cosine similarity
+ </summary>
+ <param name="lhs"></param>
+ <param name="rhs"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.DistanceFunctions.CosineForNormalizedVectors(System.Double[],System.Double[])">
+ <summary>
+ use this function if the input vector <paramref name="lhs"/> and <paramref name="rhs"/> 
+ has been normalized to range [0,1]
+ </summary>
+ <param name="lhs"></param>
+ <param name="rhs"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.DistanceFunctions.SpectralSimilarity(System.Double[],System.Double[])">
+ <summary>
+ this function could be give the un-normalized vector data
+ </summary>
+ <param name="lhs"></param>
+ <param name="rhs"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.DistanceFunctions.JaccardSimilarity(System.Double[],System.Double[])">
+ <summary>
+ usually be tanimoto method for compares two fingerprint data
+ </summary>
+ <param name="lhs"></param>
+ <param name="rhs"></param>
+ <returns></returns>
+ <remarks>
+ zero as missing, other non-zero data as fingerprint 1
+ </remarks>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNearestNeighbour">
+ <summary>
+ K Nearest Neighbour Search
+ 
+ Uses a kd-tree to find the p number of near neighbours for each point in an input/output dataset.
+ 
+ Use the nn2 function from the RANN package, utilizes the Approximate Near Neighbor (ANN) C++ library, 
+ which can give the exact near neighbours or (as the name suggests) approximate near neighbours 
+ to within a specified error bound. For more information on the ANN library please 
+ visit http://www.cs.umd.edu/~mount/ANN/.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNearestNeighbour.NearestNeighbors(System.Double[][])">
+ <summary>
+ Compute the ``nNeighbors`` nearest points for each data point in ``X`` - this may be exact, but more likely is approximated via nearest neighbor descent.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNearestNeighbour.Round(System.Double)">
+ <summary>
+ Handle python3 rounding down from 0.5 discrpancy
+ </summary>
+ <param name="n"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNearestNeighbour.FindNeighbors(Microsoft.VisualBasic.Math.LinearAlgebra.Matrix.NumericMatrix,System.Int32,Microsoft.VisualBasic.DataMining.UMAP.DistanceCalculation,Microsoft.VisualBasic.Math.IProvideRandomValues)">
+ <summary>
+ K Nearest Neighbour Search
+ </summary>
+ <param name="data">matrix; input data matrix</param>
+ <param name="k">integer; number of nearest neighbours</param>
+ <returns>
+ a n-by-k matrix of neighbor indices
+ </returns>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNNArguments.k">
+ <summary>
+ nNeighbors
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNNState">
+ <summary>
+ index and the distance matrix of the corresponding indexed entity
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.KNN.KNNState.knnDistances">
+ <summary>
+ weights
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.NNDescent">
+ <summary>
+ UMAP (Uniform Manifold Approximation and Projection) is a nonlinear dimensionality reduction
+ technique widely used in data science and machine learning to visualize high-dimensional
+ datasets. NNDescent (Nearest Neighbor Descent) is a crucial step in the UMAP algorithm that
+ efficiently finds nearest neighbors in high-dimensional spaces.
+
+ Understanding the proximity between data points is essential for preserving the local structure
+ of the data before dimensionality reduction. NNDescent is an algorithm for fast approximate 
+ nearest neighbor search in high-dimensional spaces. It iteratively refines estimates of the 
+ proximity between points to build a nearest neighbor graph that captures the intrinsic local
+ structure of the data.
+ 
+ The NNDescent algorithm works as follows:
+ 
+ 1. Initialization: Randomly select some points as initial neighbors and establish an initial 
+    nearest neighbor graph.
+ 2. Iterative Search: Update the neighbor sets for each point through multiple rounds of iteration.
+    In each iteration, the algorithm checks whether the current neighbors of a point are truly
+    the closest and attempts to find closer neighbors if not.
+ 3. Candidate Set Construction: To find closer neighbors, the algorithm uses a technique 
+    called “candidate set construction,” which speculatively generates potential closer neighbors
+    based on the current known neighbors.
+ 4. Distance Calculation: The algorithm computes the distance from the current point to all 
+    points in its candidate set and updates the neighbor list accordingly.
+ 5. Pruning: During iteration, the algorithm prunes, or removes, neighbors that are too distant
+    to manage the size of the neighbor sets and reduce computational load.
+ 6. Convergence: The algorithm stops iterating if no better neighbors are found for several 
+    consecutive iterations or if a predefined number of iterations is reached.
+ 
+ The advantage of NNDescent is its ability to quickly find a good approximation of nearest 
+ neighbors, and it is more efficient than other nearest neighbor search algorithms, such as 
+ k-d trees or ball trees, especially when dealing with high-dimensional and large-scale datasets.
+ In UMAP, NNDescent is used to construct the local structure of the data, which is then 
+ preserved during the dimensionality reduction process.
+ 
+ In summary, NNDescent is an algorithm used in UMAP for efficiently constructing the local 
+ structure of high-dimensional data by iteratively optimizing the search for nearest neighbors, 
+ providing a crucial foundation for the subsequent dimensionality reduction steps.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.NNDescent.MakeNNDescent(System.Double[][],System.Int32[][],System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Boolean)">
+ <summary>
+ Create a version of nearest neighbor descent.
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.NNDescentLoop">
+ <summary>
+ implements NNDescent parallel loop
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.RPTree">
+ <summary>
+ In the context of the NNDescent algorithm, an rpTree (Random Projection Tree)
+ is a data structure used to index high-dimensional data points for efficient 
+ nearest neighbor search. Random Projection Trees are a type of metric tree,
+ which is a tree-like data structure that partitions data points to facilitate 
+ fast queries for nearest neighbors.
+
+ The idea behind an rpTree is to project the data points onto a random hyperplane 
+ and recursively divide the points into two subsets based on which side of the 
+ hyperplane they fall. This process is repeated for each subset, creating a binary
+ tree where each node represents a hyperplane and the two child nodes represent
+ the subsets of points on either side of the hyperplane.
+ 
+ Here’s how an rpTree works in the context of NNDescent:
+ 
+ 1. Random Hyperplane: A random hyperplane is chosen in the high-dimensional space. 
+    This hyperplane is defined by a random vector, and the projection of each data 
+    point onto this vector determines which side of the hyperplane the point falls.
+ 2. Partitioning: The data points are divided into two groups based on their 
+    projection onto the random hyperplane. Points that project to one side of the 
+    hyperplane are assigned to one child node, while points on the other side are
+    assigned to the other child node.
+ 3. Recursion: The process is repeated recursively for each child node, creating 
+    a hierarchy of partitions. At each level of the tree, the data is further 
+    divided by new random hyperplanes until a stopping criterion is met (e.g., a
+    maximum tree depth is reached or there are fewer points than a predefined 
+    threshold).
+ 4. Nearest Neighbor Search: When searching for the nearest neighbors of a query 
+    point, the rpTree is traversed. Starting from the root, the algorithm determines 
+    which side of each hyperplane the query point falls and traverses down the tree 
+    accordingly. At each node, the algorithm can potentially prune branches that are
+    guaranteed to not contain any points closer than the current nearest neighbors 
+    found.
+ 5. Candidate Generation: As the algorithm traverses the rpTree, it collects points 
+    from each leaf node that the query point passes through. These points are 
+    considered candidate nearest neighbors.
+ 6. Refinement: The final set of nearest neighbors is refined by comparing the 
+    query point to all candidate points collected from the rpTree. This step ensures
+    that the nearest neighbors found are indeed the closest points in the dataset.
+ 
+ The use of rpTrees in NNDescent allows for efficient and approximate nearest 
+ neighbor search in high-dimensional spaces. By using random hyperplanes, rpTrees 
+ avoid the curse of dimensionality that affects other types of spatial data structures,
+ such as k-d trees, which struggle as the number of dimensions increases. The random 
+ nature of rpTrees makes them more robust to the high-dimensional data distributions
+ that are common in real-world datasets.
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.OptimizationState.Head">
+ <summary>
+ the index of source node
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.OptimizationState.Tail">
+ <summary>
+ the index of target node
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.OptimizationState.EpochOfNextSample">
+ <summary>
+ edge weight?
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.OptimizationState.Dim">
+ <summary>
+ the dimension result of the projection operation
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.Umap">
+ <summary>
+ UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction
+ </summary>
+ <remarks>
+ https://github.com/curiosity-ai/umap-sharp
+ </remarks>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Umap._optimizationState">
+ <summary>
+ graph data:
+ 
+ + head  source index
+ + tail  target index
+ + value edge weight
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Umap._kdTreeKNNEngine">
+ <summary>
+ run knn search via kd-tree as mectric engine?
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Umap._graph">
+ <summary>
+ Internal graph connectivity representation
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Umap._knn">
+ <summary>
+ KNN state (can be precomputed and supplied via initializeFit)
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.UMAP.Umap._embedding">
+ <summary>
+ Projected embedding
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.#ctor(Microsoft.VisualBasic.DataMining.UMAP.DistanceCalculation,Microsoft.VisualBasic.Math.IProvideRandomValues,System.Int32,System.Int32,System.Double,System.Int32,System.Double,System.Nullable{System.Int32},System.Nullable{System.Double},System.Boolean,System.Double,System.Double,System.Double,System.Double,System.Double,Microsoft.VisualBasic.CommandLine.InteropService.Pipeline.RunSlavePipeline.SetProgressEventHandler)">
+ <summary>
+ 
+ </summary>
+ <param name="distance"></param>
+ <param name="random"></param>
+ <param name="dimensions"></param>
+ <param name="numberOfNeighbors"></param>
+ <param name="localConnectivity"></param>
+ <param name="KnnIter"></param>
+ <param name="bandwidth"></param>
+ <param name="customNumberOfEpochs"></param>
+ <param name="customMapCutoff">cutoff value in range ``[0,1]``</param>
+ <param name="progressReporter"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.InitializeFit(System.Double[][])">
+ <summary>
+ Initializes fit by computing KNN and a fuzzy simplicial set, as well as initializing 
+ the projected embeddings. Sets the optimization state ahead of optimization steps.
+ 
+ Returns the number of epochs to be used for the SGD optimization.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.GetEmbedding">
+ <summary>
+ get projection result
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.GetNEpochs">
+ <summary>
+ Gets the number of epochs for optimizing the projection - NOTE: This heuristic differs from the python version
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.FuzzySimplicialSet(System.Double[][],System.Double)">
+ <summary>
+ Given a set of data X, a neighborhood size, and a measure of distance compute the fuzzy simplicial 
+ set(here represented as a fuzzy graph in the form of a sparse matrix) associated to the data. This 
+ is done by locally approximating geodesic distance at each point, creating a fuzzy simplicial set 
+ for each such point, and then combining all the local fuzzy simplicial sets into a global one via 
+ a fuzzy union.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.InitializeSimplicialSetEmbedding">
+ <summary>
+ Initialize a fuzzy simplicial set embedding, using a specified initialisation method and then minimizing the 
+ fuzzy set cross entropy between the 1-skeletons of the high and low dimensional fuzzy simplicial sets.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.Step">
+ <summary>
+ Manually step through the optimization process one epoch at a time
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.Umap.OptimizeLayoutStep(System.Int32)">
+ <summary>
+ Improve an embedding using stochastic gradient descent to minimize the fuzzy set cross entropy between 
+ the 1-skeletons of the high dimensional and low dimensional fuzzy simplicial sets.
+ 
+ In practice this is done by sampling edges based on their membership strength(with the (1-p) terms 
+ coming from negative sampling similar to word2vec).
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject">
+ <summary>
+ binary file data model for save the UMAP embedding result
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.graph">
+ <summary>
+ KNN graph 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.embedding">
+ <summary>
+ the UMAP embedding result
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.dimension">
+ <summary>
+ width of the vector inside the <see cref="P:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.embedding"/> result.
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.samples">
+ <summary>
+ number of samples
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.UMAP.UMAPProject.CreateProjection(Microsoft.VisualBasic.DataMining.UMAP.Umap)">
+ <summary>
+ extract matrix data from umap result
+ </summary>
+ <param name="umap"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>

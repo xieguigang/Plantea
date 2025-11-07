@@ -1,0 +1,55 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Model.MotifGraph
+</name>
+</assembly>
+<members>
+<member name="M:SMRUCC.genomics.Model.MotifGraph.DistanceGraph.MeasureAverageDistance(System.String,System.String,System.String)">
+ <summary>
+ 计算出出现在f1后面的f2的距离平均值
+ </summary>
+ <returns></returns>
+ <remarks>
+ 具有先后顺序关系的片段距离
+ </remarks>
+</member>
+<member name="T:SMRUCC.genomics.Model.MotifGraph.SequenceGraph">
+ <summary>
+ A machine learning vector model for motif analysis
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.id">
+ <summary>
+ the unique reference id of current sequence graph model
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.graph">
+ <summary>
+ A tuple graph
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.tuple">
+ <summary>
+ deflat of the <see cref="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.graph"/>.
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.len">
+ <summary>
+ the sequence length
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.GetVector(System.Boolean)">
+ <summary>
+ get vector by default charset in <see cref="P:SMRUCC.genomics.Model.MotifGraph.SequenceGraph.composition"/>
+ </summary>
+ <returns></returns>
+ 
+</member>
+</members>
+</doc>

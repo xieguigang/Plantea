@@ -1,0 +1,358 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler">
+ <summary>
+ 
+ </summary>
+ <remarks>
+ https://github.com/trueb2/cs466proj
+ </remarks>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.SequenceCount">
+ <returns> the size of the list sequences </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.find(System.Int32)">
+ <summary>
+ Runs numSamples gibbsSamples to find a prediction on the sites
+ and motifs with the highest information content in the sequences </summary>
+ <param name="maxIterations">maximum number of times to iterate in a Gibbs Sample </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.gibbsSample(System.Int32,System.Collections.Generic.IList{System.String})">
+ <summary>
+ Implements the Gibbs Sampling algorithm found in the lawrence93.pdf </summary>
+ <param name="maxIterations">, maximum number of iterations sampling may take </param>
+ <returns> Sets of int predicting the position motifs located in each sequence </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.calculateP(System.Collections.Generic.IList{System.String})">
+ <summary>
+ Calculates the background probabilities for each base </summary>
+ <param name="S">, sequenceCount sequences </param>
+ <returns> List of Double length 4 </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.predictiveUpdateStep(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.Int32})">
+ <summary>
+ One of the sequenceLength sequences, z,
+ is chosen either at random
+ The pattern description q_{i,j} frequency is
+ then calculated from the current positions a_k
+ in all sequences excluding z </summary>
+ <param name="S">, the sequences other than z </param>
+ <param name="A">, the sites for the sequences other than z </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.getMotifStrings(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.Int32})">
+ <summary>
+ Grabs the motif strings of length motifLength
+ from each sequence and site </summary>
+ <param name="S">, sequences </param>
+ <param name="A">, sites </param>
+ <returns> sequenceCount motif strings </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.samplingStep(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.SequenceMatrix,System.String,System.Collections.Generic.IList{System.Double})">
+ <summary>
+ Every possible segment of width motifLength within sequence z
+ is considered as a possible instance of the pattern. The
+ probabilities Q_x of generating each segment x according to
+ the current pattern probabilities q_{i,j} are calculated
+ The weight A_x = Q_x/P_x is assigned to segment x, and
+ with each segment so weighted, a random one is selected.
+ Its position then becomes the new a_z. </summary>
+ <param name="z">, sequence we are iterating through </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.calculateMotifProbability(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.SequenceMatrix,System.String,System.Int32,System.Collections.Generic.IList{System.Double})">
+ <summary>
+ calculates the log probability of a character appearing at a specific index in a motif </summary>
+ <param name="q_ij">, motif weight matrix </param>
+ <param name="z">, string of characters </param>
+ <param name="x">, index of site in z </param>
+ <param name="P">, background frequencies </param>
+ <returns> log probability </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.smoothProbabilities(System.Collections.Generic.IList{System.Double})">
+ <summary>
+ Takes Q a list of log probabilities
+ Replaces negative infinities with 1 less than the minimum log probability </summary>
+ <param name="A">, log probabilities </param>
+ <returns> list of smoothed probabilities </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.weightedChooseIndex(System.Collections.Generic.IList{System.Double})">
+ <summary>
+ Currently picks the one with the greatest probability but should be
+ picking randomly from a weighted distribution </summary>
+ <param name="weightDistribution">, sequenceCount smoothed log probabilities </param>
+ <returns> new index of the site </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler.getRandomSites">
+ <summary>
+ Creates a list of sequenceLength random numbers
+ using the random object supplied
+ the numbers are from 0 to sequenceLength-motifLength-1 inclusive </summary>
+ <returns> sequenceLength random ints </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.MotifMatrix.#ctor(System.Double,System.Int32)">
+ <summary>
+ Creates a countsMatrix that may be sampled from where
+ columns have informationContentPerColumn information content
+ and there are motifLength columns </summary>
+ <param name="informationContentPerColumn">, information content per column </param>
+ <param name="motifLength">, number of columns </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.MotifMatrix.initMotifMatrix">
+ <summary>
+ Initializes the countsMatrix then randomly
+ chooses the probabilities based off of the
+ information content per column
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.MotifMatrix.stochasticGradientDescent(System.Int32)">
+ <summary>
+ Call this upon each row of the countsMatrix
+ 1. Picks a random base to emphasize
+ 2. Maintains an epoch and step counter to add less as epochs go on
+ 3. Randomly picks a base other than the target base and takes step
+      counts from it and gives it to the target base
+     4. Calculates the Information Content after each loop
+     Loop terminates after the Information Content has been
+     surpassed through taking a step of size 1. If a step of size
+     greater than 1 surpasses the threshold, then the
+     epoch will be undone. </summary>
+ <param name="idx">, row index of motif to perform work on </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.MotifMatrix.pickDecrementIndex(System.Int32[],System.Int32,System.Int32)">
+ <summary>
+ Picks the index in a row that may be decremented without going negative </summary>
+ <param name="row">, row of counts </param>
+ <param name="targetIdx">, target index that may not be decremented </param>
+ <param name="step">, amount of decrement </param>
+ <returns> index to decrement </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.MotifMatrix.initCountMatrix">
+ <summary>
+ Initializes the countsMatrix with the rowSum/4 value
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.SequenceMatrix.initSequenceMatrix">
+ <summary>
+ Counts the occurrences of each base along each position of each sequence
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.SequenceMatrix.probability(System.Int32,System.Int32)">
+ <summary>
+ Returns the probability of seeing the base in the index </summary>
+ <param name="index">, index of base </param>
+ <param name="base">, base in the index </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.writeSequenceInfo(System.Double,System.Int32,System.Int32,System.Int32,System.String,System.String,System.String,System.String,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.WeightMatrix,System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.Collections.Generic.KeyValuePair{System.String,System.Int32}})">
+ <summary>
+ Writes all of the files that need to be written </summary>
+ <param name="icpc">, information content per column </param>
+ <param name="ml"> </param>
+ <param name="sl"> </param>
+ <param name="sc"> </param>
+ <param name="fastaFileName"> </param>
+ <param name="sitesFileName"> </param>
+ <param name="motifFileName"> </param>
+ <param name="motifLengthFileName"> </param>
+ <param name="motif"> </param>
+ <param name="bindingSites"> </param>
+ <param name="plantedSequences"> </param>
+ <exception cref="T:System.IO.FileNotFoundException"> </exception>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.writeSites(System.Int32,System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.Int32},System.String)">
+ <summary>
+ Use any format for writing down the location of the planted site in each sequence </summary>
+ <param name="motifs"> </param>
+ <param name="sitePositions"> </param>
+ <param name="filename"> </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.writeMotif(System.Int32,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Matrix.WeightMatrix,System.String,System.Double)">
+ <summary>
+ Write down the motif that was generated. It should be stored in a format as
+ shown in the miniproj.pdf in step 8 </summary>
+ <param name="motif"> </param>
+ <param name="filename"> </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.writeMotifLength(System.Int32,System.String)">
+ <summary>
+ Write down the motif length </summary>
+ <param name="ml"> </param>
+ <param name="filename"> </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.writeResult(System.String,System.String,System.String)">
+ <summary>
+ Writes a benchmark result to the output directory </summary>
+ <param name="outputDirectory">, the directory to print the files in </param>
+ <param name="benchmark">, name of benchmark </param>
+ <param name="result">, result for file </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Writer.initOutputDirectory(System.String)">
+ <summary>
+ Creates the directory where the files will be written </summary>
+ <param name="filename">, path to a file that needs to be written </param>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter.minW">
+ <summary>
+ <see cref="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifSeeds.PairwiseSeeding(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter)"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter.maxW">
+ <summary>
+ <see cref="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifSeeds.PairwiseSeeding(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter)"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter.seedingCutoff">
+ <summary>
+ <see cref="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifSeeds.PairwiseSeeding(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter)"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter.seedOccurances">
+ <summary>
+ [0, 1]，表示种子至少要在这个属性值所表示的百分比数量上的原始序列出现
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Protocol.PopulateMotifs(System.Collections.Generic.IEnumerable{SMRUCC.genomics.SequenceModel.FASTA.FastaSeq},SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter,System.Int32,System.Double,System.Boolean)">
+ <summary>
+ Motif motif finding workflow start from here
+ </summary>
+ <param name="inputs"></param>
+ <param name="leastN%"></param>
+ <param name="cleanMotif"></param>
+ <param name="param"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Protocol.PWM(SMRUCC.genomics.Analysis.SequenceTools.MSA.MSAOutput,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter)">
+ <summary>
+ create PWM matrix of a motif model
+ </summary>
+ <param name="alignment">经过了多重序列比对之后，所有的成员的长度都已经是一致的了</param>
+ <param name="members"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.Protocol.Consensus(SMRUCC.genomics.Analysis.SequenceTools.HSP)">
+ <summary>
+ get consensus sequence of a pairwise alignment seed
+ </summary>
+ <param name="pairwise"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32)">
+ <summary>
+ 基于PWM的概率匹配
+ </summary>
+ <param name="target"></param>
+ <param name="cutoff#"></param>
+ <param name="minW%"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue[],SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32,System.Int32)">
+ <summary>
+ 基于PWM的概率匹配
+ </summary>
+ <param name="PWM">PWM</param>
+ <param name="target"></param>
+ <param name="cutoff#"></param>
+ <param name="minW%"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SeedCluster">
+ <summary>
+ Clustering seeds using binary tree
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SeedCluster.BuildAVLTreeCluster(System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{System.String}},System.Double)">
+ <summary>
+ 
+ </summary>
+ <param name="seeds">
+ value in this tuple object should be the sequence data
+ </param>
+ <param name="cutoff">
+ cos cutoff of the two sequence graph vector
+ </param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.FileName.RandomSeed(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Int32,Microsoft.VisualBasic.ComponentModel.Ranges.Model.IntRange)">
+ <summary>
+ bootstrapping sampling
+ </summary>
+ <param name="seq"></param>
+ <param name="n"></param>
+ <param name="range"></param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GraphSeed.part">
+ <summary>
+ the part of the sequence
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GraphSeed.graph">
+ <summary>
+ the raw graph data
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GraphSeed.embedding">
+ <summary>
+ the raw <see cref="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GraphSeed.graph"/> vector umap embedding data result
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.FullScan">
+ <summary>
+ Create seeds via pairwise alignment between all sequence input
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifSeeds.LocalSeeding(System.Collections.Generic.IEnumerable{SMRUCC.genomics.SequenceModel.FASTA.FastaSeq},SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter)">
+ <summary>
+ create seeds via pairwise alignment, use 
+ the smith-waterman HSP as motif seeds.
+ </summary>
+ <param name="regions"></param>
+ <param name="q"></param>
+ <param name="param"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.TreeScan.Compares(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq)">
+ <summary>
+ 建树的过程中会完成种子的提取
+ </summary>
+ <param name="a"></param>
+ <param name="b"></param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.alignments">
+ <summary>
+ the alignment score vector of current motif PWM with the source seeds
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.width">
+ <summary>
+ the length of the MSA alignment
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.AverageScore">
+ <summary>
+ score / motif with
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.SignificantSites">
+ <summary>
+ get number of the conserved sites
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

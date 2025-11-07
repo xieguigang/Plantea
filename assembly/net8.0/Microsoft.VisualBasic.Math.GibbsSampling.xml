@@ -1,0 +1,90 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Microsoft.VisualBasic.Math.GibbsSampling
+</name>
+</assembly>
+<members>
+<member name="T:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs">
+ <summary>
+ Gibb's Sampling Steps:<br/>
+ 
+ 1. Set every variable to a random value.<br/>
+ 2. Choose a variable to update. <br/>
+ 3. Randomly Select (aka "Sample") a new value for the variable based on the
+    current conditions. <br/>
+ 4. Repeat from Step 2.
+ </summary>  
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs.#ctor(System.String[],System.Int32)">
+ <summary>
+ Constructs and performs Gibb's Sampling in order to find repeated motifs.
+ </summary>
+ <param name="seqArray">
+            A String array of the sequences that will be used. </param>
+ <param name="motifLength">
+            An Integer that shows the length of the motif or pattern we
+            are trying to find, this value is given. </param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs.sample(System.Int32)">
+ <summary>
+ This method is repeated 2000 times.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs.calculateQ(System.String,System.Int32,System.Int32)">
+ <summary>
+ Calculates the probability of a letter in this position.
+ </summary>
+ <param name="tempMotif">
+            The motif being used for this calculation. </param>
+ <param name="chosenSeqIndex">
+            The index of the sequence being used for this calculation,
+            useful for skipping all of this sequences calculations and
+            focusing on the other ones. </param>
+ <returns> A double of the probability of a letter in this position. </returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs.calculateP(System.String,System.Int32)">
+ <summary>
+ Calculates the probability of a letter randomly selected.
+ 
+ To find this value, the method loops through each letter of the selected
+ temporary motif, and loops through the other sequences. While looping
+ through the other sequences, we find the amount of same letters in each
+ other sequence, along with the total length of all other sequences. The
+ value P is a product of every result, each result being the amount of
+ letters of the same kind over the total amount of letters.
+ </summary>
+ <param name="tempMotif">
+            The motif being used for this calculation. </param>
+ <param name="chosenSeqIndex">
+            The index of the sequence being used for this calculation,
+            useful for skipping all of this sequences calculations and
+            focusing on the other ones. </param>
+ <returns> A double of the probability of a letter randomly selected. </returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.Gibbs.generateRandomValue">
+ <summary>
+ Calculates and stores every random value. Generates a random from 0 to a
+ value of each individual sequences length subtracted by the motif length.
+ </summary>
+ <returns> A HashTable containing the sequence as a key, and the random
+         integer to be used as the value. </returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.GibbsSampling.MetropolisHastings.Main(System.Int32,System.Int32,System.Int32[],System.Int32,System.Int32,System.Int32[][])">
+ <summary>
+ 
+ </summary>
+ <param name="dim1"></param>
+ <param name="dim2"></param>
+ <param name="observed">
+ should be has element size equals to ``<paramref name="dim1"/>*<paramref name="dim2"/>``.
+ </param>
+ <param name="markovBasis">
+ store moves of markov basis
+ 
+ matrix in size of: RectangularArray.Matrix(Of Integer)(dim3, dim4)
+ </param>
+</member>
+</members>
+</doc>

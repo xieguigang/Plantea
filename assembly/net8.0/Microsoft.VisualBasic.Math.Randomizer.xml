@@ -1,0 +1,508 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Microsoft.VisualBasic.Math.Randomizer
+</name>
+</assembly>
+<members>
+<member name="T:Microsoft.VisualBasic.Math.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.My.Resources.Resources.deviates">
+<summary>
+  Looks up a localized string similar to 0000   1.276- 1.218-   .453-  .350-   .723   .676   1.099-  .314-   .394-  .633-
+0001    .318-  .799-  1.664- 1.391    .382   .733    .653   .219    .681- 1.129 
+0002   1.377- 1.257-   .495   .139-   .854-  .428   1.322-  .315-   .732- 1.348-
+0003   2.334   .337-  1.955-  .636-  1.318-  .433-   .545   .428    .297-  .276 
+0004   1.136-  .642   3.436  1.667-   .847  1.173-   .355-  .035    .359   .930 
+0005    .414   .011-   .666  1.132-   .410- 1.077-   .734  1.484    .340-  .789 
+0006    .494-  .364   1.23 [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.My.Resources.Resources.digits">
+<summary>
+  Looks up a localized string similar to 00000   10097 32533  76520 13586  34673 54876  80959 09117  39292 74945
+00001   37542 04805  64894 74296  24805 24037  20636 10402  00822 91665
+00002   08422 68953  19645 09303  23209 02560  15953 34764  35080 33606
+00003   99019 02529  09376 70715  38311 31165  88676 74397  04436 27659
+00004   12807 99970  80157 36147  64032 36653  98951 16877  12171 76833
+00005   66065 74717  34072 76850  36697 36170  65813 39885  11199 29170
+00006   31060 10805  45571 82406  35303 42614  86799 07439  23403 09732
+00007    [rest of string was truncated]&quot;;.
+</summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.crandn">
+ <summary>
+ 正态分布随机数
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.crandn.randn(System.Int32,System.Int32)">
+ <summary>
+ 生成标准正态分布随机向量
+ </summary>
+ <param name="m">向量维数</param>
+ <param name="seed">混合同余种子</param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.crandn.randn(System.Int32,System.Int32,System.Int32)">
+ <summary>
+ 生成标准正态分布随机矩阵
+ </summary>
+ <param name="m">矩阵维数</param>
+ <param name="n">矩阵维数</param>
+ <param name="seed">混合同余种子</param>
+ <returns></returns>
+ <remarks>
+ 由于矩阵的行和列都可能为奇数，所以先判断总元素
+ 的奇偶性，如果是偶数，先生成偶数随机向量，后把
+ 随机向量赋值给随机矩阵。
+ 如果总元素为奇数，按照VEC rand中类似的方法先
+ 生成随机向量，后把向量复制给随机矩阵。
+ </remarks>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.crandn.rand(System.Int32,System.Int32)">
+ <summary>
+ 混合同余法产生[0，1]均匀分布随机数向量
+ </summary>
+ <param name="m">向量维数</param>
+ <param name="seed">种子</param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.crandn.rand(System.Int32,System.Int32,System.Int32)">
+ <summary>
+ 混合同余法生成[0，1]均匀分布随机矩阵
+ 与随机向量函数同名重载
+ </summary>
+ <param name="m">矩阵维数</param>
+ <param name="n">矩阵维数</param>
+ <param name="seed">种子</param>
+ <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.FastRandom">
+ <summary>
+ A fast random number generator for .NET, from https://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random
+ Colin Green, January 2005
+
+ September 4th 2005
+ 	 Added NextBytesUnsafe() - commented out by default.
+ 	 Fixed bug in Reinitialise() - y,z and w variables were not being reset.
+
+ Key points:
+  1) Based on a simple and fast xor-shift pseudo random number generator (RNG) specified in:
+  Marsaglia, George. (2003). Xorshift RNGs.
+  http://www.jstatsoft.org/v08/i14/xorshift.pdf
+
+  This particular implementation of xorshift has a period of 2^128-1. See the above paper to see
+  how this can be easily extened if you need a longer period. At the time of writing I could find no
+  information on the period of System.Random for comparison.
+
+  2) Faster than System.Random. Up to 8x faster, depending on which methods are called.
+
+  3) Direct replacement for System.Random. This class implements all of the methods that System.Random
+  does plus some additional methods. The like named methods are functionally equivalent.
+
+  4) Allows fast re-initialisation with a seed, unlike System.Random which accepts a seed at construction
+  time which then executes a relatively expensive initialisation routine. This provides a vast speed improvement
+  if you need to reset the pseudo-random number sequence many times, e.g. if you want to re-generate the same
+  sequence many times. An alternative might be to cache random numbers in an array, but that approach is limited
+  by memory capacity and the fact that you may also want a large number of different sequences cached. Each sequence
+  can each be represented by a single seed value (int) when using FastRandom.
+
+  Notes.
+  A further performance improvement can be obtained by declaring local variables as static, thus avoiding
+  re-allocation of variables on each call. However care should be taken if multiple instances of
+  FastRandom are in use or if being used in a multi-threaded environment.
+
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.#ctor">
+ <summary>
+ Initialises a new instance using time dependent seed.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.#ctor(System.Int32)">
+ <summary>
+ Initialises a new instance using an int value as seed.
+ This constructor signature is provided to maintain compatibility with
+ System.Random
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.Reinitialise(System.Int32)">
+ <summary>
+ Reinitialises using an int value as a seed.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.Next">
+ <summary>
+ Generates a random int over the range 0 to int.MaxValue-1.
+ MaxValue is not generated in order to remain functionally equivalent to System.Random.Next().
+ This does slightly eat into some of the performance gain over System.Random, but not much.
+ For better performance see:
+
+ Call NextInt() for an int over the range 0 to int.MaxValue.
+
+ Call NextUInt() and cast the result to an int to generate an int over the full Int32 value range
+ including negative values.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.Next(System.Int32)">
+ <summary>
+ Generates a random int over the range 0 to upperBound-1, and not including upperBound.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.Next(System.Int32,System.Int32)">
+ <summary>
+ Generates a random int over the range lowerBound to upperBound-1, and not including upperBound.
+ upperBound must be >= lowerBound. lowerBound may be negative.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextDouble">
+ <summary>
+ Generates a random double. Values returned are from 0.0 up to but not including 1.0.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextFloat">
+ <summary>
+ Generates a random double. Values returned are from 0.0 up to but not including 1.0.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextFloats(System.Double[])">
+ <summary>
+ Fills the provided byte array with random floats.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextBytes(System.Byte[])">
+ <summary>
+ Fills the provided byte array with random bytes.
+ This method is functionally equivalent to System.Random.NextBytes().
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextUInt">
+ <summary>
+ Generates a uint. Values returned are over the full range of a uint,
+ uint.MinValue to uint.MaxValue, inclusive.
+
+ This is the fastest method for generating a single random number because the underlying
+ random number generator algorithm generates 32 random bits that can be cast directly to
+ a uint.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextInt">
+ <summary>
+ Generates a random int over the range 0 to int.MaxValue, inclusive.
+ This method differs from Next() only in that the range is 0 to int.MaxValue
+ and not 0 to int.MaxValue-1.
+
+ The slight difference in range means this method is slightly faster than Next()
+ but is not functionally equivalent to System.Random.Next().
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.FastRandom.NextBool">
+ <summary>
+ Generates a single random bit.
+ This method's performance is improved by generating 32 bits in one operation and storing them
+ ready for future calls.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.IProvideRandomValues.NextFloat">
+ <summary>
+ Generates a random float. Values returned are from 0.0 up to but not including 1.0.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.IProvideRandomValues.NextFloats(System.Double[])">
+ <summary>
+ Fills the elements of a specified array of bytes with random numbers.
+ </summary>
+ <param name="buffer">An array of bytes to contain random numbers.</param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.IProvideRandomValues.Next(System.Int32,System.Int32)">
+ <summary>
+ Returns a random integer that is within a specified range.
+ </summary>
+ <param name="minValue">The inclusive lower bound of the random number returned.</param>
+ <param name="maxValue">The exclusive upper bound of the random number returned. maxValue must be greater than or equal to minValue.</param>
+ <returns>A 32-bit signed integer greater than or equal to minValue and less than maxValue; that is, the range of return values includes minValue but not maxValue. If minValue
+ equals maxValue, minValue is returned.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.ThreadSafeFastRandom.Next">
+ <summary>
+ Returns a non-negative random integer.
+ </summary>
+ <returns>A 32-bit signed integer that is greater than or equal to 0 and less than System.Int32.MaxValue.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.ThreadSafeFastRandom.Next(System.Int32)">
+ <summary>
+ Returns a non-negative random integer that is less than the specified maximum.
+ </summary>
+ <param name="maxValue">The exclusive upper bound of the random number to be generated. maxValue must be greater than or equal to 0.</param>
+ <returns>A 32-bit signed integer that is greater than or equal to 0, and less than maxValue; that is, the range of return values ordinarily includes 0 but not maxValue. However,
+ if maxValue equals 0, maxValue is returned.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.ThreadSafeFastRandom.Next(System.Int32,System.Int32)">
+ <summary>
+ Returns a random integer that is within a specified range.
+ </summary>
+ <param name="minValue">The inclusive lower bound of the random number returned.</param>
+ <param name="maxValue">The exclusive upper bound of the random number returned. maxValue must be greater than or equal to minValue.</param>
+ <returns>A 32-bit signed integer greater than or equal to minValue and less than maxValue; that is, the range of return values includes minValue but not maxValue. If minValue
+ equals maxValue, minValue is returned.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.ThreadSafeFastRandom.NextFloat">
+ <summary>
+ Generates a random float. Values returned are from 0.0 up to but not including 1.0.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.ThreadSafeFastRandom.NextFloats(System.Double[])">
+ <summary>
+ Fills the elements of a specified array of bytes with random numbers.
+ </summary>
+ <param name="buffer">An array of bytes to contain random numbers.</param>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.MersenneTwisterFast">
+ <summary>
+ MersenneTwisterFast:
+  
+ A simulation quality fast random number generator (MT19937) with the same
+ public methods as java.util.Random.
+  
+  
+ About the Mersenne Twister. This is a Java version of the C-program for
+ MT19937: Integer version. next(32) generates one pseudorandom unsigned
+ integer (32bit) which is uniformly distributed among 0 to 2^32-1 for each
+ call. next(int bits) >>>'s by (32-bits) to get a value ranging between 0 and
+ 2^bits-1 long inclusive; hope that's correct. setSeed(seed) set initial
+ values to the working area of 624 words. For setSeed(seed), seed is any
+ 32-bit integer except for 0.
+  
+ Reference. M. Matsumoto and T. Nishimura, "Mersenne Twister: A
+ 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator",
+ <i>ACM Transactions on Modeling and Computer Simulation,</i> Vol. 8, No. 1,
+ January 1998, pp 3--30.
+  
+  
+ Bug Fixes. This implementation implements the bug fixes made in Java 1.2's
+ version of Random, which means it can be used with earlier versions of Java.
+ See <a href=
+ "http://www.javasoft.com/products/jdk/1.2/docs/api/java/util/Random.html">
+ the JDK 1.2 java.util.Random documentation</a> for further documentation on
+ the random-number generation contracts made. Additionally, there's an
+ undocumented bug in the JDK java.util.Random.nextBytes() method, which this
+ code fixes.
+  
+  
+ Important Note. Just like java.util.Random, this generator accepts a long
+ seed but doesn't use all of it. java.util.Random uses 48 bits. The Mersenne
+ Twister instead uses 32 bits (int size). So it's best if your seed does not
+ exceed the int range.
+  
+  
+ <a href="http://www.cs.umd.edu/users/seanl/">Sean Luke's web page</a>
+  
+  
+ - added shuffling method (Alexei Drummond)
+  
+ - added gamma RV method (Marc Suchard)
+  
+ This is now package private - it should be accessed using the instance in
+ Random
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.MersenneTwisterFast.serialVersionUID">
+ 
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.#ctor">
+ <summary>
+ Constructor using the time of day as default seed.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.#ctor(System.Int64)">
+ <summary>
+ Constructor using a given seed. Though you pass this seed in as a long,
+ it's best to make sure it's actually an integer.
+ </summary>
+ <param name="seed">
+            generator starting number, often the time of day. </param>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.MersenneTwisterFast.Seed">
+ <summary>
+ Initalize the pseudo random number generator. The Mersenne Twister only
+ uses an integer for its seed; It's best that you don't pass in a long
+ that's bigger than an int.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.nextInt(System.Int32)">
+ <summary>
+ Returns an integer drawn uniformly from 0 to n-1. Suffice it to say, n
+ must be > 0, or an IllegalArgumentException is raised.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.permute(System.Int32[])">
+ <summary>
+ Returns a uniform random permutation of int objects in array
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.shuffle(System.Int32[])">
+ <summary>
+ Shuffles an array.
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.shuffle(System.Int32[],System.Int32)">
+ <summary>
+ Shuffles an array. Shuffles numberOfShuffles times
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.shuffled(System.Int32)">
+ <summary>
+ Returns an array of shuffled indices of length l.
+ </summary>
+ <param name="l">
+            length of the array required. </param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.permuted(System.Int32)">
+ <summary>
+ Returns a uniform random permutation of ints 0,...,l-1
+ </summary>
+ <param name="l">
+            length of the array required. </param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.MersenneTwisterFast.nextGamma(System.Double,System.Double)">
+ <summary>
+****************************************************************
+ * Gamma Distribution - Acceptance Rejection combined with *
+ Acceptance Complement * *
+ ****************************************************************** 
+ * FUNCTION: - gds samples a random number from the standard * gamma
+ distribution with parameter a > 0. * Acceptance Rejection gs for a &lt;
+ 1 , * Acceptance Complement gd for a >= 1 . * REFERENCES: - J.H.
+ Ahrens, U. Dieter (1974): Computer methods * for sampling from gamma,
+ beta, Poisson and * binomial distributions, Computing 12, 223-246. *
+ - J.H. Ahrens, U. Dieter (1982): Generating gamma * variates by a
+ modified rejection technique, * Communications of the ACM 25, 47-54.
+ * SUBPROGRAMS: - drand(seed) ... (0,1)-Uniform generator with *
+ unsigned long integer *seed * - NORMAL(seed) ... Normal generator
+ N(0,1). * *
+ *****************************************************************
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.Randomizer">
+ <summary>
+ ##### Random generator based on the random table.(请注意，这个模块之中的所有函数都是线程不安全的)
+ 
+ ###### A Million Random Digits with 100,000 Normal Deviates
+ 
+ Not long after research began at RAND in 1946, the need arose for random numbers that 
+ could be used to solve problems of various kinds of experimental probability procedures. 
+ These applications, called Monte Carlo methods, required a large supply of random 
+ digits and normal deviates of high quality, and the tables presented here were produced 
+ to meet those requirements. This book was a product of RAND's pioneering work in computing, 
+ as well a testament to the patience and persistence of researchers in the early days of 
+ RAND. The tables of random numbers in this book have become a standard reference in 
+ engineering and econometrics textbooks and have been widely used in gaming and simulations 
+ that employ Monte Carlo trials. Still the largest published source of random digits and 
+ normal deviates, the work is routinely used by statisticians, physicists, polltakers, 
+ market analysts, lottery administrators, and quality control engineers. A 2001 article 
+ in the New York Times on the value of randomness featured the original edition of the book, 
+ published in 1955 by the Free Press. The rights have since reverted to RAND, and in this 
+ digital age, we thought it appropriate to reissue a new edition of the book in its original 
+ format, with a new foreword by Michael D. Rich, RAND's Executive Vice President.
+ 
+ > http://www.rand.org/pubs/monograph_reports/MR1418.html
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Randomizer.max">
+ <summary>
+ <see cref="F:Microsoft.VisualBasic.Math.Randomizer._digits"/> max integer
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Randomizer.min">
+ <summary>
+ <see cref="F:Microsoft.VisualBasic.Math.Randomizer._digits"/> max integer
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Randomizer.len">
+ <summary>
+ <see cref="F:Microsoft.VisualBasic.Math.Randomizer._digits"/> max integer
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Randomizer.DigitsRowLength">
+ <summary>
+ 每一行有10个随机数
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.Next">
+ <summary>
+ Returns a non-negative random integer.
+ </summary>
+ <returns>A 32-bit signed integer that is greater than or equal to 0 and less than System.Int32.MaxValue.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.GetRandomPercentages(System.Int32)">
+ <summary>
+ 返回随机的0-1之间的百分比数值
+ </summary>
+ <param name="n"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.NextDouble">
+ <summary>
+ Returns a random floating-point number that is greater than or equal to 0.0,
+ and less than 1.0.
+ </summary>
+ <returns>A double-precision floating point number that is greater than or equal to 0.0,
+ and less than 1.0.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.NextBytes(System.Byte[])">
+ <summary>
+ Fills the elements of a specified array of bytes with random numbers.
+ </summary>
+ <param name="buffer">An array of bytes to contain random numbers.</param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.Next(System.Int32)">
+ <summary>
+ Returns a non-negative random integer that is less than the specified maximum.
+ </summary>
+ <param name="maxValue">The exclusive upper bound of the random number to be generated. maxValue must
+ be greater than or equal to 0.</param>
+ <returns>A 32-bit signed integer that is greater than or equal to 0, and less than maxValue;
+ that is, the range of return values ordinarily includes 0 but not maxValue. However,
+ if maxValue equals 0, maxValue is returned.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.Next(System.Int32,System.Int32)">
+ <summary>
+ Returns a random integer that is within a specified range.
+ </summary>
+ <param name="minValue">The inclusive lower bound of the random number returned.</param>
+ <param name="maxValue">The exclusive upper bound of the random number returned. maxValue must be greater
+ than or equal to minValue.</param>
+ <returns>A 32-bit signed integer greater than or equal to minValue and less than maxValue;
+ that is, the range of return values includes minValue but not maxValue. If minValue
+ equals maxValue, minValue is returned.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.GetRandomNormalDeviates(System.Int32)">
+ <summary>
+ 返回一组符合标准正态分布的实数
+ </summary>
+ <param name="n"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Randomizer.Sample">
+ <summary>
+ Normal deviates
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

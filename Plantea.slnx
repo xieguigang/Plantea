@@ -19,6 +19,12 @@
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Data/DataFrame/dataframework-netcore5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
     </Project>
+    <Project Path="../GCModeller/src/runtime/sciBASIC#/Microsoft.VisualBasic.Core/src/Core.vbproj">
+      <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="PlantMAT|Any CPU" Project="x86" />
+    </Project>
+  </Folder>
+  <Folder Name="/framework/math/">
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Data_science/DataMining/DataMining/DataMining.NET5.vbproj">
       <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
       <Platform Solution="*|x64" Project="x64" />
@@ -28,6 +34,10 @@
       <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Data_science/DataMining/UMAP/UMAP.NET5.vbproj">
+      <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="../GCModeller/src/runtime/sciBASIC#/Data_science/Graph/graph-netcore5.vbproj">
       <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
       <Platform Solution="*|x64" Project="x64" />
     </Project>
@@ -42,9 +52,9 @@
       <Platform Solution="*|x64" Project="x64" />
       <Platform Solution="PlantMAT|Any CPU" Project="x86" />
     </Project>
-    <Project Path="../GCModeller/src/runtime/sciBASIC#/Microsoft.VisualBasic.Core/src/Core.vbproj">
+    <Project Path="../GCModeller/src/runtime/sciBASIC#/Data_science/Mathematica/Math/Randomizer/randomizer-netcore5.vbproj">
+      <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
-      <Platform Solution="PlantMAT|Any CPU" Project="x86" />
     </Project>
   </Folder>
   <Folder Name="/gcmodeller/">
@@ -60,6 +70,14 @@
     </Project>
   </Folder>
   <Folder Name="/gcmodeller/motif/">
+    <Project Path="../GCModeller/src/GCModeller/analysis/Motifs/MotifGraph/MotifGraph.vbproj">
+      <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/DNA_Comparative/DNA_Comparative.netcoreapp.vbproj">
+      <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
     <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/MotifFinder/MotifFinder.vbproj">
       <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />

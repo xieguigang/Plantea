@@ -12,5 +12,17 @@ Plantea
  </summary>
  <returns></returns>
 </member>
+<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ 
+ </summary>
+ <param name="motifLinks"></param>
+ <param name="motif_hits"></param>
+ <param name="regulators">
+ should be a blast alignment result of the subclass of <see cref="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract.IQueryHits"/>.
+ </param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
 </members>
 </doc>
