@@ -81,7 +81,13 @@ Module Exports
         Dim network As New List(Of RegulationFootprint)
 
         For Each scan As MotifMatch In motif_hits
+            Dim motif_seed = scan.seeds(0).Split
+            Dim links = matrixIndex(motif_seed.First)
+            Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
 
+            For Each source_id As String In gene_ids
+
+            Next
         Next
 
         Return network.ToArray
