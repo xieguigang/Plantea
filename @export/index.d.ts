@@ -3,7 +3,9 @@
 // package_source=Plantea
 
 declare namespace Plantea {
-   /**
-   */
-   function hello(): object;
+   module _ {
+      /**
+      */
+      function onLoad(): object;
+   }
 }
