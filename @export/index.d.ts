@@ -12,4 +12,7 @@ declare namespace Plantea {
      * @param data_frame default value Is ``false``.
    */
    function load_motif_links(data_frame?: any): object;
+   /**
+   */
+   function PlantTFDB_motifs(): object;
 }
