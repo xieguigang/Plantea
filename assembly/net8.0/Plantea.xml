@@ -12,7 +12,7 @@ Plantea
  </summary>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  
  </summary>

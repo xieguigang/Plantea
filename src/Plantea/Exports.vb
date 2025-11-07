@@ -79,7 +79,6 @@ Module Exports
     Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(),
                                   <RRawVectorArgument>
                                   regulators As Object,
-                                  sourceMaps As list,
                                   Optional env As Environment = Nothing) As Object
 
         Dim regs As pipeline = pipeline.TryCreatePipeline(Of IQueryHits)(regulators, env)
@@ -88,14 +87,18 @@ Module Exports
             Return regs.getError
         End If
 
-        Dim TFfamily As Dictionary(Of String, TFInfo()) = env.globalEnvironment _
+        Dim TFdb = env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
+            .ToArray
+
+        Dim TFfamily As Dictionary(Of String, TFInfo()) = TFdb _
             .GroupBy(Function(tf) tf.family) _
             .ToDictionary(Function(tf) tf.Key,
                           Function(tf)
                               Return tf.ToArray
                           End Function)
+        Dim TFIndex As Dictionary(Of String, TFInfo) = TFdb.ToDictionary(Function(a) a.protein_id)
         Dim matrixIndex As Dictionary(Of String, MotifLink()) = motifLinks _
             .GroupBy(Function(a) a.Matrix_id) _
             .ToDictionary(Function(a) a.Key,
@@ -109,11 +112,11 @@ Module Exports
                               Return a.ToArray
                           End Function)
         Dim network As New List(Of RegulationFootprint)
-        Dim regMaps As Dictionary(Of String, String()) = sourceMaps.slots _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return CLRVector.asCharacter(a.Value)
-                          End Function)
+        Dim regMaps As New Dictionary(Of String, String()) ' = sourceMaps.slots _
+        '    .ToDictionary(Function(a) a.Key,
+        '                  Function(a)
+        '                      Return CLRVector.asCharacter(a.Value)
+        '                  End Function)
 
         For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
             Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
