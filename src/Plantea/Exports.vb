@@ -6,6 +6,7 @@ Imports Microsoft.VisualBasic.Scripting.Runtime
 Imports Microsoft.VisualBasic.Text.Xml.Models
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
+Imports SMRUCC.genomics.SequenceModel.FASTA
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
 Imports SMRUCC.Rsharp.Runtime.Interop
@@ -46,6 +47,20 @@ Module Exports
         Return file.LoadXml(Of XmlList(Of MotifPWM))() _
             .AsEnumerable _
             .ToArray
+    End Function
+
+    <ExportAPI("extract_tf_info")>
+    <RApiReturn(GetType(TFInfo))>
+    Public Function extractTFInfo(<RRawVectorArgument> TF_fsa As Object, Optional env As Environment = Nothing) As Object
+        Dim pull As pipeline = pipeline.TryCreatePipeline(Of FastaSeq)(TF_fsa, env)
+
+        If pull.isError Then
+            Return pull.getError
+        Else
+            Return pull.populates(Of FastaSeq)(env) _
+                .Select(Function(fa) New TFInfo(fa.Title)) _
+                .ToArray
+        End If
     End Function
 
     ''' <summary>
@@ -96,14 +111,17 @@ Module Exports
             Dim links = matrixIndex(motif_seed.First)
             Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
             Dim regList As New List(Of IQueryHits)
+            Dim infertype As String
 
             For Each source_id As String In gene_ids
                 If regulatorHits.ContainsKey(source_id) Then
                     Call regList.AddRange(regulatorHits(source_id))
+                    infertype = "conserved"
                 ElseIf regMaps.ContainsKey(source_id) Then
                     For Each mappedId As String In regMaps(source_id)
                         Call regList.AddRange(regulatorHits(mappedId))
                     Next
+                    infertype = "conserved"
                 Else
                     Call $"missing regulator mapping information for motif hit: {scan}".warning
                 End If
@@ -125,7 +143,8 @@ Module Exports
                 .MotifFamily = reg_desc.JoinBy(", "),
                 .MotifTrace = scan.seeds.First,
                 .Distance = -scan.start,
-                .pvalue = scan.pvalue
+                .pvalue = scan.pvalue,
+                .Type = infertype
             })
         Next
 

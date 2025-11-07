@@ -9,6 +9,10 @@
 */
 declare namespace Plantea {
    /**
+     * @param env default value Is ``null``.
+   */
+   function extract_tf_info(TF_fsa: any, env?: object): object;
+   /**
     * load motif database from a given xml list dataset
     * 
     * 
