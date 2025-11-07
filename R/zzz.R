@@ -13,6 +13,8 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
+imports "Plantea" from "Plantea";
+
 .onLoad = function() {
   
 }
