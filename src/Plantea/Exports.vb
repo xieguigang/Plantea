@@ -1,13 +1,14 @@
-﻿Imports Microsoft.VisualBasic.Scripting.MetaData
-Imports SMRUCC.Rsharp.Runtime.Interop
-Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
-Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
+﻿Imports Microsoft.VisualBasic.CommandLine.Reflection
+Imports Microsoft.VisualBasic.Linq
+Imports Microsoft.VisualBasic.Scripting.MetaData
+Imports Microsoft.VisualBasic.Text.Xml.Models
+Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
+Imports SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Abstract
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
-Imports Microsoft.VisualBasic.CommandLine.Reflection
-Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
-Imports Microsoft.VisualBasic.Text.Xml.Models
-Imports Microsoft.VisualBasic.Linq
+Imports SMRUCC.Rsharp.Runtime.Interop
+Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
+Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 
 <Package("Plantea")>
 <RTypeExport("motif_link", GetType(MotifLink))>
@@ -42,5 +43,28 @@ Module Exports
         Return file.LoadXml(Of XmlList(Of MotifPWM))() _
             .AsEnumerable _
             .ToArray
+    End Function
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="motifLinks"></param>
+    ''' <param name="motif_hits"></param>
+    ''' <param name="regulators">
+    ''' should be a blast alignment result of the subclass of <see cref="IQueryHits"/>.
+    ''' </param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
+    <ExportAPI("tf_network")>
+    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As Object,
+                                  Optional env As Environment = Nothing) As Object
+
+        Dim regs As pipeline = pipeline.TryCreatePipeline(Of IQueryHits)(regulators, env)
+
+        If regs.isError Then
+            Return regs.getError
+        End If
+
+
     End Function
 End Module
