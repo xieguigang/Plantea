@@ -110,13 +110,20 @@ Module Exports
         End If
 
         Dim gene_hits As New Dictionary(Of String, DataSet)
+        Dim tag As String
 
         For Each link As RegulationFootprint In pull
             If Not gene_hits.ContainsKey(link.ORF) Then
-                Call gene_hits.Add(link.ORF, New DataSet With {.ID = link.ORF})
+                Call gene_hits.Add(link.ORF, New DataSet With {
+                     .ID = link.ORF,
+                     .Properties = New Dictionary(Of String, Double)
+                })
             End If
 
-            gene_hits(link.ORF)(link.motif_family) = gene_hits(link.ORF)(link.motif_family) + 1
+            tag = If(link.motif_family.StringEmpty(, True),
+                "missing",
+                link.motif_family)
+            gene_hits(link.ORF)(tag) = gene_hits(link.ORF)(tag) + 1
         Next
 
         Return gene_hits.Values.ToArray
