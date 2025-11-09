@@ -17,6 +17,7 @@ Imports SMRUCC.Rsharp.Runtime.Interop
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
+Imports SMRUCC.Rsharp.Runtime.Internal.Invokes
 
 ''' <summary>
 ''' The plant genomics data analysis tools
@@ -106,6 +107,14 @@ Module Exports
         Dim termsIndex As Dictionary(Of String, rankterm) = rankTerms.populates(Of rankterm)(env).todictionary(Function(a) a.queryname)
         Dim subnet As New List(Of RegulationFootprint)
 
+        For Each prot_id As String In termsIndex.Keys.ToArray
+            Dim gene_id As String = prot_id.Split("."c).First
+
+            If gene_id <> prot_id Then
+                Call termsIndex.Add(gene_id, termsIndex(prot_id))
+            End If
+        Next
+
         For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
             Dim hit As Boolean = False
 
@@ -113,7 +122,7 @@ Module Exports
                 hit = True
                 link.target_group = termsIndex(link.ORF).term
             End If
-            If termsIndex.ContainsKey(link.regulator) Then
+            If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
                 hit = True
                 link.regulator_group = termsIndex(link.regulator).term
             End If
