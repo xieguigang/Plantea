@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Data.Framework
+Imports Microsoft.VisualBasic.Data.Framework.IO
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Scripting.Runtime
@@ -80,6 +81,45 @@ Module Exports
     <ExportAPI("read_regulation")>
     Public Function readRegulations(file As String) As RegulationFootprint()
         Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
+    End Function
+
+    <ExportAPI("embedding_matrix")>
+    Public Function embedding_matrix(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
+        Dim pull As IEnumerable(Of RegulationFootprint)
+
+        If TypeOf regulations Is list Then
+            pull = DirectCast(regulations, list).data _
+                .Select(Function(a)
+                            Dim part = pipeline.TryCreatePipeline(Of RegulationFootprint)(a, env)
+
+                            If part.isError Then
+                                Return {}
+                            Else
+                                Return part.populates(Of RegulationFootprint)(env)
+                            End If
+                        End Function) _
+                .IteratesALL
+        Else
+            With pipeline.TryCreatePipeline(Of RegulationFootprint)(regulations, env)
+                If .isError Then
+                    Return .getError
+                Else
+                    pull = .populates(Of RegulationFootprint)(env)
+                End If
+            End With
+        End If
+
+        Dim gene_hits As New Dictionary(Of String, DataSet)
+
+        For Each link As RegulationFootprint In pull
+            If Not gene_hits.ContainsKey(link.ORF) Then
+                Call gene_hits.Add(link.ORF, New DataSet With {.ID = link.ORF})
+            End If
+
+            gene_hits(link.ORF)(link.motif_family) = gene_hits(link.ORF)(link.motif_family) + 1
+        Next
+
+        Return gene_hits.Values.ToArray
     End Function
 
     ''' <summary>
