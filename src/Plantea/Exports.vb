@@ -83,7 +83,7 @@ Module Exports
         Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
     End Function
 
-    <ExportAPI("embedding_matrix")>
+    <ExportAPI("count_matrix")>
     Public Function embedding_matrix(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
         Dim pull As IEnumerable(Of RegulationFootprint)
 
