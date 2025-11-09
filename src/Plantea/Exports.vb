@@ -14,6 +14,9 @@ Imports SMRUCC.Rsharp.Runtime.Interop
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 
+''' <summary>
+''' The plant genomics data analysis tools
+''' </summary>
 <Package("Plantea")>
 <RTypeExport("motif_link", GetType(MotifLink))>
 Module Exports
@@ -49,6 +52,12 @@ Module Exports
             .ToArray
     End Function
 
+    ''' <summary>
+    ''' A helper function extract fo the PlantTFDB information
+    ''' </summary>
+    ''' <param name="TF_fsa"></param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
     <ExportAPI("extract_tf_info")>
     <RApiReturn(GetType(TFInfo))>
     Public Function extractTFInfo(<RRawVectorArgument> TF_fsa As Object, Optional env As Environment = Nothing) As Object
@@ -64,7 +73,7 @@ Module Exports
     End Function
 
     ''' <summary>
-    ''' 
+    ''' build transcription regulation network
     ''' </summary>
     ''' <param name="motifLinks"></param>
     ''' <param name="motif_hits"></param>
