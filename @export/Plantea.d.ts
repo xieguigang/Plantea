@@ -10,6 +10,10 @@
 */
 declare namespace Plantea {
    /**
+     * @param env default value Is ``null``.
+   */
+   function count_matrix(regulations: any, env?: object): any;
+   /**
     * A helper function extract fo the PlantTFDB information
     * 
     * 
