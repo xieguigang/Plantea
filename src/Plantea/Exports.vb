@@ -151,7 +151,7 @@ Module Exports
             End With
         End If
 
-        Return pull
+        Return New [Variant](Of Message, IEnumerable(Of RegulationFootprint))(pull)
     End Function
 
     <ExportAPI("count_matrix")>

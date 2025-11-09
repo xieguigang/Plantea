@@ -32,6 +32,15 @@ Plantea
  <param name="file"></param>
  <returns></returns>
 </member>
+<member name="M:Plantea.Exports.subnetwork(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ create subnetwork by matches a set of terms
+ </summary>
+ <param name="regulations"></param>
+ <param name="terms"></param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
 <member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
