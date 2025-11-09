@@ -2,6 +2,7 @@
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Data.Framework.IO
+Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Scripting.Runtime
@@ -10,10 +11,12 @@ Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
 Imports SMRUCC.genomics.SequenceModel.FASTA
 Imports SMRUCC.Rsharp.Runtime
+Imports SMRUCC.Rsharp.Runtime.Components
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
 Imports SMRUCC.Rsharp.Runtime.Interop
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
+Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
 
 ''' <summary>
 ''' The plant genomics data analysis tools
@@ -83,8 +86,47 @@ Module Exports
         Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
     End Function
 
-    <ExportAPI("count_matrix")>
-    Public Function embedding_matrix(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
+    ''' <summary>
+    ''' create subnetwork by matches a set of terms
+    ''' </summary>
+    ''' <param name="regulations"></param>
+    ''' <param name="terms"></param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
+    <ExportAPI("term_subnetwork")>
+    <RApiReturn(GetType(RegulationFootprint))>
+    Public Function subnetwork(<RRawVectorArgument> regulations As Object, <RRawVectorArgument> terms As Object, Optional env As Environment = Nothing) As Object
+        Dim pulldata = pullNetwork(regulations, env)
+        Dim rankTerms As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(terms, env)
+
+        If pulldata Like GetType(Message) Then
+            Return pulldata.TryCast(Of Message)
+        End If
+
+        Dim termsIndex As Dictionary(Of String, rankterm) = rankTerms.populates(Of rankterm)(env).todictionary(Function(a) a.queryname)
+        Dim subnet As New List(Of RegulationFootprint)
+
+        For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
+            Dim hit As Boolean = False
+
+            If termsIndex.ContainsKey(link.ORF) Then
+                hit = True
+                link.target_group = termsIndex(link.ORF).term
+            End If
+            If termsIndex.ContainsKey(link.regulator) Then
+                hit = True
+                link.regulator_group = termsIndex(link.regulator).term
+            End If
+
+            If hit Then
+                Call subnet.Add(link)
+            End If
+        Next
+
+        Return subnet.ToArray
+    End Function
+
+    Private Function pullNetwork(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As [Variant](Of Message, IEnumerable(Of RegulationFootprint))
         Dim pull As IEnumerable(Of RegulationFootprint)
 
         If TypeOf regulations Is list Then
@@ -109,10 +151,20 @@ Module Exports
             End With
         End If
 
+        Return pull
+    End Function
+
+    <ExportAPI("count_matrix")>
+    Public Function embedding_matrix(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
         Dim gene_hits As New Dictionary(Of String, DataSet)
         Dim tag As String
+        Dim pulldata = pullNetwork(regulations, env)
 
-        For Each link As RegulationFootprint In pull
+        If pulldata Like GetType(Message) Then
+            Return pulldata.TryCast(Of Message)
+        End If
+
+        For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
             If Not gene_hits.ContainsKey(link.ORF) Then
                 Call gene_hits.Add(link.ORF, New DataSet With {
                      .ID = link.ORF,
