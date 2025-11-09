@@ -18,6 +18,7 @@ Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
 Imports SMRUCC.Rsharp.Runtime.Internal.Invokes
+Imports Microsoft.VisualBasic.Data.visualize.Network.Graph
 
 ''' <summary>
 ''' The plant genomics data analysis tools
@@ -188,6 +189,58 @@ Module Exports
         Next
 
         Return gene_hits.Values.ToArray
+    End Function
+
+    <ExportAPI("as.regulation_graph")>
+    Public Function createGraph(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
+        Dim pulldata = pullNetwork(regulations, env)
+
+        If pulldata Like GetType(Message) Then
+            Return pulldata.TryCast(Of Message)
+        End If
+
+        Dim g As New NetworkGraph
+
+        For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
+            If link.regulator Is Nothing Then
+                Continue For
+            End If
+
+            Dim u As String = link.regulator.Split("."c).First
+            Dim v As String = link.ORF.Split("."c).First
+
+            If g.GetElementByID(u) Is Nothing Then
+                Call g.CreateNode(u, New NodeData With {
+                    .label = u,
+                    .origID = u,
+                    .Properties = New Dictionary(Of String, String) From {
+                        {"group", link.regulator_group},
+                        {"source", link.regulator_trace}
+                    }
+                })
+            End If
+            If g.GetElementByID(v) Is Nothing Then
+                Call g.CreateNode(v, New NodeData With {
+                    .label = v,
+                    .origID = v,
+                    .Properties = New Dictionary(Of String, String) From {
+                        {"group", link.target_group},
+                        {"source", link.motif_trace}
+                    }
+                })
+            End If
+
+            Call g.CreateEdge(g.GetElementByID(u), g.GetElementByID(v), 1, New EdgeData With {
+                .Properties = New Dictionary(Of String, String) From {
+                    {"motif", link.signature},
+                    {"site", link.sequence},
+                    {"loci", link.starts},
+                    {"family", link.motif_family}
+                }
+            })
+        Next
+
+        Return g
     End Function
 
     ''' <summary>

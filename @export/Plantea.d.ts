@@ -37,6 +37,17 @@ declare namespace Plantea {
    */
    function read_regulation(file: string): object;
    /**
+    * create subnetwork by matches a set of terms
+    * 
+    * 
+     * @param regulations -
+     * @param terms -
+     * @param env -
+     * 
+     * + default value Is ``null``.
+   */
+   function term_subnetwork(regulations: any, terms: any, env?: object): object;
+   /**
     * build transcription regulation network
     * 
     * 
