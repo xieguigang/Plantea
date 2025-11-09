@@ -192,6 +192,7 @@ Module Exports
     End Function
 
     <ExportAPI("as.regulation_graph")>
+    <RApiReturn(GetType(NetworkGraph))>
     Public Function createGraph(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
         Dim pulldata = pullNetwork(regulations, env)
 

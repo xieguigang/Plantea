@@ -9,6 +9,12 @@
  * 
 */
 declare namespace Plantea {
+   module as {
+      /**
+        * @param env default value Is ``null``.
+      */
+      function regulation_graph(regulations: any, env?: object): object;
+   }
    /**
      * @param env default value Is ``null``.
    */

@@ -7,4 +7,5 @@ The plant genomics data analysis tools
 + [read_regulation](Plantea/read_regulation.1) read regulation network from a given csv table file
 + [term_subnetwork](Plantea/term_subnetwork.1) create subnetwork by matches a set of terms
 + [count_matrix](Plantea/count_matrix.1) 
++ [as.regulation_graph](Plantea/as.regulation_graph.1) 
 + [tf_network](Plantea/tf_network.1) build transcription regulation network
