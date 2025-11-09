@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Plantea.RegulationFootprint</title>
+    <title>SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="../../_assets/page.css">
@@ -13,44 +13,38 @@
 
         <table style="width: 100%;">
             <tr>
-                <td>RegulationFootprint {Plantea}</td>
+                <td>VirtualFootprint {SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat}</td>
                 <td style="text-align: right;">.NET clr documentation</td>
             </tr>
         </table>
 
-        <h2>RegulationFootprint</h2>
+        <h2>VirtualFootprint</h2>
 
         <h3>Description</h3>
 
-        <p>The transcription regulation network edge</p>
+        <p>A motif site feature data model</p>
 
         <h3>Declare</h3>        
 
         <pre>
             <code id="clr_ts">
-# namespace Plantea
-export class RegulationFootprint extends <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a> {
-   chromosome: string;
-   class: string;
-   cor: double;
+# namespace SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat
+export class VirtualFootprint {
+   # <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprint.html">VirtualFootprint</a>.<a href="#">motif_id</a>与<a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/VirtualFootprint.html">VirtualFootprint</a>.<a href="#">ORF</a>的ATG之间的距离
    distance: integer;
    ends: integer;
+   # Motif序列片段的长度
    length: integer;
-   motif_family: string;
+   # 注释源信息
    motif_id: string;
-   motif_trace: string;
+   # target gene that to be regulated
    ORF: string;
-   pvalue: double;
-   regulator: string;
-   regulator_trace: string;
+   # the matched TFBS site sequence
    sequence: string;
+   # Motif序列的正则表达式表述模型
    signature: string;
    starts: integer;
    strand: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a>;
-   subclass: string;
-   tag: string;
-   type: string;
-   WGCNA: string;
 }
 </code>
         </pre>
@@ -58,7 +52,6 @@ export class RegulationFootprint extends <a href="/vignettes/clr/SMRUCC/genomics
         <h3>.NET clr type reference tree</h3>
 
         <ol>
-<li>this class extends from <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a> class: <a href="/vignettes/clr/SMRUCC/genomics/Model/Network/VirtualFootprint/DocumentFormat/RegulatesFootprints.html">RegulatesFootprints</a></li>
 <li>use by <i>property</i> member <code>strand</code>: <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Loci/Strands.html">Strands</a></li>
 </ol>
 

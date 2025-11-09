@@ -45,7 +45,6 @@
           "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.Reference": "1.0.0.0",
           "SMRUCC.genomics.Annotation.Reference": "1.0.0.0",
           "SMRUCC.genomics.Core.Reference": "6.3.256.3655",
-          "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference": "1.0.0.0",
           "SMRUCC.genomics.Data.RegulonDatabase.Reference": "1.0.0.0",
           "SMRUCC.genomics.InteractionModel.Reference": "1.0.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions.Reference": "1.0.0.0",
@@ -543,24 +542,12 @@
           }
         }
       },
-      "SMRUCC.genomics.Data.MicrobesOnline.Org/1.0.0": {
-        "dependencies": {
-          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
-          "SMRUCC.genomics.Core": "6.3.256.3655"
-        },
-        "runtime": {
-          "SMRUCC.genomics.Data.MicrobesOnline.Org.dll": {
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "SMRUCC.genomics.Data.RegulonDatabase/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Data.Framework": "5.0.123",
           "Microsoft.VisualBasic.MIME.Html": "1.0.0",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
           "SMRUCC.genomics.Core": "6.3.256.3655",
-          "SMRUCC.genomics.Data.MicrobesOnline.Org": "1.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0"
         },
         "runtime": {
@@ -632,7 +619,6 @@
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655",
-          "SMRUCC.genomics.Data.MicrobesOnline.Org": "1.0.0",
           "SMRUCC.genomics.Data.RegulonDatabase": "1.0.0",
           "SMRUCC.genomics.InteractionModel": "1.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0",
@@ -849,14 +835,6 @@
           "SMRUCC.genomics.Core.dll": {
             "assemblyVersion": "6.3.256.3655",
             "fileVersion": "6.3.256.3655"
-          }
-        }
-      },
-      "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference/1.0.0.0": {
-        "runtime": {
-          "SMRUCC.genomics.Data.MicrobesOnline.Org.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1129,11 +1107,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SMRUCC.genomics.Data.MicrobesOnline.Org/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "SMRUCC.genomics.Data.RegulonDatabase/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1285,11 +1258,6 @@
       "sha512": ""
     },
     "SMRUCC.genomics.Core.Reference/6.3.256.3655": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Data.MicrobesOnline.Org.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

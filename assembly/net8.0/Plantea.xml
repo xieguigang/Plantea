@@ -6,15 +6,35 @@ Plantea
 </name>
 </assembly>
 <members>
+<member name="T:Plantea.Exports">
+ <summary>
+ The plant genomics data analysis tools
+ </summary>
+</member>
 <member name="M:Plantea.Exports.loadMotifDb(System.String)">
  <summary>
  load motif database from a given xml list dataset
  </summary>
  <returns></returns>
 </member>
+<member name="M:Plantea.Exports.extractTFInfo(System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ A helper function extract fo the PlantTFDB information
+ </summary>
+ <param name="TF_fsa"></param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
+<member name="M:Plantea.Exports.readRegulations(System.String)">
+ <summary>
+ read regulation network from a given csv table file
+ </summary>
+ <param name="file"></param>
+ <returns></returns>
+</member>
 <member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
- 
+ build transcription regulation network
  </summary>
  <param name="motifLinks"></param>
  <param name="motif_hits"></param>
@@ -29,6 +49,11 @@ Plantea
  A set of the gene id that associated with current motif object
  </summary>
  <returns></returns>
+</member>
+<member name="T:Plantea.RegulationFootprint">
+ <summary>
+ The transcription regulation network edge
+ </summary>
 </member>
 </members>
 </doc>

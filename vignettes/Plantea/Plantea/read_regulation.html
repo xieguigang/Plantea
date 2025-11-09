@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>build transcription regulation network</title>
+    <title>read regulation network from a given csv table file</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <link rel="stylesheet" type="text/css" href="../../_assets/page.css">
@@ -13,12 +13,12 @@
 
         <table style="width: 100%;">
             <tr>
-                <td>tf_network {Plantea}</td>
+                <td>read_regulation {Plantea}</td>
                 <td style="text-align: right;">R Documentation</td>
             </tr>
         </table>
 
-        <h2>build transcription regulation network</h2>
+        <h2>read regulation network from a given csv table file</h2>
 
         <h3>Description</h3>
 
@@ -27,27 +27,15 @@
         <h3>Usage</h3>
 
         <div style="width: 100%; padding-left: 3%; color: black;">
-            <pre><code class='language-R' style="color: black; font-weight:normal;"><strong>tf_network</strong>(<i>motifLinks</i>, <i>motif.hits</i>, <i>regulators</i>);</code></pre>
+            <pre><code class='language-R' style="color: black; font-weight:normal;"><strong>read_regulation</strong>(<i>file</i>);</code></pre>
         </div>
 
         <h3>Arguments</h3>
 
         <table>
             
-<dt>motifLinks</dt>
-<dd><p>[as <a href="/vignettes/clr/Plantea/MotifLink.html">MotifLink</a>]</p></dd>
-
-
-<dt>motif.hits</dt>
-<dd><p>[as <a href="/vignettes/clr/SMRUCC/genomics/Analysis/SequenceTools/SequencePatterns/Motif/MotifMatch.html">MotifMatch</a>]</p></dd>
-
-
-<dt>regulators</dt>
-<dd><p>should be a blast alignment result of the subclass of <a href="/vignettes/clr/SMRUCC/genomics/ComponentModel/Annotation/IQueryHits.html">IQueryHits</a>.</p></dd>
-
-
-<dt>env</dt>
-<dd><p>[as <a href="/vignettes/clr/SMRUCC/Rsharp/Runtime/Environment.html">Environment</a>]</p></dd>
+<dt>file</dt>
+<dd><p>[as string]</p></dd>
 
         </table>
 
@@ -62,7 +50,7 @@
 
         <h3>Value</h3>
 
-        this function returns data object of type <a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint</a>.<h4>clr value class</h4><ul><li><a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint</a></li></ul>
+        this function returns data object of type <a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint[]</a>.<h4>clr value class</h4><ul><li><a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint[]</a></li></ul>
 
         <h3 style="display: none;">Examples</h3>
 

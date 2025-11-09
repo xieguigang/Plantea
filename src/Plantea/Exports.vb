@@ -73,6 +73,16 @@ Module Exports
     End Function
 
     ''' <summary>
+    ''' read regulation network from a given csv table file
+    ''' </summary>
+    ''' <param name="file"></param>
+    ''' <returns></returns>
+    <ExportAPI("read_regulation")>
+    Public Function readRegulations(file As String) As RegulationFootprint()
+        Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
+    End Function
+
+    ''' <summary>
     ''' build transcription regulation network
     ''' </summary>
     ''' <param name="motifLinks"></param>

@@ -168,21 +168,32 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <param name="x"></param>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.motif_id">
+<member name="T:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint">
+ <summary>
+ A motif site feature data model
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.motif_id">
  <summary>
  注释源信息
  </summary>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.distance">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.ORF">
  <summary>
- <see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.motif_id"></see>与<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.ORF"></see>的ATG之间的距离
+ target gene that to be regulated
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.distance">
+ <summary>
+ <see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.motif_id"></see>与<see cref="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.ORF"></see>的ATG之间的距离
  </summary>
  <value></value>
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.length">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.length">
  <summary>
  Motif序列片段的长度
  </summary>
@@ -190,13 +201,13 @@ SMRUCC.genomics.Model.Network.VirtualFootprint
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.sequence">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.sequence">
  <summary>
  the matched TFBS site sequence 
  </summary>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprints.signature">
+<member name="P:SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat.VirtualFootprint.signature">
  <summary>
  Motif序列的正则表达式表述模型
  </summary>

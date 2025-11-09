@@ -5,11 +5,18 @@
 // ref=Plantea.Exports@Plantea, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 
 /**
+ * The plant genomics data analysis tools
  * 
 */
 declare namespace Plantea {
    /**
-     * @param env default value Is ``null``.
+    * A helper function extract fo the PlantTFDB information
+    * 
+    * 
+     * @param TF_fsa -
+     * @param env -
+     * 
+     * + default value Is ``null``.
    */
    function extract_tf_info(TF_fsa: any, env?: object): object;
    /**
@@ -19,6 +26,14 @@ declare namespace Plantea {
    */
    function load_motifdb(file: string): object;
    /**
+    * read regulation network from a given csv table file
+    * 
+    * 
+     * @param file -
+   */
+   function read_regulation(file: string): object;
+   /**
+    * build transcription regulation network
     * 
     * 
      * @param motifLinks -

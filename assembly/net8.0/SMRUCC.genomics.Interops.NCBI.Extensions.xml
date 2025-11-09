@@ -1456,27 +1456,27 @@ SMRUCC.genomics.Interops.NCBI.Extensions
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Programs.BLASTPlus.MolTypeNucleotide">
  <summary>
- The nucleotide molecular type value for the makeblastdb operation.(用于makeblastdb操作所需要的核酸链分子的命令行参数值)
+ The nucleotide molecular type value for the makeblastdb operation.
  </summary>
  <value></value>
  <returns></returns>
- <remarks></remarks>
+ <remarks>(用于makeblastdb操作所需要的核酸链分子的命令行参数值)</remarks>
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Programs.BLASTPlus.MolTypeProtein">
  <summary>
- The protein molecular type value for the makeblastdb operation.(用于makeblastdb操作所需要的蛋白质分子的命令行参数值)
+ The protein molecular type value for the makeblastdb operation.
  </summary>
  <value></value>
  <returns></returns>
- <remarks></remarks>
+ <remarks>(用于makeblastdb操作所需要的蛋白质分子的命令行参数值)</remarks>
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Programs.BLASTPlus.Version">
  <summary>
- Gets the blast program group version.(获取blast程序组的版本信息)
+ Gets the blast program group version.
  </summary>
  <value></value>
  <returns></returns>
- <remarks></remarks>
+ <remarks>(获取blast程序组的版本信息)</remarks>
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Programs.CLIArgumentsBuilder.BlastpOptionalArguments.QueryLocation">
  <summary>
