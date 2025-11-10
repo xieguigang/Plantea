@@ -1,0 +1,66 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.GapPenalty">
+ <summary>
+ Class to implement linear and affine gap penalties
+ Bioinformatics 1, WS 15/16
+ Jonas Ditz and Benjamin Schroeder
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.GapPenalty.GapOpening">
+ <summary>
+ get gap opening cost </summary>
+ <returns> gapOpening </returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.GapPenalty.GapExtension">
+ <summary>
+ get gap extension cost </summary>
+ <returns> gapExtension </returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.GapPenalty.PenaltyTyp">
+ <summary>
+ get gap penalty typ </summary>
+ <returns> 0 if linear, 1 else </returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.GapPenalty.getGapCost(System.Boolean)">
+ <summary>
+ get gap cost for currend gap </summary>
+ <param name="gapOpen"> </param>
+ <returns> gapCost </returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.RunNeedlemanWunsch">
+ <summary>
+ Application of the ``Needleman-Wunsch Algorithm``
+ Bioinformatics 1, WS 15/16
+ Dr. Kay Nieselt and Alexander Seitz
+ 
+ * Benjamin Schroeder
+ * Jonas Ditz
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.RunNeedlemanWunsch.RunAlign(SMRUCC.genomics.SequenceModel.IPolymerSequenceModel,SMRUCC.genomics.SequenceModel.IPolymerSequenceModel,System.Double@)">
+ <summary>
+ Run the Needleman-Wunsch Algorithm 
+ </summary>
+ <param name="fasta1"> commandline arguments </param>
+ <exception cref="T:System.Exception"> </exception>
+ <returns>This function returns the alignment score</returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.RunNeedlemanWunsch.RunAlign(SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.IO.TextWriter)">
+ <summary>
+ Run the Needleman-Wunsch Algorithm 
+ </summary>
+ <param name="fasta1"> commandline arguments </param>
+ <exception cref="T:System.Exception"> </exception>
+ <remarks>
+ 如果两条序列长度不一样，则较短的序列会被补充长度到最长的一条序列
+ </remarks>
+</member>
+</members>
+</doc>

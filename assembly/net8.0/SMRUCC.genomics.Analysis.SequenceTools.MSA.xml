@@ -1,0 +1,60 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Analysis.SequenceTools.MSA
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.MSA.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.MSA.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.MSA.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.MSA.My.Resources.Resources.Matrix">
+<summary>
+  Looks up a localized string similar to A A 0
+C C 0
+G G 0
+T T 0
+A C 1
+A G 1
+A T 1
+C A 1
+C G 1
+C T 1
+G A 1
+G C 1
+G T 1
+T A 1
+T C 1
+T G 1
+A - 2
+- A 2
+C - 2
+- C 2
+G - 2
+- G 2
+T - 2
+- T 2
+- - 100.
+</summary>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.MSA.MSAOutput">
+ <summary>
+ the result data of multiple sequence alignment
+ </summary>
+</member>
+</members>
+</doc>

@@ -2,6 +2,7 @@
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Data.Framework.IO
+Imports Microsoft.VisualBasic.Data.visualize.Network.Graph
 Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
@@ -9,6 +10,7 @@ Imports Microsoft.VisualBasic.Scripting.Runtime
 Imports Microsoft.VisualBasic.Text.Xml.Models
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
+Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
 Imports SMRUCC.genomics.SequenceModel.FASTA
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Components
@@ -16,9 +18,6 @@ Imports SMRUCC.Rsharp.Runtime.Internal.Object
 Imports SMRUCC.Rsharp.Runtime.Interop
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
-Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
-Imports SMRUCC.Rsharp.Runtime.Internal.Invokes
-Imports Microsoft.VisualBasic.Data.visualize.Network.Graph
 
 ''' <summary>
 ''' The plant genomics data analysis tools
@@ -105,7 +104,7 @@ Module Exports
             Return pulldata.TryCast(Of Message)
         End If
 
-        Dim termsIndex As Dictionary(Of String, rankterm) = rankTerms.populates(Of rankterm)(env).todictionary(Function(a) a.queryname)
+        Dim termsIndex As Dictionary(Of String, RankTerm) = rankTerms.populates(Of RankTerm)(env).ToDictionary(Function(a) a.queryName)
         Dim subnet As New List(Of RegulationFootprint)
 
         For Each prot_id As String In termsIndex.Keys.ToArray
