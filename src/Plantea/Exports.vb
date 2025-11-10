@@ -7,6 +7,7 @@ Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Scripting.Runtime
+Imports Microsoft.VisualBasic.Serialization.JSON
 Imports Microsoft.VisualBasic.Text.Xml.Models
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
@@ -55,6 +56,11 @@ Module Exports
         Return file.LoadXml(Of XmlList(Of MotifPWM))() _
             .AsEnumerable _
             .ToArray
+    End Function
+
+    <ExportAPI("load_class")>
+    Public Function loadClusterBackground(json As String) As ClassClusterData()
+        Return json.LineIterators.JoinBy(vbCrLf).LoadJSON(Of ClassClusterData())
     End Function
 
     ''' <summary>
