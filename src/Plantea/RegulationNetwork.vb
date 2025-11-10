@@ -68,13 +68,32 @@ Public Class RegulationNetwork
         Dim tfdata As New List(Of TFInfo)
 
         For Each source_id As String In gene_ids
+            If Not TFGeneIndex.ContainsKey(source_id) Then
+                Continue For
+            End If
+
             ' translate gene_id to TF id
             Dim tf As TFInfo() = TFGeneIndex(source_id)
 
             If tf.Any(Function(a) regIndex.ContainsKey(a.protein_id)) Then
-                infertype = "direct_mapping"
-                regList.AddRange(tf.Where(Function(a) regIndex.ContainsKey(a.protein_id)).Select(Function(a) regIndex(a.protein_id)).IteratesALL)
+                Dim mapped As IEnumerable(Of RankTerm) = tf _
+                    .Where(Function(a) regIndex.ContainsKey(a.protein_id)) _
+                    .Select(Function(a) regIndex(a.protein_id)) _
+                    .IteratesALL
+
+                If infertype = "direct_mapping" Then
+                    ' merge with previous source_id result
+                    regList.AddRange(mapped)
+                Else
+                    ' overrides of the family propagate result
+                    infertype = "direct_mapping"
+                    regList = New List(Of RankTerm)(mapped)
+                End If
             ElseIf tf.Any(Function(a) regfamily.ContainsKey(a.family)) Then
+                If infertype = "direct_mapping" Then
+                    Continue For
+                End If
+
                 ' infer by family
                 infertype = "family propagate"
                 regList.AddRange(tf.Where(Function(a) regfamily.ContainsKey(a.family)).Select(Function(a) regfamily(a.family)).IteratesALL)
@@ -88,42 +107,63 @@ Public Class RegulationNetwork
         Dim motif_family As IGrouping(Of String, TFInfo) = tfdata _
             .GroupBy(Function(a) a.family) _
             .OrderByDescending(Function(a) a.Count) _
-            .First
+            .FirstOrDefault
 
-        regList = New List(Of RankTerm)(From t As RankTerm
-                                        In regList
-                                        Order By t.score Descending)
+        If regList.Count = 0 Then
+            Dim familyName As String = If(motif_family Is Nothing OrElse motif_family.Key Is Nothing, "Unknown", motif_family.Key)
 
-        If regList.Any(Function(a) topics.ContainsKey(a.queryName)) Then
-            regList = New List(Of RankTerm)(From t As RankTerm
-                                            In regList
-                                            Where topics.ContainsKey(t.queryName)
-                                            Let term_score = topics(t.queryName)
-                                            Order By t.score * term_score.score Descending
-                                            Select t
-                                            Take top)
-        Else
-            regList = New List(Of RankTerm)(regList.Take(top))
-        End If
-
-        For Each regTerm As RankTerm In regList
-            Dim edge As New RegulationFootprint With {
+            ' is missing of the cooresponding regulator
+            Yield New RegulationFootprint With {
                 .chromosome = target_meta(0),
                 .sequence = scan.segment,
                 .motif_id = motif_seed.First,
                 .signature = scan.motif,
-                .tag = $"{regTerm.topHit},score={regTerm.scores.Max}",
-                .regulator_trace = regTerm.topHit,
-                .regulator = regTerm.queryName,
+                .tag = Nothing,
+                .regulator_trace = Nothing,
+                .regulator = Nothing,
                 .ORF = target_meta(1),
-                .motif_family = motif_family.Key,
+                .motif_family = familyName,
                 .motif_trace = scan.seeds.First,
                 .distance = -scan.start,
                 .pvalue = scan.pvalue,
                 .type = infertype
             }
+        Else
+            regList = New List(Of RankTerm)(From t As RankTerm
+                                            In regList
+                                            Order By t.score Descending)
 
-            Yield edge
-        Next
+            If regList.Any(Function(a) topics.ContainsKey(a.queryName)) Then
+                regList = New List(Of RankTerm)(From t As RankTerm
+                                                In regList
+                                                Where topics.ContainsKey(t.queryName)
+                                                Let term_score = topics(t.queryName)
+                                                Order By t.score * term_score.score Descending
+                                                Select t
+                                                Take top)
+            Else
+                regList = New List(Of RankTerm)(regList.Take(top))
+            End If
+
+            For Each regTerm As RankTerm In regList
+                Dim edge As New RegulationFootprint With {
+                    .chromosome = target_meta(0),
+                    .sequence = scan.segment,
+                    .motif_id = motif_seed.First,
+                    .signature = scan.motif,
+                    .tag = $"{regTerm.topHit},score={regTerm.scores.Max}",
+                    .regulator_trace = regTerm.topHit,
+                    .regulator = regTerm.queryName,
+                    .ORF = target_meta(1),
+                    .motif_family = motif_family.Key,
+                    .motif_trace = scan.seeds.First,
+                    .distance = -scan.start,
+                    .pvalue = scan.pvalue,
+                    .type = infertype
+                }
+
+                Yield edge
+            Next
+        End If
     End Function
 End Class
