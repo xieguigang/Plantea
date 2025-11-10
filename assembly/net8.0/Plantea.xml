@@ -41,17 +41,22 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
  </summary>
  <param name="motifLinks"></param>
  <param name="motif_hits"></param>
  <param name="regulators">
- should be a blast alignment result of the subclass of <see cref="T:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits"/>.
+ should be a blast alignment result of the class type <see cref="T:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm"/>. apply for mapping protein to a specific family term
  </param>
  <param name="env"></param>
  <returns></returns>
+</member>
+<member name="T:Plantea.MotifLink">
+ <summary>
+ motif source information
+ </summary>
 </member>
 <member name="P:Plantea.MotifLink.Gene_id">
  <summary>

@@ -244,6 +244,11 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  <param name="pairwise"></param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch">
+ <summary>
+ motif model sequence site matches result
+ </summary>
+</member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32)">
  <summary>
  基于PWM的概率匹配
