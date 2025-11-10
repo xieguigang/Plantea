@@ -252,7 +252,23 @@ Module Exports
 
         If regs.isError Then
             Return regs.getError
+        ElseIf TFdb.IsNullOrEmpty Then
+            TFdb = env.globalEnvironment _
+                .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
+                .LoadCsv(Of TFInfo)(mute:=True) _
+                .ToArray
         End If
+
+        Dim termMaps As New Dictionary(Of String, String)
+
+        For Each tf As TFInfo In TFdb
+
+        Next
+
+        Dim pull As IEnumerable(Of IQueryHits) = regs.populates(Of IQueryHits)(env)
+        Dim termsAll As RankTerm() = RankTerm.RankTopTerm(pull, termMaps, topBest:=False).ToArray
+
+        Return termsAll
     End Function
 
     ''' <summary>
