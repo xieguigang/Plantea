@@ -8,4 +8,5 @@ The plant genomics data analysis tools
 + [term_subnetwork](Plantea/term_subnetwork.1) create subnetwork by matches a set of terms
 + [count_matrix](Plantea/count_matrix.1) 
 + [as.regulation_graph](Plantea/as.regulation_graph.1) 
++ [assign_tffamily](Plantea/assign_tffamily.1) 
 + [tf_network](Plantea/tf_network.1) build transcription regulation network

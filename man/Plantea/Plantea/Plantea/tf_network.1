@@ -5,7 +5,7 @@ tf_network \- build transcription regulation network
 .SH SYNOPSIS
 \fItf_network(\fBmotifLinks\fR as <generic> MotifLink[], 
 \fBmotif_hits\fR as <generic> MotifMatch[], 
-\fBregulators\fR as any, 
+\fBregulators\fR as <generic> RankTerm[], 
 [\fB<Environment>\fR]);\fR
 .SH DESCRIPTION
 .PP
@@ -20,7 +20,7 @@ build transcription regulation network
 .PP
 .PP
 \fBregulators\fB \fR\- 
- should be a blast alignment result of the subclass of @\fBT:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits\fR.
+ should be a blast alignment result of the class type @\fBT:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm\fR. apply for mapping protein to a specific family term
 . 
 .PP
 .PP

@@ -262,7 +262,7 @@ Module Exports
         Dim termMaps As New Dictionary(Of String, String)
 
         For Each tf As TFInfo In TFdb
-
+            termMaps(tf.protein_id) = tf.family
         Next
 
         Dim pull As IEnumerable(Of IQueryHits) = regs.populates(Of IQueryHits)(env)

@@ -16,6 +16,11 @@ declare namespace Plantea {
       function regulation_graph(regulations: any, env?: object): object;
    }
    /**
+     * @param TFdb default value Is ``null``.
+     * @param env default value Is ``null``.
+   */
+   function assign_tffamily(blastp: any, TFdb?: object, env?: object): any;
+   /**
      * @param env default value Is ``null``.
    */
    function count_matrix(regulations: any, env?: object): any;
@@ -59,10 +64,10 @@ declare namespace Plantea {
     * 
      * @param motifLinks -
      * @param motif_hits -
-     * @param regulators should be a blast alignment result of the subclass of @``T:SMRUCC.genomics.ComponentModel.Annotation.IQueryHits``.
+     * @param regulators should be a blast alignment result of the class type @``T:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm``. apply for mapping protein to a specific family term
      * @param env -
      * 
      * + default value Is ``null``.
    */
-   function tf_network(motifLinks: object, motif_hits: object, regulators: any, env?: object): object;
+   function tf_network(motifLinks: object, motif_hits: object, regulators: object, env?: object): object;
 }
