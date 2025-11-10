@@ -17,9 +17,10 @@ declare namespace Plantea {
    }
    /**
      * @param TFdb default value Is ``null``.
+     * @param top_best default value Is ``true``.
      * @param env default value Is ``null``.
    */
-   function assign_tffamily(blastp: any, TFdb?: object, env?: object): any;
+   function assign_tffamily(blastp: any, TFdb?: object, top_best?: boolean, env?: object): any;
    /**
      * @param env default value Is ``null``.
    */
