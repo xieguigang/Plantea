@@ -95,7 +95,7 @@ Module Exports
 
     <ExportAPI("assign_classdata")>
     <RApiReturn(GetType(RegulationFootprint))>
-    Public Function assign_classdata(regs As Object, kb As ClassClusterData(), Optional env As Environment = Nothing) As Object
+    Public Function assign_classdata(<RRawVectorArgument> regs As Object, kb As ClassClusterData(), Optional env As Environment = Nothing) As Object
         Dim pulldata = pullNetwork(regs, env)
 
         If pulldata Like GetType(Message) Then
