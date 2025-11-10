@@ -288,105 +288,15 @@ Module Exports
                                   Optional top As Integer = 3,
                                   Optional env As Environment = Nothing) As Object
 
-        Dim TFdb = env.globalEnvironment _
+        Dim TFdb As TFInfo() = env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
             .ToArray
-        Dim regIndex As Dictionary(Of String, RankTerm()) = regulators _
-            .Select(Function(a) a.source.Select(Function(p) (p, a))) _
-            .IteratesALL _
-            .GroupBy(Function(a) a.p) _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return a.Select(Function(t) t.a).ToArray
-                          End Function)
-        Dim regfamily As Dictionary(Of String, RankTerm()) = regulators _
-            .GroupBy(Function(a) a.term) _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return a.ToArray
-                          End Function)
-        Dim TFGeneIndex As Dictionary(Of String, TFInfo()) = TFdb _
-            .GroupBy(Function(a) a.gene_id) _
-            .OrderByDescending(Function(a) a.Count) _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return a.ToArray
-                          End Function)
-        Dim matrixIndex As Dictionary(Of String, MotifLink()) = motifLinks _
-            .GroupBy(Function(a) a.Matrix_id) _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return a.ToArray
-                          End Function)
-        Dim network As New List(Of RegulationFootprint)
-        Dim topics As New Dictionary(Of String, RankTerm)
+        Dim network As New RegulationNetwork(motifLinks, TFdb)
+        Dim regs As RegulationFootprint() = network _
+            .BuildTFNetwork(motif_hits, regulators, topic, top) _
+            .ToArray
 
-        If Not topic.IsNullOrEmpty Then
-            topics = topic.ToDictionary(Function(a) a.queryName)
-        End If
-
-        For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
-            Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
-            Dim links = matrixIndex(motif_seed.First)
-            Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
-            Dim regList As New List(Of RankTerm)
-            Dim infertype As String = "missing"
-            Dim target_meta As String() = scan.title.Split("|"c)
-
-            For Each source_id As String In gene_ids
-                ' translate gene_id to TF id
-                Dim tf As TFInfo() = TFGeneIndex(source_id)
-
-                If tf.Any(Function(a) regIndex.ContainsKey(a.protein_id)) Then
-                    infertype = "direct_mapping"
-                    regList.AddRange(tf.Where(Function(a) regIndex.ContainsKey(a.protein_id)).Select(Function(a) regIndex(a.protein_id)).IteratesALL)
-                ElseIf tf.Any(Function(a) regfamily.ContainsKey(a.family)) Then
-                    ' infer by family
-                    infertype = "family propagate"
-                    regList.AddRange(tf.Where(Function(a) regfamily.ContainsKey(a.family)).Select(Function(a) regfamily(a.family)).IteratesALL)
-                Else
-                    ' missing
-                End If
-            Next
-
-            regList = New List(Of RankTerm)(From t In regList Order By t.score Descending)
-
-            If regList.Any(Function(a) topics.ContainsKey(a.queryName)) Then
-                regList = New List(Of RankTerm)(From t As RankTerm
-                                                In regList
-                                                Where topics.ContainsKey(t.queryName)
-                                                Let term_score = topics(t.queryName)
-                                                Order By t.score * term_score.score Descending
-                                                Select t
-                                                Take top)
-            Else
-                regList = New List(Of RankTerm)(regList.Take(top))
-            End If
-
-            For Each regTerm As RankTerm In regList
-
-            Next
-
-            Dim reg_desc = regList.Select(Function(r) r.source).IteratesALL.Distinct.ToArray
-
-            Call network.Add(New RegulationFootprint With {
-                .chromosome = target_meta(0),
-                .sequence = scan.segment,
-                .motif_id = motif_seed.First,
-                .signature = scan.motif,
-                .tag = scan.seeds(0),
-                .regulator_trace = regList.Select(Function(a) a.source).IteratesALL.Distinct.JoinBy("; "),
-                .regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
-                .ORF = target_meta(1),
-                .motif_family = reg_desc.JoinBy(", "),
-                .motif_trace = scan.seeds.First,
-                .distance = -scan.start,
-                .pvalue = scan.pvalue,
-                .type = infertype
-            })
-        Next
-
-        Return network.ToArray
+        Return regs
     End Function
 End Module
