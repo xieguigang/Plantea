@@ -65,6 +65,7 @@ Public Class RegulationNetwork
         Dim regList As New List(Of RankTerm)
         Dim infertype As String = "missing"
         Dim target_meta As String() = scan.title.Split("|"c)
+        Dim tfdata As New List(Of TFInfo)
 
         For Each source_id As String In gene_ids
             ' translate gene_id to TF id
@@ -80,9 +81,18 @@ Public Class RegulationNetwork
             Else
                 ' missing
             End If
+
+            Call tfdata.AddRange(tf)
         Next
 
-        regList = New List(Of RankTerm)(From t In regList Order By t.score Descending)
+        Dim motif_family As IGrouping(Of String, TFInfo) = tfdata _
+            .GroupBy(Function(a) a.family) _
+            .OrderByDescending(Function(a) a.Count) _
+            .First
+
+        regList = New List(Of RankTerm)(From t As RankTerm
+                                        In regList
+                                        Order By t.score Descending)
 
         If regList.Any(Function(a) topics.ContainsKey(a.queryName)) Then
             regList = New List(Of RankTerm)(From t As RankTerm
@@ -97,17 +107,16 @@ Public Class RegulationNetwork
         End If
 
         For Each regTerm As RankTerm In regList
-            Dim reg_desc As String = regTerm.topHit
             Dim edge As New RegulationFootprint With {
                 .chromosome = target_meta(0),
                 .sequence = scan.segment,
                 .motif_id = motif_seed.First,
                 .signature = scan.motif,
                 .tag = scan.seeds(0),
-                .regulator_trace = $"{reg_desc},score={regTerm.scores.Max}",
+                .regulator_trace = $"{regTerm.topHit},score={regTerm.scores.Max}",
                 .regulator = regTerm.queryName,
                 .ORF = target_meta(1),
-                .motif_family = reg_desc,
+                .motif_family = motif_family.Key,
                 .motif_trace = scan.seeds.First,
                 .distance = -scan.start,
                 .pvalue = scan.pvalue,
