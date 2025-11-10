@@ -16,6 +16,10 @@ declare namespace Plantea {
       function regulation_graph(regulations: any, env?: object): object;
    }
    /**
+     * @param env default value Is ``null``.
+   */
+   function assign_classdata(regs: any, kb: object, env?: object): object;
+   /**
      * @param TFdb default value Is ``null``.
      * @param top_best default value Is ``true``.
      * @param env default value Is ``null``.
@@ -35,6 +39,9 @@ declare namespace Plantea {
      * + default value Is ``null``.
    */
    function extract_tf_info(TF_fsa: any, env?: object): object;
+   /**
+   */
+   function load_class(json: string): object;
    /**
     * load motif database from a given xml list dataset
     * 
