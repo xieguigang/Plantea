@@ -284,22 +284,23 @@ Module Exports
     <ExportAPI("tf_network")>
     <RApiReturn(GetType(RegulationFootprint))>
     Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As RankTerm(), Optional env As Environment = Nothing) As Object
-        Dim regs As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(regulators, env)
-
-        If regs.isError Then
-            Return regs.getError
-        End If
-
         Dim TFdb = env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
             .ToArray
-
-        Dim TFfamily As Dictionary(Of String, TFInfo()) = TFdb _
-            .GroupBy(Function(tf) tf.family) _
-            .ToDictionary(Function(tf) tf.Key,
-                          Function(tf)
-                              Return tf.ToArray
+        Dim regIndex As Dictionary(Of String, RankTerm()) = regulators _
+            .Select(Function(a) a.source.Select(Function(p) (p, a))) _
+            .IteratesALL _
+            .GroupBy(Function(a) a.p) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.Select(Function(t) t.a).ToArray
+                          End Function)
+        Dim regfamily As Dictionary(Of String, RankTerm()) = regulators _
+            .GroupBy(Function(a) a.term) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.ToArray
                           End Function)
         Dim TFGeneIndex As Dictionary(Of String, TFInfo()) = TFdb _
             .GroupBy(Function(a) a.gene_id) _
@@ -314,66 +315,33 @@ Module Exports
                           Function(a)
                               Return a.ToArray
                           End Function)
-        Dim regulatorHits As Dictionary(Of String, IQueryHits()) = regs.populates(Of IQueryHits)(env) _
-            .GroupBy(Function(a) a.hitName) _
-            .ToDictionary(Function(a) a.Key,
-                          Function(a)
-                              Return a.ToArray
-                          End Function)
         Dim network As New List(Of RegulationFootprint)
-        Dim regMaps As New Dictionary(Of String, String()) ' = sourceMaps.slots _
-        '    .ToDictionary(Function(a) a.Key,
-        '                  Function(a)
-        '                      Return CLRVector.asCharacter(a.Value)
-        '                  End Function)
-        Dim missing As New List(Of String)
 
         For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
             Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
             Dim links = matrixIndex(motif_seed.First)
             Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
-            Dim regList As New List(Of IQueryHits)
+            Dim regList As New List(Of RankTerm)
             Dim infertype As String = "missing"
 
             For Each source_id As String In gene_ids
-                If regulatorHits.ContainsKey(source_id) Then
-                    Call regList.AddRange(regulatorHits(source_id))
-                    infertype = "conserved"
-                ElseIf regMaps.ContainsKey(source_id) Then
-                    For Each mappedId As String In regMaps(source_id)
-                        Call regList.AddRange(regulatorHits(mappedId))
-                    Next
-                    infertype = "conserved"
-                ElseIf TFGeneIndex.ContainsKey(source_id) Then
-                    Dim maps = TFGeneIndex(source_id)
+                ' translate gene_id to TF id
+                Dim tf As TFInfo() = TFGeneIndex(source_id)
 
+                If tf.Any(Function(a) regIndex.ContainsKey(a.protein_id)) Then
+                    infertype = "direct_mapping"
+                    regList.AddRange(tf.Where(Function(a) regIndex.ContainsKey(a.protein_id)).Select(Function(a) regIndex(a.protein_id)).IteratesALL)
+                ElseIf tf.Any(Function(a) regfamily.ContainsKey(a.family)) Then
+                    ' infer by family
                     infertype = "family propagate"
-
-                    For Each map As TFInfo In maps
-                        Dim infer = TFfamily(map.family)
-                        Dim anyhits As IQueryHits() = infer _
-                            .Where(Function(a) regulatorHits.ContainsKey(a.protein_id)) _
-                            .Select(Function(a) regulatorHits(a.protein_id)) _
-                            .IteratesALL _
-                            .ToArray
-
-                        Call regList.AddRange(anyhits)
-                    Next
-
-                    If regList.Any Then
-                        regList = New List(Of IQueryHits) From {
-                            regList _
-                                .OrderByDescending(Function(a) a.identities) _
-                                .First
-                        }
-                    End If
+                    regList.AddRange(tf.Where(Function(a) regfamily.ContainsKey(a.family)).Select(Function(a) regfamily(a.family)).IteratesALL)
                 Else
-
+                    ' missing
                 End If
             Next
 
             Dim target_meta As String() = scan.title.Split("|"c)
-            Dim reg_desc = regList.Select(Function(r) r.description.Split("|"c)(1)).Distinct.ToArray
+            Dim reg_desc = regList.Select(Function(r) r.source).IteratesALL.Distinct.ToArray
             Dim region = target_meta(2).Split("-"c).AsInteger
 
             Call network.Add(New RegulationFootprint With {
@@ -382,7 +350,7 @@ Module Exports
                 .motif_id = motif_seed.First,
                 .signature = scan.motif,
                 .tag = scan.seeds(0),
-                .regulator_trace = regList.Select(Function(a) a.hitName).Distinct.JoinBy("; "),
+                .regulator_trace = regList.Select(Function(a) a.source).IteratesALL.Distinct.JoinBy("; "),
                 .regulator = regList.Select(Function(a) a.queryName).Distinct.JoinBy("; "),
                 .ORF = target_meta(1),
                 .motif_family = reg_desc.JoinBy(", "),
