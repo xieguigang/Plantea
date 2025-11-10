@@ -246,6 +246,7 @@ Module Exports
     <ExportAPI("assign_tffamily")>
     Public Function makeTFFamilyTerms(<RRawVectorArgument> blastp As Object,
                                       Optional TFdb As TFInfo() = Nothing,
+                                      Optional top_best As Boolean = True,
                                       Optional env As Environment = Nothing) As Object
 
         Dim regs As pipeline = pipeline.TryCreatePipeline(Of IQueryHits)(blastp, env)
@@ -266,7 +267,7 @@ Module Exports
         Next
 
         Dim pull As IEnumerable(Of IQueryHits) = regs.populates(Of IQueryHits)(env)
-        Dim termsAll As RankTerm() = RankTerm.RankTopTerm(pull, termMaps, topBest:=False).ToArray
+        Dim termsAll As RankTerm() = RankTerm.RankTopTerm(pull, termMaps, topBest:=top_best).ToArray
 
         Return termsAll
     End Function
