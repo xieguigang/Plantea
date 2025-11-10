@@ -110,7 +110,10 @@ Public Class RegulationNetwork
             .FirstOrDefault
 
         If regList.Count = 0 Then
-            Dim familyName As String = If(motif_family Is Nothing OrElse motif_family.Key Is Nothing, "Unknown", motif_family.Key)
+            Dim familyName As String = If(
+                motif_family Is Nothing OrElse motif_family.Key Is Nothing,
+                "Unknown",
+                motif_family.Key)
 
             ' is missing of the cooresponding regulator
             Yield New RegulationFootprint With {
