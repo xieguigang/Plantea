@@ -1,5 +1,8 @@
 ﻿Imports Microsoft.VisualBasic.Data.Framework.StorageProvider.Reflection
 
+''' <summary>
+''' motif source information
+''' </summary>
 Public Class MotifLink
 
     Public Property Matrix_id As String

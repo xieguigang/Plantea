@@ -243,24 +243,32 @@ Module Exports
         Return g
     End Function
 
+    <ExportAPI("assign_tffamily")>
+    Public Function makeTFFamilyTerms(<RRawVectorArgument> blastp As Object,
+                                      Optional TFdb As TFInfo() = Nothing,
+                                      Optional env As Environment = Nothing) As Object
+
+        Dim regs As pipeline = pipeline.TryCreatePipeline(Of IQueryHits)(blastp, env)
+
+        If regs.isError Then
+            Return regs.getError
+        End If
+    End Function
+
     ''' <summary>
     ''' build transcription regulation network
     ''' </summary>
     ''' <param name="motifLinks"></param>
     ''' <param name="motif_hits"></param>
     ''' <param name="regulators">
-    ''' should be a blast alignment result of the subclass of <see cref="IQueryHits"/>.
+    ''' should be a blast alignment result of the class type <see cref="RankTerm"/>. apply for mapping protein to a specific family term
     ''' </param>
     ''' <param name="env"></param>
     ''' <returns></returns>
     <ExportAPI("tf_network")>
     <RApiReturn(GetType(RegulationFootprint))>
-    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(),
-                                  <RRawVectorArgument>
-                                  regulators As Object,
-                                  Optional env As Environment = Nothing) As Object
-
-        Dim regs As pipeline = pipeline.TryCreatePipeline(Of IQueryHits)(regulators, env)
+    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As RankTerm(), Optional env As Environment = Nothing) As Object
+        Dim regs As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(regulators, env)
 
         If regs.isError Then
             Return regs.getError
