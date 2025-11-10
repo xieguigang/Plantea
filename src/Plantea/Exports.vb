@@ -283,7 +283,11 @@ Module Exports
     ''' <returns></returns>
     <ExportAPI("tf_network")>
     <RApiReturn(GetType(RegulationFootprint))>
-    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As RankTerm(), Optional env As Environment = Nothing) As Object
+    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As RankTerm(),
+                                  Optional topic As RankTerm() = Nothing,
+                                  Optional top As Integer = 3,
+                                  Optional env As Environment = Nothing) As Object
+
         Dim TFdb = env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
@@ -316,6 +320,11 @@ Module Exports
                               Return a.ToArray
                           End Function)
         Dim network As New List(Of RegulationFootprint)
+        Dim topics As New Dictionary(Of String, RankTerm)
+
+        If Not topic.IsNullOrEmpty Then
+            topics = topic.ToDictionary(Function(a) a.queryName)
+        End If
 
         For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
             Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
@@ -323,6 +332,7 @@ Module Exports
             Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
             Dim regList As New List(Of RankTerm)
             Dim infertype As String = "missing"
+            Dim target_meta As String() = scan.title.Split("|"c)
 
             For Each source_id As String In gene_ids
                 ' translate gene_id to TF id
@@ -340,9 +350,25 @@ Module Exports
                 End If
             Next
 
-            Dim target_meta As String() = scan.title.Split("|"c)
+            regList = New List(Of RankTerm)(From t In regList Order By t.score Descending)
+
+            If regList.Any(Function(a) topics.ContainsKey(a.queryName)) Then
+                regList = New List(Of RankTerm)(From t As RankTerm
+                                                In regList
+                                                Where topics.ContainsKey(t.queryName)
+                                                Let term_score = topics(t.queryName)
+                                                Order By t.score * term_score.score Descending
+                                                Select t
+                                                Take top)
+            Else
+                regList = New List(Of RankTerm)(regList.Take(top))
+            End If
+
+            For Each regTerm As RankTerm In regList
+
+            Next
+
             Dim reg_desc = regList.Select(Function(r) r.source).IteratesALL.Distinct.ToArray
-            Dim region = target_meta(2).Split("-"c).AsInteger
 
             Call network.Add(New RegulationFootprint With {
                 .chromosome = target_meta(0),
