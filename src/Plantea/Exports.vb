@@ -87,6 +87,24 @@ Module Exports
         Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
     End Function
 
+    <ExportAPI("assign_classdata")>
+    <RApiReturn(GetType(RegulationFootprint))>
+    Public Function assign_classdata(regs As Object, kb As ClassClusterData(), Optional env As Environment = Nothing) As Object
+        Dim pulldata = pullNetwork(regs, env)
+
+        If pulldata Like GetType(Message) Then
+            Return pulldata.TryCast(Of Message)
+        End If
+
+        Dim kbIndex = kb.GroupBy(Function(a) a.gene).ToDictionary(Function(a) a.Key, Function(a) a.First)
+        Dim filled As RegulationFootprint() = RegulationFootprint _
+            .AssignClassData(pulldata.TryCast(Of IEnumerable(Of RegulationFootprint)), kbIndex) _
+            .Where(Function(a) Not a.class.StringEmpty(, True)) _
+            .ToArray
+
+        Return filled
+    End Function
+
     ''' <summary>
     ''' create subnetwork by matches a set of terms
     ''' </summary>
