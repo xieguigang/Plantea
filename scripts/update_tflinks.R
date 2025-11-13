@@ -8,7 +8,7 @@ setwd(relative_work());
 
 # writeLines(page, con = "download.html");
 
-let tables = Html::tables(page, filter = TRUE);
+let tables = Html::tables(page, filter = TRUE, plain_text = FALSE);
 
 for(let name in names(tables)) {
     print(tables[[name]]);
