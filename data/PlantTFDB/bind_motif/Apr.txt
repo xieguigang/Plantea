@@ -1,0 +1,17 @@
+Gene_id	Family	Matrix_id	Species	Method	Datasource	Datasource_ID
+F751_0717	bZIP	MP00173	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT1G32150(Arabidopsis thaliana)
+F751_0857	bHLH	MP00219	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT1G69010(Arabidopsis thaliana)
+F751_1374	WRKY	MP00455	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT4G26640(Arabidopsis thaliana)
+F751_1830	MYB_related	MP00652	Auxenochlorella protothecoides	PBM	PlantTFDB	transfer from LOC_Os01g51154(Oryza sativa subsp. japonica)
+F751_1832	C3H	MP00113	Auxenochlorella protothecoides	ampDAP	PlantTFDB	transfer from AT3G12130(Arabidopsis thaliana)
+F751_1875	SBP	MP00604	Auxenochlorella protothecoides	PBM	PlantTFDB	transfer from AT5G18830(Arabidopsis thaliana)
+F751_1877	ERF	MP00289	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT2G33710(Arabidopsis thaliana)
+F751_2473	CPP	MP00269	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT2G20110(Arabidopsis thaliana)
+F751_2710	MYB	MP00466	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT4G32730(Arabidopsis thaliana)
+F751_3367	MYB	MP00028	Auxenochlorella protothecoides	SELEX	PlantTFDB	transfer from AT1G09770(Arabidopsis thaliana)
+F751_3976	MYB	MP00222	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT1G69560(Arabidopsis thaliana)
+F751_4808	MYB	MP00259	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT2G02820(Arabidopsis thaliana)
+F751_4902	G2-like	MP00354	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT3G13040(Arabidopsis thaliana)
+F751_5410	SBP	MP00603	Auxenochlorella protothecoides	PBM	PlantTFDB	transfer from AT2G47070(Arabidopsis thaliana)
+F751_6948	MYB	MP00385	Auxenochlorella protothecoides	DAP	PlantTFDB	transfer from AT3G27785(Arabidopsis thaliana)
+

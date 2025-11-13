@@ -1,0 +1,18 @@
+Gene_id	Family	Matrix_id	Species	Method	Datasource	Datasource_ID
+GPECTOR_10g1002	MYB_related	MP00103	Gonium pectorale	PBM	PlantTFDB	transfer from AT2G46830(Arabidopsis thaliana)
+GPECTOR_15g499	bZIP	MP00117	Gonium pectorale	ampDAP	PlantTFDB	transfer from AT5G11260(Arabidopsis thaliana)
+GPECTOR_164g150	ERF	MP00027	Gonium pectorale	PBM	PlantTFDB	transfer from AT4G23750(Arabidopsis thaliana)
+GPECTOR_1g538	C3H	MP00383	Gonium pectorale	ampDAP	PlantTFDB	transfer from AT1G68200(Arabidopsis thaliana)
+GPECTOR_20g429	G2-like	MP00014	Gonium pectorale	PBM	PlantTFDB	transfer from AT3G46640(Arabidopsis thaliana)
+GPECTOR_24g169	GATA	MP00048	Gonium pectorale	PBM	PlantTFDB	transfer from AT4G32890(Arabidopsis thaliana)
+GPECTOR_31g305	WRKY	MP00094	Gonium pectorale	SELEX	PlantTFDB	transfer from AT2G04880(Arabidopsis thaliana)
+GPECTOR_322g32	SBP	MP00634	Gonium pectorale	PBM	PlantTFDB	transfer from PK22320.1(Cannabis sativa)
+GPECTOR_340g76	bHLH	MP00372	Gonium pectorale	DAP	PlantTFDB	transfer from AT3G23210(Arabidopsis thaliana)
+GPECTOR_3g108	E2F/DP	MP00190	Gonium pectorale	DAP	PlantTFDB	transfer from AT1G47870(Arabidopsis thaliana)
+GPECTOR_4g709	SBP	MP00290	Gonium pectorale	DAP	PlantTFDB	transfer from AT2G33810(Arabidopsis thaliana)
+GPECTOR_4g719	MYB	MP00596	Gonium pectorale	DAP	PlantTFDB	transfer from AT5G67300(Arabidopsis thaliana)
+GPECTOR_5g462	SBP	MP00604	Gonium pectorale	PBM	PlantTFDB	transfer from AT5G18830(Arabidopsis thaliana)
+GPECTOR_6g616	ERF	MP00542	Gonium pectorale	DAP	PlantTFDB	transfer from AT5G44210(Arabidopsis thaliana)
+GPECTOR_6g802	CPP	MP00044	Gonium pectorale	PBM	PlantTFDB	transfer from AT3G22760(Arabidopsis thaliana)
+GPECTOR_8g235	Dof	MP00046	Gonium pectorale	PBM	PlantTFDB	transfer from AT5G39660(Arabidopsis thaliana)
+

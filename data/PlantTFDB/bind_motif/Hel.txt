@@ -1,0 +1,8 @@
+Gene_id	Family	Matrix_id	Species	Method	Datasource	Datasource_ID
+H632_c1193p0	MYB	MP00596	Helicosporidium	DAP	PlantTFDB	transfer from AT5G67300(Arabidopsis thaliana)
+H632_c2698p1	MYB_related	MP00551	Helicosporidium	DAP	PlantTFDB	transfer from AT5G47390(Arabidopsis thaliana)
+H632_c3470p0	MYB	MP00028	Helicosporidium	SELEX	PlantTFDB	transfer from AT1G09770(Arabidopsis thaliana)
+H632_c620p1	Nin-like	MP00234	Helicosporidium	DAP	PlantTFDB	transfer from AT1G74480(Arabidopsis thaliana)
+H632_c637p0	CAMTA	MP00043	Helicosporidium	PBM	PlantTFDB	transfer from AT5G64220(Arabidopsis thaliana)
+H632_c793p0	MYB	MP00505	Helicosporidium	DAP	PlantTFDB	transfer from AT5G11510(Arabidopsis thaliana)
+

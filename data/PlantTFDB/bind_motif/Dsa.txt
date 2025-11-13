@@ -1,0 +1,16 @@
+Gene_id	Family	Matrix_id	Species	Method	Datasource	Datasource_ID
+Dusal.0010s00015	GATA	MP00110	Dunaliella salina	ampDAP	PlantTFDB	transfer from AT2G18380(Arabidopsis thaliana)
+Dusal.0015s00002	MYB	MP00337	Dunaliella salina	DAP	PlantTFDB	transfer from AT3G09230(Arabidopsis thaliana)
+Dusal.0026s00012	MYB_related	MP00568	Dunaliella salina	DAP	PlantTFDB	transfer from AT5G58900(Arabidopsis thaliana)
+Dusal.0059s00028	MYB_related	MP00338	Dunaliella salina	DAP	PlantTFDB	transfer from AT3G09600(Arabidopsis thaliana)
+Dusal.0157s00007	ERF	MP00456	Dunaliella salina	DAP	PlantTFDB	transfer from AT4G27950(Arabidopsis thaliana)
+Dusal.0225s00021	bZIP	MP00389	Dunaliella salina	DAP	PlantTFDB	transfer from AT3G30530(Arabidopsis thaliana)
+Dusal.0278s00002	MYB	MP00028	Dunaliella salina	SELEX	PlantTFDB	transfer from AT1G09770(Arabidopsis thaliana)
+Dusal.0320s00012	GATA	MP00377	Dunaliella salina	DAP	PlantTFDB	transfer from AT3G24050(Arabidopsis thaliana)
+Dusal.0320s00013	GATA	MP00048	Dunaliella salina	PBM	PlantTFDB	transfer from AT4G32890(Arabidopsis thaliana)
+Dusal.0400s00013	MYB	MP00259	Dunaliella salina	DAP	PlantTFDB	transfer from AT2G02820(Arabidopsis thaliana)
+Dusal.0407s00002	CPP	MP00045	Dunaliella salina	PBM	PlantTFDB	transfer from AT4G29000(Arabidopsis thaliana)
+Dusal.0423s00003	G2-like	MP00252	Dunaliella salina	DAP	PlantTFDB	transfer from AT2G01060(Arabidopsis thaliana)
+Dusal.0500s00002	ERF	MP00109	Dunaliella salina	PBM	PlantTFDB	transfer from AT3G16770(Arabidopsis thaliana)
+Dusal.2891s00001	ERF	MP00542	Dunaliella salina	DAP	PlantTFDB	transfer from AT5G44210(Arabidopsis thaliana)
+
