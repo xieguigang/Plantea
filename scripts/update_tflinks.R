@@ -20,10 +20,15 @@ print(bind_motif, max.print = 13);
 
 for(let bind_data in tqdm(bind_motif$"Motif information")) {
     let url = `https://planttfdb.gao-lab.org/${Html::link(bind_data)}`;
-    let infodata = toString(requests.get(url));
     let name = basename(url) |> gsub("_TF_binding_motifs_information");
-
-    writeLines(infodata, con = 
-        relative_work(`../data/PlantTFDB/bind_motif/${name}.txt`));
-    sleep(1);
+    let datafile = relative_work(`../data/PlantTFDB/bind_motif/${name}.txt`);
+    
+    if (!file.exists(datafile)) {
+        url 
+        |> requests.get() 
+        |> toString() 
+        |> writeLines(con = datafile)
+        ;
+        sleep(1);
+    }    
 }
