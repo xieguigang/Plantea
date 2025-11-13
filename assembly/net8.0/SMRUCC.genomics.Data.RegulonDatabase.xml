@@ -222,6 +222,28 @@ SMRUCC.genomics.Data.RegulonDatabase
  <param name="fasta">位点Fasta文件的文件路径</param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.genomics.Data.Regprecise.MicrobesOnline">
+ <summary>
+ Some gene sequence is not exists in the KEGG database that can be download from this database.
+ http://www.microbesonline.org/cgi-bin/fetchLocus.cgi?locus=5219138&amp;disp=4
+ </summary>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.MicrobesOnline.Downloads(System.String)">
+ <summary>
+ {prot, nt}, Downloads nt and prot sequence from microbesonline database
+ </summary>
+ <param name="locusId"></param>
+ <returns>The return array has two elements, first element is the prot sequnece and the second element is the nt sequence.</returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.MicrobesOnline.locusId(System.String)">
+ <summary>
+ Parse the locus id from the url string
+ </summary>
+ <param name="url"></param>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.Download(System.String)">
  <summary>
  Download the whole regprecise database for each bacteria genome.
@@ -235,6 +257,13 @@ SMRUCC.genomics.Data.RegulonDatabase
  </summary>
  <param name="Regprecise"></param>
  <param name="EXPORT"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.ReadXml(System.String)">
+ <summary>
+ read the local regprecise database file
+ </summary>
+ <param name="path"></param>
  <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.ExportBySpecies(SMRUCC.genomics.Data.Regprecise.TranscriptionFactors,System.String)">
@@ -272,12 +301,6 @@ SMRUCC.genomics.Data.RegulonDatabase
  <remarks>对于调控因子序列仅仅取出LocusTAG以及Description数据，TFBS文件是重新生成的</remarks>
  
 </member>
-<member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseAPI.LoadRegulationDb">
- <summary>
- 加载自有的源之中的调控数据库
- </summary>
- <returns></returns>
-</member>
 <member name="T:SMRUCC.genomics.Data.Regprecise.RegpreciseBBH">
  <summary>
  RegPrecise regulator matched by blastp sbh/bbh mapping
@@ -307,9 +330,9 @@ SMRUCC.genomics.Data.RegulonDatabase
 </member>
 <member name="T:SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH">
  <summary>
- Bidirectional best hit regulator with the regprecise database.(调控因子与Regprecise数据库的双向最佳比对结果)
+ Bidirectional best hit regulator with the regprecise database.
  </summary>
- <remarks></remarks>
+ <remarks>(调控因子与Regprecise数据库的双向最佳比对结果)</remarks>
  
 </member>
 <member name="M:SMRUCC.genomics.Data.Regprecise.RegpreciseBidirectionalBh_Methods.MPCutoff(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Data.Regprecise.RegpreciseMPBBH},System.Double)">
@@ -1098,6 +1121,12 @@ SMRUCC.genomics.Data.RegulonDatabase
  </summary>
  <returns></returns>
 </member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.Regulator.regulatorySites">
+ <summary>
+ a collection of the motif sites
+ </summary>
+ <returns></returns>
+</member>
 <member name="P:SMRUCC.genomics.Data.Regprecise.Regulator.operons">
  <summary>
  被这个调控因子所调控的基因，按照操纵子进行分组，这个适用于推断Regulon的
@@ -1214,8 +1243,16 @@ SMRUCC.genomics.Data.RegulonDatabase
  for comparative and evolutionary analysis of TF binding site motifs and regulon content for orthologous
  transcription factors.
  </summary>
- <remarks></remarks>
+ <remarks>
+ regprecise database is a collection of <see cref="T:SMRUCC.genomics.Data.Regprecise.BacteriaRegulome"/> reference data
+ </remarks>
 
+</member>
+<member name="P:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.genomes">
+ <summary>
+ the reference genome of the regprecise database
+ </summary>
+ <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Data.Regprecise.TranscriptionFactors.GetRegulators(System.String)">
  <summary>
@@ -1252,21 +1289,6 @@ SMRUCC.genomics.Data.RegulonDatabase
  Write for csv file
  </summary>
  <remarks></remarks>
-</member>
-<member name="T:SMRUCC.genomics.Data.MicrobesOnline">
- <summary>
- Some gene sequence is not exists in the KEGG database that can be download from this database.
- http://www.microbesonline.org/cgi-bin/fetchLocus.cgi?locus=5219138&amp;disp=4
- </summary>
- 
-</member>
-<member name="M:SMRUCC.genomics.Data.MicrobesOnline.Downloads(System.String)">
- <summary>
- {prot, nt}, Downloads nt and prot sequence from microbesonline database
- </summary>
- <param name="locusId"></param>
- <returns></returns>
- 
 </member>
 <member name="T:SMRUCC.genomics.Data.Regtransbase.WebServices.TranscriptionFactorFamily">
  <summary>

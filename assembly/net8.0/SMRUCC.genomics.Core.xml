@@ -10616,7 +10616,7 @@ Get feature site data by nucleotide location.
  The NCBI genbank data api handler
  </summary>
 </member>
-<member name="T:SMRUCC.genomics.Assembly.NCBI.Entrez.Entry">
+<member name="T:SMRUCC.genomics.Assembly.NCBI.Entrez.EntrezEntry">
  <summary>
  查询某一个蛋白质或者基因对象所返回的结果数据下载入口点
  </summary>
@@ -12117,6 +12117,21 @@ Get feature site data by nucleotide location.
  high-throughput sequencing instruments such as the Illumina Genome Analyzer.
  </summary>
 </member>
+<member name="F:SMRUCC.genomics.ComponentModel.MimeTypes.FastAProt">
+ <summary>
+ Fasta file for protein sequence data
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.ComponentModel.MimeTypes.FastANucl">
+ <summary>
+ Fasta file for nucleotide sequence data
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.ComponentModel.MimeTypes.GFF3Table">
+ <summary>
+ Generic Feature Format version 3
+ </summary>
+</member>
 <member name="T:SMRUCC.genomics.ComponentModel.FormulaData">
  <summary>
  The formula composition data model
@@ -12776,6 +12791,16 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <param name="biomString"></param>
  <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Metagenomics.GenomeNameIndex`1.Query(System.String,System.Double)">
+ <summary>
+ 
+ </summary>
+ <param name="name"></param>
+ <param name="cutoff"></param>
+ <returns>
+ the query output result has already been sorted with <see cref="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.FindResult.similarity"/> in decreasing order.
+ </returns>
 </member>
 <member name="T:SMRUCC.genomics.Metagenomics.OTUData`1">
  <summary>

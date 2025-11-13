@@ -10710,6 +10710,14 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="escape"></param>
  <returns></returns>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.strings.makeQGram(System.Object,System.Int32)">
+ <summary>
+ make text index based on the qgram algorithm
+ </summary>
+ <param name="text"></param>
+ <param name="qgram"></param>
+ <returns></returns>
+</member>
 <member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils">
  <summary>
  helper tools for the R# programming
@@ -12133,7 +12141,7 @@ to take away yo [rest of string was truncated]&quot;;.
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.list.add(System.String,System.Object)">
  <summary>
- add key-value directly 
+ add key-value directly, for add content data with possible duplicated names safely, use the <see cref="M:SMRUCC.Rsharp.Runtime.Internal.Object.list.unique_add(System.String,System.Object)"/> method. 
  </summary>
  <param name="name"></param>
  <param name="value"></param>
@@ -13107,6 +13115,15 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <param name="any"></param>
  <param name="type"></param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Object.Converts.IMakeDataFrame">
+ <summary>
+ handler for cast any clr runtime object as R# runtime dataframe object
+ </summary>
+ <param name="x"></param>
+ <param name="args"></param>
  <param name="env"></param>
  <returns></returns>
 </member>

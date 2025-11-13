@@ -12,6 +12,7 @@
           "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
           "REnv": "5.1.3.5558",
+          "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder": "1.0.0",
@@ -36,6 +37,7 @@
           "Microsoft.VisualBasic.MIME.Html.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Runtime.Reference": "5.33.69.2558",
           "REnv.Reference": "2.33.856.6961",
+          "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.MSA.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.Reference": "1.0.0.0",
@@ -419,6 +421,22 @@
           }
         }
       },
+      "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.GraphTheory": "1.0.0",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
+          "Microsoft.VisualBasic.Math.Statistics": "1.0.0",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Core": "6.3.256.3655",
+          "System.Composition": "8.0.0",
+          "System.Resources.Extensions": "8.0.0"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
@@ -766,6 +784,14 @@
           }
         }
       },
+      "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.dll": {
@@ -1062,6 +1088,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1213,6 +1244,11 @@
       "sha512": ""
     },
     "REnv.Reference/2.33.856.6961": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
