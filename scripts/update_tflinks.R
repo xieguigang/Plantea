@@ -1,7 +1,15 @@
 require(http);
+require(Html);
 
-let page = toString(requests.get("https://planttfdb.gao-lab.org/download.php"));
+let url  = relative_work("download.html"); # "https://planttfdb.gao-lab.org/download.php";
+let page = toString(requests.get(url));
 
 setwd(relative_work());
 
-writeLines(page, con = "download.html");
+# writeLines(page, con = "download.html");
+
+let tables = Html::tables(page, filter = TRUE);
+
+for(let name in names(tables)) {
+    print(tables[[name]]);
+}
