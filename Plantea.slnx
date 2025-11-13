@@ -77,6 +77,10 @@
     <Project Path="../GCModeller/src/GCModeller/analysis/Motifs/VirtualFootprint/VirtualFootprint.vbproj">
       <Platform Solution="*|x64" Project="x64" />
     </Project>
+    <Project Path="../GCModeller/src/GCModeller/annotations/GSEA/FisherCore/Fisher.NET5.vbproj">
+      <BuildType Solution="PlantMAT|*" Project="LipidSearch" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
     <Project Path="../GCModeller/src/GCModeller/core/Bio.Annotation/annotation.NET5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
       <Platform Solution="PlantMAT|Any CPU" Project="ARM32" />
