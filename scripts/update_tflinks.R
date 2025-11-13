@@ -29,6 +29,5 @@ for(let bind_data in tqdm(bind_motif$"Motif information")) {
         |> toString() 
         |> writeLines(con = datafile)
         ;
-        sleep(1);
     }    
 }
