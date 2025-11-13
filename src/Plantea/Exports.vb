@@ -9,6 +9,7 @@ Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Scripting.Runtime
 Imports Microsoft.VisualBasic.Serialization.JSON
 Imports Microsoft.VisualBasic.Text.Xml.Models
+Imports SMRUCC.genomics.Analysis.HTS.GSEA
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
@@ -61,6 +62,18 @@ Module Exports
     <ExportAPI("load_class")>
     Public Function loadClusterBackground(json As String) As ClassClusterData()
         Return json.LineIterators.JoinBy(vbCrLf).LoadJSON(Of ClassClusterData())
+    End Function
+
+    <ExportAPI("class_background")>
+    <RApiReturn(GetType(Background))>
+    Public Function class_background(<RRawVectorArgument> geneset As Object, Optional env As Environment = Nothing) As Object
+        Dim genes As pipeline = pipeline.TryCreatePipeline(Of ClassClusterData)(geneset, env)
+
+        If genes.isError Then
+            Return genes.getError
+        Else
+            Return ClassClusterData.BuildBackground(genes.populates(Of ClassClusterData)(env))
+        End If
     End Function
 
     ''' <summary>
