@@ -34,17 +34,16 @@
           "Microsoft.VisualBasic.Math.GibbsSampling.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Math.Randomizer.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Math.Statistics.Reference": "1.0.0.0",
+          "Microsoft.VisualBasic.MIME.application.json.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.MIME.Html.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Runtime.Reference": "5.33.69.2558",
           "REnv.Reference": "2.33.856.6961",
           "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core.Reference": "1.0.0.0",
+          "SMRUCC.genomics.Analysis.SequenceAlignment.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference": "1.0.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.MSA.Reference": "1.0.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Reference": "1.0.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder.Reference": "1.0.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.Reference": "1.0.0.0",
           "SMRUCC.genomics.Annotation.Reference": "1.0.0.0",
           "SMRUCC.genomics.Core.Reference": "6.3.256.3655",
           "SMRUCC.genomics.Data.RegulonDatabase.Reference": "1.0.0.0",
@@ -383,6 +382,18 @@
           }
         }
       },
+      "Microsoft.VisualBasic.MIME.application.json/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "System.Composition": "8.0.0",
+          "System.Resources.Extensions": "8.0.0"
+        },
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.application.json.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Microsoft.VisualBasic.MIME.Html/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
@@ -437,6 +448,19 @@
           }
         }
       },
+      "SMRUCC.genomics.Analysis.SequenceAlignment/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.DataMining.DynamicProgramming": "1.0.0",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Core": "6.3.256.3655"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Analysis.SequenceAlignment.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
@@ -449,33 +473,10 @@
           }
         }
       },
-      "SMRUCC.genomics.Analysis.SequenceTools.MSA/1.0.0": {
-        "dependencies": {
-          "Microsoft.VisualBasic.DataMining.DynamicProgramming": "1.0.0",
-          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
-          "SMRUCC.genomics.Core": "6.3.256.3655"
-        },
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.MSA.dll": {
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch/1.0.0": {
-        "dependencies": {
-          "Microsoft.VisualBasic.DataMining.DynamicProgramming": "1.0.0",
-          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
-          "SMRUCC.genomics.Core": "6.3.256.3655"
-        },
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.dll": {
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
       "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns/1.0.0": {
         "dependencies": {
           "Microsoft.VisualBasic.Data.Framework": "5.0.123",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655"
@@ -505,32 +506,20 @@
           "Microsoft.VisualBasic.DataMining.Framework": "1.0.0",
           "Microsoft.VisualBasic.DataMining.UMAP": "5.0.1.2389",
           "Microsoft.VisualBasic.DataStorage.HDSPack": "1.0.0",
+          "Microsoft.VisualBasic.MIME.application.json": "1.0.0",
           "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
           "Microsoft.VisualBasic.Math.GibbsSampling": "1.0.0",
           "Microsoft.VisualBasic.Math.Statistics": "1.0.0",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Analysis.SequenceAlignment": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.MSA": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655",
           "SMRUCC.genomics.Model.MotifGraph": "1.0.0"
         },
         "runtime": {
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder.dll": {
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman/1.0.0": {
-        "dependencies": {
-          "Microsoft.VisualBasic.DataMining.DynamicProgramming": "1.0.0",
-          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
-          "SMRUCC.genomics.Core": "6.3.256.3655"
-        },
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.dll": {
             "fileVersion": "0.0.0.0"
           }
         }
@@ -631,11 +620,8 @@
           "Microsoft.VisualBasic.Math.Statistics": "1.0.0",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.MSA": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder": "1.0.0",
-          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655",
           "SMRUCC.genomics.Data.RegulonDatabase": "1.0.0",
           "SMRUCC.genomics.InteractionModel": "1.0.0",
@@ -760,6 +746,14 @@
           }
         }
       },
+      "Microsoft.VisualBasic.MIME.application.json.Reference/1.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.application.json.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Microsoft.VisualBasic.MIME.Html.Reference/1.0.0.0": {
         "runtime": {
           "Microsoft.VisualBasic.MIME.Html.dll": {
@@ -792,25 +786,17 @@
           }
         }
       },
+      "SMRUCC.genomics.Analysis.SequenceAlignment.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Analysis.SequenceAlignment.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "SMRUCC.genomics.Analysis.SequenceTools.MSA.Reference/1.0.0.0": {
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.MSA.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.Reference/1.0.0.0": {
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -835,14 +821,6 @@
       "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.Reference/1.0.0.0": {
-        "runtime": {
-          "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1073,6 +1051,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.VisualBasic.MIME.application.json/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.VisualBasic.MIME.Html/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1093,17 +1076,12 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Analysis.SequenceAlignment/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.MSA/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1119,11 +1097,6 @@
       "sha512": ""
     },
     "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1233,6 +1206,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.VisualBasic.MIME.application.json.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.VisualBasic.MIME.Html.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -1253,17 +1231,12 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Analysis.SequenceAlignment.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Analysis.SequenceTools.DNA_Comparative.Reference/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.MSA.Reference/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.NeedlemanWunsch.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -1279,11 +1252,6 @@
       "sha512": ""
     },
     "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder.Reference/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SMRUCC.genomics.Analysis.SequenceTools.SmithWaterman.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

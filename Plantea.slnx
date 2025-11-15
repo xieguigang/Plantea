@@ -25,6 +25,9 @@
     <Project Path="../GCModeller/src/runtime/sciBASIC#/Data/DataFrame/dataframework-netcore5.vbproj">
       <Platform Solution="*|x64" Project="x64" />
     </Project>
+    <Project Path="../GCModeller/src/runtime/sciBASIC#/mime/application%json/JSON-netcore5.vbproj">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
     <Project Path="../GCModeller/src/runtime/sciBASIC#/mime/text%html/html_netcore5.vbproj">
       <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
@@ -113,11 +116,7 @@
       <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
     </Project>
-    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/MSA/MSA.NET5.vbproj">
-      <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
-      <Platform Solution="*|x64" Project="x64" />
-    </Project>
-    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/NeedlemanWunsch/NeedlemanWunsch.NET5.vbproj">
+    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/SequenceAlignment/SequenceAlignment.vbproj">
       <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
     </Project>
@@ -125,10 +124,6 @@
       <Platform Solution="*|x64" Project="x64" />
     </Project>
     <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/SequencePatterns/SequencePatterns.NET5.vbproj">
-      <Platform Solution="*|x64" Project="x64" />
-    </Project>
-    <Project Path="../GCModeller/src/GCModeller/analysis/SequenceToolkit/SmithWaterman/SmithWaterman.NET5.vbproj">
-      <BuildType Solution="PlantMAT|*" Project="Rsharp_app_release" />
       <Platform Solution="*|x64" Project="x64" />
     </Project>
   </Folder>

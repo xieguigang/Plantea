@@ -122,12 +122,18 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  The PWM model
  </summary>
 </member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.region">
+ <summary>
+ the PWM matrix data
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.E(System.Int32)">
  <summary>
  
  </summary>
  <param name="nsize">
- the count of the fasta sequence.
+ the count of the input fasta sequence.
  </param>
  <returns></returns>
 </member>
@@ -145,6 +151,9 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  
  </summary>
  <param name="En"></param>
+ <param name="NtMol">
+ calculate for the nucleotide sequence model?
+ </param>
  <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.HI(System.Collections.Generic.Dictionary{System.Char,System.Double})">
@@ -158,6 +167,17 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  due to the reason of ZERO multiple any number is ZERO, so that if n is ZERO, 
  then set n * Math.Log(n, 2) its value to Zero directly.
  </remarks>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue">
+ <summary>
+ residue site
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue.frequency">
+ <summary>
+ should be sum equals to 1
+ </summary>
+ <returns></returns>
 </member>
 </members>
 </doc>

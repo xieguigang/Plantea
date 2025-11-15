@@ -141,12 +141,14 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
  <summary>
  Build probability matrix from clustal multiple sequence alignment, this matrix model can be 
  used for the downstream sequence logo drawing visualization.
- (从Clustal比对结果之中生成PWM用于SequenceLogo的绘制)
  </summary>
  <param name="fa">A fasta sequence file from the clustal multiple sequence alignment.</param>
  <returns></returns>
+ <remarks>
+ (从Clustal比对结果之中生成PWM用于SequenceLogo的绘制)
+ </remarks>
 </member>
-<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PWM.__residue(System.Collections.Generic.Dictionary{System.Char,System.Double},System.Double,System.Double,System.Int32,System.Int32)">
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PWM.makeResidue(System.Collections.Generic.Dictionary{System.Char,System.Double},System.Double,System.Double,System.Int32,System.Int32)">
  <summary>
  Construct of the residue model in the PWM
  </summary>
@@ -173,6 +175,12 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
  </summary>
  <returns></returns>
 </member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ResidueSite.AsChar">
+ <summary>
+ 请注意，在这里显示的字符是按照内部默认的ATGC的顺序来显示的，可能会与实际的字符顺序不符合，这里仅做调试查看使用
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ResidueSite.Complement">
  <summary>
  ATGC -> TACG
@@ -184,12 +192,6 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
 
  </summary>
  <param name="nt"></param>
-</member>
-<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ResidueSite.AsChar">
- <summary>
- 请注意，在这里显示的字符是按照内部默认的ATGC的顺序来显示的，可能会与实际的字符顺序不符合，这里仅做调试查看使用
- </summary>
- <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ResidueSite.ToChar(System.Char,System.Double)">
  <summary>
