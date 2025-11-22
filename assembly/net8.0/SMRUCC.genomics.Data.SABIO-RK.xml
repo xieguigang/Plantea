@@ -1,0 +1,269 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Data.SABIO-RK
+</name>
+</assembly>
+<members>
+<member name="M:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.docuRESTfulWebHelper.getModelById(System.String,System.Int32,System.Int32,System.String)">
+ <summary>
+ Get a single kinetic law entry by SABIO entry ID
+ </summary>
+ <param name="id"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.docuRESTfulWebHelper.searchKineticLawsRawXml(System.Collections.Generic.Dictionary{SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields,System.String},System.String)">
+ <summary>
+ Search for SABIO kinetic law entries by a query string
+ </summary>
+ <param name="q"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.docuRESTfulWebHelper.searchKineticLaws(System.Collections.Generic.Dictionary{SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields,System.String},System.String)">
+ <summary>
+ Search for SABIO kinetic law entries by a query string
+ </summary>
+ <param name="q"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields">
+ <summary>
+ The following vocabulary may be used to form queries to search for entries. 
+ These terms are identical to those used in the web interface for forming 
+ queries. An xml document containing all possible search fields is also 
+ accessible at http://sabiork.h-its.org/sabioRestWebServices/searchKineticLaws. 
+ 
+ Queries are formed using one or more of the fields below and should be passed 
+ as a request parameter named "q". Fields may be combined using the boolean 
+ ``AND`` operator to form complex queries.
+ 
+ > http://sabiork.h-its.org/sabioRestWebServices/searchKineticLaws
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields.EntryID">
+ <summary>
+ EntryID - SABIO-RK entry ID (eg EntryID:123)
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields.Pathway">
+ <summary>
+ Pathway - The name of the reaction pathway (eg, Pathway:"urea Cycle")
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields.KeggReactionID">
+ <summary>
+ KeggReactionID - KEGG ID for the reaction (eg KeggReactionID:"R00782")
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields.SabioReactionID">
+ <summary>
+ SabioReactionID - SABIO-RK ID for the reaction (eg SabioReactionID:14)
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.QueryFields.AnyRole">
+ <summary>
+ AnyRole - Compound found in any role in a reaction (eg AnyRole:"ATP")
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.docuRESTfulWeb.WebRequest.QueryUsing_KEGGId(System.String[],System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="IdList"></param>
+ <param name="ExportDir"></param>
+ <returns></returns>
+ <remarks>
+ 因为会存在非常多的废弃的id编号，所以这个函数应该会被废弃掉
+ </remarks>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.TabularDump.EnzymeModifier">
+ <summary>
+ data of enzyme information
+ </summary>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.TabularDump.EnzymeCatalystKineticLaw">
+ <summary>
+ Vmax 是指 最大反应速度。当 底物浓度 足够大时，体系中酶的活性中心达到饱和状态，其反应速度达到最大。由此可见，最大反应速度 Vmax 随 酶浓度 的变化而变化。
+ kcat 指反应常数(Catalytic Constant)，Kcat 可以由公式计算得到： kcat = Vmax/[E]
+    - [E] 指 酶浓度，由此可以说， kcat 表示了每单位时间内（秒）每摩尔的酶（或者说每摩尔的活性中心）能够把多少摩尔的底物转化成产物。
+
+ Km 俗称 米氏常数，以浓度做单位，米氏常数定义为 反应速度 达到 最大反应速度一半时 的底物浓度。 Km 可以反映出酶与底物的亲和力，Km越低，亲和力越大。
+ Kcat/Km 称为 催化效率，常常以此来比较 不同的酶而同一底物， 或者 不同底物而同一种酶。
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.EnzymeCatalystKineticLaw.compartment">
+ <summary>
+ list of compartment of current enzyme and kinetics
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.TabularDump.ModifierKinetics">
+ <summary>
+ 对酶分子的Modifier
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.ModifierKinetics.KineticsRecordId">
+ <summary>
+ Sabio-rk Id
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.ModifierKinetics.KEGGCompoundId">
+ <summary>
+ KEGG.Compound identifier string for <see cref="P:SMRUCC.genomics.Data.SABIORK.TabularDump.ModifierKinetics.Modifier">enzyme modifier</see>
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.ModifierKinetics.ObjectId">
+ <summary>
+ 具备附加属性的：Enzyme或者Reaction
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.TabularDump.SabiorkEntity">
+ <summary>
+ sabio-rk object reference
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.SabiorkEntity.SabiorkId">
+ <summary>
+ the unique reference id of the kinetics
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.TabularDump.CompoundSpecie.DBLinks">
+ <summary>
+ MetaCyc.Schema.DBLinkManager.DBLink
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.SBML.LocalParameterParser.KM_ID">
+ <summary>
+ Km_[<see cref="P:SMRUCC.genomics.Data.SABIORK.SBML.SBMLParser.CompoundSpecie.Id"></see>]
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.SBML.SabiorkSBML">
+ <summary>
+ 从sbml文件中的数据解析转换得到的GCModeller的内部数据存储格式
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.SBML.SabiorkSBML.URL_SABIORK_KINETIC_LAWS_QUERY">
+ <summary>
+ http://sabiork.h-its.org/sabioRestWebServices/kineticLaws/123
+ </summary>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.SBML.MathMLParser">
+ <summary>
+ parser helper for the mathML enzymatic kinetics
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.MathMLParser.DefaultKineticis">
+ <summary>
+ Populate the default enzyme kinetics math lambda expression
+ 
+ ```
+ Km, kcat, E
+ V = Kcat[E]t[S] / ( KM + [S])
+ ```
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument">
+ <summary>
+ list of reactions and list of the lambda formula expression 
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument.sbml">
+ <summary>
+ the raw sbml document data
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument.mathML">
+ <summary>
+ a list of the enzamatic kinetics expression
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument.LoadXml(System.String,System.String@)">
+ <summary>
+ Load a generic sbml xml document file
+ </summary>
+ <param name="xml"></param>
+ <param name="text"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument.LoadDocument(System.String)">
+ <summary>
+ load the documents with kinetics math lambda parsed
+ </summary>
+ <param name="path"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer">
+ <summary>
+ helper for get reaction model from sabio-rk <see cref="T:SMRUCC.genomics.Data.SABIORK.SBML.SbmlDocument"/> dataset
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.compartments">
+ <summary>
+ a list of the sub-cellular compartments
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.species">
+ <summary>
+ a list of the metabolites
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.keggCompounds">
+ <summary>
+ mapping of the kegg metabolites
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.GetKeggReactionId(SMRUCC.genomics.Data.SABIORK.SBML.SBMLReaction)">
+ <summary>
+ try to get kegg reaction id from the given sabio-rk reaction model
+ </summary>
+ <param name="react"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.getKineticLaw(System.String)">
+ <summary>
+ 获取得到反应过程对应的动力学函数
+ </summary>
+ <param name="id"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Data.SABIORK.SBML.SBMLInternalIndexer.getEnzymes(SMRUCC.genomics.Data.SABIORK.SBML.SBMLReaction)">
+ <summary>
+ try to get enzyme molecules from a given reaction model
+ </summary>
+ <param name="react"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Data.SABIORK.SBML.SBMLReaction">
+ <summary>
+ SBML格式的数据文件之中的reaction模型定义
+ </summary>
+ 
+</member>
+<member name="P:SMRUCC.genomics.Data.SABIORK.SBML.SBMLReaction.ec_number">
+ <summary>
+ get enzyme number that associated with current reaction model
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

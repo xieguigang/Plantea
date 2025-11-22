@@ -333,9 +333,17 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
 </member>
 <member name="M:Microsoft.VisualBasic.My.JavaScript.JavaScriptObject.CreateDynamicObject(System.String[],System.Object[])">
  <summary>
- A wrapper for <see cref="M:Microsoft.VisualBasic.DynamicType.Create"/>
+ A wrapper for <see cref="M:Microsoft.VisualBasic.DynamicType.Create(System.Collections.Generic.Dictionary{System.String,System.Object})"/>
  </summary>
  <param name="names"></param>
+ <param name="values"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.My.JavaScript.JavaScriptObject.CreateDynamicObject(System.Type,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+ <summary>
+ Create runtime object and then assign the property value
+ </summary>
+ <param name="dynamic"></param>
  <param name="values"></param>
  <returns></returns>
 </member>
@@ -818,8 +826,6 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
 <member name="M:Microsoft.VisualBasic.App.JoinVariable(System.String,System.String)">
  <summary>
  add/update the environment variable in sciBASIC.NET framework.
- 
- (添加参数到应用程序的环境变量之中)
  </summary>
  <param name="name">
  if target variable symbol name is exists in the framework, 
@@ -829,6 +835,9 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  
  (如果给定的当前这个参数名称存在于当前框架环境中，则会更新原来的值)</param>
  <param name="value"></param>
+ <remarks>
+ (添加参数到应用程序的环境变量之中)
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.App.JoinVariables(Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{System.String}[])">
  <summary>
@@ -2113,9 +2122,21 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  A virtual filesystem tree
  </summary>
 </member>
+<member name="P:Microsoft.VisualBasic.ApplicationServices.FileSystemTree.Name">
+ <summary>
+ the filename/folder name of this filesystem tree node
+ </summary>
+ <returns></returns>
+</member>
 <member name="P:Microsoft.VisualBasic.ApplicationServices.FileSystemTree.Parent">
  <summary>
  the parent folder
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ApplicationServices.FileSystemTree.data">
+ <summary>
+ the tagged data that associated with this file node
  </summary>
  <returns></returns>
 </member>
@@ -2285,6 +2306,18 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  the workdir path of current workspace object
  </summary>
  <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.ApplicationServices.FileSystemView">
+ <summary>
+ A data view wrapper that used a specific subdir as workfolder
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.FileSystemView.#ctor(Microsoft.VisualBasic.ApplicationServices.IFileSystemEnvironment,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="fs">the root workspace model</param>
+ <param name="subdir">a specific sub-dir for create a wrapper view of the workspace</param>
 </member>
 <member name="T:Microsoft.VisualBasic.ApplicationServices.MemoryStreamPool">
  <summary>
@@ -11839,7 +11872,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  q-gram的长度
  </summary>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex.AddString(System.String)">
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex.AddString(System.String,System.Nullable{System.Int32})">
  <summary>
  向索引中添加字符串
  </summary>
@@ -13826,6 +13859,11 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <param name="x"></param>
  <returns></returns>
+ <remarks>
+ Please note that this function is a iterator function. <b>which means your MUST
+ call the ToArray or ToList method to execute this function</b>, <span style="color: red;">or the items
+ will not be added into current index object.</span>
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.Collection.Index`1.Clear">
  <summary>
@@ -29896,6 +29934,14 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <summary>
  [optional] the name display string for tagged the <see cref="T:System.ComponentModel.DisplayNameAttribute"/> value to current property.
  </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DynamicType.Create(System.String,System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="name">the generated clr type name</param>
+ <param name="asm_module">the assembly module name</param>
+ <returns></returns>
 </member>
 <member name="M:Microsoft.VisualBasic.DynamicType.AddDisplayName(System.Reflection.Emit.PropertyBuilder,System.String)">
  <summary>

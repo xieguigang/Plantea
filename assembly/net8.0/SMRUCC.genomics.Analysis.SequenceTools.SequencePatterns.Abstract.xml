@@ -111,10 +111,24 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  k-mers
  </summary>
 </member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.KMers.Tag">
+ <summary>
+ the kmer sequence
+ </summary>
+ <returns></returns>
+</member>
 <member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.KMers.Count">
  <summary>
  count current k-mers <see cref="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.KMers.Tag"/> on a given sequence
  </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.KMers.KMerSample(SMRUCC.genomics.SequenceModel.FASTA.IFastaProvider,System.Int32)">
+ <summary>
+ Create sample matrix row data
+ </summary>
+ <param name="seq"></param>
+ <param name="k"></param>
  <returns></returns>
 </member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability">

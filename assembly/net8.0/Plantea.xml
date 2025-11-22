@@ -41,7 +41,7 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
  </summary>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Data.Rhea
+</name>
+</assembly>
+<members>
+<member name="T:SMRUCC.genomics.Data.Rhea.RheaRDF">
+ <summary>
+ 
+ </summary>
+ <remarks>
+ https://ftp.expasy.org/databases/rhea/rdf/rhea.rdf.gz
+ </remarks>
+ 
+</member>
+<member name="P:SMRUCC.genomics.Data.Rhea.Reaction.definition">
+ <summary>
+ the reaction equation in character string type
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Data.Rhea.Reaction.equation">
+ <summary>
+ the parsed reaction equaltion object based on the definition property
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner
+</name>
+</assembly>
+<members>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Extensions.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PWMDatabase,System.Collections.Generic.IEnumerable{SMRUCC.genomics.SequenceModel.FASTA.FastaSeq},System.Int32,System.Double,System.Double,System.Int32,System.Int32,System.Boolean,System.Action{System.String})">
+ <summary>
+ 
+ </summary>
+ <param name="db"></param>
+ <param name="regions"></param>
+ <param name="n_threads"></param>
+ <param name="identities_cutoff"></param>
+ <param name="minW"></param>
+ <param name="top"></param>
+ <param name="permutation"></param>
+ <param name="workflowMode">
+ parallel will works in different mode
+ </param>
+ <param name="progress"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PatternScanner">
+ <summary>
+ 对位点进行类似于正则表达式的模式匹配
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PatternScanner.GetOutput(Microsoft.VisualBasic.DataMining.DynamicProgramming.SmithWaterman.GSW{System.String},System.Double,System.Int32)">
+ <summary>
+
+ </summary>
+ <param name="cutoff">0%-100%</param>
+ <returns></returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PWMDatabase.LoadMotifs">
+ <summary>
+ Load all motif data into memory
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PWMDatabase.LoadMotifs(Microsoft.VisualBasic.ApplicationServices.IFileSystemEnvironment)">
+ <summary>
+ Load all motif data into memory
+ </summary>
+ <param name="fs"></param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.GeneReport.locus_tag">
+ <summary>
+ the promoter region associated gene id
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.GeneReport.length">
+ <summary>
+ the length of the input promoter region
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifMatch">
+ <summary>
+ motif model sequence site matches result
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SequenceMotif,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32)">
+ <summary>
+ 基于PWM的概率匹配
+ </summary>
+ <param name="target"></param>
+ <param name="cutoff#"></param>
+ <param name="minW%"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Double,System.Double,System.Double,System.Int32,System.Int32)">
+ <summary>
+ 基于PWM的概率匹配
+ </summary>
+ <param name="target"></param>
+ <param name="cutoff#"></param>
+ <param name="minW%"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue[],SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32,System.Int32)">
+ <summary>
+ 基于PWM的概率匹配
+ </summary>
+ <param name="PWM">PWM</param>
+ <param name="target"></param>
+ <param name="cutoff"></param>
+ <param name="minW"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SequenceMotif">
+ <summary>
+ motif model
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SequenceMotif.alignments">
+ <summary>
+ the alignment score vector of current motif PWM with the source seeds
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SequenceMotif.AverageScore">
+ <summary>
+ score / motif with
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SequenceMotif.SignificantSites">
+ <summary>
+ get number of the conserved sites
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

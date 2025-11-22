@@ -6,6 +6,21 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
 </name>
 </assembly>
 <members>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ConsensusScanner">
+ <summary>
+ Find motif from the consensus sequence region
+ </summary>
+ <remarks>
+ 扫描出相同的KO编号的基因的上游区域的片段的相似片段
+ </remarks>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ModelLoader.LoadKEGGModels(System.String)">
+ <summary>
+ Load kegg organism model
+ </summary>
+ <param name="repo"></param>
+ <returns></returns>
+</member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler">
  <summary>
  
@@ -234,6 +249,69 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  Creates the directory where the files will be written </summary>
  <param name="filename">, path to a file that needs to be written </param>
 </member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree">
+ <summary>
+ Create motif via the clustering of the blastn alignment result
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.BuildTree(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.NtMapping.BlastnMapping})">
+ <summary>
+ 使用``!values``字典键来获取目标位点上的所有mapping结果
+ </summary>
+ <param name="mappings"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.compares(SMRUCC.genomics.ComponentModel.Loci.Location,SMRUCC.genomics.ComponentModel.Loci.Location)">
+ <summary>
+ 计算两个片段的overlap的区域的占比
+ </summary>
+ <param name="a"></param>
+ <param name="b"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.ExtractSites(Microsoft.VisualBasic.ComponentModel.Algorithm.BinaryTree.NaiveBinaryTree{SMRUCC.genomics.ComponentModel.Loci.Location,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.NtMapping.BlastnMapping})">
+ <summary>
+ 
+ </summary>
+ <param name="tree">
+ 因为当节点非常多的时候，直接使用二叉树的结构可能会因为很多层次的递归而造成stack overflow的问题
+ 所以在这里直接使用AVLTree对象的ToArray来避免这种情况的出现
+ </param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.FilterMotifs(System.Collections.Generic.IEnumerable{System.ValueTuple{SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.NtMapping.BlastnMapping[]}},System.Func{System.String,System.String},System.Func{System.String,System.String},System.Int32,System.Boolean)">
+ <summary>
+ 可能会有多个家族的调控因子作用在该位点上
+ </summary>
+ <param name="sites"></param>
+ <param name="getFamily"></param>
+ <param name="getTarget"></param>
+ <param name="hits%"></param>
+ <returns></returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.FilterMotifs(System.Collections.Generic.IEnumerable{System.ValueTuple{SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.NtMapping.BlastnMapping[]}},System.Func{System.String,System.String},System.Func{System.String,System.String},System.String)">
+ <summary>
+ 可能会有多个家族的调控因子作用在该位点上
+ </summary>
+ <param name="sites"></param>
+ <param name="getFamily"></param>
+ <param name="getTarget"></param>
+ <param name="hitsExpression"></param>
+ <returns></returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree.FilterMotifsQuantile(System.Collections.Generic.IEnumerable{System.ValueTuple{SMRUCC.genomics.ComponentModel.Loci.NucleotideLocation,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.NtMapping.BlastnMapping[]}},System.Func{System.String,System.String},System.Func{System.String,System.String},System.Double)">
+ <summary>
+ 可能会有多个家族的调控因子作用在该位点上
+ </summary>
+ <param name="sites"></param>
+ <param name="getFamily"></param>
+ <param name="getTarget"></param>
+ <param name="quantile"></param>
+ <returns></returns>
+ 
+</member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MSAMotif">
  <summary>
  
@@ -289,30 +367,6 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  get consensus sequence of a pairwise alignment seed
  </summary>
  <param name="pairwise"></param>
- <returns></returns>
-</member>
-<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifMatch">
- <summary>
- motif model sequence site matches result
- </summary>
-</member>
-<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif,SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32)">
- <summary>
- 基于PWM的概率匹配
- </summary>
- <param name="target"></param>
- <param name="cutoff#"></param>
- <param name="minW%"></param>
- <returns></returns>
-</member>
-<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue[],SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32,System.Int32)">
- <summary>
- 基于PWM的概率匹配
- </summary>
- <param name="PWM">PWM</param>
- <param name="target"></param>
- <param name="cutoff#"></param>
- <param name="minW%"></param>
  <returns></returns>
 </member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SeedCluster">
@@ -380,29 +434,6 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  </summary>
  <param name="a"></param>
  <param name="b"></param>
- <returns></returns>
-</member>
-<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif">
- <summary>
- motif model
- </summary>
-</member>
-<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.alignments">
- <summary>
- the alignment score vector of current motif PWM with the source seeds
- </summary>
- <returns></returns>
-</member>
-<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.AverageScore">
- <summary>
- score / motif with
- </summary>
- <returns></returns>
-</member>
-<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SequenceMotif.SignificantSites">
- <summary>
- get number of the conserved sites
- </summary>
  <returns></returns>
 </member>
 </members>
