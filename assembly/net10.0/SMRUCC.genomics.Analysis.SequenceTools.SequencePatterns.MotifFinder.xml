@@ -242,6 +242,11 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  Creates the directory where the files will be written </summary>
  <param name="filename">, path to a file that needs to be written </param>
 </member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MEMEMotifRepository">
+ <summary>
+ save meme motif model data inside a local directory with multiple meme text file
+ </summary>
+</member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MotifTree">
  <summary>
  Create motif via the clustering of the blastn alignment result
@@ -367,6 +372,11 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  </summary>
  <param name="pairwise"></param>
  <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PWMDatabase">
+ <summary>
+ Save motif dataset inside a HDS package file
+ </summary>
 </member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.SeedCluster">
  <summary>

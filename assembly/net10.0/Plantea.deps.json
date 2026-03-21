@@ -52,6 +52,7 @@
           "SMRUCC.genomics.Core.Reference": "6.3.256.3655",
           "SMRUCC.genomics.Data.RegulonDatabase.Reference": "1.0.0.0",
           "SMRUCC.genomics.InteractionModel.Reference": "1.0.0.0",
+          "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents.Reference": "1.0.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions.Reference": "1.0.0.0",
           "SMRUCC.genomics.Model.MotifGraph.Reference": "1.0.0.0",
           "SMRUCC.genomics.Model.Network.VirtualFootprint.Reference": "1.0.0.0"
@@ -522,6 +523,7 @@
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner": "1.0.0",
           "SMRUCC.genomics.Core": "6.3.256.3655",
+          "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents": "1.0.0",
           "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0",
           "SMRUCC.genomics.Model.MotifGraph": "1.0.0"
         },
@@ -594,6 +596,20 @@
         },
         "runtime": {
           "SMRUCC.genomics.InteractionModel.dll": {
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Analysis.SequenceAlignment": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
+          "SMRUCC.genomics.Core": "6.3.256.3655"
+        },
+        "runtime": {
+          "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents.dll": {
             "fileVersion": "0.0.0.0"
           }
         }
@@ -911,6 +927,14 @@
           }
         }
       },
+      "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents.Reference/1.0.0.0": {
+        "runtime": {
+          "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "SMRUCC.genomics.Interops.NCBI.Extensions.Reference/1.0.0.0": {
         "runtime": {
           "SMRUCC.genomics.Interops.NCBI.Extensions.dll": {
@@ -1189,6 +1213,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "SMRUCC.genomics.Interops.NCBI.Extensions/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1355,6 +1384,11 @@
       "sha512": ""
     },
     "SMRUCC.genomics.InteractionModel.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SMRUCC.genomics.Interops.NBCR.MEME_Suite.Documents.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
