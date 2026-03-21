@@ -41,13 +41,6 @@ SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core
  <param name="outputAll"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.genomics.Analysis.HTS.GSEA.Enrichment.FDRCorrection(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Analysis.HTS.GSEA.EnrichmentResult})">
- <summary>
- 进行计算结果的假阳性FDR控制计算
- </summary>
- <param name="enrichments">根据我们所提供的基因列表，对每一个代谢途径的富集计算结果的集合</param>
- <returns></returns>
-</member>
 <member name="T:SMRUCC.genomics.Analysis.HTS.GSEA.EnrichmentResult">
  <summary>
  The GCModeller enrichment analysis output table
@@ -70,7 +63,7 @@ SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core
  Only apply for evluates of the enrichment for a vs b comparision
  </summary>
 </member>
-<member name="M:SMRUCC.genomics.Analysis.HTS.GSEA.GSEACalculate.Enrich(Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{System.Double}[],Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String},System.Int32)">
+<member name="M:SMRUCC.genomics.Analysis.HTS.GSEA.GSEACalculate.Enrich(SMRUCC.genomics.Analysis.HTS.GSEA.GeneExpressionRank[],Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String},System.Int32)">
  <summary>
  Enrichment for one specific pathway
  </summary>
@@ -81,6 +74,20 @@ SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core
  gene set in current pathway
  </param>
  <param name="permutations"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.HTS.GSEA.GSEACalculate.enrich_score(SMRUCC.genomics.Analysis.HTS.GSEA.GeneExpressionRank[],Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String})">
+ <summary>
+ 
+ </summary>
+ <param name="geneExpression"></param>
+ <param name="geneSet"></param>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.HTS.GSEA.GeneExpressionRank.rank">
+ <summary>
+ gene id tagged with the expression ranking value, example as -log10 of t-test pvalue
+ </summary>
  <returns></returns>
 </member>
 <member name="T:SMRUCC.genomics.Analysis.HTS.GSEA.Background">
@@ -108,6 +115,13 @@ SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core
  <summary>
  a collection of the functional related genesets.
  </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.HTS.GSEA.Background.Item(System.String)">
+ <summary>
+ get background cluster object via its id reference
+ </summary>
+ <param name="id"></param>
  <returns></returns>
 </member>
 <member name="M:SMRUCC.genomics.Analysis.HTS.GSEA.Background.SubsetOf(System.Func{SMRUCC.genomics.Analysis.HTS.GSEA.Cluster,System.Boolean})">

@@ -197,6 +197,26 @@ to [rest of string was truncated]&quot;;.
  <param name="env"></param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.Rsharp.Interpreter.DebugAction">
+ <summary>
+ 调试动作类型
+ </summary>
+</member>
+<member name="T:SMRUCC.Rsharp.Interpreter.DebuggerContext">
+ <summary>
+ 调试器状态管理类
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Interpreter.DebuggerContext.ShouldPause(SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression)">
+ <summary>
+ 检查是否应该暂停执行
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Interpreter.DebuggerContext.Pause(SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ 进入暂停状态，等待用户指令
+ </summary>
+</member>
 <member name="T:SMRUCC.Rsharp.Interpreter.DebugLevels">
  <summary>
  debug echo verbose level for the R# interpreter engine
@@ -234,7 +254,7 @@ to [rest of string was truncated]&quot;;.
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Interpreter.ExecutableLoop.ExecuteCodeLine(SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression,SMRUCC.Rsharp.Runtime.Environment,System.Boolean@,System.Boolean)">
+<member name="M:SMRUCC.Rsharp.Interpreter.ExecutableLoop.ExecuteCodeLine(SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression,SMRUCC.Rsharp.Runtime.Environment,System.Boolean@)">
  <summary>
  For execute lambda function
  </summary>
@@ -1247,7 +1267,9 @@ to [rest of string was truncated]&quot;;.
  </summary>
  <param name="envir"></param>
  <param name="passed"></param>
- <returns></returns>
+ <returns>
+ returns the function name string or the function object value
+ </returns>
 </member>
 <member name="M:SMRUCC.Rsharp.Interpreter.ExecuteEngine.ExpressionSymbols.Closure.FunctionInvoke.HandleResult(System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
@@ -1372,6 +1394,11 @@ to [rest of string was truncated]&quot;;.
  ```
  left op right
  ```
+ </summary>
+</member>
+<member name="T:SMRUCC.Rsharp.Interpreter.ExecuteEngine.ExpressionSymbols.Operators.BinaryExpression">
+ <summary>
+ a basic binary expression, example as math expression
  </summary>
 </member>
 <member name="T:SMRUCC.Rsharp.Interpreter.ExecuteEngine.ExpressionSymbols.Operators.BinaryInExpression">
@@ -2341,6 +2368,14 @@ to [rest of string was truncated]&quot;;.
  <param name="name$"></param>
  <param name="value"></param>
  <param name="type"></param>
+</member>
+<member name="M:SMRUCC.Rsharp.Interpreter.RInterpreter.Set(System.String,System.Object)">
+ <summary>
+ declare new variable or set variable value
+ </summary>
+ <param name="name"></param>
+ <param name="value"></param>
+ <returns></returns>
 </member>
 <member name="M:SMRUCC.Rsharp.Interpreter.RInterpreter.Invoke(System.String,System.Object[])">
  <summary>
@@ -5727,26 +5762,29 @@ to take away yo [rest of string was truncated]&quot;;.
 
  The ‘factory-fresh’ default settings of some of these options are
 
- add.smooth	TRUE
- check.bounds	FALSE
- continue	"+ "
- digits	7
- echo	TRUE
- encoding	"native.enc"
- error	NULL
- expressions	5000
- keep.source	interactive()
- keep.source.pkgs	FALSE
- max.print	99999
- OutDec	"."
- prompt	"> "
- scipen	0
- show.error.messages	TRUE
- timeout	60
- verbose	FALSE
- warn	0
- warning.length	1000
- width	80
+ |options            |default value|
+ |-------------------|-------------|
+ |add.smooth         |TRUE         |
+ |check.bounds       |FALSE        |
+ |continue           |"+ "         |
+ |digits             |7            |
+ |echo               |TRUE         |
+ |encoding           |"native.enc" |
+ |error              |NULL         |
+ |expressions        |5000         |
+ |keep.source        |interactive()|
+ |keep.source.pkgs   |FALSE        |
+ |max.print          |99999        |
+ |OutDec             |"."          |
+ |prompt             |"> "         |
+ |scipen             |0            |
+ |show.error.messages|TRUE         |
+ |timeout            |60           |
+ |verbose            |FALSE        |
+ |warn               |0            |
+ |warning.length     |1000         |
+ |width              |80           |
+ 
  Others are set from environment variables or are platform-dependent.
  </remarks>
 </member>
@@ -5757,7 +5795,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.names(System.Object,System.Array,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.names(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  # The Names of an Object
  
@@ -5832,7 +5870,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="names"></param>
  <returns>this function by extends the numeric suffix to the duplictaed name for make the name string be uniqued!</returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.rownames(System.Object,System.Array,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.rownames(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  # Row and Column Names
  
@@ -5864,7 +5902,7 @@ to take away yo [rest of string was truncated]&quot;;.
  by as.character, And setting colnames will convert the row names To character.
  </remarks>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.colnames(System.Object,System.Array,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.colnames(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  # Row and Column Names
  
@@ -5993,14 +6031,14 @@ to take away yo [rest of string was truncated]&quot;;.
  to character (and which are pasted together with no separator) 
  or (for message only) a single condition object.</param>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.cat(System.Object,System.String,System.String,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.base.cat(System.Object,System.Object,System.String,System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  # Concatenate and Print
  
  Outputs the objects, concatenating the representations. 
  ``cat`` performs much less conversion than ``print``.
  </summary>
- <param name="values">R objects (see ‘Details’ for the types of objects allowed).</param>
+ <param name="x">R objects (see ‘Details’ for the types of objects allowed).</param>
  <param name="file">A connection, or a character string naming the file to print to. 
  If "" (the default), cat prints to the standard output connection, the console 
  unless redirected by ``sink``.</param>
@@ -6377,6 +6415,98 @@ to take away yo [rest of string was truncated]&quot;;.
  extra disk space during the save.</param>
  <param name="envir">environment to search for objects to be saved.</param>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.conditions.tryCatch(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ ### Condition Handling and Recovery
+ 
+ These functions provide a mechanism for handling unusual conditions, including errors and warnings.
+ </summary>
+ <param name="expr">expression to be evaluated.</param>
+ <param name="finally">expression to be evaluated before returning or exiting.</param>
+ <param name="args">additional arguments; see details below.</param>
+ <param name="env"></param>
+ <returns></returns>
+ <remarks>
+ The condition system provides a mechanism for signaling and handling unusual conditions, including 
+ errors and warnings. Conditions are represented as objects that contain information about the condition 
+ that occurred, such as a message and the call in which the condition occurred. Currently conditions 
+ are S3-style objects, though this may eventually change.
+ Conditions are objects inheriting from the abstract class condition. Errors and warnings are objects 
+ inheriting from the abstract subclasses error and warning. The class simpleError is the class used
+ by stop and all internal error signals. Similarly, simpleWarning is used by warning, and simpleMessage
+ is used by message. The constructors by the same names take a string describing the condition as 
+ argument and an optional call. The functions conditionMessage and conditionCall are generic functions
+ that return the message and call of a condition.
+ The function errorCondition can be used to construct error conditions of a particular class with 
+ additional fields specified as the ... argument. warningCondition is analogous for warnings.
+ Conditions are signaled by signalCondition. In addition, the stop and warning functions have been 
+ modified to also accept condition arguments.
+ The function tryCatch evaluates its expression argument in a context where the handlers provided in 
+ the ... argument are available. The finally expression is then evaluated in the context in which tryCatch 
+ was called; that is, the handlers supplied to the current tryCatch call are not active when the finally 
+ expression is evaluated.
+ Handlers provided in the ... argument to tryCatch are established for the duration of the evaluation of expr.
+ If no condition is signaled when evaluating expr then tryCatch returns the value of the expression.
+ If a condition is signaled while evaluating expr then established handlers are checked, starting with the
+ most recently established ones, for one matching the class of the condition. When several handlers are 
+ supplied in a single tryCatch then the first one is considered more recent than the second. If a handler
+ is found then control is transferred to the tryCatch call that established the handler, the handler found 
+ and all more recent handlers are disestablished, the handler is called with the condition as its argument,
+ and the result returned by the handler is returned as the value of the tryCatch call.
+ Calling handlers are established by withCallingHandlers. If a condition is signaled and the applicable 
+ handler is a calling handler, then the handler is called by signalCondition in the context where the 
+ condition was signaled but with the available handlers restricted to those below the handler called in 
+ the handler stack. If the handler returns, then the next handler is tried; once the last handler has been tried,
+ signalCondition returns NULL.
+ globalCallingHandlers establishes calling handlers globally. These handlers are only called as a last resort,
+ after the other handlers dynamically registered with withCallingHandlers have been invoked. They are 
+ called before the error global option (which is the legacy interface for global handling of errors).
+ Registering the same handler multiple times moves that handler on top of the stack, which ensures that 
+ it is called first. Global handlers are a good place to define a general purpose logger (for instance 
+ saving the last error object in the global workspace) or a general recovery strategy (e.g. installing 
+ missing packages via the retry_loadNamespace restart).
+ Like withCallingHandlers and tryCatch, globalCallingHandlers takes named handlers. Unlike these functions,
+ it also has an options-like interface: you can establish handlers by passing a single list of named handlers.
+ To unregister all global handlers, supply a single 'NULL'. The list of deleted handlers is returned invisibly.
+ Finally, calling globalCallingHandlers without arguments returns the list of currently established handlers,
+ visibly.
+ User interrupts signal a condition of class interrupt that inherits directly from class condition before 
+ executing the default interrupt action.
+ Restarts are used for establishing recovery protocols. They can be established using withRestarts. One 
+ pre-established restart is an abort restart that represents a jump to top level.
+ findRestart and computeRestarts find the available restarts. findRestart returns the most recently established
+ restart of the specified name. computeRestarts returns a list of all restarts. Both can be given a 
+ condition argument and will then ignore restarts that do not apply to the condition.
+ invokeRestart transfers control to the point where the specified restart was established and calls the 
+ restart's handler with the arguments, if any, given as additional arguments to invokeRestart. The restart 
+ argument to invokeRestart can be a character string, in which case findRestart is used to find the restart. 
+ If no restart is found, an error is thrown.
+ tryInvokeRestart is a variant of invokeRestart that returns silently when the restart cannot be found with
+ findRestart. Because a condition of a given class might be signalled with arbitrary protocols (error, warning,
+ etc), it is recommended to use this permissive variant whenever you are handling conditions signalled 
+ from a foreign context. For instance, invocation of a "muffleWarning" restart should be optional because
+ the warning might have been signalled by the user or from a different package with the stop or message 
+ protocols. Only use invokeRestart when you have control of the signalling context, or when it is a logical
+ error if the restart is not available.
+ New restarts for withRestarts can be specified in several ways. The simplest is in name = function form 
+ where the function is the handler to call when the restart is invoked. Another simple variant is as name = string
+ where the string is stored in the description field of the restart object returned by findRestart; 
+ in this case the handler ignores its arguments and returns NULL. The most flexible form of a restart 
+ specification is as a list that can include several fields, including handler, description, and test. 
+ The test field should contain a function of one argument, a condition, that returns TRUE if the restart 
+ applies to the condition and FALSE if it does not; the default function returns TRUE for all conditions.
+ One additional field that can be specified for a restart is interactive. This should be a function of no 
+ arguments that returns a list of arguments to pass to the restart handler. The list could be obtained by 
+ interacting with the user if necessary. The function invokeRestartInteractively calls this function to 
+ obtain the arguments to use when invoking the restart. The default interactive method queries the user 
+ for values for the formal arguments of the handler function.
+ Interrupts can be suspended while evaluating an expression using suspendInterrupts. Subexpression can be
+ evaluated with interrupts enabled using allowInterrupts. These functions can be used to make sure cleanup
+ handlers cannot be interrupted.
+ .signalSimpleWarning, .handleSimpleError, and .tryResumeInterrupt are used internally and should not be
+ called directly.
+ </remarks>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.bitView.magicNumber(System.Object,System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  try to get the magic number of the given binary file
@@ -6574,6 +6704,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <summary>
  s4object api function exports
  </summary>
+ 
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.s4Methods.setClass(System.String,System.Object,SMRUCC.Rsharp.Runtime.Internal.Object.list,System.String,System.Object,System.Object,System.Object,System.Object,System.Object,System.Object,System.Boolean,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
@@ -7204,7 +7335,7 @@ to take away yo [rest of string was truncated]&quot;;.
  + ``language`` always "R".
  </returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.etc.CultureInfo(System.String)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.etc.CultureInfo_ctor(System.String)">
  <summary>
  Initializes a new instance of the System.Globalization.CultureInfo class based
  on the culture specified by name.
@@ -7511,6 +7642,78 @@ to take away yo [rest of string was truncated]&quot;;.
  this function returns FALSE if the given files value is NULL
  </returns>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.file.file_create(System.Object,System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ ### File Manipulation
+ 
+ These functions provide a low-level interface to the computer's file system.
+ </summary>
+ <param name="x">character vectors, containing file names or paths.</param>
+ <param name="showWarnings">logical; should the warnings on failure be shown?</param>
+ <returns>These functions return a logical vector indicating which operation succeeded for each of the files attempted. 
+ Using a missing value for a file or path name will always be regarded as a failure.
+ If showWarnings = True, file.create will give a warning For an unexpected failure.</returns>
+ <remarks>
+ The ... arguments are concatenated to form one character string: you can specify the files separately or 
+ as one vector. All of these functions expand path names: see path.expand. (file.exists silently reports
+ false for paths that would be too long after expansion: the rest will give a warning.)
+ 
+ file.create creates files with the given names if they do Not already exist And truncates them if they do.
+ They are created with the maximal read/write permissions allowed by the 'umask’ setting (where relevant).
+ By default a warning is given (with the reason) if the operation fails.
+ 
+ #### Case-insensitive file systems
+ 
+ Case-insensitive file systems are the norm on Windows and macOS, but can be found on all OSes 
+ (for example a FAT-formatted USB drive is probably case-insensitive).
+ 
+ These functions will most likely match existing files regardless of case on such file systems: 
+ however this is an OS function and it is possible that file names might be mapped to upper or 
+ lower case.
+ 
+ #### Symbolic links on Windows
+ 
+ Symbolic links in the sense of POSIX file systems do not exist on Windows: however, 
+ NTFS file systems support two similar concepts.
+ 
+ There are ‘junctions’ (or ‘junction points’), unfortunately without a public API: 
+ a Windows version of the Unix concept of mounting one directory on another. A junction 
+ can link directories located on the same or different local volumes of the same computer,
+ but cannot link to a network drive. Function Sys.junction creates one or more junctions: 
+ to should either specify a single existing directory or a set of non-existent file paths 
+ of the same length as from. (Command mklink /J can also be used to create junctions.)
+ 
+ A version of symbolic linking to files/directories was implemented more recently, and 
+ file.symlink makes use of that interface. However, it has restrictions which are crippling. 
+ First, the user needs permission to make symbolic links, and that permission is not 
+ normally granted except to Administrator accounts (note: not users with Administrator rights): 
+ further many users report that whereas the Policy Editor appears to be able to grant such rights, 
+ the API still reports insufficient permissions. Second, the interface needs to know if from 
+ is a file or a directory (and it need not yet exist): we have implemented this to allow linking 
+ from a directory only if it currently exists.
+ 
+ Care is needed with removing a junction (and most likely also a symbolic link): many tools 
+ will remove the target and its contents.
+ 
+ #### Warning
+ 
+ Always check the return value of these functions when used in package code. This is especially 
+ important for file.rename, which has OS-specific restrictions (and note that the session temporary
+ directory is commonly on a different file system from the working directory): it is only portable
+ to use file.rename to change file name(s) within a single directory.
+ 
+ #### Note
+ 
+ There is no guarantee that these functions will handle Windows relative paths of the form 
+ ‘d:path’: try ‘d:./path’ instead. In particular, ‘d:’ is not recognized as a directory. 
+ Nor are ‘⁠\\?\⁠’ prefixes (and similar) supported.
+ 
+ Most of these functions accept UTF-8 filepaths not valid in the current locale.
+ 
+ User error in supplying invalid file names (and note that ‘foo/’ and ‘foo\’ are invalid on Windows) 
+ has undefined consequences.
+ </remarks>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.file.dirCreate(System.String,System.Boolean,System.Boolean,System.String)">
  <summary>
  dir.create creates the last element of the path, unless recursive = TRUE. 
@@ -7664,45 +7867,6 @@ to take away yo [rest of string was truncated]&quot;;.
  <returns>
  true for no error in gzfile, false means the given gz file is corrupted
  </returns>
-</member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.file.stdin_dev">
- <summary>
- 
- </summary>
- <returns>
- stdin(), stdout() and stderr() return connection objects.
- </returns>
- <remarks>
- stdin(), stdout() and stderr() are standard connections corresponding to input, output and error on the console 
- respectively (and not necessarily to file streams). They are text-mode connections of class "terminal" which 
- cannot be opened or closed, and are read-only, write-only and write-only respectively. The stdout() and stderr() 
- connections can be re-directed by sink (and in some circumstances the output from stdout() can be split: see the 
- help page).
- 
- The encoding For stdin() When redirected can be Set by the command-line flag --encoding.
- 
- nullfile() returns filename of the null device ("/dev/null" on Unix, "nul:" on Windows).
- 
- showConnections returns a matrix Of information. If a connection Object has been lost Or forgotten, getConnection 
- will take a row number from the table And Return a connection Object For that connection, which can be used To 
- close the connection, For example. However, If there Is no R level Object referring To the connection it will be 
- closed automatically at the Next garbage collection (except For gzcon connections).
- 
- closeAllConnections closes(And destroys) all user connections, restoring all sink diversions As it does so.
- 
- isatty returns True If the connection Is one Of the Class "terminal" connections And it Is apparently connected To 
- a terminal, otherwise False. This may Not be reliable In embedded applications, including GUI consoles.
- 
- getAllConnections returns a sequence Of Integer connection descriptors For use With getConnection, corresponding 
- To the row names Of the table returned by showConnections(all = True).
- 
- stdin() refers to the ‘console’ and not to the C-level ‘stdin’ of the process. The distinction matters in GUI 
- consoles (which may not have an active ‘stdin’, and if they do it may not be connected to console input), and also 
- in embedded applications. If you want access to the C-level file stream ‘stdin’, use file("stdin").
- 
- When R Is reading a script from a file, the file Is the 'console’: this is traditional usage to allow in-line 
- data (see ‘An Introduction to R’ for an example).
- </remarks>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.file.file(System.String,Microsoft.VisualBasic.FileIO.FileModeDescriptor,System.Boolean,Microsoft.VisualBasic.ApplicationServices.IFileSystemEnvironment)">
  <summary>
@@ -7933,6 +8097,132 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="byts"></param>
  <param name="env"></param>
  <returns></returns>
+</member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.NullStream">
+ <summary>
+ 提供一个不存储任何数据的 Stream。所有写入的数据都被丢弃，所有读取操作都返回0。
+ 这是对类 Unix 系统上的 /dev/null 或 Windows 上的 NUL 设备的 .NET 模拟。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stddev.stderr">
+ <summary>
+ ### Display Connections
+ 
+ Display aspects of connections.
+ </summary>
+ <returns>
+ stdin(), stdout() and stderr() return connection objects.
+ showConnections returns a character matrix of information with a row for each connection,
+ by default only for open non-standard connections.
+ getConnection returns a connection object, or NULL.
+ </returns>
+ <remarks>
+ stdin(), stdout() and stderr() are standard connections corresponding to input, output and 
+ error on the console respectively (and not necessarily to file streams). They are text-mode 
+ connections of class "terminal" which cannot be opened or closed, and are read-only, write-only 
+ and write-only respectively. The stdout() and stderr() connections can be re-directed by sink 
+ (and in some circumstances the output from stdout() can be split: see the help page).
+ The encoding for stdin() when redirected can be set by the command-line flag --encoding.
+ nullfile() returns filename of the null device ("/dev/null" on Unix, "nul:" on Windows).
+ showConnections returns a matrix of information. If a connection object has been lost or forgotten,
+ getConnection will take a row number from the table and return a connection object for that connection,
+ which can be used to close the connection, for example. However, if there is no R level object 
+ referring to the connection it will be closed automatically at the next garbage collection 
+ (except for gzcon connections).
+ closeAllConnections closes (and destroys) all user connections, restoring all sink diversions as it does so.
+ isatty returns true if the connection is one of the class "terminal" connections and it is apparently 
+ connected to a terminal, otherwise false. This may not be reliable in embedded applications, 
+ including GUI consoles.
+ getAllConnections returns a sequence of integer connection descriptors for use with getConnection,
+ corresponding to the row names of the table returned by showConnections(all = TRUE).
+ 
+ stdin() refers to the ‘console’ and not to the C-level ‘stdin’ of the process. The distinction matters 
+ in GUI consoles (which may not have an active ‘stdin’, and if they do it may not be connected to 
+ console input), and also in embedded applications. If you want access to the C-level file stream 
+ ‘stdin’, use file("stdin").
+ When R is reading a script from a file, the file is the ‘console’: this is traditional usage to allow 
+ in-line data (see ‘An Introduction to R’ for an example).
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stddev.stdout">
+ <summary>
+ ### Display Connections
+ 
+ Display aspects of connections.
+ </summary>
+ <returns>
+ stdin(), stdout() and stderr() return connection objects.
+ showConnections returns a character matrix of information with a row for each connection,
+ by default only for open non-standard connections.
+ getConnection returns a connection object, or NULL.
+ </returns>
+ <remarks>
+ stdin(), stdout() and stderr() are standard connections corresponding to input, output and 
+ error on the console respectively (and not necessarily to file streams). They are text-mode 
+ connections of class "terminal" which cannot be opened or closed, and are read-only, write-only 
+ and write-only respectively. The stdout() and stderr() connections can be re-directed by sink 
+ (and in some circumstances the output from stdout() can be split: see the help page).
+ The encoding for stdin() when redirected can be set by the command-line flag --encoding.
+ nullfile() returns filename of the null device ("/dev/null" on Unix, "nul:" on Windows).
+ showConnections returns a matrix of information. If a connection object has been lost or forgotten,
+ getConnection will take a row number from the table and return a connection object for that connection,
+ which can be used to close the connection, for example. However, if there is no R level object 
+ referring to the connection it will be closed automatically at the next garbage collection 
+ (except for gzcon connections).
+ closeAllConnections closes (and destroys) all user connections, restoring all sink diversions as it does so.
+ isatty returns true if the connection is one of the class "terminal" connections and it is apparently 
+ connected to a terminal, otherwise false. This may not be reliable in embedded applications, 
+ including GUI consoles.
+ getAllConnections returns a sequence of integer connection descriptors for use with getConnection,
+ corresponding to the row names of the table returned by showConnections(all = TRUE).
+ 
+ stdin() refers to the ‘console’ and not to the C-level ‘stdin’ of the process. The distinction matters 
+ in GUI consoles (which may not have an active ‘stdin’, and if they do it may not be connected to 
+ console input), and also in embedded applications. If you want access to the C-level file stream 
+ ‘stdin’, use file("stdin").
+ When R is reading a script from a file, the file is the ‘console’: this is traditional usage to allow 
+ in-line data (see ‘An Introduction to R’ for an example).
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stddev.stdin">
+ <summary>
+ ### Display Connections
+ 
+ Display aspects of connections.
+ </summary>
+ <returns>
+ stdin(), stdout() and stderr() return connection objects.
+ showConnections returns a character matrix of information with a row for each connection,
+ by default only for open non-standard connections.
+ getConnection returns a connection object, or NULL.
+ </returns>
+ <remarks>
+ stdin(), stdout() and stderr() are standard connections corresponding to input, output and 
+ error on the console respectively (and not necessarily to file streams). They are text-mode 
+ connections of class "terminal" which cannot be opened or closed, and are read-only, write-only 
+ and write-only respectively. The stdout() and stderr() connections can be re-directed by sink 
+ (and in some circumstances the output from stdout() can be split: see the help page).
+ The encoding for stdin() when redirected can be set by the command-line flag --encoding.
+ nullfile() returns filename of the null device ("/dev/null" on Unix, "nul:" on Windows).
+ showConnections returns a matrix of information. If a connection object has been lost or forgotten,
+ getConnection will take a row number from the table and return a connection object for that connection,
+ which can be used to close the connection, for example. However, if there is no R level object 
+ referring to the connection it will be closed automatically at the next garbage collection 
+ (except for gzcon connections).
+ closeAllConnections closes (and destroys) all user connections, restoring all sink diversions as it does so.
+ isatty returns true if the connection is one of the class "terminal" connections and it is apparently 
+ connected to a terminal, otherwise false. This may not be reliable in embedded applications, 
+ including GUI consoles.
+ getAllConnections returns a sequence of integer connection descriptors for use with getConnection,
+ corresponding to the row names of the table returned by showConnections(all = TRUE).
+ 
+ stdin() refers to the ‘console’ and not to the C-level ‘stdin’ of the process. The distinction matters 
+ in GUI consoles (which may not have an active ‘stdin’, and if they do it may not be connected to 
+ console input), and also in embedded applications. If you want access to the C-level file stream 
+ ‘stdin’, use file("stdin").
+ When R is reading a script from a file, the file is the ‘console’: this is traditional usage to allow 
+ in-line data (see ‘An Introduction to R’ for an example).
+ </remarks>
 </member>
 <member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.LinqPipeline.dataframe_methods">
  <summary>
@@ -8451,7 +8741,7 @@ to take away yo [rest of string was truncated]&quot;;.
  list. *****
  </returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.LinqPipeline.linq.sort(System.Object,System.Boolean,System.Boolean)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.LinqPipeline.linq.sort(System.Object,System.Boolean,System.Object,System.Boolean)">
  <summary>
  ### Sorting or Ordering Vectors
  
@@ -8463,6 +8753,8 @@ to take away yo [rest of string was truncated]&quot;;.
  For sort an R object with a class Or a numeric, complex, 
  character Or logical vector. For sort.int, a numeric, complex, 
  character Or logical vector, Or a factor.
+ 
+ for sort a dataframe object, then it will sort by the value order which is defined via the given columns.
  </param>
  <param name="decreasing">
  logical. Should the sort be increasing or decreasing? For the 
@@ -8562,7 +8854,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <summary>
  Sorts the elements of a sequence in ascending order according to a key.
  </summary>
- <param name="sequence">A sequence of values to order.</param>
+ <param name="x">A sequence of values to order.</param>
  <param name="getKey">
  A function to extract a key from an element. and this parameter value 
  can also be the field name or column name to sort.
@@ -8699,6 +8991,21 @@ to take away yo [rest of string was truncated]&quot;;.
  3. Data frame attributes are preserved.
  4. Groups are maintained; you can't select off grouping variables.
  </returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.LinqPipeline.linq.switch(System.Object,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ text labeler
+ </summary>
+ <param name="x"></param>
+ <param name="labels"></param>
+ <param name="env"></param>
+ <returns></returns>
+ <example>
+ let labels = switch(c(...),  gene = c(...), prot = c(...), metabolite = c(...), NA = "kegg_pathway" );
+ 
+ print(labels);
+ # [6] "gene" "gene" "prot" "prot" "prot" "metabolite" "kegg_pathway"
+ </example>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.LinqPipeline.parallelApplys.parallelList(System.Collections.IDictionary,SMRUCC.Rsharp.Runtime.Components.Interface.RFunction,System.Int32,System.Int32,System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
@@ -9687,7 +9994,7 @@ to take away yo [rest of string was truncated]&quot;;.
  </param>
  <returns>Root of number.</returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.ranking.rank(System.Double[],System.Boolean,Microsoft.VisualBasic.Math.Correlations.Ranking.Strategies)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.ranking.rank(System.Object,System.Boolean,Microsoft.VisualBasic.Math.Correlations.Ranking.Strategies)">
  <summary>
  ### Sample Ranks
  
@@ -9730,7 +10037,7 @@ to take away yo [rest of string was truncated]&quot;;.
  slowly.
  </remarks>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.ranking.order(System.Array,System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.ranking.order(System.Object,System.Boolean,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  ### Ordering Permutation
  
@@ -10189,7 +10496,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="b"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.set.combn(System.Array,System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.set.combn(System.Object,System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  Generate All Combinations of n Elements, Taken m at a Time
  
@@ -10267,6 +10574,79 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="len"></param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat">
+ <summary>
+ 提供与 R 语言 base::format 函数功能相似的格式化方法。
+ </summary>
+</member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification">
+ <summary>
+ 指定字符串的对齐方式，模仿 R 的 justify 参数。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.FormatValue(System.Object,System.String,System.Boolean,System.Nullable{System.Int32},System.Int32,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Boolean},System.String,System.Int32,System.String,System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ 格式化一个对象（数字、日期或字符串），模仿 R 的 format 函数。
+ </summary>
+ <param name="x">要格式化的对象 (数字, 日期, 字符串)。</param>
+ <param name="trim">对于字符串，是否移除前导和尾随空白。默认为 False。</param>
+ <param name="digits">数字的有效数字位数。如果为 Nothing，则不指定。默认为 Nothing。</param>
+ <param name="nsmall">数字小数点后的最小位数。默认为 0。</param>
+ <param name="justify">字符串的对齐方式。默认为 Left。</param>
+ <param name="width">格式化后字符串的目标宽度。如果为 Nothing，则不填充。默认为 Nothing。</param>
+ <param name="na_encode">如果 x 为 Nothing 或 DBNull，是否将其编码为 "NA"。默认为 True。</param>
+ <param name="scientific">是否强制使用科学计数法。Nothing 表示自动决定。默认为 Nothing。</param>
+ <param name="big_mark">用于分隔大数整数部分的千位分隔符。默认为 ""。</param>
+ <param name="big_interval">千位分隔符的间隔位数。默认为 3。</param>
+ <param name="small_mark">用于分隔小数部分的标记。默认为 ""。</param>
+ <param name="small_interval">小数部分分隔标记的间隔位数。默认为 5。</param>
+ <param name="decimal_mark">用作小数点的字符。默认为当前系统设置。</param>
+ <param name="zero_print">用于表示零值的字符串。如果为 Nothing，则正常显示。默认为 Nothing。</param>
+ <param name="drop0trailing">是否移除小数点后的尾随零。默认为 False。</param>
+ <returns>格式化后的字符串。</returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.FormatNumber(System.Double,System.Boolean,System.Nullable{System.Int32},System.Int32,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.String,System.Int32,System.String,System.Int32,System.String,System.String,System.Boolean)">
+ <summary>
+ 格式化数字。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.FormatToSignificantDigits(System.Double,System.Int32,System.Globalization.NumberFormatInfo)">
+ <summary>
+ 将数字格式化为指定的有效数字位数。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.ApplySmallMark(System.String,System.String,System.String,System.Int32)">
+ <summary>
+ 在小数部分应用 small.mark 标记。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.FormatDate(System.DateTime,System.String,System.Boolean,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32})">
+ <summary>
+ 格式化日期。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.ConvertRDateFormatToDotNet(System.String)">
+ <summary>
+ 将 R 语言的日期时间格式字符串转换为等价的 .NET 自定义日期时间格式字符串。
+ </summary>
+ <param name="rFormat">一个有效的 R 日期时间格式字符串，例如 "%Y-%m-%d %H:%M:%S"。</param>
+ <returns>一个等价的 .NET 自定义日期时间格式字符串，例如 "yyyy-MM-dd HH:mm:ss"。</returns>
+ <remarks>
+ 此函数支持大多数常用的 R 格式化占位符。
+ 对于一些在 .NET 中没有直接等价物的复杂占位符（如一年中的第几天 %j，或周数 %U/%W），
+ 函数会保留原始占位符，并可能需要在转换后进行手动处理。
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.FormatString(System.String,System.Boolean,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32})">
+ <summary>
+ 格式化字符串。
+ </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.ApplyJustificationAndWidth(System.String,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32})">
+ <summary>
+ 对字符串应用对齐和宽度填充。
+ </summary>
+</member>
 <member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr">
  <summary>
  the R text data helper
@@ -10279,6 +10659,73 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="x"></param>
  <param name="env"></param>
  <returns></returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr.format_str(System.Object,System.String,System.Boolean,System.Nullable{System.Int32},System.Int32,SMRUCC.Rsharp.Runtime.Internal.Invokes.RFormat.Justification,System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Boolean},System.String,System.Int64,System.String,System.Int64,System.Object,System.String,System.Boolean,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ ### Encode in a Common Format
+ 
+ Format an R object for pretty printing, notably encoding vector or column elements into a common format.
+ </summary>
+ <param name="x">any R object (conceptually); typically numeric.</param>
+ <param name="trim">logical; if FALSE, logical, numeric And complex values are right-justified to a common width 
+ If True the leading blanks For justification are suppressed.</param>
+ <param name="digits">a positive Integer indicating how many significant digits are To be used For numeric And complex x.
+ The Default, NULL, uses getOption("digits"). This Is a suggestion: enough decimal places will be used so that the 
+ smallest (in magnitude) number has this many significant digits, And also to satisfy nsmall. (For more, notably the 
+ interpretation for complex numbers see signif.)</param>
+ <param name="nsmall">the minimum number of digits to the right of the decimal point in formatting real/complex numbers 
+ in non-scientific formats. Allowed values are 0 &lt;= nsmall &lt;= 20.</param>
+ <param name="justify">should a character vector be left-justified (the Default), right-justified, centred Or left alone. Can be abbreviated.</param>
+ <param name="width">Default method: the minimum field width Or NULL Or 0 For no restriction.
+ AsIs method: the maximum field width For non-character objects. NULL corresponds To the Default 12.</param>
+ <param name="na_encode">logical: should NA strings be encoded? Note this only applies To elements Of character vectors, 
+ Not To numerical, complex nor logical NAs, which are always encoded As "NA".</param>
+ <param name="scientific">either a logical specifying whether elements of a real or complex vector should be encoded in scientific format, 
+ or an integer penalty (see options("scipen")). Missing values correspond to the current default penalty.</param>
+ <param name="big_mark">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="big_interval">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="small_mark">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="small_interval">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="decimal_mark">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="zero_print">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="drop0trailing">used for prettying (longish) numerical and complex sequences. Passed to prettyNum: that help page explains the details.</param>
+ <param name="args">further arguments passed To Or from other methods.</param>
+ <param name="env"></param>
+ <returns>
+ An object of similar structure to x containing character representations of the elements of the first argument x in a common format,
+ and in the current locale's encoding.
+ 
+ For character, numeric, complex or factor x, dims and dimnames are preserved on matrices/arrays and names on vectors: no other attributes are copied.
+ 
+ If x is a list, the result is a character vector obtained by applying format.default(x, ...) to each element of the list (after 
+ unlisting elements which are themselves lists), and then collapsing the result for each element with paste(collapse = ", "). 
+ The defaults in this case are trim = TRUE, justify = "none" since one does not usually want alignment in the collapsed strings.
+ </returns>
+ <remarks>
+ format is a generic function. Apart from the methods described here there are methods for dates (see format.Date), date-times 
+ (see format.POSIXct) and for other classes such as format.octmode and format.dist.
+ 
+ format.data.frame formats the data frame column by column, applying the appropriate method of format for each column. 
+ Methods for columns are often similar to as.character but offer more control. Matrix and data-frame columns will be 
+ converted to separate columns in the result, and character columns (normally all) will be given class "AsIs".
+ format.factor converts the factor to a character vector and then calls the default method (and so justify applies).
+ format.AsIs deals with columns of complicated objects that have been extracted from a data frame. Character objects and 
+ (atomic) matrices are passed to the default method (and so width does not apply). Otherwise it calls toString to 
+ convert the object to character (if a vector or list, element by element) and then right-justifies the result.
+ Justification for character vectors (and objects converted to character vectors by their methods) is done on display width (see nchar), 
+ taking double-width characters and the rendering of special characters (as escape sequences, including escaping backslash 
+ but not double quote: see print.default) into account. Thus the width is as displayed by print(quote = FALSE) and not as displayed by cat. 
+ Character strings are padded with blanks to the display width of the widest. (If na.encode = FALSE missing character strings are 
+ not included in the width computations and are not encoded.)
+ Numeric vectors are encoded with the minimum number of decimal places needed to display all the elements to at least 
+ the digits significant digits. However, if all the elements then have trailing zeroes, the number of decimal places 
+ is reduced until at least one element has a non-zero final digit; see also the argument documentation for big.*, small.* etc, above. 
+ See the note in print.default about digits >= 16.
+ Raw vectors are converted to their 2-digit hexadecimal representation by as.character.
+ format.default(x) now provides a “minimal” string when isS4(x) is true.
+ While the internal code respects the option getOption("OutDec") for the ‘decimal mark’ in general, decimal.mark takes 
+ precedence over that option. Similarly, scientific takes precedence over getOption("scipen").
+ </remarks>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr.objToString(System.Object,System.String,System.Globalization.CultureInfo,SMRUCC.Rsharp.Runtime.Internal.Object.list,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
@@ -10419,7 +10866,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr.Csprintf(System.Array,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr.Csprintf(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  #### Use C-style String Formatting Commands
  
@@ -10730,6 +11177,61 @@ to take away yo [rest of string was truncated]&quot;;.
  3 tokens: ``$(\d+)`` for matches integer string token, ``_`` will always produce a regular string token ``_``,
  ``$(\[\d*M.*\]\d*[+-])`` for matches another string token that wrapped with bracket [] and 
  ends with signed integer number as suffix.
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.stringr.grepl(System.String,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+ <summary>
+ ### Pattern Matching and Replacement
+ 
+ grep, grepv, grepl, regexpr, gregexpr, regexec and gregexec search for matches to argument pattern
+ within each element of a character vector: they differ in the format of and amount of detail in 
+ the results.
+ 
+ sub and gsub perform replacement of the first and all matches respectively within each element of 
+ a character vector.
+ </summary>
+ <param name="pattern">character string containing a regular expression (or character string for fixed = TRUE) 
+ to be matched in the given character vector. Coerced by as.character to a character string if possible. 
+ If a character vector of length 2 or more is supplied, the first element is used with a warning. Missing values 
+ are allowed except for regexpr, gregexpr and regexec.</param>
+ <param name="x">a character vector where matches are sought, or an object which can be coerced by 
+ as.character to a character vector. Long vectors are supported.</param>
+ <param name="ignore_case">logical. if FALSE, the pattern matching Is case sensitive And if TRUE, 
+ case Is ignored during matching.</param>
+ <param name="perl">logical. Should Perl-compatible regexps be used?</param>
+ <param name="fixed">logical. If TRUE, pattern is a string to be matched as is. Overrides all conflicting arguments.</param>
+ <param name="useBytes">logical. If TRUE the matching Is done byte-by-byte rather than character-by-character. See 'Details’.</param>
+ <returns>grepl returns a logical vector (match or not for each element of x).</returns>
+ <remarks>
+ Arguments which should be character strings or character vectors are coerced to character if possible.
+ Each of these functions operates in one of three modes:
+ 
+ + fixed = TRUE: use exact matching.
+ + perl = TRUE: use Perl-style regular expressions.
+ + fixed = FALSE, perl = FALSE: use POSIX 1003.2 extended regular expressions (the default).
+ 
+ See the help pages on regular expression for details of the different types of regular expressions.
+ The two *sub functions differ only in that sub replaces only the first occurrence of a pattern whereas gsub 
+ replaces all occurrences. If replacement contains backreferences which are not defined in pattern the 
+ result is undefined (but most often the backreference is taken to be "").
+ 
+ For regexpr, gregexpr, regexec and gregexec it is an error for pattern to be NA, otherwise NA is permitted 
+ and gives an NA match. grep and grepv only differ in the default of the value argument.Both grep and grepl 
+ take missing values in x as not matching a non-missing pattern.
+ 
+ The main effect of useBytes = TRUE is to avoid errors/warnings about invalid inputs and spurious matches in 
+ multibyte locales, but for regexpr it changes the interpretation of the output. It inhibits the conversion 
+ of inputs with marked encodings, and is forced if any input is found which is marked as "bytes" 
+ (see Encoding).
+ 
+ Caseless matching does not make much sense for bytes in a multibyte locale, and you should expect it only to 
+ work for ASCII characters if useBytes = TRUE. regexpr and gregexpr with perl = TRUE allow Python-style named 
+ captures, but not for long vector inputs.
+ 
+ Invalid inputs in the current locale are warned about up to 5 times.
+ 
+ Caseless matching with perl = TRUE for non-ASCII characters depends on the PCRE library being compiled with 
+ ‘Unicode property support’, which PCRE2 is by default.
  </remarks>
 </member>
 <member name="T:SMRUCC.Rsharp.Runtime.Internal.Invokes.strings">
@@ -11141,7 +11643,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils.system2(System.String,System.Object,System.String,System.String,System.String,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Single,System.Boolean,System.Boolean,System.Nullable{System.Boolean},SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils.system2(System.String,System.Object,System.Object,System.Object,System.String,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Single,System.Boolean,System.Boolean,System.Nullable{System.Boolean},SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  ### Invoke a System Command
  
@@ -11265,6 +11767,40 @@ to take away yo [rest of string was truncated]&quot;;.
  The Windows cmd.exe shell (used by default with shell) uses type = "cmd2" quoting: 
  special characters are prefixed with "^". In some cases, two types of quoting should 
  be used: first for the application, and then type = "cmd2" for cmd.exe. 
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils.Sys_which(System.Object)">
+ <summary>
+ ### Find Full Paths to Executables
+ 
+ This is an interface to the system command which, or to an emulation on Windows.
+ </summary>
+ <param name="names">Character vector of names or paths of possible executables.</param>
+ <returns>A character vector of the same length as names, named by names. The elements are either the full path to the executable or some indication that no executable of that name was found. Typically the indication is "", but this does depend on the OS (and the known exceptions are changed to ""). Missing values in names have missing return values.
+ On Windows the paths will be short paths (8+3 components, no spaces) with \ as the path delimiter.</returns>
+ <remarks>
+ The system command which reports on the full path names of an executable (including an executable script) as would be executed by a shell, accepting either absolute paths or looking on the path.
+ On Windows an ‘executable’ is a file with extension ‘.exe’, ‘.com’, ‘.cmd’ or ‘.bat’. Such files need not actually be executable, but they are what system tries.
+ On a Unix-alike the full path to which (usually ‘/usr/bin/which’) is found when R is installed.
+ 
+ Except on Windows this calls the system command which: since that is not part of e.g. the POSIX standards, exactly what it does is OS-dependent. It will usually do tilde-expansion and it may make use of csh aliases.
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils.Sys_chmod(System.Object,System.String,System.Boolean,System.Boolean)">
+ <summary>
+ ### Manipulation of Directories and File Permissions
+ 
+ These functions provide a low-level interface to the computer's file system.
+ </summary>
+ <param name="paths">character vectors containing file or directory paths. Tilde expansion (see path.expand) is done.</param>
+ <param name="mode">the mode to be used on Unix-alikes: it will be coerced by as.octmode. For Sys.chmod it is recycled along paths.</param>
+ <param name="use_umask">logical: should the mode be restricted by the umask setting?</param>
+ <returns></returns>
+ <remarks>Sys.chmod sets the file permissions of one or more files.
+ The interpretation of mode in the Windows system functions is non-POSIX and only supports setting the 
+ read-only attribute of the file. So R interprets mode to mean set read-only if and only if 
+ (mode &amp; 0200) == 0 (interpreted in octal). Windows has a much more extensive system of file 
+ permissions on some file systems (e.g., versions of NTFS) which are unrelated to this system call.
  </remarks>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Invokes.utils.system(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Double,System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
@@ -11818,6 +12354,67 @@ to take away yo [rest of string was truncated]&quot;;.
  this function will check for the column name matches
  </remarks>
 </member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector">
+ <summary>
+ S4 type system
+ </summary>
+</member>
+<member name="P:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.elementType">
+ <summary>
+ R# type wrapper of the type data for <see cref="T:Microsoft.VisualBasic.ApplicationServices.Development.NetCoreApp.target"/>
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.#ctor">
+ <summary>
+ 
+ </summary>
+ <remarks>
+ constructor for the runtime s4object
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.getByName(System.String)">
+ <summary>
+ Get property value/method reference by name
+ </summary>
+ <param name="name"></param>
+ <returns>
+ Function will returns nothing when target not found, but 
+ property value read getter result may be nothing, please 
+ check member exists or not by method <see cref="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.existsName(System.String)"/> 
+ if the result value is nothing of this function.
+ </returns>
+ <remarks>
+ this method is strict in s4object, this function will throw error if not found by name
+ </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.getByName(System.String[])">
+ <summary>
+ Get properties value collection by a given name list
+ </summary>
+ <param name="names"></param>
+ <returns></returns>
+ 
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.setByName(System.String,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ set property value by name
+ </summary>
+ <param name="name"></param>
+ <param name="value"></param>
+ <param name="envir"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.baseOp.s4Reflector.setByName(System.String[],System.Array,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ set properties values by given name list
+ </summary>
+ <param name="names"></param>
+ <param name="value"></param>
+ <param name="envir"></param>
+ <returns></returns>
+ 
+</member>
 <member name="T:SMRUCC.Rsharp.Runtime.Internal.Object.IdataframeReader">
  <summary>
  syntax helper for a readonly dataframe liked clr object
@@ -12104,7 +12701,7 @@ to take away yo [rest of string was truncated]&quot;;.
  which is true is zero-based by default
  </remarks>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.dataframe.sliceByRow(System.Array,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.dataframe.sliceByRow(System.Array,SMRUCC.Rsharp.Runtime.Environment,System.Boolean)">
  <summary>
  ``data[selector, ]``
  </summary>
@@ -12201,7 +12798,7 @@ to take away yo [rest of string was truncated]&quot;;.
  the class object property used as the dataframe column data
  </remarks>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.dataframe.CreateDataFrame``1(Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{``0}[],System.Collections.Generic.IEnumerable{System.String})">
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.dataframe.CreateDataFrame``1(System.Collections.Generic.IReadOnlyCollection{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{``0}},System.Collections.Generic.IEnumerable{System.String})">
  <summary>
  Create dataframe from row data
  </summary>
@@ -12569,6 +13166,19 @@ to take away yo [rest of string was truncated]&quot;;.
  NULL <paramref name="value"/> will remove the target slot by <paramref name="name"/>
  </remarks>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.list.empty">
+ <summary>
+ Create a tuple list object that contains no data.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.list.scalar(System.Object)">
+ <summary>
+ Create a tuple list object that just contains one scalar value
+ </summary>
+ <param name="x"></param>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.list.empty(SMRUCC.Rsharp.Runtime.Internal.Object.list)">
  <summary>
  check of the given tuple list object is null or empty?
@@ -12672,7 +13282,7 @@ to take away yo [rest of string was truncated]&quot;;.
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.pipeline.CreateFromPopulator``1(System.Collections.Generic.IEnumerable{``0},System.Action)">
  <summary>
- Create pipeline object from the given upstream data
+ Create CLR object iterator from the given upstream data
  </summary>
  <typeparam name="T"></typeparam>
  <param name="upstream">the upstream data</param>
@@ -12682,6 +13292,15 @@ to take away yo [rest of string was truncated]&quot;;.
  <remarks>
  just a simple wrapper to the <see cref="F:SMRUCC.Rsharp.Runtime.Internal.Object.pipeline.pipeline"/> object constructor function.
  </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.pipeline.CreateFromPopulator``1(System.Func{System.Collections.Generic.IEnumerable{``0}},System.Action)">
+ <summary>
+ Create CLR object iterator from the given upstream data
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="pull"></param>
+ <param name="finalize"></param>
+ <returns></returns>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.pipeline.TryCreatePipeline``1(System.Object,SMRUCC.Rsharp.Runtime.Environment,System.Boolean,System.String)">
  <summary>
@@ -12701,6 +13320,11 @@ to take away yo [rest of string was truncated]&quot;;.
  message if the given <paramref name="upstream"/> data is
  ``Nothing``.
  </returns>
+</member>
+<member name="T:SMRUCC.Rsharp.Runtime.Internal.Object.S4Object">
+ <summary>
+ class definition of the dynamics runtime clr object
+ </summary>
 </member>
 <member name="P:SMRUCC.Rsharp.Runtime.Internal.Object.S4Object.slots">
  <summary>
@@ -12751,12 +13375,6 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <returns></returns>
 </member>
-<member name="P:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.elementType">
- <summary>
- R# type wrapper of the type data for <see cref="P:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.target"/>
- </summary>
- <returns></returns>
-</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.getByName(System.String)">
  <summary>
  Get property value/method reference by name
@@ -12769,14 +13387,6 @@ to take away yo [rest of string was truncated]&quot;;.
  if the result value is nothing of this function.
  </returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.getByName(System.String[])">
- <summary>
- Get properties value collection by a given name list
- </summary>
- <param name="names"></param>
- <returns></returns>
- 
-</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.setByName(System.String,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  set property value by name
@@ -12785,16 +13395,6 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="value"></param>
  <param name="envir"></param>
  <returns></returns>
-</member>
-<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.vbObject.setByName(System.String[],System.Array,SMRUCC.Rsharp.Runtime.Environment)">
- <summary>
- set properties values by given name list
- </summary>
- <param name="names"></param>
- <param name="value"></param>
- <param name="envir"></param>
- <returns></returns>
- 
 </member>
 <member name="P:SMRUCC.Rsharp.Runtime.Internal.Object.vector.unit">
  <summary>
@@ -12898,11 +13498,19 @@ to take away yo [rest of string was truncated]&quot;;.
  </param>
  <returns></returns>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.names.uniqueNames``1(System.Collections.Generic.IEnumerable{``0})">
+ <summary>
+ Make unique names
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="data"></param>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.names.setNames(System.Object,System.Array,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  
  </summary>
- <param name="[object]"></param>
+ <param name="object">target R# runtime object that could be set names</param>
  <param name="names">This method will ensure that the value is a string vector</param>
  <param name="env"></param>
  <returns></returns>
@@ -12975,7 +13583,7 @@ to take away yo [rest of string was truncated]&quot;;.
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Internal.Object.Converts.RConversion.asObject(System.Object)">
  <summary>
- Cast .NET object to R# object
+ Cast any .NET clr object to R# s4 class system object
  </summary>
  <param name="obj"></param>
  <returns></returns>
@@ -13886,6 +14494,11 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="name">the type alias name in R# runtime environment</param>
  <param name="target"></param>
 </member>
+<member name="T:SMRUCC.Rsharp.Runtime.Interop.RLazyExpressionAttribute">
+ <summary>
+ Tells the script host: dot not evaluate this parameter its source expression, it should pass the raw expression object to this parameter
+ </summary>
+</member>
 <member name="T:SMRUCC.Rsharp.Runtime.Interop.RListObjectArgumentAttribute">
  <summary>
  表示当前的函数参数为一个 ``...`` 可以产生一个字典list对象值的参数列表
@@ -14012,6 +14625,13 @@ to take away yo [rest of string was truncated]&quot;;.
  <summary>
  construct a vector flag with any object type and use the <see cref="T:SMRUCC.Rsharp.Runtime.Interop.DefaultVectorParser"/>.
  </summary>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Interop.RRawVectorArgumentAttribute.#ctor(SMRUCC.Rsharp.Runtime.Components.TypeCodes,System.Type)">
+ <summary>
+ 
+ </summary>
+ <param name="vector">the vector element type</param>
+ <param name="parser"></param>
 </member>
 <member name="T:SMRUCC.Rsharp.Runtime.Interop.RReturn">
  <summary>
@@ -14620,6 +15240,12 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <returns></returns>
 </member>
+<member name="P:SMRUCC.Rsharp.Runtime.Interop.RType.is_any">
+ <summary>
+ check of current type information is clr <see cref="T:System.Object"/> type?
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.Interop.RType.GetRawElementType">
  <summary>
  gets the array element type from current r# type <see cref="P:SMRUCC.Rsharp.Runtime.Interop.RType.raw"/>
@@ -14855,6 +15481,15 @@ to take away yo [rest of string was truncated]&quot;;.
  propably returns an array with all element value is nothing
  </returns>
 </member>
+<member name="M:SMRUCC.Rsharp.Runtime.RVectorExtensions.UnsafeTryCastGenericArray(System.Array,System.Type)">
+ <summary>
+ Cast a possible object array to a generic type constrained array
+ </summary>
+ <param name="vec"></param>
+ <returns>
+ propably returns an array with all element value is nothing
+ </returns>
+</member>
 <member name="M:SMRUCC.Rsharp.Runtime.RVectorExtensions.isScalarVector(System.Object)">
  <summary>
  target value is nothing orelse is array with less than or equals to one element?
@@ -14879,10 +15514,10 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="vec"></param>
  <param name="env"></param>
  <returns>
- A class variant type: error message or a generic array
+ A class variant type: error message or a generic array.
  
- Andalso this function will returns nothing if the input <paramref name="vec"/>
- is nothing.
+ Andalso this function will returns nothing <strong>if the input <paramref name="vec"/>
+ is nothing orelse is empty array.</strong>
  </returns>
  <remarks>
  返回错误消息或者结果向量
@@ -15183,6 +15818,12 @@ to take away yo [rest of string was truncated]&quot;;.
  get value part
  </summary>
  <param name="envir"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.Rsharp.Runtime.Components.InvokeParameter.ToString">
+ <summary>
+ previews of the argument
+ </summary>
  <returns></returns>
 </member>
 <member name="M:SMRUCC.Rsharp.Runtime.Components.InvokeParameter.Create(System.Collections.Generic.IEnumerable{SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression})">
@@ -17073,7 +17714,7 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <returns>dll file file path in full name</returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.getAssemblyList(System.String,Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String})">
+<member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.getAssemblyList(System.String,Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String},System.Boolean)">
  <summary>
  scan for all dll files from the given package source <paramref name="dir"/>
  </summary>
@@ -17084,7 +17725,7 @@ to take away yo [rest of string was truncated]&quot;;.
  </param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.Build(SMRUCC.Rsharp.Development.Package.File.DESCRIPTION,System.String,System.IO.Stream,Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String},System.Boolean)">
+<member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.Build(SMRUCC.Rsharp.Development.Package.File.DESCRIPTION,System.String,System.IO.Stream,Microsoft.VisualBasic.ComponentModel.Collection.Index{System.String},System.Boolean,System.Boolean)">
  <summary>
  build a R# package file
  </summary>
@@ -17092,6 +17733,9 @@ to take away yo [rest of string was truncated]&quot;;.
  the target directory that contains the necessary 
  files for create a R# package file.</param>
  <param name="outfile">the output zip file stream</param>
+ <param name="enableDebugSymbols">
+ enable add debug symbol pdb files into assembly package?
+ </param>
  <returns></returns>
  
 </member>
@@ -17129,6 +17773,13 @@ to take away yo [rest of string was truncated]&quot;;.
  <remarks>
  this function will rename the function with anomoymous name
  </remarks>
+</member>
+<member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.loadingDependency(System.Collections.Generic.IEnumerable{SMRUCC.Rsharp.Interpreter.ExecuteEngine.Expression})">
+ <summary>
+ Create package dependency and module loading list
+ </summary>
+ <param name="loading"></param>
+ <returns></returns>
 </member>
 <member name="M:SMRUCC.Rsharp.Development.Package.File.CreatePackage.getFileReader(System.String)">
  <summary>
@@ -17245,6 +17896,11 @@ to take away yo [rest of string was truncated]&quot;;.
  expression: [ExpressionTypes, i32][dataSize, i32][TypeCodes, byte][expressionData, bytes]
               4                     4              1                ...
  </remarks>
+</member>
+<member name="T:SMRUCC.Rsharp.Development.Package.File.Expressions.RIf">
+ <summary>
+ if and else if
+ </summary>
 </member>
 <member name="T:SMRUCC.Rsharp.Development.Package.File.Expressions.RJSON">
  <summary>
@@ -17577,11 +18233,14 @@ to take away yo [rest of string was truncated]&quot;;.
 </member>
 <member name="M:SMRUCC.Rsharp.Development.Package.PackageLoader.ParsePackage(System.Type,System.Boolean)">
  <summary>
- 这个函数会将包信息缓存下来
+ parse the data which is tagged with <see cref="T:Microsoft.VisualBasic.Scripting.MetaData.PackageAttribute"/>
  </summary>
  <param name="type"></param>
- <param name="strict"></param>
+ <param name="strict">this function will wrap a new <see cref="T:Microsoft.VisualBasic.Scripting.MetaData.PackageAttribute"/> object with type name as package name if not strict</param>
  <returns></returns>
+ <remarks>
+ 这个函数会将包信息缓存下来
+ </remarks>
 </member>
 <member name="M:SMRUCC.Rsharp.Development.Package.PackageLoader.ScanDllFiles(System.String,System.Boolean)">
  <summary>
@@ -17677,7 +18336,7 @@ to take away yo [rest of string was truncated]&quot;;.
  R# ``zzz.R`` magic trick
  </summary>
 </member>
-<member name="M:SMRUCC.Rsharp.Development.Package.zzz.TryRunZzzOnLoad(System.Reflection.Assembly)">
+<member name="M:SMRUCC.Rsharp.Development.Package.zzz.TryRunZzzOnLoad(System.Reflection.Assembly,System.Boolean)">
  <summary>
  It's a file where one usually puts actions on load of the package. 
  It is tradition/convention that it's called zzz.R and could be 
@@ -17689,6 +18348,15 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <param name="package">
  module named ``zzz`` andalso contains a entry method named ``onLoad``
+ </param>
+</member>
+<member name="M:SMRUCC.Rsharp.Development.Package.zzz.RunZzz(System.Reflection.Assembly,System.Boolean)">
+ <summary>
+ 
+ </summary>
+ <param name="package"></param>
+ <param name="quietly">
+ config quietly for clr assembly module loader
  </param>
 </member>
 <member name="T:SMRUCC.Rsharp.Development.Polyglot.Platform">

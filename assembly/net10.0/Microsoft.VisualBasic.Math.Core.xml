@@ -6,6 +6,15 @@ Microsoft.VisualBasic.Math.Core
 </name>
 </assembly>
 <members>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.HelperExtensions.GetColumn(System.Double[0:,0:],System.Int32)">
+ <summary>
+ 从二维数组中提取指定的一列
+ </summary>
+ <param name="matrix">二维矩阵</param>
+ <param name="columnIndex">要提取的列索引（0表示第一列）</param>
+ <returns>包含该列数据的一维数组</returns>
+ 
+</member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.HelperExtensions.IsNaNImaginary(System.Collections.Generic.IEnumerable{System.Double})">
  <summary>
  get a logical vector for indicates that which elements inside the given numeric vector is invalid number, like NaN, Inf
@@ -73,7 +82,6 @@ Microsoft.VisualBasic.Math.Core
  <param name="b"></param>
  <param name="symmetrize"></param>
  <returns></returns>
- 
 </member>
 <member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.EllipseFitResult.Center">
  <summary>
@@ -111,6 +119,17 @@ Microsoft.VisualBasic.Math.Core
  </summary>
  <returns>椭圆的面积，类型为 Double。</returns>
 </member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.EllipseFitResult.FitEllipse(System.Drawing.PointF[],System.Boolean)">
+ <summary>
+ 这个模块实现的是代数拟合椭圆（Algebraic ellipse fitting），通过 SVD 对给定点集拟合一条二次曲线，使其在最小二乘意义下逼近这些点。
+ </summary>
+ <param name="points"></param>
+ <param name="strict"></param>
+ <returns></returns>
+ <remarks>
+ 不适用于PCA的统计椭圆的拟合
+ </remarks>
+</member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.EllipseFitResult.BuildDesignMatrix(System.Drawing.PointF[])">
  <summary>
  构建设计矩阵 M = [x², xy, y², x, y, 1]
@@ -124,6 +143,139 @@ Microsoft.VisualBasic.Math.Core
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.EllipseFitResult.NormalizeAngle(System.Double)">
  <summary>
  规范化角度到 [0, π) 范围
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult">
+ <summary>
+ PCA统计椭圆计算结果
+ 基于协方差矩阵和分布假设的数据椭圆/置信椭圆
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.Center">
+ <summary>
+ 椭圆中心点（均值）
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.SemiMajorAxis">
+ <summary>
+ 长半轴长度
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.SemiMinorAxis">
+ <summary>
+ 短半轴长度
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.RotationAngle">
+ <summary>
+ 旋转角度（弧度，从X轴逆时针方向）
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.ConfidenceLevel">
+ <summary>
+ 置信水平（例如0.95表示95%置信椭圆）
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.CovarianceMatrix">
+ <summary>
+ 协方差矩阵 [2x2]
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.EigenValues">
+ <summary>
+ 特征值数组 [2]
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.EigenVectors">
+ <summary>
+ 特征向量矩阵 [2x2]，每列是一个特征向量
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.Area">
+ <summary>
+ 计算椭圆面积
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseResult.CreateShape">
+ <summary>
+ 创建椭圆形状对象
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator">
+ <summary>
+ PCA椭圆计算器
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType">
+ <summary>
+ 椭圆类型枚举
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType.Normal">
+ <summary>
+ 基于多元正态分布的置信椭圆
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType.T">
+ <summary>
+ 基于多元t分布的数据椭圆（更稳健，对离群点不敏感）
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType.Euclidean">
+ <summary>
+ 欧几里得距离圆（不考虑协方差结构）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.CalculateEllipse(System.Drawing.PointF[],System.Single,Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType,System.Nullable{System.Int32})">
+ <summary>
+ 计算PCA统计椭圆
+ </summary>
+ <param name="points">PCA得分散点集合</param>
+ <param name="confidenceLevel">置信水平（0-1之间，默认0.95）</param>
+ <param name="ellipseType">椭圆类型（默认Normal）</param>
+ <param name="degreesOfFreedom">t分布的自由度（默认None，自动计算）</param>
+ <returns>PCA椭圆计算结果</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EigenDecompose(System.Double[0:,0:])">
+ <summary>
+ 2x2对称矩阵的特征分解
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.CalculateScaleFactor(System.Single,Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.EllipseType,System.Int32,System.Nullable{System.Int32})">
+ <summary>
+ 计算缩放因子
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.ChiSquareQuantile(System.Double,System.Int32)">
+ <summary>
+ 卡方分布分位数近似计算
+ 使用Wilson-Hilferty近似
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.FQuantile(System.Double,System.Int32,System.Int32)">
+ <summary>
+ F分布分位数近似计算
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.NormalQuantile(System.Double)">
+ <summary>
+ 标准正态分布分位数近似计算
+ 使用Beasley-Springer-Moro近似
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.NormalizeVector(System.Double[])">
+ <summary>
+ 向量归一化
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.PCAEllipseCalculator.NormalizeAngle(System.Double)">
+ <summary>
+ 角度规范化到[0, π)
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.EigenDecompositionResult">
+ <summary>
+ 特征分解结果
  </summary>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.Extensions.subscriptN(System.Int32)">
@@ -148,6 +300,11 @@ Microsoft.VisualBasic.Math.Core
  可以使用objectfunction的系数长度来取出原来的输入的变量名称的列表
  </summary>
 </member>
+<member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.originalConstraintTypes">
+ <summary>
+ 添加字段保存原始约束类型
+ </summary>
+</member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.#ctor(Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.OptimizationType,System.String[],System.Double[],System.Double[0:,0:],System.String[],System.Double[],System.Double)">
  <summary>
  
@@ -160,11 +317,17 @@ Microsoft.VisualBasic.Math.Core
  <param name="constraintRightHandSides">方程组的右边：方程组之中每一个方程的结果值</param>
  <param name="objectiveFunctionValue">目标方程的目标结果值</param>
 </member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.#ctor(Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPModel)">
+ <summary>
+ 从一个模型的xml反序列化结果对象中的数据创建当前的这个LPP算法
+ </summary>
+ <param name="lppModel"></param>
+</member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.#ctor(System.String,System.String[],System.Double[],System.Double[][],System.String[],System.Double[],System.Double)">
  <summary>
  
  </summary>
- <param name="objectiveFunctionType$">目标函数的类型，是求取极大值还是极小值</param>
+ <param name="objectiveFunctionType">目标函数的类型，是求取极大值还是极小值</param>
  <param name="variableNames">方程之中的未知变量的名称，可以省略这个函数，程序会默认会自动使用x1, x2, x3...等来自动命名</param>
  <param name="objectiveFunctionCoefficients">目标函数之中每一个未知变量所对应的系数</param>
  <param name="constraintCoefficients">方程组的左边：系数矩阵</param>
@@ -182,6 +345,12 @@ Microsoft.VisualBasic.Math.Core
  Change signs to = by adding variables
  </summary>
  <param name="artificialVariables"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.ArtificialVariableAssignments">
+ <summary>
+ 根据约束类型和添加的变量系数判断是否需要人工变量
+ </summary>
+ <returns></returns>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPP.addVariableAt(System.Int32,System.Double)">
  <summary>
@@ -225,6 +394,88 @@ Microsoft.VisualBasic.Math.Core
  </summary>
  <param name="varIndex"></param>
  <param name="constIndex"></param>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased">
+ <summary>
+ 使用两阶段法改进的单纯形法求解器
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.Phase1(System.Boolean,System.Text.StringBuilder)">
+ <summary>
+ 第一阶段：最小化人工变量之和（完整修正版本）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.InitializePhase1BasicVariables">
+ <summary>
+ 初始化第一阶段基变量
+ 在第一阶段，人工变量作为初始基变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.IsUnitVector(System.Int32,System.Int32)">
+ <summary>
+ 检查变量是否构成单位向量（在指定行系数为1，其他行为0）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.RestoreOriginalObjective(System.Double[],System.Double)">
+ <summary>
+ 恢复原始目标函数
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.GetArtificialVariablesList">
+ <summary>
+ 获取人工变量列表
+ 识别所有以'a'开头或索引大于原始变量数的变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.IsArtificialVariable(System.Int32)">
+ <summary>
+ 判断是否为人工变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.Phase2(System.Boolean,System.Text.StringBuilder)">
+ <summary>
+ 第二阶段：求解原问题
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.RunSimplexIteration(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Text.StringBuilder,System.Boolean)">
+ <summary>
+ 核心单纯形迭代逻辑
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.Pivot(System.Int32,System.Int32)">
+ <summary>
+ 改进的旋转操作（增加数值稳定性检查）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.GetCurrentBasicVariables">
+ <summary>
+ 获取当前基变量（改进的数值稳定性版本）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.IsPotentialBasicVariable(System.Int32,System.Int32)">
+ <summary>
+ 检查变量是否可能成为基变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.RemoveArtificialVariables(System.Collections.Generic.List{System.Int32})">
+ <summary>
+ 移除人工变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.ExtractSolution">
+ <summary>
+ 提取解信息（修正版本）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.ChooseEnteringVariable(System.Collections.Generic.List{System.Int32})">
+ <summary>
+ 选择入基变量（改进检验数计算）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.LPPSolverTwoPhased.ChooseLeavingConstraint(System.Int32)">
+ <summary>
+ 选择出基约束（改进最小比值规则）
+ </summary>
 </member>
 <member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.LinearProgramming.OptimizationType.MAX">
  <summary>
@@ -385,6 +636,14 @@ Microsoft.VisualBasic.Math.Core
  <summary>Return the eigenvector matrix</summary>
  <returns>     V
  </returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.LinearAlgebra.Matrix.LargeScaleEigenSolver.GetTopKEigenvalues(Microsoft.VisualBasic.Math.LinearAlgebra.Matrix.SparseMatrix,System.Int32)">
+ <summary>
+ 计算稀疏对称矩阵的前 k 个最大特征值（使用 Lanczos 算法）
+ </summary>
+ <param name="sparseMatrix">稀疏矩阵（必须是对称的，如无向图邻接矩阵）</param>
+ <param name="k">需要计算的特征值数量</param>
+ <returns>前 k 个特征值（近似值）</returns>
 </member>
 <member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.Matrix.LUDecomposition">
  <summary>LU Decomposition.
@@ -2705,11 +2964,6 @@ Microsoft.VisualBasic.Math.Core
  <param name="w"></param>
  <param name="v"></param>
 </member>
-<member name="F:Microsoft.VisualBasic.Math.LinearAlgebra.Tensor.data">
- <summary>
- the tensor data
- </summary>
-</member>
 <member name="T:Microsoft.VisualBasic.Math.LinearAlgebra.Vector">
  <summary>
  A numeric vector
@@ -4052,6 +4306,15 @@ Microsoft.VisualBasic.Math.Core
  <summary>
  gamma function (Γ) from mathematics
  </summary>
+ <remarks>
+ |特性|lngamm函数|lngamma函数|
+ |----|----------|-----------|
+ |实现的方法|Lanczos 近似|Spouge 近似​|
+ |核心注释|引用 Lanczos 1964 年的论文，翻译自 Alan Miller 的 FORTRAN 代码。|注释标明适用于大参数（large arguments）。|
+ |系数数组|使用数组 p|使用数组 p_ln|
+ |函数定义|标准函数|扩展方法（带有 Extension 属性）|
+ |主要适用场景|通用的高精度计算|特别适合处理较大的参数值|
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.Distributions.MathGamma.lngamm(System.Double)">
  <summary>
@@ -4062,6 +4325,15 @@ Microsoft.VisualBasic.Math.Core
  </summary>
  <param name="Z"></param>
  <returns></returns>
+ <remarks>
+ Lanczos 近似算法实现的log gamma函数，是一个通用的高精度计算方法
+
+ 参考资料：
+ 
+ - Lanczos, C. "A precision approximation of the gamma function", J. SIAM Numer. Anal., B, 1, 86-96, 1964.
+ - Alan Miller的FORTRAN实现翻译
+ - [http://lib.stat.cmu.edu/apstat/245](http://lib.stat.cmu.edu/apstat/245)
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.Distributions.MathGamma.lngamma(System.Double)">
  <summary>
@@ -4070,6 +4342,9 @@ Microsoft.VisualBasic.Math.Core
  <param name="z"></param>
  <returns></returns>
  <remarks>
+ Spouge 近似算法实现的log gamma函数，适用于大参数
+
+ 参考资料：
  http://lib.stat.cmu.edu/apstat/245
  </remarks>
 </member>
@@ -5336,6 +5611,86 @@ Microsoft.VisualBasic.Math.Core
  只允许ASCII字符串
  </summary>
  <param name="key$"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.SimilarityIndex.IsUniqueHit">
+ <summary>
+ Check of the sequence <see cref="F:Microsoft.VisualBasic.Math.HashMaps.MinHash.SimilarityIndex.U"/> is a unique hit?
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.LSH.FindSimilarItems(Microsoft.VisualBasic.Math.HashMaps.MinHash.SequenceItem[],System.Int32,System.Int32,System.Boolean)">
+ <summary>
+ LSH 处理过程：将数据分桶，找出相似候选对
+ </summary>
+ <param name="allSequences"></param>
+ <param name="Num_Bands">
+ LSH波段数
+ </param>
+ <param name="Rows_Per_Band">
+ 每个波段的行数 (100 / 20 = 5)
+ </param>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.LSH.CalculateSimilarity(System.UInt32[]@,System.UInt32[]@)">
+ <summary>
+ 辅助：计算两个签名的相似度 (海明距离或匹配度)
+ </summary>
+ <param name="sig1"></param>
+ <param name="sig2"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.LSHParameterEstimator.GetThresholdFromIdentity(System.Double,System.Int32)">
+ <summary>
+ 核心推荐函数：根据目标序列一致性，计算应该使用的 MinHash 相似度阈值
+ </summary>
+ <param name="targetIdentity">目标序列一致性 (如 CD-hit 的 0.8)</param>
+ <param name="k">k-mer 大小</param>
+ <returns>建议的 MinHash Jaccard 阈值</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.LSHParameterEstimator.EstimateLSHThreshold(System.Int32,System.Int32)">
+ <summary>
+ 估算当前 LSH 参数对应的“临界相似度”
+ 相似度高于此值的序列有极高概率被选中，低于此值的极大概率被过滤
+ </summary>
+ <param name="numBands">波段数</param>
+ <param name="rowsPerBand">每波段行数</param>
+ <returns>LSH 临界阈值</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.LSHParameterEstimator.RecommendConfig(System.Double,System.Int32)">
+ <summary>
+ 辅助工具：根据目标相似度推荐 b 和 r 的配置
+ </summary>
+ <param name="targetJaccard">目标 Jaccard 相似度</param>
+ <param name="totalHashFunctions">总哈希函数数量 (如 100)</param>
+ <returns>建议的波段数和每波段行数</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.MinHash.GenerateMinHashSignature(System.Collections.Generic.HashSet{System.String},System.Int32)">
+ <summary>
+ 生成MinHash签名
+ </summary>
+ <param name="shingles"></param>
+ <param name="Num_HashFunctions">
+ MinHash签名长度
+ </param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.HashMaps.MinHash.MinHash.CreateSequenceData(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Int32)">
+ <summary>
+ Compute minhash for a given sequence
+ </summary>
+ <param name="items">对字符串序列进行n-gram切片后的结果</param>
+ <param name="id">sequence id</param>
+ <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.Math.HashMaps.MinHash.SequenceItem">
+ <summary>
+ 定义一个简单的数据结构来存储序列
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Math.HashMaps.MinHash.SequenceItem.Signature">
+ <summary>
+ 最终生成的MinHash签名
+ </summary>
  <returns></returns>
 </member>
 <member name="T:Microsoft.VisualBasic.Math.NumberExtension">

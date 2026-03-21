@@ -81,6 +81,27 @@ R -1  5  0 -2 -3  1  0 -2  0 -3 -2  2 -1 -3 -2 -1 -1 -3 -2 -3 -1  0 -1 -4
 N -2  0  6  1 -3  0  0  0  1 -3 [rest of string was truncated]&quot;;.
 </summary>
 </member>
+<member name="F:SMRUCC.genomics.Analysis.SequenceAlignment.CDHit.seqPool">
+ <summary>
+ sort by sequence length in desc order
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceAlignment.CDHit.#ctor(System.Int32)">
+ <summary>
+ 
+ </summary>
+ <param name="k">
+ protein - k=5aa
+ nucleotide - k=12nt
+ genomics - k=31nt
+ </param>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceAlignment.CDHit.FindSimilar(System.Double)">
+ <summary>
+ implements of the CD-hit liked sequence similarity clustering
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceAlignment.MSA.MSAOutput">
  <summary>
  the result data of multiple sequence alignment

@@ -556,7 +556,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.My.UNIX.LinuxRunHelper.BashShell">
+<member name="M:Microsoft.VisualBasic.My.UNIX.LinuxRunHelper.BashShell(System.Boolean)">
  <summary>
  这里比perl脚本掉调用有一个缺点，在运行前还需要使用命令修改为可执行权限
  
@@ -564,6 +564,9 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  'sudo chmod 777 cmd.sh'
  ```
  </summary>
+ <param name="install_root">
+ install command to root location: /usr/local/bin/
+ </param>
  <returns></returns>
 </member>
 <member name="M:Microsoft.VisualBasic.My.UNIX.LinuxRunHelper.Shell(System.String,System.String,System.Boolean,System.String)">
@@ -737,6 +740,9 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  Gets the name, without the extension, of the assembly file for the application.
  </summary>
  <returns></returns>
+ <remarks>
+ get <see cref="M:Microsoft.VisualBasic.PathExtensions.BaseName(System.String,System.Boolean)"/> of the <see cref="P:Microsoft.VisualBasic.App.ExecutablePath"/>.
+ </remarks>
 </member>
 <member name="P:Microsoft.VisualBasic.App.HOME">
  <summary>
@@ -1479,6 +1485,14 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  make value copy
  </summary>
  <param name="clone"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.Debugging.Diagnostics.StackFrame.GetBreakpointHashCode">
+ <summary>
+ 计算当前堆栈帧位置的哈希值，用于断点匹配。
+ 哈希计算基于：标准化后的文件路径 + 行号。
+ 如果文件路径为空，则回退到 Method 全名 + 行号。
+ </summary>
+ <returns>一个整数哈希值，可用于 HashSet 或 Dictionary 的 Key</returns>
 </member>
 <member name="T:Microsoft.VisualBasic.ApplicationServices.Debugging.ExceptionHandler">
  <summary>
@@ -2366,60 +2380,47 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  Works on windows, have not test on Linux/Mac yet.
  </remarks>
 </member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.#ctor(System.String[])">
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.Which(System.String,System.Collections.Generic.IEnumerable{System.String})">
  <summary>
- 
+ linux ``which`` liked file search tool 
  </summary>
- <param name="ENV$">
- 环境变量名称列表，如果不赋值这个参数，则会默认使用Program Files和Program Files(x86)这两个文件夹
- </param>
-</member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.FindProgram(System.String,System.Boolean)">
- <summary>
- 
- </summary>
- <param name="keyword$">常规的文件名称之类的，不可以包含有通配符</param>
- <param name="includeDll"></param>
+ <param name="name"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.BranchRule(System.String,System.String)">
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.FindExecutableOnWindows(System.String)">
  <summary>
- 商标搜索规则
+ 在 Windows 系统上查找可执行文件。
  </summary>
- <param name="ProgramFiles"></param>
- <param name="Keyword"></param>
- <returns></returns>
- <remarks></remarks>
 </member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.SearchScriptFile(System.String,System.String,System.String)">
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.GetPathDirectories">
  <summary>
- Search for the path of a script file with a specific extension name.
+ 获取 PATH 环境变量中的目录列表。
  </summary>
- <param name="DIR"></param>
- <param name="Keyword"></param>
- <param name="withExtension">脚本文件的文件拓展名</param>
- <returns></returns>
- <remarks></remarks>
-
 </member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.SearchDirectory(System.String,System.String)">
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.GetPathExtensions">
  <summary>
- Search for the directories which its name was matched the keyword pattern.
+ 获取 PATHEXT 环境变量中的可执行文件扩展名列表。
  </summary>
- <param name="SpecificDrive">所指定进行搜索的驱动器，假若希望搜索整个硬盘，请留空字符串</param>
- <returns></returns>
- <remarks></remarks>
-
 </member>
-<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.SearchProgram(System.String,System.String,System.Boolean)">
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.IsValidWindowsExecutable(System.String)">
  <summary>
- Invoke the search session for the program file using a specific keyword string value.
- (使用某个关键词来搜索目标应用程序)
+ 检查文件是否具有有效的 Windows 可执行扩展名。
  </summary>
- <param name="DIR"></param>
- <param name="Keyword"></param>
- <returns></returns>
- <remarks></remarks>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.GetShortPathName(System.String,System.Text.StringBuilder,System.Int32)">
+ <summary>
+ P/Invoke 声明，用于获取文件的短路径名 (8.3 格式)。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.ToShortPathName(System.String)">
+ <summary>
+ 将长路径名转换为 Windows 短路径名。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.ProgramPathSearchTool.FindExecutableOnUnix(System.String)">
+ <summary>
+ 在 Unix-like 系统上通过调用 'which' 命令来查找可执行文件。
+ </summary>
 </member>
 <member name="F:Microsoft.VisualBasic.ApplicationServices.SubStream.offset">
  <summary>
@@ -4895,6 +4896,11 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  Starts the ProgressBar
  </summary>
 </member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.ConsoleProgressBar.ProgressBar.WaitForExit">
+ <summary>
+ wait for <see cref="M:Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.ConsoleProgressBar.ProgressBar.ThreadAction"/> exit
+ </summary>
+</member>
 <member name="M:Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.ConsoleProgressBar.ProgressBar.Pause">
  <summary>
  Pauses the ProgressBar
@@ -5345,6 +5351,17 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="printsPerSecond">The update frequency of the progress bar.</param>
  <param name="useColor">Indicates whether to use colored output for the progress bar.</param>
  <returns>An enumerable that iterates over the collection with progress tracking.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm.TqdmWrapper.StreamReader(System.IO.StreamReader)">
+ <summary>
+ 
+ </summary>
+ <param name="str"></param>
+ <returns>
+ this function returns a string line populator function,
+ each time call this result function pointer will populate a new line and move to next line. 
+ if this function returns nothing, that it means read the end of the stream.
+ </returns>
 </member>
 <member name="M:Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm.TqdmWrapper.Range(System.Int32,System.Int32,Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm.ProgressBar@,System.Int32,System.Int32,System.Boolean,System.Boolean)">
  <summary>
@@ -6690,6 +6707,12 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <remarks>
  works based on <see cref="F:Microsoft.VisualBasic.My.Log4VB.redirectInfo"/>
  </remarks>
+</member>
+<member name="M:Microsoft.VisualBasic.VBDebugger.echo(System.String)">
+ <summary>
+ wrapper for console.write
+ </summary>
+ <param name="str"></param>
 </member>
 <member name="M:Microsoft.VisualBasic.VBDebugger.echo(System.Char)">
  <summary>
@@ -8372,7 +8395,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="[in]"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.CommandLine.PipelineProcess.Call(System.String,System.String,System.String,System.Boolean,System.String@,System.Int32@)">
+<member name="M:Microsoft.VisualBasic.CommandLine.PipelineProcess.Call(System.String,System.String,System.String,System.Boolean,System.String@,System.Int32@,System.Boolean)">
  <summary>
  Run process and then gets the ``std_out`` of the child process
  </summary>
@@ -9286,6 +9309,15 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="filename"></param>
  <param name="argv"></param>
  <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.CommandLine.Interpreter.IsPossibleRequestFile(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="target"></param>
+ <returns>
+ returns true if the given <paramref name="target"/> is local file path or http/https/ftp url
+ </returns>
 </member>
 <member name="M:Microsoft.VisualBasic.CommandLine.Interpreter.SDKdocs">
  <summary>
@@ -10272,6 +10304,33 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="size"></param>
  <returns></returns>
 </member>
+<member name="T:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CartesianProduct">
+ <summary>
+ 笛卡尔积是集合论中的一个基本概念，它描述了如何从两个或多个集合中生成所有可能的有序组合。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CartesianProduct.CreateCombos``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
+ <summary>
+ 生成两个序列的两两组合 ``{<paramref name="seq_1"/> -> <paramref name="seq_2"/>}[]``
+ </summary>
+ <typeparam name="TA"></typeparam>
+ <typeparam name="TB"></typeparam>
+ <param name="seq_1"></param>
+ <param name="seq_2"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CartesianProduct.CreateTripleCartesianProduct``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2})">
+ <summary>
+ 生成三个序列的笛卡尔积（所有可能的三元组组合）
+ </summary>
+ <typeparam name="TA">第一个序列的元素类型</typeparam>
+ <typeparam name="TB">第二个序列的元素类型</typeparam>
+ <typeparam name="TC">第三个序列的元素类型</typeparam>
+ <param name="seq1">第一个序列</param>
+ <param name="seq2">第二个序列</param>
+ <param name="seq3">第三个序列</param>
+ <returns>包含所有可能三元组的序列</returns>
+</member>
 <member name="T:Microsoft.VisualBasic.ComponentModel.Algorithm.base.Comb`1">
  <summary>
  对象类型的组合输出工具，即目标类型的集合之中的元素两两组合配对
@@ -10315,23 +10374,23 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CombinationExtensions.CreateCombos``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
+<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CombinationExtensions.Generate``1(``0[][])">
  <summary>
- 生成两个序列的两两组合 ``{<paramref name="seq_1"/> -> <paramref name="seq_2"/>}()``
- </summary>
- <typeparam name="TA"></typeparam>
- <typeparam name="TB"></typeparam>
- <param name="seq_1"></param>
- <param name="seq_2"></param>
- <returns></returns>
-</member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.CombinationExtensions.Iteration``1(``0[][])">
- <summary>
- create a vs b vs c ...
+ wrapper call for <see cref="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.NDimensionCartesianProduct.CreateMultiCartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])"/>
  </summary>
  <typeparam name="T"></typeparam>
  <param name="source"></param>
  <returns></returns>
+</member>
+<member name="T:Microsoft.VisualBasic.ComponentModel.Algorithm.base.NDimensionCartesianProduct">
+ <summary>
+ Create a vs b vs c ...
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.NDimensionCartesianProduct.CreateMultiCartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])">
+ <summary>
+ 生成任意数量集合的笛卡尔积（递归实现）
+ </summary>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.Algorithm.base.DistanceMap`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Func{`0,`0,System.Double})">
  <summary>
@@ -11464,6 +11523,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <param name="source">名称属性<see cref="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue`1.Name"/></param>必须是相同的
 </member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection`1.#ctor(System.Linq.IGrouping{System.String,`0})">
+ <summary>
+ Create from the linq group output
+ </summary>
+ <param name="group"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection`1.#ctor(System.String,System.Collections.Generic.IEnumerable{`0},System.String)">
+ <summary>
+ make the given <paramref name="data"/> collection with a label <paramref name="name"/>.
+ </summary>
+ <param name="name"></param>
+ <param name="data"></param>
+ <param name="description"></param>
+</member>
 <member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue`1">
  <summary>
  The value object have a name string.(一个具有自己的名称的变量值)
@@ -11598,6 +11671,174 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="name"></param>
  <returns></returns>
 </member>
+<member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter">
+ <summary>
+ 提供布隆过滤器的实现。
+ 布隆过滤器是一种空间效率很高的概率型数据结构，用于判断一个元素是否在集合中。
+ 它允许一定的假阳性，但绝不允许假阴性。
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.bitmap">
+ <summary>
+ 使用 BitArray 来高效地存储位数组
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.m">
+ <summary>
+ length of the <see cref="T:System.Collections.BitArray"/> 
+ </summary>
+ <returns>位数组的长度</returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.k">
+ <summary>
+ 哈希函数的数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.FalsePositiveRate(System.Int32)">
+ <summary>
+ 获取当前布隆过滤器的理论假阳性率。
+ </summary>
+ <param name="currentItemCount">当前已插入的元素数量。</param>
+ <returns>理论假阳性率。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.#ctor(System.Int32,System.Int32)">
+ <summary>
+ 使用指定的位数组大小和哈希函数数量初始化 BloomFilter 类的新实例。
+ </summary>
+ <param name="m">位数组的大小。必须为正数。</param>
+ <param name="k">哈希函数的数量。必须为正数。</param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.Create(System.Int32,System.Double)">
+ <summary>
+ 根据期望的元素数量和目标假阳性率，自动计算最优参数并初始化 BloomFilter 类的新实例。
+ </summary>
+ <param name="expectedItems">预计将要插入的元素数量。必须为正数。</param>
+ <param name="desiredFalsePositiveRate">期望的假阳性率，范围在 (0, 1) 之间。</param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.Add(System.String)">
+ <summary>
+ 将指定的元素添加到布隆过滤器中。
+ </summary>
+ <param name="item">要添加的元素。不能为 Nothing。</param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.Contains(System.String)">
+ <summary>
+ 检查布隆过滤器中是否可能包含指定的元素。
+ </summary>
+ <param name="item">要检查的元素。不能为 Nothing。</param>
+ <returns>如果元素可能存在，则为 true；如果元素绝对不存在，则为 false。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.OptimalM(System.Int32,System.Double)">
+ <summary>
+ 根据给定的元素数量和假阳性率，计算最优的位数组大小。
+ </summary>
+ <param name="n">预计插入的元素数量。</param>
+ <param name="p">期望的假阳性率。</param>
+ <returns>最优的位数组大小。</returns>
+ 
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.OptimalK(System.Int32,System.Int32)">
+ <summary>
+ 根据给定的位数组大小和元素数量，计算最优的哈希函数数量。
+ </summary>
+ <param name="m">位数组的大小。</param>
+ <param name="n">预计插入的元素数量。</param>
+ <returns>最优的哈希函数数量。</returns>
+ 
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.prime">
+ <summary>
+ Knuth's multiplicative constant
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.BloomFilter.GetHashPositions(System.String)">
+ <summary>
+ 获取元素在位数组中映射的 k 个位置。
+ 这里使用双哈希技术来生成 k 个独立的哈希值。
+ </summary>
+ <param name="item">要哈希的元素。</param>
+ <returns>包含 k 个位置的整数数组。</returns>
+</member>
+<member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter">
+ <summary>
+ 提供布谷鸟过滤器的实现。
+ 布谷鸟过滤器是一种基于布谷鸟哈希的紧凑型概率数据结构，支持插入、删除和成员查询。
+ 相比布隆过滤器，它支持动态删除元素，且在中等假阳性率下通常具有更高的空间效率。
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter._buckets">
+ <summary>
+ 存储桶的数组。使用一维数组模拟二维结构以提升性能。
+ 索引计算公式：index = bucketIndex * bucketSize + slotIndex
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.BucketCount">
+ <summary>
+ 桶的数量
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.BucketSize">
+ <summary>
+ 每个桶中包含的槽位数量（即每个桶能存多少个指纹）。
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.MaxKicks">
+ <summary>
+ 插入失败时的最大重试（踢出）次数。
+ 如果超过此次数仍无法插入，则认为过滤器已满。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.#ctor(System.Int32,System.Int32,System.Int32)">
+ <summary>
+ 使用指定的期望容量和桶参数初始化 CuckooFilter 类的新实例。
+ </summary>
+ <param name="capacity">期望插入的元素数量。</param>
+ <param name="bucketSize">每个桶的槽位数。默认为 4，推荐的值为 4 或 8。</param>
+ <param name="maxKicks">最大踢出重试次数。默认为 500。</param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.Add(System.String)">
+ <summary>
+ 将指定的元素添加到布谷鸟过滤器中。
+ </summary>
+ <param name="item">要添加的元素。不能为 Nothing。</param>
+ <returns>如果添加成功则为 true；如果过滤器已满且插入失败则为 false。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.Contains(System.String)">
+ <summary>
+ 检查布谷鸟过滤器中是否可能包含指定的元素。
+ </summary>
+ <param name="item">要检查的元素。不能为 Nothing。</param>
+ <returns>如果元素可能存在，则为 true；如果元素绝对不存在，则为 false。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.Delete(System.String)">
+ <summary>
+ 从过滤器中删除指定的元素。
+ </summary>
+ <param name="item">要删除的元素。不能为 Nothing。</param>
+ <returns>如果元素存在并被删除，则为 true；如果元素不存在，则为 false。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.GetAltIndex(System.Int32,System.UInt32)">
+ <summary>
+ 计算备用索引位置。
+ 公式：i2 = i1 XOR hash(fp)
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.TryInsert(System.Int32,System.UInt32)">
+ <summary>
+ 尝试将指纹插入到指定桶的任意空槽位中。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.Lookup(System.Int32,System.UInt32)">
+ <summary>
+ 在指定桶中查找是否存在特定指纹。
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.CuckooFilter.TryDelete(System.Int32,System.UInt32)">
+ <summary>
+ 尝试从指定桶中删除特定指纹。
+ </summary>
+</member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.ILocalSearchHandle.Matches(System.String,Microsoft.VisualBasic.CompareMethod)">
  <summary>
  
@@ -11630,6 +11871,21 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  一般是一些短的字符串所构成的能够唯一标记该<see cref="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.IKeyIndex`1.Entity"/>对象的术语列表
  </summary>
  <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.InMemoryDb.EnumerateAllKeys">
+ <summary>
+ 枚举数据库中所有的键。
+ 此操作会遍历所有数据文件，可能比较耗时，建议在需要时调用。
+ </summary>
+ <returns>返回一个包含所有键的字符串集合。</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.InMemoryDb.Close">
+ <summary>
+ close the database connection
+ </summary>
+ <remarks>
+ this function will be called on dispose
+ </remarks>
 </member>
 <member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QueryCacheFactory`1">
  <summary>
@@ -11867,10 +12123,57 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  this function will erase the <paramref name="duplicated"/> at first and then make value assigned.
  </remarks>
 </member>
+<member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.StringTemplate">
+ <summary>
+ 
+ </summary>
+ <remarks>
+ template syntax example:
+ 
+ &lt;locus_tag>|taxid|&lt;product>
+ </remarks>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.StringTemplate.keys">
+ <summary>
+ a collection mapping of [key -> &lt;key>] for get value and make string template interpolation
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.StringTemplate.CreateString``1(``0)">
+ <summary>
+ Create a string based on the given template
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="i"></param>
+ <returns></returns>
+</member>
 <member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex._q">
  <summary>
  q-gram的长度
  </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex._index">
+ <summary>
+ the q-gram index set
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex._strings">
+ <summary>
+ the raw input string collection
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex._counts">
+ <summary>
+ the q-gram count for each raw input string
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex.#ctor(System.Int32)">
+ <summary>
+ 
+ </summary>
+ <param name="q"></param>
+ <remarks>
+ for make search index of the metabolite/chemical/gene/protein name, q = 3 is recommended as the name size is vary from short to long
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex.AddString(System.String,System.Nullable{System.Int32})">
  <summary>
@@ -11891,11 +12194,14 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <summary>
  基于q-gram重叠度查找相似字符串
  </summary>
+ <remarks>大小写不敏感</remarks>
+ <returns>the returns similarity text search result has already been sorted via <see cref="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.FindResult.similarity"/> in descending order.</returns>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.QGramIndex.GetIndexStats">
  <summary>
  获取索引统计信息
  </summary>
+ 
 </member>
 <member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.SimHashIndex._hashSize">
  <summary>
@@ -13761,6 +14067,9 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  请注意，这里的数据源请尽量使用Distinct的，否则对于重复的数据，只会记录下第一个位置
  </summary>
  <param name="source"></param>
+ <remarks>
+ this constructor will create an empty index object if the given <paramref name="source"/> input is nothing.
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.Collection.Index`1.#ctor(System.Int32)">
  <summary>
@@ -14160,6 +14469,30 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <typeparam name="T"></typeparam>
 </member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.count">
+ <summary>
+ number of elements in queue
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.top">
+ <summary>
+ the top element (the min element as defined by lessThan)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.empty">
+ <summary>
+ true if no more elements in queue
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.isHeap">
+ <summary>
+ check heap condition (for testing)
+ </summary>
+ <returns>true if queue is in valid state</returns>
+</member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.#ctor(System.Func{`0,`0,System.Boolean})">
  <summary>
  ```
@@ -14168,11 +14501,37 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <param name="lessThan"></param>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.top">
+<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.push(`0[])">
  <summary>
- the top element (the min element as defined by lessThan)
+ put things on the heap
+ </summary>
+ <param name="args"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.forEach(System.Action{`0,Microsoft.VisualBasic.ComponentModel.Collection.PairingHeap{`0}})">
+ <summary>
+ apply f to each element of the queue
+ </summary>
+ <param name="f">function to apply</param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.pop">
+ <summary>
+ remove and return the min element from the queue
  </summary>
  <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.PriorityQueue`1.reduceKey(Microsoft.VisualBasic.ComponentModel.Collection.PairingHeap{`0},`0,System.Action{`0,Microsoft.VisualBasic.ComponentModel.Collection.PairingHeap{`0}})">
+ <summary>
+ reduce the key value of the specified heap node
+ </summary>
+ <param name="heapNode"></param>
+ <param name="newKey"></param>
+ <param name="setHeapNode"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.Collection.RewindableEnumerator`1.Previous">
+ <summary>
+ 将枚举器回退一步，使得下一次 MoveNext() 再次返回当前元素。
+ </summary>
 </member>
 <member name="T:Microsoft.VisualBasic.ComponentModel.Collection.KeyValuePairExtensions">
  <summary>
@@ -14258,7 +14617,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="source"></param>
  <param name="key"></param>
  <returns>
- nothing will be return if the <paramref name="key"/> is not exists
+ nothing will be return if the <paramref name="key"/> is not exists or source sequence is nothing
  </returns>
 </member>
 <member name="M:Microsoft.VisualBasic.ComponentModel.Collection.KeyValuePairExtensions.Takes``1(System.Collections.Generic.IEnumerable{``0},System.String)">
@@ -16827,6 +17186,27 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="value"></param>
  <returns></returns>
 </member>
+<member name="T:Microsoft.VisualBasic.Data.Repository.FileHashCheckSum.HashType">
+ <summary>
+ 支持的哈希算法类型
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Data.Repository.FileHashCheckSum.ComputeHash(System.String,Microsoft.VisualBasic.Data.Repository.FileHashCheckSum.HashType,System.Int32)">
+ <summary>
+ 计算文件的哈希值 (优化版，适合大文件)
+ </summary>
+ <param name="filePath">文件路径</param>
+ <param name="algo">哈希算法类型</param>
+ <param name="bufferSize">
+ 应该小于2GB
+ </param>
+ <returns>哈希值的十六进制字符串</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Data.Repository.FileHashCheckSum.CreateHashAlgorithm(Microsoft.VisualBasic.Data.Repository.FileHashCheckSum.HashType)">
+ <summary>
+ 工厂方法：根据枚举创建具体的 HashAlgorithm 对象
+ </summary>
+</member>
 <member name="M:Microsoft.VisualBasic.Data.Repository.FNV1a.GetDeterministicHashCode(System.String)">
  <summary>
  What if you need GetHashCode() to be deterministic across program executions?
@@ -16855,6 +17235,14 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <remarks>
  http://www.isthe.com/chongo/tech/comp/fnv/index.html
  </remarks>
+</member>
+<member name="M:Microsoft.VisualBasic.Data.Repository.MurmurHash.MurmurHashCode3_x86_32(System.Byte[],System.UInt32)">
+ <summary>
+ 计算给定数据的32位MurmurHash3值。
+ </summary>
+ <param name="data">输入数据。</param>
+ <param name="seed">哈希种子。</param>
+ <returns>32位无符号哈希值。</returns>
 </member>
 <member name="T:Microsoft.VisualBasic.Data.Repository.Nilsimsa">
  <summary>
@@ -17005,7 +17393,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="DIR"></param>
  <param name="keyword"></param>
  <param name="ext">元素的排布是有顺序的</param>
- <returns></returns>
+ <returns>A list of file path which match with the keyword and the file extension name.</returns>
  <remarks></remarks>
 
 </member>
@@ -17017,7 +17405,10 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  请注意，本方法是不能够产生具有相同的主文件名的数据的。假若目标GBK是使用本模块之中的方法保存或者导出来的，
  则可以使用本方法生成Entry列表；（在返回的结果之中，KEY为文件名，没有拓展名，VALUE为文件的路径）
  </summary>
- <param name="source"></param>
+ <param name="source">The source directory which will be searchs for file.</param>
+ <param name="ext">
+ The list of the file extension.
+ </param>
  <returns></returns>
  <remarks></remarks>
 
@@ -25407,6 +25798,13 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  (通过具有缓存的流对象读取文本数据，使用迭代器来读取文件之中的所有的行，大文件推荐使用这个方法进行读取操作)
  </remarks>
 </member>
+<member name="M:Microsoft.VisualBasic.TextDoc.ReadLines(System.IO.StreamReader)">
+ <summary>
+ Read large text file lines with tqdm progress bar
+ </summary>
+ <param name="reader"></param>
+ <returns></returns>
+</member>
 <member name="M:Microsoft.VisualBasic.TextDoc.ReadFirstLine(System.String,System.Text.Encoding)">
  <summary>
  Read the first line of the text in the file.
@@ -25526,7 +25924,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <typeparam name="T"></typeparam>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.XmlExtensions.LoadXml``1(System.String,System.Text.Encoding,System.Boolean,System.Func{System.String,System.String},System.Boolean)">
+<member name="M:Microsoft.VisualBasic.XmlExtensions.LoadXml``1(System.String,System.Text.Encoding,System.Boolean,System.Func{System.String,System.String},System.Boolean,System.Boolean)">
  <summary>
  Load class object from the exists Xml document.
  </summary>
@@ -25543,7 +25941,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <returns></returns>
  <remarks>(从文件之中加载XML之中的数据至一个对象类型之中)</remarks>
 </member>
-<member name="M:Microsoft.VisualBasic.XmlExtensions.LoadXml(System.String,System.Type,System.Text.Encoding,System.Boolean,System.Func{System.String,System.String},System.Boolean)">
+<member name="M:Microsoft.VisualBasic.XmlExtensions.LoadXml(System.String,System.Type,System.Text.Encoding,System.Boolean,System.Func{System.String,System.String},System.Boolean,System.Boolean)">
  <summary>
  从文件之中加载XML之中的数据至一个对象类型之中
  </summary>
@@ -25758,7 +26156,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
 </member>
 <member name="M:Microsoft.VisualBasic.Extensions.AddRange``2(System.Collections.Generic.Dictionary{``0,``1}@,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Boolean)">
  <summary>
- 
+ merge the given data key-value pair data into current directory and then returns the current directory object
  </summary>
  <typeparam name="TKey"></typeparam>
  <typeparam name="TValue"></typeparam>
@@ -27120,9 +27518,8 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <summary>
  Gets the name of the target file or directory, if the target is a file, then the name without 
  the extension suffix name.
- (获取目标文件夹的名称或者文件的不包含拓展名的名称)
  </summary>
- <returns></returns>
+ <returns>获取目标文件夹的名称或者文件的不包含拓展名的名称</returns>
  <remarks>
  ###### 2017-2-14 
  
@@ -27349,6 +27746,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="equal"></param>
  <returns></returns>
 </member>
+<member name="M:Microsoft.VisualBasic.Math.Correlations.Correlations.JaccardIndex(System.Collections.Generic.IReadOnlyCollection{System.String},System.Collections.Generic.IReadOnlyCollection{System.String})">
+ <summary>
+ The Jaccard index, also known as Intersection over Union and the Jaccard similarity coefficient 
+ (originally coined coefficient de communauté by Paul Jaccard), is a statistic used for comparing 
+ the similarity and diversity of sample sets. The Jaccard coefficient measures similarity between 
+ finite sample sets, and is defined as the size of the intersection divided by the size of the 
+ union of the sample sets.
+ 
+ https://en.wikipedia.org/wiki/Jaccard_index
+ </summary>
+ <param name="a"></param>
+ <param name="b"></param>
+ <returns></returns>
+</member>
 <member name="M:Microsoft.VisualBasic.Math.Correlations.Correlations.SW(System.Double[],System.Double[])">
  <summary>
  Sandelin-Wasserman similarity function.
@@ -27367,15 +27778,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <param name="P"></param>
  <param name="Q"></param>
- <returns></returns>
+ <returns>
+ jsd value is not in range [0,1], value maybe in any real number.
+ </returns>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.Correlations.Correlations.KLD(System.Double[],System.Double[])">
  <summary>
- Kullback-Leibler divergence, <paramref name="x"/>和<paramref name="y"/>必须是等长的
+ Kullback-Leibler divergence, (KL散度/相对熵)
  </summary>
- <param name="x"></param>
+ <param name="x"><paramref name="x"/>和<paramref name="y"/>必须是等长的</param>
  <param name="y"></param>
  <returns></returns>
+ <remarks>
+ 计算 D_KL(P || Q) = Σ P(i) * ln(P(i) / Q(i))
+ </remarks>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.Correlations.Correlations.rankKendallTauBeta(System.Double[],System.Double[])">
  <summary>
@@ -27815,7 +28231,14 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  xi in the input data sequence
  </summary>
 </member>
-<member name="M:Microsoft.VisualBasic.Math.Correlations.RankOrder`1.Ranking(System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.Math.Correlations.RankOrder{`0}},System.Boolean)">
+<member name="M:Microsoft.VisualBasic.Math.Correlations.RankOrder`1.Input(System.Collections.Generic.IEnumerable{`0})">
+ <summary>
+ tagged input data with the input orders
+ </summary>
+ <param name="data"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Correlations.RankOrder`1.Ranking(System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.Math.Correlations.RankOrder{`0}},System.Boolean,Microsoft.VisualBasic.ComponentModel.Collection.Index{`0})">
  <summary>
  
  </summary>
@@ -28106,6 +28529,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="data"></param>
  <param name="weights">这个数组里面的值的和必须要等于1</param>
  <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.VBMath.WeightedMedian(System.Double[],System.Double[])">
+ <summary>
+ 计算加权中位数
+ </summary>
+ <param name="values">数据值数组</param>
+ <param name="weights">对应的权重数组</param>
+ <returns>加权中位数</returns>
+ 
+</member>
+<member name="M:Microsoft.VisualBasic.Math.VBMath.WeightedMedianOptimized(System.Double[],System.Double[])">
+ <summary>
+ 更高效的加权中位数计算（使用Value-Weight对结构）
+ </summary>
 </member>
 <member name="M:Microsoft.VisualBasic.Math.VBMath.seq(Microsoft.VisualBasic.Language.Value{System.Double},System.Double,System.Double)">
  <summary>
@@ -29231,6 +29668,21 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="other"></param>
  <returns>The Pearson of the sequence of values, or null if the source sequence is
  empty or contains only values that are null.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Statistics.Linq.EnumerableStatsStandardDeviation.StandardDeviation(System.Collections.Generic.IEnumerable{System.Double})">
+ <summary>
+ Computes the StandardDeviation of a sequence of System.Double values.
+ </summary>
+ <param name="source">A sequence of System.Double values to calculate the StandardDeviation of.</param>
+ <returns>The StandardDeviation of the sequence of values.</returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Statistics.Linq.EnumerableStatsStandardDeviation.StandardDeviation(System.Collections.Generic.IEnumerable{System.Nullable{System.Single}})">
+ <summary>
+ Computes the StandardDeviation of a sequence of nullable System.Single values.
+ </summary>
+ <param name="source">A sequence of nullable System.Single values to calculate the StandardDeviation of.</param>
+ <returns>The StandardDeviation of the sequence of values, or null if the source sequence is
+     empty or contains only values that are null.</returns>
 </member>
 <member name="T:Microsoft.VisualBasic.Math.Statistics.Linq.EnumerableStatsVariance">
  <summary>
@@ -32825,7 +33277,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  使用这个函数得到的结果需要注意进行<see cref="M:System.IDisposable.Dispose"/>,否则很容易造成内存泄漏
  </remarks>
  <param name="stream"></param>
- <returns></returns>
+ <returns>a memory stream object that has file position reset to scan0</returns>
 </member>
 <member name="M:Microsoft.VisualBasic.Net.Http.GZipStreamHandler.UnGzipStream(System.Collections.Generic.IEnumerable{System.Byte})">
  <summary>
@@ -33655,6 +34107,11 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="ip"></param>
  <returns></returns>
 </member>
+<member name="T:Microsoft.VisualBasic.Net.WebClient.Axel">
+ <summary>
+ linux axel liked multiple thread http file download module
+ </summary>
+</member>
 <member name="M:Microsoft.VisualBasic.Net.WebClient.WebClient.OpenSaveStream">
  <summary>
  open save stream
@@ -33890,7 +34347,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  Example for xx-net tool:
  
  ```
- http://127.0.0.1:8087/
+ http://127.0.0.1:10809/
  ```
  </summary>
  <returns></returns>
@@ -34492,6 +34949,17 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
          elements in the list are less than the specified key.  Note
          that this guarantees that the return value will be &gt;= 0 if
          and only if the key is found. </returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Language.Java.Collections.retainAll``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0})">
+ <summary>
+ 模拟 Java Collection 中的 retainAll 方法。
+ 仅保留当前集合中包含在指定集合中的元素（即求交集）。
+ 如果集合发生了更改，则返回 True。
+ </summary>
+ <typeparam name="T">集合元素类型</typeparam>
+ <param name="source">原集合（会被修改）</param>
+ <param name="itemsToKeep">要保留的元素集合</param>
+ <returns>如果原集合被修改了返回 True，否则返回 False</returns>
 </member>
 <member name="T:Microsoft.VisualBasic.Language.Java.JavaMath">
  <summary>
@@ -36057,7 +36525,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
 </member>
 <member name="M:Microsoft.VisualBasic.Language.UnixBash.PS1.W">
  <summary>
- ``\W`` 利用``<see cref="M:Microsoft.VisualBasic.PathExtensions.BaseName(System.String,System.Boolean)"/>``取得工作目录名称，所以仅会列出最后一个目录名。
+ ``\W`` 利用``<see cref="M:Microsoft.VisualBasic.PathExtensions.BaseName(System.Collections.Generic.IEnumerable{System.String},System.Boolean)"/>``取得工作目录名称，所以仅会列出最后一个目录名。
  </summary>
  <returns></returns>
 </member>
@@ -38114,6 +38582,15 @@ to take away yo [rest of string was truncated]&quot;;.
  https://github.com/xieguigang/sciBASIC
  </summary>
  
+</member>
+<member name="M:Microsoft.VisualBasic.LLMs.LLMsTalk(System.String)">
+ <summary>
+ A proxy function for LLMs talk in framework runtime
+ </summary>
+ <param name="prompt">the LLMs prompt text</param>
+ <returns>
+ this proxy function will returns nothing if there is no ollama client is hooked
+ </returns>
 </member>
 <member name="T:Microsoft.VisualBasic.NamespaceDoc">
  <summary>
@@ -40533,6 +41010,18 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="simpleDict"></param>
  <returns></returns>
  
+</member>
+<member name="M:Microsoft.VisualBasic.Serialization.JSON.JsonContract.LoadJSONL``1(System.String,System.Text.Encoding,System.Boolean,System.Collections.Generic.IEnumerable{System.Type},System.Boolean)">
+ <summary>
+ load json list file
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="file"></param>
+ <param name="encoding"></param>
+ <param name="simpleDict"></param>
+ <param name="knownTypes"></param>
+ <param name="throwEx"></param>
+ <returns></returns>
 </member>
 <member name="M:Microsoft.VisualBasic.Serialization.JSON.JsonContract.LoadJsonFile``1(System.String,System.Text.Encoding,System.Boolean,System.Collections.Generic.IEnumerable{System.Type},System.Boolean)">
  <summary>

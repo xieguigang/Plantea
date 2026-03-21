@@ -36,6 +36,11 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner
  <returns></returns>
  
 </member>
+<member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PWMDatabase">
+ <summary>
+ PWM database with internal virtual file system
+ </summary>
+</member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.PWMDatabase.LoadMotifs">
  <summary>
  Load all motif data into memory
@@ -86,7 +91,7 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner
 </member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.ProbabilityScanner.ScanSites(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue[],SMRUCC.genomics.SequenceModel.FASTA.FastaSeq,System.Double,System.Int32,System.Double,System.Double,System.Int32,System.Int32)">
  <summary>
- 基于PWM的概率匹配
+ 基于PWM的概率匹配，从目标基因组序列中找到Motif位点用于建立调控关系
  </summary>
  <param name="PWM">PWM</param>
  <param name="target"></param>
@@ -115,6 +120,17 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner
  <summary>
  get number of the conserved sites
  </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.SmithWaterman.MakeAlignment(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue},System.Collections.Generic.IEnumerable{SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Residue},System.Double,System.Int32,System.Int32,System.Boolean)">
+ <summary>
+ Make smith-waterman alignment between two motif PWM data
+ </summary>
+ <param name="pwm1">the query motif input</param>
+ <param name="pwm2">the subject motif input</param>
+ <param name="cutoff"></param>
+ <param name="minW"></param>
+ <param name="top"></param>
  <returns></returns>
 </member>
 </members>

@@ -14,13 +14,6 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  扫描出相同的KO编号的基因的上游区域的片段的相似片段
  </remarks>
 </member>
-<member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.ModelLoader.LoadKEGGModels(System.String)">
- <summary>
- Load kegg organism model
- </summary>
- <param name="repo"></param>
- <returns></returns>
-</member>
 <member name="T:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.GibbsSampler">
  <summary>
  
@@ -319,6 +312,12 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder
  <remarks>
  a sub-class of <see cref="T:SMRUCC.genomics.Analysis.SequenceAlignment.MSA.MSAOutput"/>.
  </remarks>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.MSAMotif.alphabets">
+ <summary>
+ usually be the ACGT
+ </summary>
+ <returns></returns>
 </member>
 <member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif.PopulatorParameter.minW">
  <summary>

@@ -24,7 +24,14 @@ Microsoft.VisualBasic.DataMining.DynamicProgramming
  > https://github.com/EranCohenSW/Multiple-sequence-alignment/blob/master/Project/src/CenterStar.java
  </summary>
 </member>
-<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.Compute(Microsoft.VisualBasic.ComponentModel.Algorithm.DynamicProgramming.IScore{System.Char},System.String[]@)">
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+ <summary>
+ auto encode sequence with title in format seq_id
+ </summary>
+ <param name="input"></param>
+ <param name="kband"></param>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.Compute(Microsoft.VisualBasic.ComponentModel.Algorithm.DynamicProgramming.IScore{System.Char},System.String[]@,System.Int32[]@)">
  <summary>
  Main
  </summary>
@@ -38,12 +45,30 @@ Microsoft.VisualBasic.DataMining.DynamicProgramming
  <returns></returns>
  
 </member>
-<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.multipleAlignmentImpl">
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.MultipleAlignment(System.Int32)">
  <summary>
  The Function do the multiple alignment according to the center string 
  </summary>
 </member>
-<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.findStarIndex">
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.SyncGaps(System.String[]@,System.Int32,System.Int32)">
+ <summary>
+ 同步所有序列的空格插入位置，以新中心序列为基准统一对齐
+ </summary>
+ <param name="alignments">待同步的序列数组</param>
+ <param name="centerIndex">中心序列的索引</param>
+ <param name="i">当前新序列的索引</param>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.FindGapInsertPositions(System.String,System.String)">
+ <summary>
+ 比较新旧中心序列，找出需要插入空格的位置
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.ApplyGapInsertions(System.String[],System.Int32[],System.Int32)">
+ <summary>
+ 将所有序列在指定位置插入空格（从后向前处理避免索引偏移）
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.CenterStar.FindStarIndex(System.Int32)">
  <summary>
  This Function finds the minimum star cost from all sequences
  </summary>
@@ -55,6 +80,11 @@ Microsoft.VisualBasic.DataMining.DynamicProgramming
  <typeparam name="T"></typeparam>
  <param name="nw"></param>
  <returns></returns>
+</member>
+<member name="F:Microsoft.VisualBasic.DataMining.DynamicProgramming.KBandSearch.K">
+ <summary>
+ k-band 带宽
+ </summary>
 </member>
 <member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.KBandSearch.CalculateEditDistance(System.String,System.String)">
  <summary>
@@ -69,14 +99,14 @@ Microsoft.VisualBasic.DataMining.DynamicProgramming
  <param name="seq2$"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.KBandSearch.calculateMinimum(System.Int32,System.Int32,System.Int32,System.Int32@)">
+<member name="M:Microsoft.VisualBasic.DataMining.DynamicProgramming.KBandSearch.FillBand(System.String,System.String,System.Int32[0:,0:]@,System.Int32[0:,0:]@)">
  <summary>
- This Function calculates the minimum choice of three choices in the next move
+ 填充带状区域
  </summary>
- <param name="diagonal%"></param>
- <param name="left%"></param>
- <param name="up%"></param>
- <returns></returns>
+ <param name="seq1"></param>
+ <param name="seq2"></param>
+ <param name="score"></param>
+ <param name="trace"></param>
 </member>
 <member name="T:Microsoft.VisualBasic.DataMining.DynamicProgramming.NeedlemanWunsch.NeedlemanWunsch`1">
  <summary>
@@ -414,7 +444,7 @@ Microsoft.VisualBasic.DataMining.DynamicProgramming
 </member>
 <member name="T:Microsoft.VisualBasic.DataMining.DynamicProgramming.SmithWaterman.Match">
  <summary>
-  Match class defintion
+ the smith-waterman HSP match class defintion
  </summary>
 </member>
 <member name="P:Microsoft.VisualBasic.DataMining.DynamicProgramming.SmithWaterman.Match.fromA">

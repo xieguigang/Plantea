@@ -142,9 +142,23 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  </summary>
  <returns></returns>
 </member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.name">
+ <summary>
+ the unique id/name reference of the motif PWM model
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.width">
+ <summary>
+ motif residue number
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Probability.E(System.Int32)">
  <summary>
- 
+ 计算小样本校正项 e_n = 1 / (2 * ln(2) * n)，这个公式是用于对 Shannon 熵
+ 进行小样本校正（small-sample correction）的经典项，常用于 motif 分析中
+ 计算信息含量（Information Content）时，以减少因有限序列数量带来的偏差。
  </summary>
  <param name="nsize">
  the count of the input fasta sequence.
@@ -164,7 +178,7 @@ SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract
  per site Is log2 4 = 2 bits for DNA/RNA And log2 20 ≈ 4.32 bits for proteins.
  
  </summary>
- <param name="En"></param>
+ <param name="En">e_n = \frac{1}{2 \ln(2) \cdot n}</param>
  <param name="NtMol">
  calculate for the nucleotide sequence model?
  </param>

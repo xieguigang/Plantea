@@ -22,6 +22,109 @@ SMRUCC.genomics.Interops.NCBI.Extensions
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation">
+ <summary>
+ 代表 DIAMOND BLASTP 结果文件 (.m8) 中的一行记录
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.QseqId">
+ <summary>
+ 1. 查询序列ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.SseqId">
+ <summary>
+ 2. 目标序列ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.Pident">
+ <summary>
+ 3. 比对一致性百分比
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.Length">
+ <summary>
+ 4. 比对长度
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.Mismatch">
+ <summary>
+ 5. 错配数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.GapOpen">
+ <summary>
+ 6. Gap 打开次数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.QStart">
+ <summary>
+ 7. 查询序列起始位置
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.QEnd">
+ <summary>
+ 8. 查询序列结束位置
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.SStart">
+ <summary>
+ 9. 目标序列起始位置
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.SEnd">
+ <summary>
+ 10. 目标序列结束位置
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.EValue">
+ <summary>
+ 11. E-value (期望值)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation.BitScore">
+ <summary>
+ 12. Bit Score (比特得分)
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondM8Parser">
+ <summary>
+ 用于解析 DIAMOND .m8 格式文件的工具类
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.DiamondM8Parser.ParseFile(System.String)">
+ <summary>
+ 解析指定的 .m8 文件并返回结果列表
+ </summary>
+ <param name="filePath">文件的完整路径</param>
+ <returns>包含 DiamondAnnotation 对象的列表</returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.TermStreamAssignment.MakeTerms(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation},System.Boolean)">
+ <summary>
+ Processing term assignment via stream processing of the large diamond annotation result output
+ </summary>
+ <param name="m8"></param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.TermStreamAssignment.HitCollection(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.DiamondAnnotation})">
+ <summary>
+ Make query group and convert as query hit collection
+ </summary>
+ <param name="diamond"></param>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.Extensions.IsNullOrEmpty(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit})">
  <summary>
  Is this collection of the besthit data is empty or nothing?
@@ -488,7 +591,7 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <returns></returns>
  <remarks></remarks>
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228.__generateLine(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.Query,System.Double,System.Double)">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228.topHitResult(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.Query,System.Double,System.Double)">
  <summary>
  导出最佳的符合条件的
  </summary>
@@ -519,6 +622,11 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  </summary>
  <returns></returns>
  <remarks></remarks>
+</member>
+<member name="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228.tokenFirst">
+ <summary>
+ split name with default fasta header delimiters
+ </summary>
 </member>
 <member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228.CheckIntegrity(SMRUCC.genomics.SequenceModel.FASTA.FastaFile)">
  <summary>
@@ -670,14 +778,6 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <param name="hits">假设这里面的hits都是通过了cutoff了的数据</param>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BBHParser.SBHScore(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit)">
- <summary>
- 因为Evalue是评价hsp的相似度的高低的因素，而identity和coverage则是评价序列整体相似度的因素，
- 所以在这里仅需要identity和coverage这两个因素来计算得分就好了
- </summary>
- <param name="hit"></param>
- <returns></returns>
-</member>
 <member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BBHParser.GetDirreBhAll2(Microsoft.VisualBasic.Data.Framework.IO.File,Microsoft.VisualBasic.Data.Framework.IO.File)">
  <summary>
  导出所有的双向最佳比对结果
@@ -775,7 +875,7 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  A vs B 以及 B vs A 都是得分最高的(BHR = 1)
  </summary>
 </member>
-<member name="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Levels.PartialBBH">
+<member name="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Levels.BHR">
  <summary>
  A vs B 以及 B vs A 都不是得分最高的,但是BHR得分是最高的 (BHR >= threshold)
  </summary>
@@ -783,6 +883,11 @@ SMRUCC.genomics.Interops.NCBI.Extensions
 <member name="F:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.Levels.SBH">
  <summary>
  只有一个方向的比对结果是最高的
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHRHit.BHRScore">
+ <summary>
+ bi-directional hit rate score
  </summary>
 </member>
 <member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR">
@@ -834,7 +939,7 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  + Moriya, Y., Itoh, M., Okuda, S., Yoshizawa, A., and Kanehisa, M.; KAAS: an automatic genome annotation and pathway reconstruction server. Nucleic Acids Res. 35, W182-W185 (2007). 
  </remarks>
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.HitRate(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.Query)">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.HitRate(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit},System.Double,System.Boolean)">
  <summary>
  Calculate R score for hit
  
@@ -842,15 +947,18 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  R = bits / max(bits)
  ```
  </summary>
+ <param name="threshold">
+ bit score filter threshold, Those hits with bit scores less than 60 are removed.
+ </param>
  <returns></returns>
  
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.BHRResult(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228,SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.BLASTOutput.BlastPlus.v228,System.Double)">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.BHRResult(Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit}[],Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit}[],System.Double,System.Double)">
  <summary>
- Calculate BBH through BHR score
+ make term assignment directly via calculate BBH through BHR score
  </summary>
- <param name="query"></param>
- <param name="refer"></param>
+ <param name="forward">localblast alignment result of query vs. subj reference</param>
+ <param name="reverse">localblast alignment result of subj reference vs. query</param>
  <param name="threshold">
  The BHR score threshold. (当这个参数为1的时候,算法会变为传统的BBH构建方法)
  </param>
@@ -861,19 +969,130 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  + 但是现在在引入BHR之后,即使A在B中的bit得分不是最高的,但是BHR是最高的,则可以认为A和B此时是BBH(保留下来了一个非常可能存在的BBH结果)
  </remarks>
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.getTopBHR(Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{System.Double}},System.Collections.Generic.Dictionary{System.String,System.Double})">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.GetTopBHR(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.TopHitRates,System.Collections.Generic.Dictionary{System.String,System.Double})">
  <summary>
  在这里计算出最高的BHR比对结果
  </summary>
  <param name="q"></param>
  <param name="r"></param>
- <returns></returns>
+ <returns>Rf * Rr</returns>
 </member>
-<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.ReverseAssembly(System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedCollection{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{System.Double}}})">
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHR.ReverseAssembly(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.TopHitRates})">
  <summary>
- Reverse assembling of the svq result.
+ Reverse assembling of the subj vs. query result.
  </summary>
  <param name="Rr"></param>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentCandidate">
+ <summary>
+ 用于存储一个查询基因的KO分配候选
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentCandidate.AssignmentScore">
+ <summary>
+ 最终计算出的KO分配得分 S_KO
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentCandidate.Sh">
+ <summary>
+ 最高比特分数 S_h，来自与该KO中所有基因比对的最佳结果
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentCandidate.N">
+ <summary>
+ 满足BHR阈值的基因数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentCandidate.X">
+ <summary>
+ KO中的总基因数
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore">
+ <summary>
+ KEGG KAAS Assignment Score (S_KO) 计算模块
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.KOgeneCounts(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit})">
+ <summary>
+ 基于reverse比对计算出每一个ko中的基因总数
+ </summary>
+ <param name="reverse">query is the KO, use input target as subject reference</param>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.CalculateAssignmentScore(System.Double,System.Int32,System.Int32,System.Int32,System.Int32,System.Double)">
+ <summary>
+ 计算KEGG的KO分配得分 S_KO
+ </summary>
+ <param name="Sh">最高比特分数</param>
+ <param name="m">查询基因长度</param>
+ <param name="n">参考基因长度</param>
+ <param name="x">KO中的总基因数</param>
+ <param name="N">满足BHR阈值的基因数</param>
+ <param name="p">单个基因满足BHR阈值的经验概率 (p0)</param>
+ <returns>Assignment Score (S_KO)</returns>
+ <remarks>
+ 这个函数直接对应了 KEGG 帮助文档中的公式：
+ 
+ We define a score for each ortholog group in order to assign the best fitting K numbers to the query gene:
+ 
+ ```
+ S_KO = S_h - log_2(mn) - log_2( sum_{k=N}^{x} C_k * p^k * (1-p)^{x-k} )
+ ```
+ 
+ where Sh is the highest score among all ortholog candidates in the ortholog group, 
+ m and n are the sequence lengths of the query and the target of BLAST, respectively, 
+ N is the number of organisms in ortholog group, x is the number of organisms in the 
+ original ortholog group from which this group is derived, and p is the ratio of the 
+ size of the original ortholog group versus the size of the entire GENES database. 
+ The second term is for the normalization of the first term by sequence lengths, and 
+ the third term is a weighting factor to consider the number of ortholog candidates 
+ that are found in the original.
+ </remarks>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.Log2BinomialRightTailProbability(System.Int32,System.Int32,System.Double)">
+ <summary>
+ 计算二项分布右尾概率的对数 (以2为底)
+ 即计算 log2( sum_{k=N}^{x} C(x,k) * p^k * (1-p)^(x-k) )
+ </summary>
+ <param name="x">总试验次数 (对应KO中的总基因数)</param>
+ <param name="N">成功的最小次数 (对应满足BHR阈值的基因数)</param>
+ <param name="p">单次试验成功的概率 (对应经验概率 p0)</param>
+ <returns>右尾概率的以2为底的对数</returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.Log2BinomialCoefficient(System.Int32,System.Int32)">
+ <summary>
+ 计算二项式系数的对数 (以2为底) log2(C(n, k))，
+ 使用 LogGamma 函数来避免计算大数阶乘导致的溢出。
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.Log2(System.Double)">
+ <summary>
+ 计算以2为底的对数
+ </summary>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.AssignBestKO(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BHRHit},System.Collections.Generic.Dictionary{System.String,System.Int32},System.Double)">
+ <summary>
+ 为单个查询基因分配最佳KO。它会评估所有可能的KO，并选择得分最高的一个。
+ </summary>
+ <param name="allBHRHitsForQuery">该查询基因与所有参考基因的BHR计算结果列表</param>
+ <param name="koGeneCounts">一个字典，包含每个KO的总基因数</param>
+ <param name="bhrThreshold">BHR阈值</param>
+ <returns>得分最高的KO分配候选，如果没有则返回Nothing</returns>
+ 
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.KOAssignmentScore.KOCandidates(SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit[],System.String,System.Int32,System.Double,System.Double)">
+ <summary>
+ 
+ </summary>
+ <param name="groupHits"></param>
+ <param name="ko"></param>
+ <param name="x">获取KO的总基因数 x</param>
+ <param name="bhrThreshold"></param>
+ <param name="empiricalProbability"></param>
  <returns></returns>
 </member>
 <member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit">
@@ -882,6 +1101,12 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  (单向的最佳比对结果)
  </summary>
  <remarks></remarks>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit.score">
+ <summary>
+ usually be the blast raw bit score
+ </summary>
+ <returns></returns>
 </member>
 <member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit.coverage">
  <summary>
@@ -2920,6 +3145,55 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <param name="getAnnotationTerm">通过这个函数指针来获取得到KO或者GO注释信息</param>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector">
+ <summary>
+ 基因组代谢酶注释结果
+ </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.assembly_id">
+ <summary>
+ the unique reference id of the genome, usually is the genbank assembly id, but it can be any string that can uniquely 
+ identify this genome in the dataset, and it should be consistent with the assembly id used in the annotation result, 
+ so that we can link the annotation result to the taxonomy information of this genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.taxonomy">
+ <summary>
+ the genome taxonomy information, it can be the taxonomic name of this genome, or the taxonomic id of this genome, 
+ but it should be consistent with the taxonomy information used in the annotation result, so that we can link the 
+ annotation result to the taxonomy information of this genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.terms">
+ <summary>
+ annotated terms inside this genome, the key is the term name, and the value is the count of this term in this genome
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.size">
+ <summary>
+ annotated gene count
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.GetHierarchicalECNumberTerms">
+ <summary>
+ used for processing of the ec number terms, make the count of the
+ hierarchical ec number terms by summing the count of the specific 
+ ec number terms
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector.GroupByTaxonomy(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.GenomeVector},System.Int32)">
+ <summary>
+ Make union of the taxonomy assembly contig result
+ </summary>
+ <param name="vectors"></param>
+ <param name="size_cutoff">test of the contigby gene size cutoff.</param>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.KOAssignment.KOAssignmentSBH(System.Collections.Generic.IEnumerable{SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH.BestHit},System.Boolean)">
  <summary>
  在这里主要是将hit_name之中的KO编号提取出来就好了
@@ -2956,6 +3230,24 @@ SMRUCC.genomics.Interops.NCBI.Extensions
  <summary>
  The functional annotation analysis pipeline based on the ncbi localblast+ toolkit
  </summary>
+</member>
+<member name="P:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm.score">
+ <summary>
+ SUM of the all scores for this term
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm.MeasureTopTerm``1(System.Linq.IGrouping{System.String,``0},System.Func{``0,System.Double},System.Collections.Generic.Dictionary{System.String,System.String})">
+ <summary>
+ make terms assignment result 
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="group"></param>
+ <param name="eval"></param>
+ <param name="termMaps"></param>
+ <returns>
+ terms has been ordered by its score in desc order
+ </returns>
 </member>
 <member name="T:SMRUCC.genomics.Interops.NCBI.Extensions.Tasks.Models.Hit">
  <summary>
