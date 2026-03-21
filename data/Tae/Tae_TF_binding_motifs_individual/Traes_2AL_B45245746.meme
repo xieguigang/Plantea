@@ -1,0 +1,23 @@
+MEME version 4.4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies (from file `../../promoter_background/Tae.bg'):
+A 0.26670 C 0.23330 G 0.23330 T 0.26670 
+
+MOTIF Traes_2AL_B45245746 MP00290
+
+letter-probability matrix: alength= 4 w= 8 nsites= 158 E= 6.1e-196
+  0.164557	  0.037975	  0.126582	  0.670886	
+  0.000000	  1.000000	  0.000000	  0.000000	
+  0.000000	  1.000000	  0.000000	  0.000000	
+  0.000000	  0.000000	  1.000000	  0.000000	
+  0.000000	  0.000000	  0.000000	  1.000000	
+  1.000000	  0.000000	  0.000000	  0.000000	
+  0.000000	  1.000000	  0.000000	  0.000000	
+  0.430380	  0.183544	  0.208861	  0.177215	
+
+URL http://planttfdb.cbi.pku.edu.cn/tf.php?sp=Tae&did=Traes_2AL_B45245746.2#bind_motif
+
