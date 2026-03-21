@@ -14,5 +14,8 @@ declare namespace Plantea {
    function load_motif_links(data_frame?: any): object;
    /**
    */
+   function open_meme(code: any): object;
+   /**
+   */
    function PlantTFDB_motifs(): object;
 }
