@@ -15,6 +15,6 @@
 
 imports "Plantea" from "Plantea";
 
-.onLoad = function() {
-  
+let .onLoad = function() {
+
 }
