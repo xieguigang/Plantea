@@ -9,8 +9,12 @@ const PlantTFDB_motifs = function() {
 }
 
 const open_meme = function(code) {
+    motif_tool::open_meme_dir(locate_meme_dir(code));
+}
+
+const locate_meme_dir = function(code) {
     let data_dir = file.path(@datadir, code);
     let meme_dir = file.path(data_dir, `${code}_TF_binding_motifs_individual`);
 
-    motif_tool::open_meme_dir(meme_dir);
+    return(meme_dir);
 }
