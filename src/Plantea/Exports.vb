@@ -311,6 +311,7 @@ Module Exports
     ''' <param name="env"></param>
     ''' <returns></returns>
     <ExportAPI("assign_tffamily")>
+    <RApiReturn(GetType(RankTerm))>
     Public Function makeTFFamilyTerms(<RRawVectorArgument> blastp As Object,
                                       Optional TFdb As TFInfo() = Nothing,
                                       Optional top_best As Boolean = True,
