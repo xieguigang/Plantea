@@ -17,6 +17,7 @@ Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Components
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
 Imports SMRUCC.Rsharp.Runtime.Interop
+Imports SMRUCC.Rsharp.Runtime.Vectorization
 Imports Rdataframe = SMRUCC.Rsharp.Runtime.Internal.Object.dataframe
 Imports RInternal = SMRUCC.Rsharp.Runtime.Internal
 
@@ -45,6 +46,28 @@ Module Exports
         Call df.add("datasource_id", From id As MotifLink In list Select id.Datasource_ID)
 
         Return df
+    End Function
+
+    <ExportAPI("as.motif_links")>
+    Public Function motif_links(<RRawVectorArgument(TypeCodes.string)> matrix_id As Object,
+                                <RRawVectorArgument(TypeCodes.string)> tf_id As Object,
+                                Optional env As Environment = Nothing) As Object
+
+        Dim matrix_vec = GetVectorElement.Create(Of String)(matrix_id)
+        Dim tf_vec = GetVectorElement.Create(Of String)(tf_id)
+
+        If GetVectorElement.DoesSizeMatch(matrix_vec, tf_vec) Then
+            Return RInternal.debug.stop($"the dimension size of matrix_id({matrix_vec.size}) is mis-matched with the tf_id({tf_vec.size}) vector.", env)
+        End If
+
+        Return GetVectorElement.Zip(matrix_vec, tf_vec) _
+            .Select(Function(reg)
+                        Return New MotifLink With {
+                            .Matrix_id = CStr(reg.Item1),
+                            .Gene_id = New String() {CStr(reg.Item2)}
+                        }
+                    End Function) _
+            .ToArray
     End Function
 
     ''' <summary>
