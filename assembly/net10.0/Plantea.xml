@@ -41,6 +41,16 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
+<member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,Plantea.TFInfo[],System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ 
+ </summary>
+ <param name="blastp">diamond annotation hit table</param>
+ <param name="TFdb"></param>
+ <param name="top_best"></param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
 <member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
