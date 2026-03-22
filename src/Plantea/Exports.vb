@@ -56,7 +56,7 @@ Module Exports
         Dim matrix_vec = GetVectorElement.Create(Of String)(matrix_id)
         Dim tf_vec = GetVectorElement.Create(Of String)(tf_id)
 
-        If GetVectorElement.DoesSizeMatch(matrix_vec, tf_vec) Then
+        If Not GetVectorElement.DoesSizeMatch(matrix_vec, tf_vec) Then
             Return RInternal.debug.stop($"the dimension size of matrix_id({matrix_vec.size}) is mis-matched with the tf_id({tf_vec.size}) vector.", env)
         End If
 

@@ -13,6 +13,10 @@ declare namespace Plantea {
       /**
         * @param env default value Is ``null``.
       */
+      function motif_links(matrix_id: any, tf_id: any, env?: object): any;
+      /**
+        * @param env default value Is ``null``.
+      */
       function regulation_graph(regulations: any, env?: object): object;
    }
    /**

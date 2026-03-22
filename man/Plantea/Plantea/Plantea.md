@@ -2,6 +2,7 @@
 
 The plant genomics data analysis tools
 
++ [as.motif_links](Plantea/as.motif_links.1) 
 + [load_motifdb](Plantea/load_motifdb.1) load motif database from a given xml list dataset
 + [load_class](Plantea/load_class.1) 
 + [class_background](Plantea/class_background.1) 

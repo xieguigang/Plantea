@@ -29,13 +29,19 @@ const load_taxonomy_links = function(code, data_frame = FALSE) {
         data.frame(
             # TRAES3BF107400040CFD_g -> TRAES3BF107400040CFD
             gene_id = gsub( t@{2},"_g",""), 
-            motif_id = t@{3}
+            matrix_id = t@{3}
         );
     });
 
-    if (data_frame) {
-        bind_rows(meme_motifs);
+    meme_motifs <- bind_rows(meme_motifs);
+
+    if (!data_frame) {
+        # cast clr object
+        as.motif_links(
+            matrix_id = meme_motifs$matrix_id,
+            tf_id     = meme_motifs$gene_id
+        );
     } else {
-        meme_motifs;
+        return(meme_motifs);
     }
 }
