@@ -9,6 +9,9 @@ declare namespace Plantea {
       function onLoad(): object;
    }
    /**
+   */
+   function build_trn(sites: any, diamond: any, link_code: any): object;
+   /**
      * @param data_frame default value Is ``false``.
    */
    function load_global_links(data_frame?: any): object;
@@ -24,6 +27,9 @@ declare namespace Plantea {
    /**
    */
    function locate_meme_dir(code: any): object;
+   /**
+   */
+   function motif_tfinfo(code: any): object;
    /**
    */
    function open_meme(code: any): object;

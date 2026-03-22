@@ -302,6 +302,14 @@ Module Exports
         Return g
     End Function
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="blastp">diamond annotation hit table</param>
+    ''' <param name="TFdb"></param>
+    ''' <param name="top_best"></param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
     <ExportAPI("assign_tffamily")>
     Public Function makeTFFamilyTerms(<RRawVectorArgument> blastp As Object,
                                       Optional TFdb As TFInfo() = Nothing,
