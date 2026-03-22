@@ -11,7 +11,16 @@ declare namespace Plantea {
    /**
      * @param data_frame default value Is ``false``.
    */
-   function load_motif_links(data_frame?: any): object;
+   function load_global_links(data_frame?: any): object;
+   /**
+     * @param code default value Is ``null``.
+     * @param data_frame default value Is ``false``.
+   */
+   function load_motif_links(code?: any, data_frame?: any): object;
+   /**
+     * @param data_frame default value Is ``false``.
+   */
+   function load_taxonomy_links(code: any, data_frame?: any): object;
    /**
    */
    function locate_meme_dir(code: any): object;

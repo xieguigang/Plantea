@@ -1,11 +1,37 @@
-const load_motif_links = function(data_frame = FALSE) {
-    let resource = system.file("data/PlantTFDB/PlantTFDB_TF_binding_motifs_from_experiments_information.txt",
-             package = "Plantea");
+imports "motif_tool" from "TRNtoolkit";
+
+const load_motif_links = function(code = NULL, data_frame = FALSE) {
+    if (is.null(code)) {
+        load_global_links(data_frame);
+    } else {
+        load_taxonomy_links(code, data_frame);
+    }
+}
+
+const load_global_links = function(data_frame = FALSE) {
+    let resource = file.path(@datadir, "/PlantTFDB/PlantTFDB_TF_binding_motifs_from_experiments_information.txt");
     let clr_df = load.csv(resource, type = "motif_link", tsv = TRUE);
 
     if (data_frame) {
         as.data.frame(clr_df);
     } else {
         return(clr_df);
+    }
+}
+
+const load_taxonomy_links = function(code, data_frame = FALSE) {
+    let meme_motifs = list.files( locate_meme_dir(code), pattern = "*.meme");
+    meme_motifs = as.list(meme_motifs, names = basename(meme_motifs));
+    meme_motifs = lapply(tqdm(meme_motifs), function(path) {
+        let motifs = read_meme(path);
+        let t = strsplit([motifs]::name,  drop1 =FALSE);
+
+        data.frame(gene_id = t@{2}, motif_id = t@{3});
+    });
+
+    if (data_frame) {
+        bind_rows(meme_motifs);
+    } else {
+        meme_motifs;
     }
 }
