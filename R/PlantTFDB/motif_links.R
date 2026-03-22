@@ -26,7 +26,11 @@ const load_taxonomy_links = function(code, data_frame = FALSE) {
         let motifs = read_meme(path);
         let t = strsplit([motifs]::name,  drop1 =FALSE);
 
-        data.frame(gene_id = t@{2}, motif_id = t@{3});
+        data.frame(
+            # TRAES3BF107400040CFD_g -> TRAES3BF107400040CFD
+            gene_id = gsub( t@{2},"_g",""), 
+            motif_id = t@{3}
+        );
     });
 
     if (data_frame) {
