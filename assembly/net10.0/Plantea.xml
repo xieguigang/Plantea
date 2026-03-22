@@ -41,7 +41,7 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,Plantea.TFInfo[],System.Boolean,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,Plantea.TFInfo[],System.Boolean,System.Double,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  
  </summary>
