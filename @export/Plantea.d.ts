@@ -11,7 +11,14 @@
 declare namespace Plantea {
    module as {
       /**
-        * @param env default value Is ``null``.
+       * create clr model for link the reference TF and the reference motif site model
+       * 
+       * 
+        * @param matrix_id the motif id
+        * @param tf_id the transcript factor id
+        * @param env -
+        * 
+        * + default value Is ``null``.
       */
       function motif_links(matrix_id: any, tf_id: any, env?: object): any;
       /**
@@ -41,7 +48,13 @@ declare namespace Plantea {
    */
    function assign_tffamily(blastp: any, TFdb?: object, top_best?: boolean, identities?: number, env?: object): object;
    /**
-     * @param env default value Is ``null``.
+    * convert the gene cluster information as gsea background model
+    * 
+    * 
+     * @param geneset -
+     * @param env -
+     * 
+     * + default value Is ``null``.
    */
    function class_background(geneset: any, env?: object): object;
    /**
@@ -59,12 +72,17 @@ declare namespace Plantea {
    */
    function extract_tf_info(TF_fsa: any, env?: object): object;
    /**
+    * read the json list of csv table of the gene cluster data information
+    * 
+    * 
+     * @param x -
    */
-   function load_class(json: string): object;
+   function load_class(x: string): object;
    /**
     * load motif database from a given xml list dataset
     * 
     * 
+     * @param file the filepath to the xml database file
    */
    function load_motifdb(file: string): object;
    /**

@@ -2,10 +2,10 @@
 
 The plant genomics data analysis tools
 
-+ [as.motif_links](Plantea/as.motif_links.1) 
++ [as.motif_links](Plantea/as.motif_links.1) create clr model for link the reference TF and the reference motif site model
 + [load_motifdb](Plantea/load_motifdb.1) load motif database from a given xml list dataset
-+ [load_class](Plantea/load_class.1) 
-+ [class_background](Plantea/class_background.1) 
++ [load_class](Plantea/load_class.1) read the json list of csv table of the gene cluster data information
++ [class_background](Plantea/class_background.1) convert the gene cluster information as gsea background model
 + [extract_tf_info](Plantea/extract_tf_info.1) A helper function extract fo the PlantTFDB information
 + [read_regulation](Plantea/read_regulation.1) read regulation network from a given csv table file
 + [assign_classdata](Plantea/assign_classdata.1) 

@@ -11,10 +11,37 @@ Plantea
  The plant genomics data analysis tools
  </summary>
 </member>
+<member name="M:Plantea.Exports.motif_links(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ create clr model for link the reference TF and the reference motif site model
+ </summary>
+ <param name="matrix_id">the motif id</param>
+ <param name="tf_id">the transcript factor id</param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
 <member name="M:Plantea.Exports.loadMotifDb(System.String)">
  <summary>
  load motif database from a given xml list dataset
  </summary>
+ <param name="file">
+ the filepath to the xml database file
+ </param>
+ <returns></returns>
+</member>
+<member name="M:Plantea.Exports.loadClusterBackground(System.String)">
+ <summary>
+ read the json list of csv table of the gene cluster data information
+ </summary>
+ <param name="x"></param>
+ <returns></returns>
+</member>
+<member name="M:Plantea.Exports.class_background(System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ convert the gene cluster information as gsea background model
+ </summary>
+ <param name="geneset"></param>
+ <param name="env"></param>
  <returns></returns>
 </member>
 <member name="M:Plantea.Exports.extractTFInfo(System.Object,SMRUCC.Rsharp.Runtime.Environment)">
@@ -77,6 +104,11 @@ Plantea
 <member name="T:Plantea.RegulationFootprint">
  <summary>
  The transcription regulation network edge
+ </summary>
+</member>
+<member name="T:Plantea.ClassClusterData">
+ <summary>
+ the gene class information
  </summary>
 </member>
 </members>
