@@ -383,15 +383,22 @@ Module Exports
     ''' <returns></returns>
     <ExportAPI("tf_network")>
     <RApiReturn(GetType(RegulationFootprint))>
-    Public Function LinkTFNetwork(motifLinks As MotifLink(), motif_hits As MotifMatch(), <RRawVectorArgument> regulators As RankTerm(),
+    Public Function LinkTFNetwork(motifLinks As MotifLink(), <RRawVectorArgument> motif_hits As Object, <RRawVectorArgument> regulators As RankTerm(),
                                   Optional topic As RankTerm() = Nothing,
                                   Optional top As Integer = 3,
                                   Optional env As Environment = Nothing) As Object
+
+        Dim pull = pipeline.TryCreatePipeline(Of MotifMatch)(motif_hits, env)
+
+        If pull.isError Then
+            Return pull.getError
+        End If
 
         Dim TFdb As TFInfo() = env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
             .ToArray
+        Dim sites As MotifMatch() = pull.populates(Of MotifMatch)(env).ToArray
         Dim network As New RegulationNetwork(motifLinks, TFdb)
         Dim regs As RegulationFootprint() = network _
             .BuildTFNetwork(motif_hits, regulators, topic, top) _
