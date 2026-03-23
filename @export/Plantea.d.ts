@@ -24,11 +24,22 @@ declare namespace Plantea {
    */
    function assign_classdata(regs: any, kb: object, env?: object): object;
    /**
-     * @param TFdb default value Is ``null``.
-     * @param top_best default value Is ``true``.
-     * @param env default value Is ``null``.
+    * 
+    * 
+     * @param blastp diamond annotation hit table
+     * @param TFdb -
+     * 
+     * + default value Is ``null``.
+     * @param top_best -
+     * 
+     * + default value Is ``true``.
+     * @param identities 
+     * + default value Is ``30``.
+     * @param env -
+     * 
+     * + default value Is ``null``.
    */
-   function assign_tffamily(blastp: any, TFdb?: object, top_best?: boolean, env?: object): any;
+   function assign_tffamily(blastp: any, TFdb?: object, top_best?: boolean, identities?: number, env?: object): object;
    /**
      * @param env default value Is ``null``.
    */

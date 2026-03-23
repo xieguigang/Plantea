@@ -1,7 +1,7 @@
 Package: Plantea
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Plant data analysis toolkit
+Version: 0.3.23
 Authors@R: c(
     person(
       "xie", "guigang",
@@ -9,8 +9,10 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Plant data analysis toolkit
+  1. build plant transcript regulation network based on the PlantTFDB database
+  2. build plant cell virtual cell model
+
 License: MIT
 Encoding: UTF-8
 LazyData: true

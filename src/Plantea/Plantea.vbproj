@@ -7,6 +7,18 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Configurations>Debug;Release;PlantMAT</Configurations>
+    <AssemblyTitle>Plant data analysis toolkit</AssemblyTitle>
+    <Title>Plant data analysis toolkit</Title>
+    <Description>Plant data analysis toolkit
+  1. build plant transcript regulation network based on the PlantTFDB database
+  2. build plant cell virtual cell model</Description>
+    <PackageProjectUrl>https://github.com/xieguigang/Plantea</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/xieguigang/Plantea</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>plant;gems</PackageTags>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,6 +58,13 @@
     <DebugType>full</DebugType>
     <DefineTrace>True</DefineTrace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\GCModeller\src\GCModeller\analysis\Motifs\VirtualFootprint\VirtualFootprint.vbproj" />
