@@ -179,4 +179,8 @@
   <Project Path="src/Plantea/Plantea.vbproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
+  <Project Path="src/PlantToolKit/PlantToolKit.vbproj" Id="9b9719dd-d1d4-44d7-ab36-aae777a15831">
+    <BuildType Solution="PlantMAT|*" Project="Release" />
+    <Platform Solution="PlantMAT|x64" Project="x64" />
+  </Project>
 </Solution>
