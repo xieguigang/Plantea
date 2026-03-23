@@ -384,6 +384,7 @@ Module Exports
     <ExportAPI("tf_network")>
     <RApiReturn(GetType(RegulationFootprint))>
     Public Function LinkTFNetwork(motifLinks As MotifLink(), <RRawVectorArgument> motif_hits As Object, <RRawVectorArgument> regulators As RankTerm(),
+                                  Optional tfinfo As TFInfo() = Nothing,
                                   Optional topic As RankTerm() = Nothing,
                                   Optional top As Integer = 3,
                                   Optional env As Environment = Nothing) As Object
@@ -394,10 +395,10 @@ Module Exports
             Return pull.getError
         End If
 
-        Dim TFdb As TFInfo() = env.globalEnvironment _
+        Dim TFdb As TFInfo() = If(tfinfo, env.globalEnvironment _
             .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
             .LoadCsv(Of TFInfo)(mute:=True) _
-            .ToArray
+            .ToArray)
         Dim sites As MotifMatch() = pull.populates(Of MotifMatch)(env).ToArray
         Dim network As New RegulationNetwork(motifLinks, TFdb)
         Dim regs As RegulationFootprint() = network _
