@@ -52,7 +52,7 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,Plantea.TFInfo[],System.Boolean,System.Double,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,PlantToolKit.TFInfo[],System.Boolean,System.Double,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  
  </summary>
@@ -62,18 +62,7 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="T:Plantea.MotifLink">
- <summary>
- motif source information
- </summary>
-</member>
-<member name="P:Plantea.MotifLink.Gene_id">
- <summary>
- A set of the gene id that associated with current motif object
- </summary>
- <returns></returns>
-</member>
-<member name="M:Plantea.TRNTools.LinkTFNetwork(Plantea.MotifLink[],System.Object,SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],Plantea.TFInfo[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.TRNTools.LinkTFNetwork(PlantToolKit.MotifLink[],System.Object,SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],PlantToolKit.TFInfo[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
  </summary>
@@ -95,7 +84,7 @@ Plantea
  <param name="file"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.TRNTools.assign_classdata(System.Object,Plantea.ClassClusterData[],SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.TRNTools.assign_classdata(System.Object,PlantToolKit.ClassClusterData[],SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  assign the class information to the ORF inside TRN network
  </summary>
@@ -111,26 +100,6 @@ Plantea
  <param name="regulations"></param>
  <param name="terms"></param>
  <param name="env"></param>
- <returns></returns>
-</member>
-<member name="T:Plantea.RegulationFootprint">
- <summary>
- The transcription regulation network edge
- </summary>
-</member>
-<member name="T:Plantea.ClassClusterData">
- <summary>
- the gene class information
- </summary>
-</member>
-<member name="M:Plantea.RegulationNetwork.BuildTFNetwork(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32)">
- <summary>
- 
- </summary>
- <param name="motif_hits"></param>
- <param name="regulators"></param>
- <param name="topic"></param>
- <param name="top">take the top n tf regulator</param>
  <returns></returns>
 </member>
 </members>

@@ -11,6 +11,7 @@
           "Microsoft.VisualBasic.Data.Framework": "5.0.123",
           "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "PlantToolKit": "1.0.0",
           "REnv": "5.1.3.5558",
           "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core": "1.0.0",
           "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns": "1.0.0",
@@ -426,6 +427,29 @@
         "runtime": {
           "Microsoft.VisualBasic.Runtime.dll": {
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "PlantToolKit/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Data.Framework": "5.0.123",
+          "Microsoft.VisualBasic.Math.Core": "5.0.1.2389",
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
+          "SMRUCC.genomics.Analysis.HTS.GSEA.Fisher.Core": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceAlignment": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Abstract": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifFinder": "1.0.0",
+          "SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifScanner": "1.0.0",
+          "SMRUCC.genomics.Annotation": "1.0.0",
+          "SMRUCC.genomics.Core": "6.3.256.3655",
+          "SMRUCC.genomics.Interops.NCBI.Extensions": "1.0.0",
+          "SMRUCC.genomics.Model.Network.VirtualFootprint": "1.0.0"
+        },
+        "runtime": {
+          "PlantToolKit.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1149,6 +1173,11 @@
       "sha512": ""
     },
     "Microsoft.VisualBasic.Runtime/5.0.1.2389": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PlantToolKit/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
