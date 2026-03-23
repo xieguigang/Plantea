@@ -41,7 +41,7 @@ Public Class TFInfo
 
     Public Shared Function RemoveTrailingIntegerSuffix(inputString As String) As String
         ' 正则表达式模式：匹配以点开头后接一个或多个数字，并且位于字符串末尾的部分
-        Dim pattern As String = "((\.\d+)|(_t\d+))$"
+        Dim pattern As String = "((\.\d+)|(_t\d+)|(\.g))$"
         ' 使用 Regex.Replace 方法将匹配到的部分替换为空字符串
         Dim result As String = Regex.Replace(inputString, pattern, String.Empty)
 

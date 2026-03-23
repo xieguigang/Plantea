@@ -1,0 +1,24 @@
+MEME version 4.4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies (from file `../../promoter_background/Osj.bg'):
+A 0.26480 C 0.23520 G 0.23520 T 0.26480 
+
+MOTIF LOC_Os01g40670 MP00607
+
+letter-probability matrix: alength= 4 w= 9 nsites= 370 E= 8.7e-306
+  0.302703	  0.094595	  0.208108	  0.394595	
+  0.035135	  0.194595	  0.010811	  0.759459	
+  0.000000	  0.000000	  0.000000	  1.000000	
+  1.000000	  0.000000	  0.000000	  0.000000	
+  0.000000	  0.000000	  1.000000	  0.000000	
+  0.000000	  0.000000	  1.000000	  0.000000	
+  0.000000	  0.000000	  0.348649	  0.651351	
+  0.000000	  0.472973	  0.000000	  0.527027	
+  0.000000	  0.124324	  0.683784	  0.191892	
+
+URL http://planttfdb.cbi.pku.edu.cn/tf.php?sp=Osj&did=LOC_Os01g40670.1#bind_motif
+
