@@ -28,6 +28,14 @@ Public Class RegulationNetwork
     Dim regfamily As Dictionary(Of String, RankTerm())
     Dim topics As Dictionary(Of String, RankTerm)
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="motif_hits"></param>
+    ''' <param name="regulators"></param>
+    ''' <param name="topic"></param>
+    ''' <param name="top">take the top n tf regulator</param>
+    ''' <returns></returns>
     Public Iterator Function BuildTFNetwork(motif_hits As MotifMatch(), regulators As RankTerm(),
                                             Optional topic As RankTerm() = Nothing,
                                             Optional top As Integer = 3) As IEnumerable(Of RegulationFootprint)

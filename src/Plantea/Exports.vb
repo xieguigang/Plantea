@@ -379,6 +379,9 @@ Module Exports
     ''' <param name="regulators">
     ''' should be a blast alignment result of the class type <see cref="RankTerm"/>. apply for mapping protein to a specific family term
     ''' </param>
+    ''' <param name="top">
+    ''' take the top n tf regulator mapping result for build TRN network.
+    ''' </param>
     ''' <param name="env"></param>
     ''' <returns></returns>
     <ExportAPI("tf_network")>

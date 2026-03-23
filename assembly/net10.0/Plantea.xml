@@ -87,6 +87,9 @@ Plantea
  <param name="regulators">
  should be a blast alignment result of the class type <see cref="T:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm"/>. apply for mapping protein to a specific family term
  </param>
+ <param name="top">
+ take the top n tf regulator mapping result for build TRN network.
+ </param>
  <param name="env"></param>
  <returns></returns>
 </member>
@@ -110,6 +113,16 @@ Plantea
  <summary>
  the gene class information
  </summary>
+</member>
+<member name="M:Plantea.RegulationNetwork.BuildTFNetwork(SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.MotifMatch[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32)">
+ <summary>
+ 
+ </summary>
+ <param name="motif_hits"></param>
+ <param name="regulators"></param>
+ <param name="topic"></param>
+ <param name="top">take the top n tf regulator</param>
+ <returns></returns>
 </member>
 </members>
 </doc>
