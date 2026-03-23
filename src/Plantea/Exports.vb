@@ -1,7 +1,6 @@
 ﻿Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Data.Framework.IO
-Imports Microsoft.VisualBasic.Data.Framework.IO.Linq
 Imports Microsoft.VisualBasic.Data.visualize.Network.Graph
 Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
@@ -9,7 +8,6 @@ Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports Microsoft.VisualBasic.Serialization.JSON
 Imports Microsoft.VisualBasic.Text.Xml.Models
 Imports SMRUCC.genomics.Analysis.HTS.GSEA
-Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns.Motif
 Imports SMRUCC.genomics.ComponentModel.Annotation
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
@@ -147,94 +145,6 @@ Module Exports
         End If
     End Function
 
-    ''' <summary>
-    ''' read regulation network from a given csv table file
-    ''' </summary>
-    ''' <param name="file"></param>
-    ''' <returns></returns>
-    <ExportAPI("read_regulation")>
-    <RApiReturn(GetType(RegulationFootprint))>
-    Public Function readRegulations(file As String, Optional tqdm As Boolean = True) As Object
-        If tqdm Then
-            Return file.OpenHandle.AsLinq(Of RegulationFootprint).as_iterator
-        Else
-            Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
-        End If
-    End Function
-
-    ''' <summary>
-    ''' assign the class information to the ORF inside TRN network
-    ''' </summary>
-    ''' <param name="regs">the TRN network data</param>
-    ''' <param name="kb"></param>
-    ''' <param name="env"></param>
-    ''' <returns></returns>
-    <ExportAPI("assign_classdata")>
-    <RApiReturn(GetType(RegulationFootprint))>
-    Public Function assign_classdata(<RRawVectorArgument> regs As Object, kb As ClassClusterData(), Optional env As Environment = Nothing) As Object
-        Dim pulldata = pullNetwork(regs, env)
-
-        If pulldata Like GetType(Message) Then
-            Return pulldata.TryCast(Of Message)
-        End If
-
-        Dim kbIndex = kb.GroupBy(Function(a) a.gene).ToDictionary(Function(a) a.Key, Function(a) a.First)
-        Dim filled As RegulationFootprint() = RegulationFootprint _
-            .AssignClassData(pulldata.TryCast(Of IEnumerable(Of RegulationFootprint)), kbIndex) _
-            .Where(Function(a) Not a.class.StringEmpty(, True)) _
-            .ToArray
-
-        Return filled
-    End Function
-
-    ''' <summary>
-    ''' create subnetwork by matches a set of terms
-    ''' </summary>
-    ''' <param name="regulations"></param>
-    ''' <param name="terms"></param>
-    ''' <param name="env"></param>
-    ''' <returns></returns>
-    <ExportAPI("term_subnetwork")>
-    <RApiReturn(GetType(RegulationFootprint))>
-    Public Function subnetwork(<RRawVectorArgument> regulations As Object, <RRawVectorArgument> terms As Object, Optional env As Environment = Nothing) As Object
-        Dim pulldata = pullNetwork(regulations, env)
-        Dim rankTerms As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(terms, env)
-
-        If pulldata Like GetType(Message) Then
-            Return pulldata.TryCast(Of Message)
-        End If
-
-        Dim termsIndex As Dictionary(Of String, RankTerm) = rankTerms.populates(Of RankTerm)(env).ToDictionary(Function(a) a.queryName)
-        Dim subnet As New List(Of RegulationFootprint)
-
-        For Each prot_id As String In termsIndex.Keys.ToArray
-            Dim gene_id As String = prot_id.Split("."c).First
-
-            If gene_id <> prot_id Then
-                Call termsIndex.Add(gene_id, termsIndex(prot_id))
-            End If
-        Next
-
-        For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
-            Dim hit As Boolean = False
-
-            If termsIndex.ContainsKey(link.ORF) Then
-                hit = True
-                link.target_group = termsIndex(link.ORF).term
-            End If
-            If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
-                hit = True
-                link.regulator_group = termsIndex(link.regulator).term
-            End If
-
-            If hit Then
-                Call subnet.Add(link)
-            End If
-        Next
-
-        Return subnet.ToArray
-    End Function
-
     <ExportAPI("count_matrix")>
     Public Function embedding_matrix(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As Object
         Dim gene_hits As New Dictionary(Of String, DataSet)
@@ -354,45 +264,5 @@ Module Exports
         Dim termsAll As RankTerm() = RankTerm.RankTopTerm(pull, termMaps, topBest:=top_best).ToArray
 
         Return termsAll
-    End Function
-
-    ''' <summary>
-    ''' build transcription regulation network
-    ''' </summary>
-    ''' <param name="motifLinks"></param>
-    ''' <param name="motif_hits"></param>
-    ''' <param name="regulators">
-    ''' should be a blast alignment result of the class type <see cref="RankTerm"/>. apply for mapping protein to a specific family term
-    ''' </param>
-    ''' <param name="top">
-    ''' take the top n tf regulator mapping result for build TRN network.
-    ''' </param>
-    ''' <param name="env"></param>
-    ''' <returns></returns>
-    <ExportAPI("tf_network")>
-    <RApiReturn(GetType(RegulationFootprint))>
-    Public Function LinkTFNetwork(motifLinks As MotifLink(), <RRawVectorArgument> motif_hits As Object, <RRawVectorArgument> regulators As RankTerm(),
-                                  Optional tfinfo As TFInfo() = Nothing,
-                                  Optional topic As RankTerm() = Nothing,
-                                  Optional top As Integer = 3,
-                                  Optional env As Environment = Nothing) As Object
-
-        Dim pull = pipeline.TryCreatePipeline(Of MotifMatch)(motif_hits, env)
-
-        If pull.isError Then
-            Return pull.getError
-        End If
-
-        Dim TFdb As TFInfo() = If(tfinfo, env.globalEnvironment _
-            .GetResourceFile("data/PlantTFDB/TF.csv", package:="Plantea") _
-            .LoadCsv(Of TFInfo)(mute:=True) _
-            .ToArray)
-        Dim sites As MotifMatch() = pull.populates(Of MotifMatch)(env).ToArray
-        Dim network As New RegulationNetwork(motifLinks, TFdb)
-        Dim regs As RegulationFootprint() = network _
-            .BuildTFNetwork(sites, regulators, topic, top) _
-            .ToArray
-
-        Return regs
     End Function
 End Module
