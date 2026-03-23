@@ -1,0 +1,23 @@
+MEME version 4.4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies (from file `../../promoter_background/Csi.bg'):
+A 0.32590 C 0.17410 G 0.17410 T 0.32590 
+
+MOTIF orange1.1g018802m.g MP00107
+
+letter-probability matrix: alength= 4 w= 8 nsites= 1000 E= 0
+  0.011000	  0.010000	  0.965000	  0.014000	
+  0.941000	  0.012000	  0.026000	  0.021000	
+  0.904096	  0.001998	  0.001998	  0.091908	
+  0.002000	  0.102000	  0.003000	  0.893000	
+  0.893000	  0.003000	  0.102000	  0.002000	
+  0.091908	  0.001998	  0.001998	  0.904096	
+  0.021000	  0.026000	  0.012000	  0.941000	
+  0.014000	  0.965000	  0.010000	  0.011000	
+
+URL http://planttfdb.cbi.pku.edu.cn/tf.php?sp=Csi&did=orange1.1g018802m#bind_motif
+

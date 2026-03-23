@@ -1,0 +1,25 @@
+MEME version 4.4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies (from file `../../promoter_background/Ccl.bg'):
+A 0.33090 C 0.16910 G 0.16910 T 0.33090 
+
+MOTIF Ciclev10016071m.g MP00055
+
+letter-probability matrix: alength= 4 w= 10 nsites= 20 E= 0
+  0.154910	  0.345159	  0.154910	  0.345022	
+  0.362430	  0.075825	  0.297692	  0.264053	
+  0.000180	  0.000180	  0.999459	  0.000180	
+  0.999459	  0.000180	  0.000180	  0.000180	
+  0.000180	  0.000180	  0.000180	  0.999459	
+  0.905504	  0.094136	  0.000180	  0.000180	
+  0.999459	  0.000180	  0.000180	  0.000180	
+  0.095648	  0.094452	  0.711682	  0.098217	
+  0.095271	  0.095271	  0.714188	  0.095271	
+  0.174355	  0.280672	  0.174355	  0.370617	
+
+URL http://planttfdb.cbi.pku.edu.cn/tf.php?sp=Ccl&did=Ciclev10016071m#bind_motif
+
