@@ -32,6 +32,9 @@ declare namespace Plantea {
    function motif_tfinfo(code: any): object;
    /**
    */
+   function motif_tfseq(code: any): object;
+   /**
+   */
    function open_meme(code: any): object;
    /**
      * @param outdir default value Is ``./``.
