@@ -402,7 +402,7 @@ Module Exports
         Dim sites As MotifMatch() = pull.populates(Of MotifMatch)(env).ToArray
         Dim network As New RegulationNetwork(motifLinks, TFdb)
         Dim regs As RegulationFootprint() = network _
-            .BuildTFNetwork(motif_hits, regulators, topic, top) _
+            .BuildTFNetwork(sites, regulators, topic, top) _
             .ToArray
 
         Return regs
