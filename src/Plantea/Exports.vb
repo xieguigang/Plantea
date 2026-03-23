@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Data.Framework.IO
+Imports Microsoft.VisualBasic.Data.Framework.IO.Linq
 Imports Microsoft.VisualBasic.Data.visualize.Network.Graph
 Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
@@ -152,10 +153,22 @@ Module Exports
     ''' <param name="file"></param>
     ''' <returns></returns>
     <ExportAPI("read_regulation")>
-    Public Function readRegulations(file As String) As RegulationFootprint()
-        Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
+    <RApiReturn(GetType(RegulationFootprint))>
+    Public Function readRegulations(file As String, Optional tqdm As Boolean = True) As Object
+        If tqdm Then
+            Return file.OpenHandle.AsLinq(Of RegulationFootprint).as_iterator
+        Else
+            Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
+        End If
     End Function
 
+    ''' <summary>
+    ''' assign the class information to the ORF inside TRN network
+    ''' </summary>
+    ''' <param name="regs">the TRN network data</param>
+    ''' <param name="kb"></param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
     <ExportAPI("assign_classdata")>
     <RApiReturn(GetType(RegulationFootprint))>
     Public Function assign_classdata(<RRawVectorArgument> regs As Object, kb As ClassClusterData(), Optional env As Environment = Nothing) As Object
@@ -220,34 +233,6 @@ Module Exports
         Next
 
         Return subnet.ToArray
-    End Function
-
-    Private Function pullNetwork(<RRawVectorArgument> regulations As Object, Optional env As Environment = Nothing) As [Variant](Of Message, IEnumerable(Of RegulationFootprint))
-        Dim pull As IEnumerable(Of RegulationFootprint)
-
-        If TypeOf regulations Is list Then
-            pull = DirectCast(regulations, list).data _
-                .Select(Function(a)
-                            Dim part = pipeline.TryCreatePipeline(Of RegulationFootprint)(a, env)
-
-                            If part.isError Then
-                                Return {}
-                            Else
-                                Return part.populates(Of RegulationFootprint)(env)
-                            End If
-                        End Function) _
-                .IteratesALL
-        Else
-            With pipeline.TryCreatePipeline(Of RegulationFootprint)(regulations, env)
-                If .isError Then
-                    Return .getError
-                Else
-                    pull = .populates(Of RegulationFootprint)(env)
-                End If
-            End With
-        End If
-
-        Return New [Variant](Of Message, IEnumerable(Of RegulationFootprint))(pull)
     End Function
 
     <ExportAPI("count_matrix")>
