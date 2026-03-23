@@ -52,15 +52,23 @@ Public Class RegulationNetwork
         End If
 
         For Each scan As MotifMatch In TqdmWrapper.Wrap(motif_hits)
-            For Each edge As RegulationFootprint In LinkTFNetwork(scan, top)
+            Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
+            Dim matrix_id As String = motif_seed.First
+            Dim links As MotifLink()
+
+            If Not matrixIndex.ContainsKey(matrix_id) Then
+                Continue For
+            Else
+                links = matrixIndex(matrix_id)
+            End If
+
+            For Each edge As RegulationFootprint In LinkTFNetwork(scan, matrix_id, links, top)
                 Yield edge
             Next
         Next
     End Function
 
-    Private Iterator Function LinkTFNetwork(scan As MotifMatch, top As Integer) As IEnumerable(Of RegulationFootprint)
-        Dim motif_seed = scan.seeds(0).Split.Skip(1).ToArray
-        Dim links = matrixIndex(motif_seed.First)
+    Private Iterator Function LinkTFNetwork(scan As MotifMatch, matrix_id As String, links As MotifLink(), top As Integer) As IEnumerable(Of RegulationFootprint)
         Dim gene_ids As String() = links.Select(Function(l) l.Gene_id).IteratesALL.ToArray
         Dim regList As New List(Of RankTerm)
         Dim infertype As String = "missing"
@@ -119,7 +127,7 @@ Public Class RegulationNetwork
             Yield New RegulationFootprint With {
                 .chromosome = target_meta(0),
                 .sequence = scan.segment,
-                .motif_id = motif_seed.First,
+                .motif_id = matrix_id,
                 .signature = scan.motif,
                 .tag = Nothing,
                 .regulator_trace = Nothing,
@@ -152,7 +160,7 @@ Public Class RegulationNetwork
                 Dim edge As New RegulationFootprint With {
                     .chromosome = target_meta(0),
                     .sequence = scan.segment,
-                    .motif_id = motif_seed.First,
+                    .motif_id = matrix_id,
                     .signature = scan.motif,
                     .tag = $"{regTerm.topHit},score={regTerm.scores.Max}",
                     .regulator_trace = regTerm.topHit,
