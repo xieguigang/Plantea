@@ -48,6 +48,13 @@ Module Exports
         Return df
     End Function
 
+    ''' <summary>
+    ''' create clr model for link the reference TF and the reference motif site model
+    ''' </summary>
+    ''' <param name="matrix_id">the motif id</param>
+    ''' <param name="tf_id">the transcript factor id</param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
     <ExportAPI("as.motif_links")>
     Public Function motif_links(<RRawVectorArgument(TypeCodes.string)> matrix_id As Object,
                                 <RRawVectorArgument(TypeCodes.string)> tf_id As Object,
@@ -73,6 +80,9 @@ Module Exports
     ''' <summary>
     ''' load motif database from a given xml list dataset
     ''' </summary>
+    ''' <param name="file">
+    ''' the filepath to the xml database file
+    ''' </param>
     ''' <returns></returns>
     <ExportAPI("load_motifdb")>
     Public Function loadMotifDb(file As String) As MotifPWM()
@@ -81,11 +91,29 @@ Module Exports
             .ToArray
     End Function
 
+    ''' <summary>
+    ''' read the json list of csv table of the gene cluster data information
+    ''' </summary>
+    ''' <param name="x"></param>
+    ''' <returns></returns>
     <ExportAPI("load_class")>
-    Public Function loadClusterBackground(json As String) As ClassClusterData()
-        Return json.LineIterators.JoinBy(vbCrLf).LoadJSON(Of ClassClusterData())
+    Public Function loadClusterBackground(x As String) As ClassClusterData()
+        If x.ExtensionSuffix("csv") Then
+            Return x.LoadCsv(Of ClassClusterData)(mute:=True)
+        Else
+            ' read jsonl
+            Return x.LineIterators _
+                .JoinBy(vbCrLf) _
+                .LoadJSON(Of ClassClusterData())
+        End If
     End Function
 
+    ''' <summary>
+    ''' convert the gene cluster information as gsea background model
+    ''' </summary>
+    ''' <param name="geneset"></param>
+    ''' <param name="env"></param>
+    ''' <returns></returns>
     <ExportAPI("class_background")>
     <RApiReturn(GetType(Background))>
     Public Function class_background(<RRawVectorArgument> geneset As Object, Optional env As Environment = Nothing) As Object

@@ -31,6 +31,9 @@ Public Class RegulationFootprint : Inherits RegulatesFootprints
 
 End Class
 
+''' <summary>
+''' the gene class information
+''' </summary>
 Public Class ClassClusterData
 
     Public Property gene As String
