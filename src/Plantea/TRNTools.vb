@@ -3,6 +3,7 @@ Imports Microsoft.VisualBasic.Data.Framework
 Imports Microsoft.VisualBasic.Data.Framework.IO.Linq
 Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
+Imports PlantToolKit
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
 Imports SMRUCC.Rsharp.Runtime
