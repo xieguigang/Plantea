@@ -27,10 +27,6 @@ declare namespace Plantea {
       function regulation_graph(regulations: any, env?: object): object;
    }
    /**
-     * @param env default value Is ``null``.
-   */
-   function assign_classdata(regs: any, kb: object, env?: object): object;
-   /**
     * 
     * 
      * @param blastp diamond annotation hit table
@@ -85,41 +81,4 @@ declare namespace Plantea {
      * @param file the filepath to the xml database file
    */
    function load_motifdb(file: string): object;
-   /**
-    * read regulation network from a given csv table file
-    * 
-    * 
-     * @param file -
-   */
-   function read_regulation(file: string): object;
-   /**
-    * create subnetwork by matches a set of terms
-    * 
-    * 
-     * @param regulations -
-     * @param terms -
-     * @param env -
-     * 
-     * + default value Is ``null``.
-   */
-   function term_subnetwork(regulations: any, terms: any, env?: object): object;
-   /**
-    * build transcription regulation network
-    * 
-    * 
-     * @param motifLinks -
-     * @param motif_hits -
-     * @param regulators should be a blast alignment result of the class type @``T:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm``. apply for mapping protein to a specific family term
-     * @param tfinfo 
-     * + default value Is ``null``.
-     * @param topic 
-     * + default value Is ``null``.
-     * @param top take the top n tf regulator mapping result for build TRN network.
-     * 
-     * + default value Is ``3``.
-     * @param env -
-     * 
-     * + default value Is ``null``.
-   */
-   function tf_network(motifLinks: object, motif_hits: any, regulators: object, tfinfo?: object, topic?: object, top?: object, env?: object): object;
 }

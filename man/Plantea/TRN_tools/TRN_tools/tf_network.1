@@ -1,0 +1,42 @@
+.\" man page create by R# package system.
+.TH TRN_TOOLS 1 2000-1月 "tf_network" "tf_network"
+.SH NAME
+tf_network \- build transcription regulation network
+.SH SYNOPSIS
+\fItf_network(\fBmotifLinks\fR as <generic> MotifLink[], 
+\fBmotif_hits\fR as any, 
+\fBregulators\fR as <generic> RankTerm[], 
+\fBtfinfo\fR as <generic> TFInfo[] = \fB<NULL>\fR, 
+\fBtopic\fR as <generic> RankTerm[] = \fB<NULL>\fR, 
+\fBtop\fR as integer = 3, 
+[\fB<Environment>\fR]);\fR
+.SH DESCRIPTION
+.PP
+build transcription regulation network
+.PP
+.SH OPTIONS
+.PP
+\fBmotifLinks\fB \fR\- -. 
+.PP
+.PP
+\fBmotif_hits\fB \fR\- -. 
+.PP
+.PP
+\fBregulators\fB \fR\- 
+ should be a blast alignment result of the class type @\fBT:SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm\fR. apply for mapping protein to a specific family term
+. 
+.PP
+.PP
+\fBtop\fB \fR\- 
+ take the top n tf regulator mapping result for build TRN network.
+. 
+.PP
+.PP
+\fBenv\fB \fR\- -. 
+.PP
+.SH SEE ALSO
+TRN_tools
+.SH FILES
+.PP
+Plantea.dll
+.PP

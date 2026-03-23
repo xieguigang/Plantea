@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>build transcription regulation network</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="../../_assets/page.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <table style="width: 100%;">
+            <tr>
+                <td>tf_network {TRN_tools}</td>
+                <td style="text-align: right;">R Documentation</td>
+            </tr>
+        </table>
+
+        <h2>build transcription regulation network</h2>
+
+        <h3>Description</h3>
+
+        
+
+        <h3>Usage</h3>
+
+        <div style="width: 100%; padding-left: 3%; color: black;">
+            <pre><code class='language-R' style="color: black; font-weight:normal;"><strong>tf_network</strong>(<i>motifLinks</i>, <i>motif.hits</i>, <i>regulators</i>,
+    <i>tfinfo</i> = <span style='color: blue !important;'>NULL</span>,
+    <i>topic</i> = <span style='color: blue !important;'>NULL</span>,
+    <i>top</i> = <span style='color: green;'>3</span>);</code></pre>
+        </div>
+
+        <h3>Arguments</h3>
+
+        <table>
+            
+<dt>motifLinks</dt>
+<dd><p>[as <a href="/vignettes/clr/Plantea/MotifLink.html">MotifLink</a>]</p></dd>
+
+
+<dt>motif.hits</dt>
+<dd><p>-</p></dd>
+
+
+<dt>regulators</dt>
+<dd><p>should be a blast alignment result of the class type <a href="/vignettes/clr/SMRUCC/genomics/Interops/NCBI/Extensions/Pipeline/RankTerm.html">RankTerm</a>. apply for mapping protein to a specific family term. [as <a href="/vignettes/clr/SMRUCC/genomics/Interops/NCBI/Extensions/Pipeline/RankTerm.html">RankTerm</a>]</p></dd>
+
+
+<dt>top</dt>
+<dd><p>take the top n tf regulator mapping result for build TRN network. [as integer]</p></dd>
+
+
+<dt>env</dt>
+<dd><p>[as <a href="/vignettes/clr/SMRUCC/Rsharp/Runtime/Environment.html">Environment</a>]</p></dd>
+
+        </table>
+
+
+        <h3 style="display: none;">Details</h3>
+
+        
+
+        <h3 style="display: block">Authors</h3>
+
+        Plantea
+
+        <h3>Value</h3>
+
+        this function returns data object of type <a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint</a>.<h4>clr value class</h4><ul><li><a href="/vignettes/clr/Plantea/RegulationFootprint.html">RegulationFootprint</a></li></ul>
+
+        <h3 style="display: none;">Examples</h3>
+
+        
+
+        <hr />
+        <div style="text-align: center;">[Package <em>TRN_tools</em> version 1.0.0.0 <a
+                href="../TRN_tools.html">Index</a>]
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../../_assets/R_syntax.js"></script>
+<script type="text/javascript" src="../../_assets/highlights.js"></script>
+<script type="text/javascript">r_highlights("example_r");</script>
+
+</html>
