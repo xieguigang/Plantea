@@ -52,22 +52,6 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.readRegulations(System.String)">
- <summary>
- read regulation network from a given csv table file
- </summary>
- <param name="file"></param>
- <returns></returns>
-</member>
-<member name="M:Plantea.Exports.subnetwork(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
- <summary>
- create subnetwork by matches a set of terms
- </summary>
- <param name="regulations"></param>
- <param name="terms"></param>
- <param name="env"></param>
- <returns></returns>
-</member>
 <member name="M:Plantea.Exports.makeTFFamilyTerms(System.Object,Plantea.TFInfo[],System.Boolean,System.Double,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  
@@ -78,7 +62,18 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.Exports.LinkTFNetwork(Plantea.MotifLink[],System.Object,SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],Plantea.TFInfo[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="T:Plantea.MotifLink">
+ <summary>
+ motif source information
+ </summary>
+</member>
+<member name="P:Plantea.MotifLink.Gene_id">
+ <summary>
+ A set of the gene id that associated with current motif object
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Plantea.TRNTools.LinkTFNetwork(Plantea.MotifLink[],System.Object,SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],Plantea.TFInfo[],SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline.RankTerm[],System.Int32,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  build transcription regulation network
  </summary>
@@ -93,15 +88,29 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="T:Plantea.MotifLink">
+<member name="M:Plantea.TRNTools.readRegulations(System.String,System.Boolean)">
  <summary>
- motif source information
+ read regulation network from a given csv table file
  </summary>
+ <param name="file"></param>
+ <returns></returns>
 </member>
-<member name="P:Plantea.MotifLink.Gene_id">
+<member name="M:Plantea.TRNTools.assign_classdata(System.Object,Plantea.ClassClusterData[],SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
- A set of the gene id that associated with current motif object
+ assign the class information to the ORF inside TRN network
  </summary>
+ <param name="regs">the TRN network data</param>
+ <param name="kb"></param>
+ <param name="env"></param>
+ <returns></returns>
+</member>
+<member name="M:Plantea.TRNTools.subnetwork(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+ <summary>
+ create subnetwork by matches a set of terms
+ </summary>
+ <param name="regulations"></param>
+ <param name="terms"></param>
+ <param name="env"></param>
  <returns></returns>
 </member>
 <member name="T:Plantea.RegulationFootprint">

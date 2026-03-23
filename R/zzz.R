@@ -13,7 +13,7 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-imports "Plantea" from "Plantea";
+imports ["Plantea", "TRN_tools"] from "Plantea";
 
 let .onLoad = function() {
 
