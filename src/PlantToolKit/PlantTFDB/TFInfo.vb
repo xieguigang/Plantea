@@ -1,6 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
-Imports Microsoft.VisualBasic.Serialization.JSON
 
 Public Class TFInfo
 
@@ -22,6 +21,10 @@ Public Class TFInfo
     Sub New()
     End Sub
 
+    ''' <summary>
+    ''' Extract the TF information from the fasta sequence header title
+    ''' </summary>
+    ''' <param name="title">the fasta header title</param>
     Sub New(title As String)
         Dim t As String() = title.Split("|"c)
         Dim mol As NamedValue(Of String) = t(0).GetTagValue(" ")
@@ -33,7 +36,7 @@ Public Class TFInfo
     End Sub
 
     Public Overrides Function ToString() As String
-        Return Me.GetJson
+        Return $"[{protein_id} - {species}] {family}|{description}"
     End Function
 
     Public Shared Function RemoveTrailingIntegerSuffix(inputString As String) As String
