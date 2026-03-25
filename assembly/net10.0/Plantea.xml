@@ -98,7 +98,7 @@ Plantea
  create subnetwork by matches a set of terms
  </summary>
  <param name="regulations"></param>
- <param name="terms"></param>
+ <param name="terms">bbh hit map data</param>
  <param name="env"></param>
  <returns></returns>
 </member>

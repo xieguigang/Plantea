@@ -37,7 +37,7 @@ declare namespace TRN_tools {
     * 
     * 
      * @param regulations -
-     * @param terms -
+     * @param terms bbh hit map data
      * @param env -
      * 
      * + default value Is ``null``.
