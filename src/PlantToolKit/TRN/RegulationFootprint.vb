@@ -1,4 +1,6 @@
-﻿Imports Microsoft.VisualBasic.Linq
+﻿Imports System.Reflection
+Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
+Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Text.Xml.Models
 Imports SMRUCC.genomics.Analysis.HTS.GSEA
 Imports SMRUCC.genomics.Model.Network.VirtualFootprint.DocumentFormat
@@ -13,6 +15,21 @@ Public Class RegulationFootprint : Inherits RegulatesFootprints
 
     Public Property regulator_group As String
     Public Property target_group As String
+
+    Sub New()
+    End Sub
+
+    ''' <summary>
+    ''' make value copy
+    ''' </summary>
+    ''' <param name="copy"></param>
+    Sub New(copy As RegulationFootprint)
+        Static schema As PropertyInfo() = DataFramework.Schema(GetType(RegulationFootprint), PropertyAccess.ReadWrite, nonIndex:=True).Values.ToArray
+
+        For Each prop As PropertyInfo In schema
+            Call prop.SetValue(Me, prop.GetValue(copy))
+        Next
+    End Sub
 
     Public Shared Iterator Function AssignClassData(regs As IEnumerable(Of RegulationFootprint), kb As Dictionary(Of String, ClassClusterData)) As IEnumerable(Of RegulationFootprint)
         For Each link As RegulationFootprint In regs.SafeQuery

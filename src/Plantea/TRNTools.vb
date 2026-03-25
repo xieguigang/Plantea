@@ -5,6 +5,7 @@ Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports PlantToolKit
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
+Imports SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Components
@@ -67,6 +68,50 @@ Module TRNTools
         Else
             Return file.LoadCsv(Of RegulationFootprint)(mute:=True).ToArray
         End If
+    End Function
+
+    <ExportAPI("bbh_mapping")>
+    Public Function bbh_mapping(<RRawVectorArgument> regs As Object, <RRawVectorArgument> bbh As Object, Optional env As Environment = Nothing) As Object
+        Dim pulldata = pullNetwork(regs, env)
+        Dim pullbbh As pipeline = pipeline.TryCreatePipeline(Of BiDirectionalBesthit)(bbh, env)
+
+        If pulldata Like GetType(Message) Then
+            Return pulldata.TryCast(Of Message)
+        ElseIf pullbbh.isError Then
+            Return pullbbh.getError
+        End If
+
+        Dim bbhIndex = pullbbh.populates(Of BiDirectionalBesthit)(env) _
+            .Where(Function(map) map.level <> Levels.NA) _
+            .GroupBy(Function(a) a.QueryName) _
+            .ToDictionary(Function(a) a.Key,
+                          Function(a)
+                              Return a.Select(Function(ai) ai.HitName) _
+                                  .Distinct _
+                                  .ToArray
+                          End Function)
+
+        Return pipeline.CreateFromPopulator(MapBBH(pulldata.TryCast(Of IEnumerable(Of RegulationFootprint)), bbhIndex))
+    End Function
+
+    Private Iterator Function MapBBH(trn As IEnumerable(Of RegulationFootprint), bbhmap As Dictionary(Of String, String())) As IEnumerable(Of RegulationFootprint)
+        For Each edge As RegulationFootprint In trn
+            If (Not bbhmap.ContainsKey(edge.ORF)) OrElse (Not bbhmap.ContainsKey(edge.regulator)) Then
+                Continue For
+            End If
+
+            Dim orf_ids As String() = bbhmap(edge.ORF)
+            Dim reg_ids As String() = bbhmap(edge.regulator)
+
+            For Each orf As String In orf_ids
+                For Each reg As String In reg_ids
+                    Dim copy As New RegulationFootprint(edge)
+                    copy.target_group = orf
+                    copy.regulator_group = reg
+                    Yield copy
+                Next
+            Next
+        Next
     End Function
 
     ''' <summary>
