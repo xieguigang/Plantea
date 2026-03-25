@@ -188,20 +188,23 @@ Module TRNTools
         For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
             Dim hit As Boolean = False
 
-            If termsIndex.ContainsKey(link.ORF) Then
-                hit = True
-
-                ' needs make records of the mapping source id
-                If Not idIndex Then
+            If Not idIndex Then
+                If termsIndex.ContainsKey(link.ORF) Then
+                    hit = True
+                    ' needs make records of the mapping source id
                     link.target_group = termsIndex(link.ORF).term
                 End If
-            End If
-            If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
-                hit = True
-
-                ' needs make records of the mapping source id
-                If Not idIndex Then
+                If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
+                    hit = True
+                    ' needs make records of the mapping source id
                     link.regulator_group = termsIndex(link.regulator).term
+                End If
+            Else
+                If termsIndex.ContainsKey(link.target_group) Then
+                    hit = True
+                End If
+                If termsIndex.ContainsKey(link.regulator_group) Then
+                    hit = True
                 End If
             End If
 
