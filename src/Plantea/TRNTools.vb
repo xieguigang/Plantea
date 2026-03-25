@@ -12,6 +12,7 @@ Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Components
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
 Imports SMRUCC.Rsharp.Runtime.Interop
+Imports SMRUCC.Rsharp.Runtime.Vectorization
 
 <Package("TRN_tools")>
 Module TRNTools
@@ -149,7 +150,7 @@ Module TRNTools
     ''' create subnetwork by matches a set of terms
     ''' </summary>
     ''' <param name="regulations"></param>
-    ''' <param name="terms"></param>
+    ''' <param name="terms">bbh hit map data</param>
     ''' <param name="env"></param>
     ''' <returns></returns>
     <ExportAPI("term_subnetwork")>
@@ -157,9 +158,20 @@ Module TRNTools
     Public Function subnetwork(<RRawVectorArgument> regulations As Object, <RRawVectorArgument> terms As Object, Optional env As Environment = Nothing) As Object
         Dim pulldata = pullNetwork(regulations, env)
         Dim rankTerms As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(terms, env)
+        Dim idIndex As Boolean = False
 
         If pulldata Like GetType(Message) Then
             Return pulldata.TryCast(Of Message)
+        ElseIf rankTerms.isError Then
+            ' check is string?
+            Dim idset = CLRVector.asCharacter(terms)
+            Dim idterms = idset.Distinct.Select(Function(id) RankTerm.WrapID(id)).ToArray
+
+            ' the source input is id set
+            ' no needs for make updates of the 
+            ' target group and regulator group for indicates the mapping source id
+            idIndex = True
+            rankTerms = pipeline.CreateFromPopulator(idterms)
         End If
 
         Dim termsIndex As Dictionary(Of String, RankTerm) = rankTerms.populates(Of RankTerm)(env).ToDictionary(Function(a) a.queryName)
@@ -178,11 +190,19 @@ Module TRNTools
 
             If termsIndex.ContainsKey(link.ORF) Then
                 hit = True
-                link.target_group = termsIndex(link.ORF).term
+
+                ' needs make records of the mapping source id
+                If Not idIndex Then
+                    link.target_group = termsIndex(link.ORF).term
+                End If
             End If
             If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
                 hit = True
-                link.regulator_group = termsIndex(link.regulator).term
+
+                ' needs make records of the mapping source id
+                If Not idIndex Then
+                    link.regulator_group = termsIndex(link.regulator).term
+                End If
             End If
 
             If hit Then
