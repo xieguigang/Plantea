@@ -177,8 +177,12 @@ Module TRNTools
             rankTerms = pipeline.CreateFromPopulator(idterms)
         End If
 
-        Dim termsIndex As Dictionary(Of String, RankTerm) = rankTerms.populates(Of RankTerm)(env).ToDictionary(Function(a) a.queryName)
         Dim subnet As New List(Of RegulationFootprint)
+        Dim termsIndex As Dictionary(Of String, RankTerm) = rankTerms _
+            .populates(Of RankTerm)(env) _
+            .ToDictionary(Function(a)
+                              Return a.queryName
+                          End Function)
 
         For Each prot_id As String In termsIndex.Keys.ToArray
             Dim gene_id As String = prot_id.Split("."c).First
@@ -200,7 +204,10 @@ Module TRNTools
                     ' needs make records of the mapping source id
                     link.target_group = termsIndex(link.ORF).term
                 End If
-                If match_tf AndAlso link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
+                If match_tf AndAlso
+                    link.regulator IsNot Nothing AndAlso
+                    termsIndex.ContainsKey(link.regulator) Then
+
                     hit = True
                     ' needs make records of the mapping source id
                     link.regulator_group = termsIndex(link.regulator).term
@@ -209,7 +216,10 @@ Module TRNTools
                 If match_orf AndAlso termsIndex.ContainsKey(link.target_group) Then
                     hit = True
                 End If
-                If match_tf AndAlso link.regulator_group IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator_group) Then
+                If match_tf AndAlso
+                    link.regulator_group IsNot Nothing AndAlso
+                    termsIndex.ContainsKey(link.regulator_group) Then
+
                     hit = True
                 End If
             End If
