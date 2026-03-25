@@ -7,6 +7,7 @@ Imports PlantToolKit
 Imports SMRUCC.genomics.Analysis.SequenceTools.SequencePatterns
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.LocalBLAST.Application.BBH
 Imports SMRUCC.genomics.Interops.NCBI.Extensions.Pipeline
+Imports SMRUCC.genomics.SequenceModel.FASTA
 Imports SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp.Runtime.Components
 Imports SMRUCC.Rsharp.Runtime.Internal.Object
@@ -96,6 +97,8 @@ Module TRNTools
 
     Private Iterator Function MapBBH(trn As IEnumerable(Of RegulationFootprint), bbhmap As Dictionary(Of String, String())) As IEnumerable(Of RegulationFootprint)
         For Each edge As RegulationFootprint In trn
+            edge.regulator = HeaderFormats.TrimAccessionVersion(edge.regulator)
+
             If (Not bbhmap.ContainsKey(edge.ORF)) OrElse (Not bbhmap.ContainsKey(edge.regulator)) Then
                 Continue For
             End If
