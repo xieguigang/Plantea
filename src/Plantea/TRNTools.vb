@@ -155,7 +155,10 @@ Module TRNTools
     ''' <returns></returns>
     <ExportAPI("term_subnetwork")>
     <RApiReturn(GetType(RegulationFootprint))>
-    Public Function subnetwork(<RRawVectorArgument> regulations As Object, <RRawVectorArgument> terms As Object, Optional env As Environment = Nothing) As Object
+    Public Function subnetwork(<RRawVectorArgument> regulations As Object, <RRawVectorArgument> terms As Object,
+                               Optional match As MapType = MapType.Both,
+                               Optional env As Environment = Nothing) As Object
+
         Dim pulldata = pullNetwork(regulations, env)
         Dim rankTerms As pipeline = pipeline.TryCreatePipeline(Of RankTerm)(terms, env)
         Dim idIndex As Boolean = False
@@ -185,25 +188,28 @@ Module TRNTools
             End If
         Next
 
+        Dim match_orf As Boolean = match = MapType.Both OrElse match = MapType.ORF
+        Dim match_tf As Boolean = match = MapType.Both OrElse match = MapType.TF
+
         For Each link As RegulationFootprint In pulldata.TryCast(Of IEnumerable(Of RegulationFootprint))
             Dim hit As Boolean = False
 
             If Not idIndex Then
-                If termsIndex.ContainsKey(link.ORF) Then
+                If match_orf AndAlso termsIndex.ContainsKey(link.ORF) Then
                     hit = True
                     ' needs make records of the mapping source id
                     link.target_group = termsIndex(link.ORF).term
                 End If
-                If link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
+                If match_tf AndAlso link.regulator IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator) Then
                     hit = True
                     ' needs make records of the mapping source id
                     link.regulator_group = termsIndex(link.regulator).term
                 End If
             Else
-                If termsIndex.ContainsKey(link.target_group) Then
+                If match_orf AndAlso termsIndex.ContainsKey(link.target_group) Then
                     hit = True
                 End If
-                If termsIndex.ContainsKey(link.regulator_group) Then
+                If match_tf AndAlso link.regulator_group IsNot Nothing AndAlso termsIndex.ContainsKey(link.regulator_group) Then
                     hit = True
                 End If
             End If
@@ -216,3 +222,11 @@ Module TRNTools
         Return subnet.ToArray
     End Function
 End Module
+
+Public Enum MapType As Integer
+
+    Both
+    ORF
+    TF
+
+End Enum
