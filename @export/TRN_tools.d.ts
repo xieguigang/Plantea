@@ -20,6 +20,10 @@ declare namespace TRN_tools {
    */
    function assign_classdata(regs: any, kb: object, env?: object): object;
    /**
+     * @param env default value Is ``null``.
+   */
+   function bbh_mapping(regs: any, bbh: any, env?: object): any;
+   /**
     * read regulation network from a given csv table file
     * 
     * 

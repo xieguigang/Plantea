@@ -97,8 +97,11 @@ Module TRNTools
 
     Private Iterator Function MapBBH(trn As IEnumerable(Of RegulationFootprint), bbhmap As Dictionary(Of String, String())) As IEnumerable(Of RegulationFootprint)
         For Each edge As RegulationFootprint In trn
-            edge.regulator = HeaderFormats.TrimAccessionVersion(edge.regulator)
-
+            If edge.ORF Is Nothing OrElse edge.regulator Is Nothing Then
+                Continue For
+            Else
+                edge.regulator = HeaderFormats.TrimAccessionVersion(edge.regulator)
+            End If
             If (Not bbhmap.ContainsKey(edge.ORF)) OrElse (Not bbhmap.ContainsKey(edge.regulator)) Then
                 Continue For
             End If
