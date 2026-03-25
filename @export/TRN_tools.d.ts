@@ -38,11 +38,13 @@ declare namespace TRN_tools {
     * 
      * @param regulations -
      * @param terms bbh hit map data
+     * @param match 
+     * + default value Is ``null``.
      * @param env -
      * 
      * + default value Is ``null``.
    */
-   function term_subnetwork(regulations: any, terms: any, env?: object): object;
+   function term_subnetwork(regulations: any, terms: any, match?: object, env?: object): object;
    /**
     * build transcription regulation network
     * 
