@@ -93,7 +93,7 @@ Plantea
  <param name="env"></param>
  <returns></returns>
 </member>
-<member name="M:Plantea.TRNTools.subnetwork(System.Object,System.Object,SMRUCC.Rsharp.Runtime.Environment)">
+<member name="M:Plantea.TRNTools.subnetwork(System.Object,System.Object,Plantea.MapType,SMRUCC.Rsharp.Runtime.Environment)">
  <summary>
  create subnetwork by matches a set of terms
  </summary>
