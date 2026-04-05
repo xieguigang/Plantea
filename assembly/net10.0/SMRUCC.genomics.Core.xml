@@ -9567,6 +9567,14 @@ ATT I Ile      ACT T Thr   [rest of string was truncated]&quot;;.
  <returns></returns>
  <remarks>(这个Genbank对象是否为一个质粒的基因组数据)</remarks>
 </member>
+<member name="P:SMRUCC.genomics.Assembly.NCBI.GenBank.GBFF.File.Species">
+ <summary>
+ the organism species name and strain information of this genbank data, 
+ this property is a combination of the source feature's species name and 
+ the source feature's strain qualifier value.
+ </summary>
+ <returns></returns>
+</member>
 <member name="P:SMRUCC.genomics.Assembly.NCBI.GenBank.GBFF.File.Taxon">
  <summary>
  get ncbi taxonomy id
@@ -11933,6 +11941,26 @@ Get feature site data by nucleotide location.
  </summary>
  <returns></returns>
 </member>
+<member name="T:SMRUCC.genomics.ComponentModel.EquaionModel.ReactionDirection">
+ <summary>
+ Represents the direction of a reaction
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.ComponentModel.EquaionModel.ReactionDirection.Equilibrium">
+ <summary>
+ Reaction is at or near equilibrium
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.ComponentModel.EquaionModel.ReactionDirection.Forward">
+ <summary>
+ Reaction proceeds in the forward direction
+ </summary>
+</member>
+<member name="F:SMRUCC.genomics.ComponentModel.EquaionModel.ReactionDirection.Reverse">
+ <summary>
+ Reaction proceeds in the reverse direction
+ </summary>
+</member>
 <member name="T:SMRUCC.genomics.ComponentModel.EquaionModel.DefaultTypes.CompoundSpecieReference">
  <summary>
  the compound model reference.
@@ -11969,13 +11997,19 @@ Get feature site data by nucleotide location.
  </summary>
  <returns></returns>
 </member>
+<member name="P:SMRUCC.genomics.ComponentModel.EquaionModel.Equation`1.Id">
+ <summary>
+ the reaction id, which should be uniqued in the reaction collection.
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:SMRUCC.genomics.ComponentModel.EquaionModel.Equation`1.GetMetabolites">
  <summary>
  得到这个代谢反应过程之中的所有的代谢物，即左边加右边
  </summary>
  <returns></returns>
 </member>
-<member name="M:SMRUCC.genomics.ComponentModel.EquaionModel.Equation`1.GetCoEfficient(System.String)">
+<member name="M:SMRUCC.genomics.ComponentModel.EquaionModel.Equation`1.GetCoefficient(System.String)">
  <summary>
  获取得到某个代谢物在本反应过程之中的化学计量数；
  [
@@ -13525,7 +13559,7 @@ to take away yo [rest of string was truncated]&quot;;.
  7E. 种
  </summary>
 </member>
-<member name="P:SMRUCC.genomics.Metagenomics.Taxonomy.lowestLevel">
+<member name="P:SMRUCC.genomics.Metagenomics.Taxonomy.RankLevel">
  <summary>
  获取当前的这个分类结果值的最小分类单元的等级
  </summary>
