@@ -217,6 +217,34 @@ Microsoft.VisualBasic.Math.Matrix
  <param name="mat"></param>
  <returns></returns>
 </member>
+<member name="F:Microsoft.VisualBasic.Math.Matrix.NamedSparseMatrix.data">
+ <summary>
+ 使用 Dictionary 存储稀疏数据
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Matrix.NamedSparseMatrix.names">
+ <summary>
+ 维护 ID 到索引的映射列表
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Math.Matrix.NamedSparseMatrix.hash">
+ <summary>
+ 快速查找 ID 是否存在
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Matrix.NamedSparseMatrix.ContainsNode(System.String)">
+ <summary>
+ 检查指定的节点ID是否存在于矩阵维度中
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Math.Matrix.NamedSparseMatrix.CheckElement(System.String,System.String)">
+ <summary>
+ Check of the edge connection is existsed inside this matrix?
+ </summary>
+ <param name="i"></param>
+ <param name="j"></param>
+ <returns>检查指定的边 (i -> j) 是否显式定义（非零值或在字典中存在键）</returns>
+</member>
 <member name="M:Microsoft.VisualBasic.Math.Matrix.NumericDataSet.Log(Microsoft.VisualBasic.Data.Framework.DataFrame,System.Double)">
  <summary>
  log of the dataframe fields 

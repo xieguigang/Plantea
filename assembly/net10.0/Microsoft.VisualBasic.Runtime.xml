@@ -11389,6 +11389,16 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <returns></returns>
 </member>
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Extensions.PropertyNames``1(System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.ComponentModel.DataSourceModel.DynamicPropertyBase{``0}})">
+ <summary>
+ Gets the union collection of the keys from <see cref="P:Microsoft.VisualBasic.ComponentModel.DataSourceModel.DynamicPropertyBase`1.Properties"/>.
+ </summary>
+ <param name="list"></param>
+ <returns></returns>
+ <remarks>
+ (包含所有的已经去除重复了的属性名称)
+ </remarks>
+</member>
 <member name="T:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Property`1">
  <summary>
  Dictionary for [<see cref="T:System.String"/>, <typeparamref name="T"/>]
@@ -12086,7 +12096,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="duplicated"></param>
  <returns></returns>
  <remarks>
- the name is uniqued via the <see cref="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.SearchFramework.UniqueNames(System.Collections.Generic.IEnumerable{System.String},System.String[]@)"/> method 
+ the name is uniqued via the <see cref="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.SearchFramework.UniqueNames(System.Collections.Generic.IEnumerable{System.String},System.String[]@,System.String)"/> method 
  via add numeric suffix to the name key string.
  </remarks>
 </member>
@@ -12099,7 +12109,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="duplicated"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.SearchFramework.UniqueNames(System.Collections.Generic.IEnumerable{System.String},System.String[]@)">
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.Repository.SearchFramework.UniqueNames(System.Collections.Generic.IEnumerable{System.String},System.String[]@,System.String)">
  <summary>
  makes the name string unique by adding an additional numeric suffix
  </summary>
@@ -12511,12 +12521,17 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  object schema provider for json/xml
  </summary>
 </member>
+<member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.isTable">
+ <summary>
+ the clr type is a dictionary?
+ </summary>
+</member>
 <member name="F:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.valueType">
  <summary>
  Value type of the dictionary
  </summary>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.#ctor(System.Reflection.MethodInfo,System.Boolean,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Reflection.PropertyInfo},System.Type,System.Type,System.Type,System.Type[],Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.Serializations)">
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.#ctor(System.Reflection.MethodInfo,System.Boolean,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Reflection.PropertyInfo},System.Type,System.Type,System.Type,System.Type[],Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.Serializations,System.Boolean)">
  <summary>
  
  </summary>
@@ -12560,7 +12575,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <returns></returns>
  
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.GetSchema(System.Type,Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.Serializations)">
+<member name="M:Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.SoapGraph.GetSchema(System.Type,Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps.Serializations,System.Boolean)">
  <summary>
  get (or cache a new schema graph object if not exists) a schema graph object
  </summary>
@@ -16064,7 +16079,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="valueRange"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.ComponentModel.Ranges.Model.IntRange.GetEnumerator">
+<member name="M:Microsoft.VisualBasic.ComponentModel.Ranges.Model.IntRange.GenericEnumerator">
  <summary>
  枚举出这个数值范围内的所有整数值，步长为1
  </summary>
@@ -17635,6 +17650,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  也可能是 BGR 3通道的
  </summary>
 </member>
+<member name="M:Microsoft.VisualBasic.Imaging.BitmapImage.BitmapBuffer.#ctor(System.IntPtr,System.Int32,System.Drawing.Size,System.Int32,System.Int32,System.Object)">
+ <summary>
+ 
+ </summary>
+ <param name="ptr"></param>
+ <param name="byts"></param>
+ <param name="size"></param>
+ <param name="stride"></param>
+ <param name="channel"></param>
+ <param name="handle"></param>
+ <remarks>
+ memory buffer is false
+ </remarks>
+</member>
 <member name="M:Microsoft.VisualBasic.Imaging.BitmapImage.BitmapBuffer.#ctor(System.IntPtr,System.Int32,System.Int32)">
  <summary>
  Make the memory data copy
@@ -17648,6 +17677,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  make in-memory data copy
  </summary>
  <param name="source"></param>
+ 
 </member>
 <member name="P:Microsoft.VisualBasic.Imaging.BitmapImage.BitmapBuffer.Width">
  <summary>
@@ -21322,6 +21352,16 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
 <member name="T:Microsoft.VisualBasic.Imaging.Math2D.VectorMath2D">
  <summary>
  
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Imaging.FontStyle.Regular">
+ <summary>
+ css normal
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Imaging.FontStyle.Bold">
+ <summary>
+ css strongs
  </summary>
 </member>
 <member name="T:Microsoft.VisualBasic.Imaging.Image">
@@ -26144,6 +26184,20 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="b"></param>
  <returns></returns>
 </member>
+<member name="M:Microsoft.VisualBasic.Extensions.AddRange``1(System.Collections.Generic.Dictionary{System.String,``0}@,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Boolean)">
+ <summary>
+ add all elements inside the given data collection into the dictionary
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="table"></param>
+ <param name="data"></param>
+ <param name="key"></param>
+ <param name="replaceDuplicated"></param>
+ <returns></returns>
+ <remarks>
+ this function will skip add if the given <paramref name="data"/> collection is nothing
+ </remarks>
+</member>
 <member name="M:Microsoft.VisualBasic.Extensions.AddRange``1(System.Collections.Generic.Dictionary{System.String,``0}@,System.Collections.Generic.IEnumerable{Microsoft.VisualBasic.ComponentModel.DataSourceModel.NamedValue{``0}},System.Boolean)">
  <summary>
  
@@ -26844,7 +26898,7 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  <param name="file"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.FileIO.Directory.CopyTo(System.String,System.IProgress{System.String},System.Boolean)">
+<member name="M:Microsoft.VisualBasic.FileIO.Directory.CopyTo(System.String,System.IProgress{System.String},System.Boolean,System.Boolean)">
  <summary>
  将当前的这个文件夹之中的内容拷贝到<paramref name="target"/>目标文件夹
  </summary>
@@ -38451,6 +38505,12 @@ You should have received a copy of the GNU  [rest of string was truncated]&quot;
  </summary>
  <returns></returns>
 </member>
+<member name="M:Microsoft.VisualBasic.Language.Value`1.Default">
+ <summary>
+ Create a new reference value with the default value of its underlying type, which is Nothing for reference type and zero for value type.
+ </summary>
+ <returns></returns>
+</member>
 <member name="M:Microsoft.VisualBasic.Language.Value`1.op_UnaryPlus(Microsoft.VisualBasic.Language.Value{`0})">
  <summary>
  Gets the <see cref="P:Microsoft.VisualBasic.Language.Value`1.Value"/> property value.
@@ -38677,6 +38737,11 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <param name="type"></param>
  <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Scripting.CCodeStringLiteralEscape.IsLegalCEscapeChar(System.Char,System.String,System.Int32)">
+ <summary>
+ 判断反斜杠后的字符是否构成了合法的C语言转义序列
+ </summary>
 </member>
 <member name="F:Microsoft.VisualBasic.Scripting.Expressions.Aggregates.Mean">
  <summary>
@@ -39834,6 +39899,59 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="args">The type of the input parameter values</param>
  <returns></returns>
 </member>
+<member name="T:Microsoft.VisualBasic.Scripting.Runtime.ScriptEnvironment">
+ <summary>
+ 脚本运行环境
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Scripting.Runtime.ScriptEnvironment._slots">
+ <summary>
+ 当前作用域的变量字典
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Scripting.Runtime.ScriptEnvironment.DefineVariable(System.String,System.Boolean)">
+ <summary>
+ 显式声明一个变量
+ </summary>
+</member>
+<member name="M:Microsoft.VisualBasic.Scripting.Runtime.ScriptEnvironment.FindSlot(System.String,System.Boolean)">
+ <summary>
+ 查找变量槽位，支持向父级作用域查找
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Scripting.Runtime.NestedScriptEnvironment">
+ <summary>
+ 脚本运行环境（支持作用域嵌套）
+ </summary>
+</member>
+<member name="F:Microsoft.VisualBasic.Scripting.Runtime.NestedScriptEnvironment._parent">
+ <summary>
+ 父级作用域（用于实现闭包或块级作用域）
+ </summary>
+</member>
+<member name="T:Microsoft.VisualBasic.Scripting.Runtime.ScriptSlot">
+ <summary>
+ 变量槽位：封装变量的类型、值和元数据
+ </summary>
+</member>
+<member name="P:Microsoft.VisualBasic.Scripting.Runtime.ScriptSlot.IsReadOnly">
+ <summary>
+ current symbol value is constant lock binding in the environment?
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:Microsoft.VisualBasic.Scripting.Runtime.ScriptSlot.ObjValue">
+ <summary>
+ .NET clr class object value
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Scripting.Runtime.ScriptSlot.SetBoolean(System.Boolean)">
+ <summary>
+ 
+ </summary>
+ <param name="value"></param>
+</member>
 <member name="F:Microsoft.VisualBasic.Scripting.Runtime.Logics.And">
  <summary>
  两边的逻辑表达式都会被计算
@@ -39868,7 +39986,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="tests"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.Scripting.Runtime.Where.__or``1(``0,System.Func{``0,System.Boolean}[])">
+<member name="M:Microsoft.VisualBasic.Scripting.Runtime.Where.LogicsOr``1(``0,System.Func{``0,System.Boolean}[])">
  <summary>
  <see cref="F:Microsoft.VisualBasic.Scripting.Runtime.Logics.Or"/>, 所有的表达式都会被计算
  </summary>
@@ -39877,7 +39995,7 @@ to take away yo [rest of string was truncated]&quot;;.
  <param name="tests"></param>
  <returns></returns>
 </member>
-<member name="M:Microsoft.VisualBasic.Scripting.Runtime.Where.__and``1(``0,System.Func{``0,System.Boolean}[])">
+<member name="M:Microsoft.VisualBasic.Scripting.Runtime.Where.LogicsAnd``1(``0,System.Func{``0,System.Boolean}[])">
  <summary>
  <see cref="F:Microsoft.VisualBasic.Scripting.Runtime.Logics.And"/>, 所有的表达式都会被计算
  </summary>
@@ -40991,7 +41109,7 @@ to take away yo [rest of string was truncated]&quot;;.
  Create object instance from a given json text base on the template <see cref="T:System.Type"/>
  information.
  </summary>
- <param name="json">null -> Nothing</param>
+ <param name="json">parse this json string and then decoded as the required .NET clr object. some special json text mapping: null will be decoded as Nothing</param>
  <param name="type"></param>
  <returns></returns>
 </member>
@@ -41021,6 +41139,18 @@ to take away yo [rest of string was truncated]&quot;;.
  </summary>
  <typeparam name="T"></typeparam>
  <param name="file"></param>
+ <param name="encoding"></param>
+ <param name="simpleDict"></param>
+ <param name="knownTypes"></param>
+ <param name="throwEx"></param>
+ <returns></returns>
+</member>
+<member name="M:Microsoft.VisualBasic.Serialization.JSON.JsonContract.LoadJSONL``1(System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding,System.Boolean,System.Collections.Generic.IEnumerable{System.Type},System.Boolean)">
+ <summary>
+ load json list file
+ </summary>
+ <typeparam name="T"></typeparam>
+ <param name="jsonl">the file content of the jsonl file</param>
  <param name="encoding"></param>
  <param name="simpleDict"></param>
  <param name="knownTypes"></param>
